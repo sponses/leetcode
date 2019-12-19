@@ -20,3 +20,31 @@ var reverseList = function(head) {
   }
   return head
 }
+/**
+ * 203.移除链表元素
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @param {number} val
+ * @return {ListNode}
+ */
+var removeElements = function(head, val) {
+  while (head && head.val === val) {
+    head = head.next
+  }
+  if (!head) return head
+  let prev = head
+  while (prev.next) {
+    if (prev.next === val) {
+      prev.next = prev.next.next
+    } else {
+      prev = prev.next
+    }
+  }
+  return head
+}
