@@ -72,3 +72,24 @@ var deleteDuplicates = function(head) {
   }
   return head
 }
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * 876.链表的中间节点
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+var middleNode = function(head) {
+  let fast = head,
+    low = head
+  while (fast && fast.next) {
+    fast = fast.next.next ? fast.next.next : fast.next
+    low = low.next
+  }
+  return low
+}
