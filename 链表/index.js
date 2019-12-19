@@ -48,3 +48,27 @@ var removeElements = function(head, val) {
   }
   return head
 }
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * 83.删除排序链表中的重复元素
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+var deleteDuplicates = function(head) {
+  if (!head) return head
+  let prev = head
+  while (prev.next) {
+    if (prev.val === prev.next.val) {
+      prev.next = prev.next.next
+    } else {
+      prev = prev.next
+    }
+  }
+  return head
+}
