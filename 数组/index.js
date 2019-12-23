@@ -49,3 +49,20 @@ var hasGroupsSizeX = function(deck) {
   }
   return true
 }
+/**
+ * 941.有效的山脉数组
+ * @param {number[]} A
+ * @return {boolean}
+ */
+var validMountainArray = function(A) {
+  const len = A.length
+  let i = 0
+  while (i < len - 1 && A[i] < A[i + 1]) {
+    i++
+  }
+  if (i === 0 || i === len - 1) return false
+  while (i < len - 1 && A[i] > A[i + 1]) {
+    i++
+  }
+  return i === len - 1
+}
