@@ -66,3 +66,13 @@ var validMountainArray = function(A) {
   }
   return i === len - 1
 }
+/**
+ * 414.第三大的数
+ * @param {number[]} nums
+ * @return {number}
+ */
+var thirdMax = function(nums) {
+  let arr = [...new Set(nums)].sort((a, b) => a - b)
+  if (arr.length < 3) return Math.max(...arr)
+  return arr[arr.length - 3]
+}
