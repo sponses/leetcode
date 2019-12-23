@@ -134,3 +134,34 @@ var getIntersectionNode = function(headA, headB) {
   }
   return null
 }
+/**
+ * 141.环形链表(哈希表)
+ * @param {ListNode} head
+ * @return {boolean}
+ */
+var hasCycle = function(head) {
+  const x = new WeakSet()
+  while (head) {
+    if (x.has(head)) return true
+    x.add(head)
+    head = head.next
+  }
+  return false
+}
+/**
+ * 141.环形链表(快慢指针)
+ * @param {ListNode} head
+ * @return {boolean}
+ */
+var hasCycle = function(head) {
+  if (!head) return false
+  let low = head,
+    fast = head.next
+
+  while (low !== fast) {
+    if (!fast || !fast.next) return false
+    low = low.next
+    fast = fast.next.next
+  }
+  return true
+}
