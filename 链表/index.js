@@ -93,3 +93,44 @@ var middleNode = function(head) {
   }
   return low
 }
+/**
+ * 160.相交链表（方法一）
+ * @param {ListNode} headA
+ * @param {ListNode} headB
+ * @return {ListNode}
+ */
+var getIntersectionNode = function(headA, headB) {
+  let pointerA = headA,
+    pointerB = headB
+  while (pointerB) {
+    while (pointerA) {
+      if (pointerA === pointerB) {
+        return pointerA
+      }
+      pointerA = pointerA.next
+    }
+    pointerA = headA
+    pointerB = pointerB.next
+  }
+  return null
+}
+/**
+ * 160.相交链表（方法二）
+ * @param {ListNode} headA
+ * @param {ListNode} headB
+ * @return {ListNode}
+ */
+var getIntersectionNode = function(headA, headB) {
+  let pointerA = headA,
+    pointerB = headB,
+    x = new WeakSet()
+  while (pointerA) {
+    x.add(pointerA)
+    pointerA = pointerA.next
+  }
+  while (pointerB) {
+    if (x.has(pointerB)) return pointerB
+    pointerB = pointerB.next
+  }
+  return null
+}
