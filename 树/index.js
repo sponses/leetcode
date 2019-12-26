@@ -58,3 +58,14 @@ var findTarget = function(root, k) {
   }
   return traversal(root)
 }
+/**
+ * 404.左叶子之和
+ * @param {TreeNode} root
+ * @return {number}
+ */
+var sumOfLeftLeaves = function(root) {
+  if (!root) return 0
+  let result = 0
+  if (root.left && !root.left.left && !root.left.right) result += root.left.val
+  return result + sumOfLeftLeaves(root.left) + sumOfLeftLeaves(root.right)
+}
