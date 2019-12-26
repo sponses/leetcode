@@ -40,3 +40,21 @@ var rangeSumBST = function(root, L, R) {
   }
   return result
 }
+/**
+ * 653. 两数之和 IV - 输入 BST
+ * @param {TreeNode} root
+ * @param {number} k
+ * @return {boolean}
+ */
+var findTarget = function(root, k) {
+  //思路就是遍历它
+  let arr = []
+
+  function traversal(root) {
+    if (!root) return false
+    if (arr.includes(k - root.val)) return true
+    arr.push(root.val)
+    return traversal(root.left) || traversal(root.right)
+  }
+  return traversal(root)
+}
