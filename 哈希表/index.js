@@ -44,3 +44,26 @@ var containsNearbyAlmostDuplicate = function(nums, k, t) {
   }
   return false
 }
+/**
+ * 525.连续数组（两层for）
+ * @param {number[]} nums
+ * @return {number}
+ */
+var findMaxLength = function(nums) {
+  let result = 0
+  for (let i = 0, len = nums.length; i < len; i++) {
+    let zero = 0,
+      one = 0
+    for (let j = i; j < len; j++) {
+      if (nums[j] === 0) {
+        zero++
+      } else {
+        one++
+      }
+      if (zero === one) {
+        result = Math.max(result, zero + one)
+      }
+    }
+  }
+  return result
+}
