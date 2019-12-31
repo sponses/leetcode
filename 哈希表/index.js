@@ -29,3 +29,18 @@ var containsNearbyDuplicate = function(nums, k) {
   }
   return false
 }
+/**
+ * 220. 存在重复元素Ⅲ
+ * @param {number[]} nums
+ * @param {number} k
+ * @param {number} t
+ * @return {boolean}
+ */
+var containsNearbyAlmostDuplicate = function(nums, k, t) {
+  for (let i = 0, len = nums.length; i < len; i++) {
+    for (let j = i + 1; j < len; j++) {
+      if (j - i <= k && Math.abs(nums[i] - nums[j]) <= t) return true
+    }
+  }
+  return false
+}
