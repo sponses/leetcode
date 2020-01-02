@@ -165,3 +165,29 @@ var hasCycle = function(head) {
   }
   return true
 }
+/**
+ * 328.奇偶链表
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+var oddEvenList = function(head) {
+  if (!head) return null
+  let odd = head,
+    even = head.next,
+    list = even
+  while (even && even.next) {
+    odd.next = even.next
+    odd = odd.next
+    even.next = odd.next
+    even = even.next
+  }
+  odd.next = list
+  return head
+}
