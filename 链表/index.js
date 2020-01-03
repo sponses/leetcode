@@ -222,3 +222,46 @@ var mergeTwoLists = function(l1, l2) {
   result.next = l1 ? l1 : l2
   return dummy.next
 }
+/**
+ * 147. 对链表进行插入排序
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+var insertionSortList = function(head) {
+  let dummy = new ListNode(null)
+  dummy.next = head
+  while (head && head.next) {
+    let prev = dummy,
+      i = 0
+    while (prev.next !== head.next) {
+      if (prev.next.val > head.next.val) {
+        let temp = head.next
+        head.next = head.next.next
+        temp.next = prev.next
+        prev.next = temp
+        i++
+        break
+      } else {
+        prev = prev.next
+      }
+    }
+    if (i) continue
+    head = head.next
+  }
+  return dummy.next
+}
