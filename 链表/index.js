@@ -208,7 +208,7 @@ var mergeTwoLists = function(l1, l2) {
   let result = new ListNode(null),
     dummy = result
 
-  while (l1 || l2) {
+  while (l1 && l2) {
     if ((l1 && l2 && l1.val <= l2.val) || (l1 && !l2)) {
       result.next = new ListNode(l1.val)
       result = result.next
@@ -219,5 +219,6 @@ var mergeTwoLists = function(l1, l2) {
       l2 = l2.next
     }
   }
+  result.next = l1 ? l1 : l2
   return dummy.next
 }
