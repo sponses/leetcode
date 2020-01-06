@@ -334,3 +334,47 @@ var reorderList = function(head) {
     head = head.next.next
   }
 }
+/**
+ * 61. 旋转链表
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @param {number} k
+ * @return {ListNode}
+ */
+var rotateRight = function(head, k) {
+  if (!head || !head.next) return head
+  //求出链表的长度
+  let len = 0
+  let p = head
+  while (p) {
+    len++
+    p = p.next
+  }
+
+  //长度与k求余，值为旋转的位置
+  let offset = k % len
+  if (!offset) return head
+
+  //找出链表索引为(len-k)的节点
+  let rest = head
+  while (len - offset > 1) {
+    rest = rest.next
+    offset++
+  }
+
+  let temp = rest.next
+  rest.next = null
+  let last = temp
+  while (last && last.next) {
+    last = last.next
+  }
+  last.next = head
+  head = temp
+  return head
+}
