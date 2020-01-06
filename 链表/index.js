@@ -265,3 +265,72 @@ var insertionSortList = function(head) {
   }
   return dummy.next
 }
+/**
+ * 143.重排链表
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @return {void} Do not return anything, modify head in-place instead.
+ */
+var reorderList = function(head) {
+  while (head && head.next && head.next) {
+    let penult = getPenult(head)
+    let last = penult.next
+    penult.next = null
+    last.next = head.next
+    head.next = last
+    head = head.next.next
+  }
+
+  function getPenult(l) {
+    while (l && l.next && l.next.next) {
+      l = l.next
+    }
+    return l
+  }
+}
+/**
+ * 143.重排链表
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @return {void} Do not return anything, modify head in-place instead.
+ */
+var reorderList = function(head) {
+  if (!head || !head.next) return
+
+  let fast = head,
+    low = head
+  while (fast && fast.next) {
+    low = low.next
+    fast = fast.next.next ? fast.next.next : fast.next
+  }
+  let last = low.next
+  low.next = null
+
+  let prev = null
+  while (last) {
+    let head = last.next
+    last.next = prev
+    prev = last
+    last = head
+  }
+
+  while (prev) {
+    let temp = prev
+    prev = prev.next
+    temp.next = head.next
+    head.next = temp
+    head = head.next.next
+  }
+}
