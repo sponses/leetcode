@@ -44,3 +44,25 @@ var sortedSquares = function(A) {
   }
   return result
 }
+/**
+ * 27. 移除元素
+ * @param {number[]} nums
+ * @param {number} val
+ * @return {number}
+ */
+var removeElement = function(nums, val) {
+  let i = 0,
+    j = nums.length - 1 - i
+  while (i <= j) {
+    if (nums[i] === val) {
+      nums.splice(i, 1)
+    } else {
+      i++
+    }
+    if (nums[j] === val) {
+      nums.splice(j, 1)
+    }
+    j--
+  }
+  return nums.length
+}
