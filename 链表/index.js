@@ -378,3 +378,38 @@ var rotateRight = function(head, k) {
   head = temp
   return head
 }
+/**
+ * 61. 旋转链表
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @param {number} k
+ * @return {ListNode}
+ */
+var rotateRight = function(head, k) {
+  if (!head || !head.next) return head
+
+  let p = head,
+    len = 1
+  while (p && p.next) {
+    len++
+    p = p.next
+  }
+  p.next = head
+
+  let offset = len - (k % len)
+
+  let prev = null
+  while (offset > 0) {
+    prev = head
+    head = head.next
+    offset--
+  }
+  prev.next = null
+  return head
+}
