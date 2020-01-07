@@ -55,3 +55,23 @@ var minDiffInBST = function(root) {
   dfs(root)
   return min
 }
+/**
+ * 1137. 第 N 个泰波那契数
+ * @param {number} n
+ * @return {number}
+ */
+var tribonacci = function(n) {
+  let a = 0,
+    b = 1,
+    c = 1
+  if (n === 0) return a
+  if (n === 1 || n === 2) return b
+
+  for (let i = 3; i <= n; i++) {
+    let temp = a + b + c
+    a = b
+    b = c
+    c = temp
+  }
+  return c
+}

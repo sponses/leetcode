@@ -93,7 +93,7 @@ WordDictionary.prototype.search = function(word) {
 
     let letter = word[0]
     if (letter === '.') {
-      let arr = Object.keys(root).filter(x => !x !== 'isEnd')
+      let arr = Object.keys(root).filter(x => x !== 'isEnd')
       let result = false
       for (let i = 0, len = arr.length; i < len; i++) {
         if (word.length === 1) {
