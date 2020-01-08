@@ -143,3 +143,29 @@ var climbStairs = function(n) {
   }
   return b
 }
+/**
+ * 5. 最长回文子串（暴力循环超时）
+ * @param {string} s
+ * @return {string}
+ */
+var longestPalindrome = function(s) {
+  let max = ''
+  for (let i = 0, len = s.length; i < len; i++) {
+    let temp = '',
+      ans = ''
+    for (let j = i; j < len; j++) {
+      temp += s[j]
+      if (
+        temp ===
+        temp
+          .split('')
+          .reverse()
+          .join('')
+      ) {
+        ans = temp
+      }
+    }
+    if (ans.length > max.length) max = ans
+  }
+  return max
+}
