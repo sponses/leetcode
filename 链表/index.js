@@ -413,3 +413,31 @@ var rotateRight = function(head, k) {
   prev.next = null
   return head
 }
+/**
+ * 24. 两两交换链表中的节点
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+var swapPairs = function(head) {
+  let dummy = new ListNode(null)
+  dummy.next = head
+  let prev = dummy
+
+  while (head && head.next) {
+    let temp = head.next
+    head.next = head.next.next
+    temp.next = head
+    prev.next = temp
+    prev = head
+    head = head.next
+  }
+
+  return dummy.next
+}
