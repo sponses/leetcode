@@ -69,3 +69,35 @@ var sumOfLeftLeaves = function(root) {
   if (root.left && !root.left.left && !root.left.right) result += root.left.val
   return result + sumOfLeftLeaves(root.left) + sumOfLeftLeaves(root.right)
 }
+/**
+ * 257. 二叉树的所有路径
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {string[]}
+ */
+var binaryTreePaths = function(root) {
+  let res = []
+  if (!root) return res
+
+  function getPath(root, str) {
+    str === '' ? (str += +root.val) : (str += '->' + root.val)
+
+    if (!root.left && !root.right) {
+      res.push(str)
+      return res
+    }
+
+    if (root.left) getPath(root.left, str)
+    if (root.right) getPath(root.right, str)
+  }
+  let str = ''
+  getPath(root, str)
+
+  return res
+}
