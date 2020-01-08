@@ -72,3 +72,20 @@ var coinChange = function(coins, amount) {
   }
   return arr[amount]
 }
+/**
+ * 53. 最大子序和（暴力循环）
+ * @param {number[]} nums
+ * @return {number}
+ */
+var maxSubArray = function(nums) {
+  let max = Number.MIN_SAFE_INTEGER
+
+  for (let i = 0, len = nums.length; i < len; i++) {
+    let res = 0
+    for (let j = i; j < len; j++) {
+      res += nums[j]
+      max = Math.max(max, res)
+    }
+  }
+  return max
+}
