@@ -103,3 +103,26 @@ var maxSubArray = function(nums) {
   }
   return res
 }
+
+/**
+ * 198. 打家劫舍（动态规划）
+ * @param {number[]} nums
+ * @return {number}
+ */
+var rob = function(nums) {
+  if (nums.length === 0) return 0
+  if (nums.length === 1) return nums[0]
+  if (nums.length === 2) return Math.max(nums[0], nums[1])
+
+  let arr = [nums[0], nums[1]],
+    pMax = arr[0],
+    max = arr[1]
+
+  for (let i = 2, len = nums.length; i < len; i++) {
+    arr.push(pMax + nums[i])
+    pMax = Math.max(pMax, arr[i - 1])
+    max = Math.max(max, arr[i])
+  }
+
+  return max
+}
