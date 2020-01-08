@@ -89,3 +89,17 @@ var maxSubArray = function(nums) {
   }
   return max
 }
+/**
+ * 53. 最大子序和（动态规划）
+ * @param {number[]} nums
+ * @return {number}
+ */
+var maxSubArray = function(nums) {
+  let res = nums[0],
+    last = nums[0]
+  for (let i = 1, len = nums.length; i < len; i++) {
+    last = Math.max(last + nums[i], nums[i])
+    res = Math.max(last, res)
+  }
+  return res
+}
