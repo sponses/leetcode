@@ -169,3 +169,25 @@ var longestPalindrome = function(s) {
   }
   return max
 }
+/**
+ * 300. 最长上升子序列
+ * @param {number[]} nums
+ * @return {number}
+ */
+var lengthOfLIS = function(nums) {
+  if (!nums.length) return 0
+
+  let dp = new Array(nums.length)
+  dp.fill(1)
+
+  for (let i = 0, len = nums.length; i < len; i++) {
+    let max = 1
+    for (let j = 0; j < i; j++) {
+      let temp = 1
+      if (nums[i] > nums[j]) temp += dp[j]
+      max = Math.max(max, temp)
+    }
+    dp[i] = max
+  }
+  return Math.max(...dp)
+}
