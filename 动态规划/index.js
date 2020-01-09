@@ -191,3 +191,31 @@ var lengthOfLIS = function(nums) {
   }
   return Math.max(...dp)
 }
+
+/**
+ * 64. 最小路径和
+ * @param {number[][]} grid
+ * @return {number}
+ */
+var minPathSum = function(grid) {
+  const dp = new Array(grid.length)
+  dp.fill(new Array(grid[0].length))
+  let temp1 = 0,
+    temp2 = grid[0][0]
+  for (let i = 0, len = grid.length; i < len; i++) {
+    for (let j = 0, len = grid[0].length; j < len; j++) {
+      if (i === 0) {
+        temp1 += grid[i][j]
+        dp[i][j] = temp1
+        continue
+      }
+      if (j === 0) {
+        temp2 += grid[i][j]
+        dp[i][j] = temp2
+        continue
+      }
+      dp[i][j] = Math.min(dp[i - 1][j], dp[i][j - 1]) + grid[i][j]
+    }
+  }
+  return dp[grid.length - 1][grid[0].length - 1]
+}
