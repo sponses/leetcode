@@ -219,3 +219,20 @@ var minPathSum = function(grid) {
   }
   return dp[grid.length - 1][grid[0].length - 1]
 }
+/**
+ * 509. 斐波那契数
+ * @param {number} N
+ * @return {number}
+ */
+var fib = function(N) {
+  if (N === 0) return 0
+  if (N === 1) return 1
+  let a = 0,
+    b = 1
+  for (let i = 2; i <= N; i++) {
+    let temp = a + b
+    a = b
+    b = temp
+  }
+  return b
+}
