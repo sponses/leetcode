@@ -67,3 +67,34 @@ var findMaxLength = function(nums) {
   }
   return result
 }
+/**
+ * 409. 最长回文串
+ * @param {string} s
+ * @return {number}
+ */
+var longestPalindrome = function(s) {
+  let obj = {}
+  for (let i = 0, len = s.length; i < len; i++) {
+    if (!obj.hasOwnProperty(s[i])) {
+      obj[s[i]] = 1
+      continue
+    }
+    obj[s[i]]++
+  }
+  let keys = Object.keys(obj),
+    count = 0,
+    res = 0
+  for (let i = 0, len = keys.length; i < len; i++) {
+    if (obj[keys[i]] % 2 === 0) {
+      res += obj[keys[i]]
+      continue
+    }
+    if (!count) {
+      res += obj[keys[i]]
+      count++
+      continue
+    }
+    res += obj[keys[i]] - 1
+  }
+  return res
+}
