@@ -101,3 +101,21 @@ var binaryTreePaths = function(root) {
 
   return res
 }
+/**
+ * 1038. 从二叉搜索树到更大和树（中序遍历逆序）
+ * @param {TreeNode} root
+ * @return {TreeNode}
+ */
+var bstToGst = function(root) {
+  let sum = 0
+  function updateNode(node) {
+    if (!node) return
+    updateNode(node.right)
+    let temp = node.val
+    node.val += sum
+    sum += temp
+    updateNode(node.left)
+  }
+  updateNode(root)
+  return root
+}
