@@ -57,3 +57,78 @@ var lastStoneWeight = function(stones) {
   }
   return heap.length === 1 ? 0 : heap[1]
 }
+/**
+ * 347. 前 K 个高频元素（小顶堆）
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {number[]}
+ */
+var topKFrequent = function(nums, k) {
+  //使用哈希表获取每个数字出现的频率
+  //这里应该用Map，懒得改了
+  let obj = {}
+  for (let i = 0, len = nums.length; i < len; i++) {
+    if (!obj.hasOwnProperty(nums[i])) {
+      obj[nums[i]] = 1
+      continue
+    }
+    obj[nums[i]]++
+  }
+
+  //维护一个长度为k的小顶堆
+  let keys = Object.keys(obj),
+    heap = [null]
+  for (let i = 0, len = keys.length; i < len; i++) {
+    if (i < k) {
+      insert(keys[i])
+    } else {
+      compare(keys[i])
+    }
+
+    function insert(key) {
+      heap.push(key)
+      let i = heap.length - 1,
+        p = Math.floor(i / 2)
+
+      while (i > 1) {
+        if (obj[heap[i]] >= obj[heap[p]]) break
+        ;[heap[i], heap[p]] = [heap[p], heap[i]]
+        i = p
+        p = Math.floor(i / 2)
+      }
+    }
+
+    function compare(key) {
+      if (obj[key] <= obj[heap[1]]) return
+
+      heap[1] = key
+      let i = 1
+      while (i * 2 < heap.length) {
+        let left = heap[i * 2],
+          right = heap[i * 2 + 1]
+        if (
+          obj[key] <= obj[left] &&
+          (right === undefined || obj[key] <= obj[right])
+        )
+          break
+        if (
+          obj[left] <= obj[key] &&
+          (right === undefined || obj[left] <= obj[right])
+        ) {
+          ;[heap[i * 2], heap[i]] = [heap[i], heap[i * 2]]
+          i = i * 2
+        } else if (
+          right !== undefined &&
+          obj[right] <= obj[key] &&
+          obj[right] <= obj[left]
+        ) {
+          ;[heap[i * 2 + 1], heap[i]] = [heap[i], heap[i * 2 + 1]]
+          i = i * 2 + 1
+        }
+      }
+    }
+  }
+  heap.shift()
+
+  return heap.map(item => +item)
+}
