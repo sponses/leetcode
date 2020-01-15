@@ -132,3 +132,53 @@ var topKFrequent = function(nums, k) {
 
   return heap.map(item => +item)
 }
+/**
+ * 378. 有序矩阵中第K小的元素（大顶堆）
+ * @param {number[][]} matrix
+ * @param {number} k
+ * @return {number}
+ */
+var kthSmallest = function(matrix, k) {
+  let heap = [null]
+
+  //维持一个大顶堆
+  function insert(val, k) {
+    if (heap.length - 1 < k) {
+      //堆中元素数量小于k，继续插入
+      heap.push(val)
+      let i = heap.length - 1
+      while (i > 1) {
+        let p = Math.floor(i / 2)
+        if (val <= heap[p]) return
+        ;[heap[i], heap[p]] = [heap[p], heap[i]]
+        i = p
+      }
+    } else {
+      //堆中元素大于等于k，要插入的值与堆顶比较
+      //如果大于不做处理，小于则替换掉堆顶
+      if (heap[1] <= val) return
+      heap[1] = val
+      let i = 1
+      while (i * 2 < heap.length) {
+        let left = heap[i * 2],
+          right = heap[i * 2 + 1]
+        if (val >= left && (right === undefined || val >= right)) return
+
+        if (left > val && (right === undefined || left >= right)) {
+          ;[heap[i * 2], heap[i]] = [heap[i], heap[i * 2]]
+          i = i * 2
+        } else if (right !== undefined && right >= left && right > val) {
+          ;[heap[i * 2 + 1], heap[i]] = [heap[i], heap[i * 2 + 1]]
+          i = i * 2 + 1
+        }
+      }
+    }
+  }
+
+  for (let i = 0, len = matrix.length; i < len; i++) {
+    for (let j = 0; j < len; j++) {
+      insert(matrix[i][j], k)
+    }
+  }
+  return heap[1]
+}
