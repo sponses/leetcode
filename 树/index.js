@@ -147,3 +147,28 @@ var flatten = function(root) {
   }
   flat(root)
 }
+/**
+ * 230. 二叉搜索树中第K小的元素
+ * @param {TreeNode} root
+ * @param {number} k
+ * @return {number}
+ */
+var kthSmallest = function(root, k) {
+  let count = 1,
+    res = null
+  function getTthSmallest(node) {
+    if (!node) return null
+    if (res) return
+    getTthSmallest(node.left)
+    if (k === count) {
+      res = node.val
+      count++
+      return
+    } else {
+      count++
+    }
+    getTthSmallest(node.right)
+  }
+  getTthSmallest(root)
+  return res
+}
