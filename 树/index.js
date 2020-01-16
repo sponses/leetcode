@@ -119,3 +119,31 @@ var bstToGst = function(root) {
   updateNode(root)
   return root
 }
+/**
+ * 114. 二叉树展开为链表
+ * @param {TreeNode} root
+ * @return {void} Do not return anything, modify root in-place instead.
+ */
+var flatten = function(root) {
+  function flat(root) {
+    if (!root || (!root.left && !root.right)) return
+
+    if (!root.left && root.right) {
+    } else if (root.left && !root.right) {
+      root.right = root.left
+      root.left = null
+    } else {
+      let right = root.right
+      root.right = root.left
+      root.left = null
+
+      let temp = root.right
+      while (temp.right) {
+        temp = temp.right
+      }
+      temp.right = right
+    }
+    flat(root.right)
+  }
+  flat(root)
+}
