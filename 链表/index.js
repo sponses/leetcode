@@ -481,3 +481,35 @@ var addTwoNumbers = function(l1, l2) {
   }
   return dummy.next
 }
+/**
+ * 109. 有序链表转换二叉搜索树
+ * @param {ListNode} head
+ * @return {TreeNode}
+ */
+var sortedListToBST = function(head) {
+  let list = []
+  while (head) {
+    list.push(head.val)
+    head = head.next
+  }
+  let root = null
+  if (!list.length) return root
+  let mid = Math.floor(list.length / 2)
+  root = new TreeNode(list[mid])
+
+  function slb(root, left, right) {
+    if (!left.length && !right.length) return
+    let midL = Math.floor(left.length / 2),
+      midR = Math.floor(right.length / 2)
+    if (left[midL] !== undefined) {
+      root.left = new TreeNode(left[midL])
+      slb(root.left, left.slice(0, midL), left.slice(midL + 1))
+    }
+    if (right[midR] !== undefined) {
+      root.right = new TreeNode(right[midR])
+      slb(root.right, right.slice(0, midR), right.slice(midR + 1))
+    }
+  }
+  slb(root, list.slice(0, mid), list.slice(mid + 1))
+  return root
+}
