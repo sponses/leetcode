@@ -513,3 +513,45 @@ var sortedListToBST = function(head) {
   slb(root, list.slice(0, mid), list.slice(mid + 1))
   return root
 }
+/**
+ * 25. K 个一组翻转链表
+ * @param {ListNode} head
+ * @param {number} k
+ * @return {ListNode}
+ */
+var reverseKGroup = function(head, k) {
+  if (k === 1) return head
+  let dummy = new ListNode(null)
+  dummy.next = head
+  let p = dummy
+  while (p.next) {
+    let count = k,
+      list = []
+    while (head && count) {
+      list.push(head.val)
+      count--
+      if (count === 0) break
+      head = head.next
+    }
+    if (count) break
+
+    let temp = null,
+      dummyTemp = new ListNode(null)
+
+    for (let i = k - 1; i >= 0; i--) {
+      if (!temp) {
+        temp = new ListNode(list[i])
+        dummyTemp.next = temp
+        continue
+      }
+      temp.next = new ListNode(list[i])
+      temp = temp.next
+    }
+    if (!head) break
+    temp.next = head.next
+    p.next = dummyTemp.next
+    p = temp
+    head = temp.next
+  }
+  return dummy.next
+}
