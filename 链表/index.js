@@ -441,3 +441,43 @@ var swapPairs = function(head) {
 
   return dummy.next
 }
+/**
+ * 2. 两数相加
+ * @param {ListNode} l1
+ * @param {ListNode} l2
+ * @return {ListNode}
+ */
+var addTwoNumbers = function(l1, l2) {
+  let dummy = new ListNode(null),
+    p = dummy,
+    val = 0
+  while (l1 || l2 || val) {
+    let newNode = new ListNode(null)
+    if (!l1 && !l2) {
+      newNode.val = val
+      p.next = newNode
+      break
+    } else if (l1 && !l2) {
+      newNode.val = l1.val + val >= 10 ? (l1.val + val) % 10 : l1.val + val
+      p.next = newNode
+      val = l1.val + val >= 10 ? 1 : 0
+      l1 = l1.next
+    } else if (!l1 && l2) {
+      newNode.val = l2.val + val >= 10 ? (l2.val + val) % 10 : l2.val + val
+      p.next = newNode
+      val = l2.val + val >= 10 ? 1 : 0
+      l2 = l2.next
+    } else {
+      newNode.val =
+        l1.val + val + l2.val >= 10
+          ? (l1.val + val + l2.val) % 10
+          : l1.val + val + l2.val
+      p.next = newNode
+      val = l1.val + val + l2.val >= 10 ? 1 : 0
+      l1 = l1.next
+      l2 = l2.next
+    }
+    p = p.next
+  }
+  return dummy.next
+}
