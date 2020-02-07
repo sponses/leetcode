@@ -42,7 +42,7 @@ var findCircleNum = function(M) {
   return res
 }
 /**
- * 547. 朋友圈（并查集压缩路径）
+ * 547. 朋友圈（并查集秩合并）
  * @param {number[][]} M
  * @return {number}
  */

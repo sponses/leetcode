@@ -66,3 +66,16 @@ var removeElement = function(nums, val) {
   }
   return nums.length
 }
+/**
+ * 561. 数组拆分 I
+ * @param {number[]} nums
+ * @return {number}
+ */
+var arrayPairSum = function(nums) {
+  nums.sort((a, b) => a - b)
+  let res = 0
+  for (let i = 0, len = nums.length; i < len; i += 2) {
+    res += nums[i]
+  }
+  return res
+}
