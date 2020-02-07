@@ -95,3 +95,20 @@ var removeDuplicates = function(nums) {
   }
   return i + 1
 }
+/**
+ * 80. 删除排序数组中的重复项 II（双指针）
+ * @param {number[]} nums
+ * @return {number}
+ */
+var removeDuplicates = function(nums) {
+  let len = nums.length
+  if (len < 2) return len
+  let i = 1
+  for (let j = 2; j < len; j++) {
+    if (nums[j] !== nums[i - 1]) {
+      i++
+      nums[i] = nums[j]
+    }
+  }
+  return i + 1
+}
