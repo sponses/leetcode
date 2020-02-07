@@ -131,3 +131,55 @@ var findRedundantConnection = function(edges) {
     if (!union(...edges[i])) return edges[i]
   }
 }
+/**
+ * 721. 账户合并（并查集）
+ * @param {string[][]} accounts
+ * @return {string[][]}
+ */
+var accountsMerge = function(accounts) {
+  let ids = [],
+    branch = []
+  function initFindUnionSet(size) {
+    for (let i = 0; i < size; i++) {
+      ids[i] = i
+      branch = 1
+    }
+  }
+  function find(index) {
+    while (index !== ids[index]) index = ids[index]
+    return index
+  }
+  function union(p, q) {
+    let pId = find(p),
+      qId = find(q)
+    if (pId === qId) return false
+    if (branch[qId] > branch[pId]) {
+      ids[pId] = qId
+      branch[qId] += branch[pId]
+    } else {
+      ids[qId] = pId
+      branch[pId] += branch[qId]
+    }
+    return true
+  }
+  initFindUnionSet(accounts.length)
+  for (let i = 1, len = accounts.length; i < len; i++) {
+    for (let j = 0; j < i; j++) {
+      for (let k = 1; k < accounts[i].length; k++) {
+        if (accounts[j].includes(accounts[i][k])) {
+          union(i, j)
+        }
+      }
+    }
+  }
+
+  for (let i = 0, len = ids.length; i < len; i++) {
+    if (i !== ids[i]) {
+      let id = find(i)
+      accounts[id] = [...new Set([...accounts[id], ...accounts[i]])]
+      accounts.splice(i, 1)
+    }
+  }
+
+  return accounts
+}
