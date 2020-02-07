@@ -90,3 +90,44 @@ var findCircleNum = function(M) {
   }
   return count
 }
+/**
+ * 684. 冗余连接（并查集）
+ * @param {number[][]} edges
+ * @return {number[]}
+ */
+var findRedundantConnection = function(edges) {
+  let ids = [],
+    branch = []
+  function initFindUnionSet(size) {
+    for (let i = 0; i < size; i++) {
+      ids[i] = i
+      branch = 1
+    }
+    a
+  }
+  function find(index) {
+    while (index !== ids[index]) index = ids[index]
+    return index
+  }
+  function union(p, q) {
+    let pId = find(p),
+      qId = find(q)
+    if (pId === qId) return false
+    if (branch[pId] >= branch[qId]) {
+      ids[qId] = pId
+      branch[pId] += branch[qId]
+    } else {
+      ids[pId] = qId
+      branch[qId] += branch[pId]
+    }
+    return true
+  }
+  let max = 0
+  for (let i = 0, len = edges.length; i < len; i++) {
+    max = Math.max(max, edges[i][1])
+  }
+  initFindUnionSet(max)
+  for (let i = 0, len = edges.length; i < len; i++) {
+    if (!union(...edges[i])) return edges[i]
+  }
+}
