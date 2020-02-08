@@ -112,3 +112,22 @@ var removeDuplicates = function(nums) {
   }
   return i + 1
 }
+/**
+ * 167. 两数之和 II - 输入有序数组（双指针）
+ * @param {number[]} numbers
+ * @param {number} target
+ * @return {number[]}
+ */
+var twoSum = function(numbers, target) {
+  let front = 0,
+    end = numbers.length
+  while (front < end) {
+    if (numbers[front] + numbers[end] === target) return [front + 1, end + 1]
+    if (numbers[front] + numbers[end] < target) {
+      front++
+    } else {
+      end--
+    }
+  }
+  return []
+}
