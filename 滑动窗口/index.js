@@ -54,3 +54,57 @@ var minWindow = function(s, t) {
   }
   return res
 }
+/**
+ * 438. 找到字符串中所有字母异位词（滑动窗口）
+ * @param {string} s
+ * @param {string} p
+ * @return {number[]}
+ */
+var findAnagrams = function(s, p) {
+  let left = 0,
+    right = 0,
+    match = 0,
+    res = []
+  const needs = {},
+    window = {}
+
+  for (let i = 0, len = p.length; i < len; i++) {
+    let char = p[i]
+    if (needs.hasOwnProperty(char)) {
+      needs[char]++
+    } else {
+      needs[char] = 1
+    }
+  }
+
+  while (right < s.length) {
+    let char = s[right]
+    if (needs.hasOwnProperty(char)) {
+      if (window.hasOwnProperty(char)) {
+        window[char]++
+      } else {
+        window[char] = 1
+      }
+
+      if (needs[char] === window[char]) {
+        match++
+      }
+    }
+
+    while (match === Object.keys(needs).length) {
+      if (p.length - 1 === right - left) {
+        res.push(left)
+      }
+      let char = s[left]
+      if (needs.hasOwnProperty(char)) {
+        window[char]--
+        if (window[char] < needs[char]) {
+          match--
+        }
+      }
+      left++
+    }
+    right++
+  }
+  return res
+}
