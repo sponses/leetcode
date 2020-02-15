@@ -1,0 +1,56 @@
+/**
+ * 76. 最小覆盖子串（滑动窗口）
+ * @param {string} s
+ * @param {string} t
+ * @return {string}
+ */
+var minWindow = function(s, t) {
+  let left = 0,
+    right = 0,
+    match = 0,
+    res = '',
+    count = Number.MAX_SAFE_INTEGER
+  const needs = {},
+    window = {}
+
+  for (let i = 0, len = t.length; i < len; i++) {
+    let char = t[i]
+    if (needs.hasOwnProperty(char)) {
+      needs[char]++
+    } else {
+      needs[char] = 1
+    }
+  }
+
+  while (right < s.length) {
+    let char = s[right]
+    if (needs.hasOwnProperty(char)) {
+      if (window.hasOwnProperty(char)) {
+        window[char]++
+      } else {
+        window[char] = 1
+      }
+
+      if (needs[char] === window[char]) {
+        match++
+      }
+    }
+
+    while (match === Object.keys(needs).length) {
+      if (count > right - left) {
+        res = s.slice(left, right + 1)
+        count = right - left + 1
+      }
+      let char = s[left]
+      if (needs.hasOwnProperty(char)) {
+        window[char]--
+        if (window[char] < needs[char]) {
+          match--
+        }
+      }
+      left++
+    }
+    right++
+  }
+  return res
+}
