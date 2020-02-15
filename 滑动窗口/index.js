@@ -108,3 +108,42 @@ var findAnagrams = function(s, p) {
   }
   return res
 }
+/**
+ * 159. 至多包含两个不同字符的最长子串（滑动窗口）
+ * @param {string} s
+ * @return {number}
+ */
+
+var lengthOfLongestSubstringTwoDistinct = function(s) {
+  let left = 0,
+    right = 0,
+    res = Number.MIN_SAFE_INTEGER
+  const window = {}
+
+  while (right < s.length) {
+    let char = s[right]
+    if (window.hasOwnProperty(char)) {
+      window[char]++
+    } else {
+      window[char] = 1
+    }
+
+    while (Object.keys(window).length > 2) {
+      let char = s[left]
+      if (window[char] === 1) {
+        delete window[char]
+      } else {
+        window[char]--
+      }
+      left++
+    }
+
+    if (Object.keys(window).length === 2) {
+      if (res < right - left + 1) {
+        res = right - left + 1
+      }
+    }
+    right++
+  }
+  return res
+}
