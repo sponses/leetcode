@@ -139,9 +139,45 @@ var lengthOfLongestSubstringTwoDistinct = function(s) {
     }
 
     if (Object.keys(window).length === 2) {
-      if (res < right - left + 1) {
-        res = right - left + 1
+      res = Math.max(res, right - left + 1)
+    }
+    right++
+  }
+  return res
+}
+/**
+ * 340.至多包含 K 个不同字符的最长子串 （滑动窗口）
+ * @param {string} s
+ * @param {number} k
+ * @return {number}
+ */
+
+var lengthOfLongestSubstringKDistinct = function(s, k) {
+  let left = 0,
+    right = 0,
+    res = Number.MIN_SAFE_INTEGER
+  const window = {}
+
+  while (right < s.length) {
+    let char = s[right]
+    if (window.hasOwnProperty(char)) {
+      window[char]++
+    } else {
+      window[char] = 1
+    }
+
+    while (Object.keys(window).length > k) {
+      let char = s[left]
+      if (window[char] === 1) {
+        delete window[char]
+      } else {
+        window[char]--
       }
+      left++
+    }
+
+    if (Object.keys(window).length === k) {
+      res = Math.max(res, right - left + 1)
     }
     right++
   }
