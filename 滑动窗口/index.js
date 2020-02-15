@@ -227,3 +227,27 @@ var checkInclusion = function(s1, s2) {
   }
   return false
 }
+/**
+ * 485. 最大连续1的个数（滑动窗口）
+ * @param {number[]} nums
+ * @return {number}
+ */
+var findMaxConsecutiveOnes = function(nums) {
+  let left = 0,
+    right = 0,
+    res = 0,
+    count = 0
+  while (right < nums.length) {
+    let n = nums[right]
+    if (n === 0) {
+      left = right = right + 1
+      count = 0
+      continue
+    } else {
+      count++
+      res = Math.max(res, count)
+    }
+    right++
+  }
+  return res
+}
