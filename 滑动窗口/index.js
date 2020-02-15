@@ -183,3 +183,47 @@ var lengthOfLongestSubstringKDistinct = function(s, k) {
   }
   return res
 }
+/**
+ * 567. 字符串的排列（滑动窗口）
+ * @param {string} s1
+ * @param {string} s2
+ * @return {boolean}
+ */
+var checkInclusion = function(s1, s2) {
+  let left = 0,
+    right = 0,
+    match = 0
+  const needs = {},
+    window = {}
+  for (let i = 0, len = s1.length; i < len; i++) {
+    needs[s1[i]] = needs.hasOwnProperty(s1[i]) ? needs[s1[i]] + 1 : 1
+  }
+  while (right < s2.length) {
+    let char = s2[right]
+    if (needs.hasOwnProperty(char)) {
+      window[char] = window.hasOwnProperty(char) ? window[char] + 1 : 1
+      if (window[char] === needs[char]) {
+        match++
+      }
+    }
+    while (right - left > s1.length - 1) {
+      let char = s2[left]
+      if (needs.hasOwnProperty(char)) {
+        if (window[char] === needs[char]) {
+          match--
+        }
+        if (window[char] === 1) {
+          delete window[char]
+        } else {
+          window[char]--
+        }
+      }
+      left++
+    }
+    if (match === Object.keys(needs).length) {
+      return true
+    }
+    right++
+  }
+  return false
+}
