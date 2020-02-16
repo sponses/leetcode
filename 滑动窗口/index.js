@@ -251,3 +251,25 @@ var findMaxConsecutiveOnes = function(nums) {
   }
   return res
 }
+/**
+ * 3. 无重复字符的最长子串（滑动窗口）
+ * @param {string} s
+ * @return {number}
+ */
+var lengthOfLongestSubstring = function(s) {
+  let res = 0,
+    left = 0,
+    right = 0
+  const hash = {}
+  while (right < s.length) {
+    let char = s[right]
+    while (hash.hasOwnProperty(char)) {
+      delete hash[s[left]]
+      left++
+    }
+    hash[char] = 1
+    res = Math.max(res, right - left + 1)
+    right++
+  }
+  return res
+}
