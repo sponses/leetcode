@@ -119,15 +119,54 @@ var removeDuplicates = function(nums) {
  * @return {number[]}
  */
 var twoSum = function(numbers, target) {
-  let front = 0,
-    end = numbers.length
-  while (front < end) {
-    if (numbers[front] + numbers[end] === target) return [front + 1, end + 1]
-    if (numbers[front] + numbers[end] < target) {
-      front++
+  let left = 0,
+    len = numbers.length,
+    right = len - 1
+  while (left < right) {
+    if (numbers[left] + numbers[right] === target) return [left + 1, right + 1]
+    if (numbers[left] + numbers[right] > target) {
+      right--
     } else {
-      end--
+      left++
     }
   }
   return []
+}
+/**
+ * 15. 三数之和（双指针）
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+var threeSum = function(nums) {
+  if (nums.length < 3) return []
+  let len = nums.length,
+    p1 = 0,
+    p2,
+    p3,
+    res = []
+  nums.sort((a, b) => a - b)
+  while (p1 <= len - 3) {
+    p2 = p1 + 1
+    p3 = len - 1
+    while (p2 < p3) {
+      if (nums[p1] + nums[p2] + nums[p3] === 0) {
+        res.push([nums[p1], nums[p2], nums[p3]])
+        while (nums[p2] === nums[p2 + 1] && nums[p3] === nums[p3 - 1]) {
+          p2++
+          p3--
+        }
+        p3--
+        p2++
+      } else if (nums[p1] + nums[p2] + nums[p3] > 0) {
+        p3--
+      } else {
+        p2++
+      }
+    }
+    while (nums[p1] === nums[p1 + 1]) {
+      p1++
+    }
+    p1++
+  }
+  return res
 }
