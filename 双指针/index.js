@@ -205,3 +205,51 @@ var threeSumClosest = function(nums, target) {
   }
   return res
 }
+/**
+ * 18. 四数之和（双指针）
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number[][]}
+ */
+var fourSum = function(nums, target) {
+  let len = nums.length,
+    p1 = 0,
+    p2,
+    p3,
+    p4,
+    res = []
+  if (len < 4) return []
+  nums.sort((a, b) => a - b)
+  while (p1 <= len - 4) {
+    p2 = p1 + 1
+    while (p2 <= len - 3) {
+      p3 = p2 + 1
+      p4 = len - 1
+      while (p3 < p4) {
+        let sum = nums[p1] + nums[p2] + nums[p3] + nums[p4]
+        if (sum === target) {
+          res.push([nums[p1], nums[p2], nums[p3], nums[p4]])
+          while (nums[p3] === nums[p3 + 1] && nums[p4] === nums[p4 - 1]) {
+            p3++
+            p4--
+          }
+          p3++
+          p4--
+        } else if (sum > target) {
+          p4--
+        } else {
+          p3++
+        }
+      }
+      while (nums[p2] === nums[p2 + 1]) {
+        p2++
+      }
+      p2++
+    }
+    while (nums[p1] === nums[p1 + 1]) {
+      p1++
+    }
+    p1++
+  }
+  return res
+}
