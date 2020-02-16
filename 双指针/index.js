@@ -170,3 +170,38 @@ var threeSum = function(nums) {
   }
   return res
 }
+/**
+ * 16. 最接近的三数之和（双指针）
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number}
+ */
+var threeSumClosest = function(nums, target) {
+  let temp = Number.MAX_SAFE_INTEGER,
+    p1 = 0,
+    len = nums.length,
+    p2,
+    p3,
+    res
+  if (len < 3) return null
+  nums.sort((a, b) => a - b)
+  while (p1 <= len - 3) {
+    p2 = p1 + 1
+    p3 = len - 1
+    while (p2 < p3) {
+      let diff = target - (nums[p1] + nums[p2] + nums[p3])
+      if (temp > Math.abs(diff)) {
+        temp = Math.abs(diff)
+        res = nums[p1] + nums[p2] + nums[p3]
+      }
+      if (diff === 0) return res
+      if (diff < 0) {
+        p3--
+      } else {
+        p2++
+      }
+    }
+    p1++
+  }
+  return res
+}
