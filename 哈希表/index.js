@@ -98,3 +98,17 @@ var longestPalindrome = function(s) {
   }
   return res
 }
+/**
+ * 1. 两数之和（哈希表）
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number[]}
+ */
+const twoSum = function(nums, target) {
+  let hash = {}
+  for (let i = 0, len = nums.length; i < len; i++) {
+    if (hash.hasOwnProperty(target - nums[i]))
+      return [hash[target - nums[i]], i]
+    hash[nums[i]] = i
+  }
+}
