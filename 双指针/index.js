@@ -45,26 +45,23 @@ var sortedSquares = function(A) {
   return result
 }
 /**
- * 27. 移除元素
+ * 27. 移除元素（双指针）
  * @param {number[]} nums
  * @param {number} val
  * @return {number}
  */
-var removeElement = function(nums, val) {
-  let i = 0,
-    j = nums.length - 1 - i
-  while (i <= j) {
-    if (nums[i] === val) {
-      nums.splice(i, 1)
-    } else {
-      i++
+function removeElement(nums, val) {
+  let len = nums.length,
+    left = -1,
+    right = 0
+  while (right < len) {
+    if (nums[right] !== val) {
+      left++
+      nums[left] = nums[right]
     }
-    if (nums[j] === val) {
-      nums.splice(j, 1)
-    }
-    j--
+    right++
   }
-  return nums.length
+  return left + 1
 }
 /**
  * 561. 数组拆分 I
@@ -101,16 +98,16 @@ var removeDuplicates = function(nums) {
  * @return {number}
  */
 var removeDuplicates = function(nums) {
-  let len = nums.length
-  if (len < 2) return len
-  let i = 1
-  for (let j = 2; j < len; j++) {
-    if (nums[j] !== nums[i - 1]) {
-      i++
-      nums[i] = nums[j]
+  let left = 1,
+    right = 2
+  while (right < nums.length) {
+    if (nums[left - 1] !== nums[right]) {
+      left++
+      nums[left] = nums[right]
     }
+    right++
   }
-  return i + 1
+  return left + 1
 }
 /**
  * 167. 两数之和 II - 输入有序数组（双指针）
