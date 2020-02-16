@@ -253,3 +253,25 @@ var fourSum = function(nums, target) {
   }
   return res
 }
+/**
+ * 11. 盛最多水的容器（双指针）
+ * @param {number[]} height
+ * @return {number}
+ */
+var maxArea = function(height) {
+  let left = 0,
+    len = height.length,
+    right = len - 1,
+    res = 0
+  if (len < 2) return 0
+  while (left < right) {
+    let s = (right - left) * Math.min(height[left], height[right])
+    res = Math.max(res, s)
+    if (height[left] > height[right]) {
+      right--
+    } else {
+      left++
+    }
+  }
+  return res
+}
