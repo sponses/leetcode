@@ -36,3 +36,28 @@ var detectCycle = function(head) {
   }
   return fast
 }
+/**
+ * 202. 快乐数（快慢指针）
+ * @param {number} n
+ * @return {boolean}
+ */
+var isHappy = function(n) {
+  function getSumOfSquares(n) {
+    let res = 0
+    while (n) {
+      res += (n % 10) * (n % 10)
+      n = Math.floor(n / 10)
+    }
+    return res
+  }
+  let slow = n,
+    fast = n
+  while (true) {
+    slow = getSumOfSquares(slow)
+    fast = getSumOfSquares(fast)
+    if (fast === 1) return true
+    fast = getSumOfSquares(fast)
+    if (fast === 1) return true
+    if (fast === slow) return false
+  }
+}
