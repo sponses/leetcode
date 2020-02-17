@@ -61,3 +61,32 @@ var isHappy = function(n) {
     if (fast === slow) return false
   }
 }
+/**
+ * 面试题22. 链表中倒数第k个节点（快慢指针）
+ * @param {ListNode} head
+ * @param {number} k
+ * @return {ListNode}
+ */
+var getKthFromEnd = function(head, k) {
+  if (!head) return null
+  let slow = head,
+    fast = head,
+    count = 1,
+    len = 1
+  while (slow) {
+    if (fast.next) {
+      if (fast.next.next) {
+        fast = fast.next.next
+        len += 2
+      } else {
+        fast = fast.next
+        len += 1
+      }
+    }
+    if (!fast.next) {
+      if (len - k + 1 === count) return slow
+      slow = slow.next
+      count++
+    }
+  }
+}
