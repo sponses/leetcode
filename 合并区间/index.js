@@ -23,3 +23,14 @@ var merge = function(intervals) {
   res.push(temp)
   return res
 }
+
+let arr = [2, 6, 3, 1, 5, 7, 10, 9, 8]
+function test(arr) {
+  for (let i = 0, len = arr.length; i < len; i++) {
+    let cur = arr[i]
+    if (cur - 1 !== i) {
+      ;[arr[i], arr[cur - 1]] = [arr[cur - 1], arr[i]]
+    }
+  }
+  return arr
+}
