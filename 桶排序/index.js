@@ -54,3 +54,21 @@ var findDuplicates = function(nums) {
   }
   return res
 }
+/**
+ * 面试题03. 数组中重复的数字（桶排序）
+ * @param {number[]} nums
+ * @return {number}
+ */
+var findRepeatNumber = function(nums) {
+  for (let i = 0, len = nums.length; i < len; i++) {
+    let cur = nums[i]
+    while (cur !== i && nums[cur] !== cur) {
+      ;[nums[i], nums[cur]] = [nums[cur], nums[i]]
+      cur = nums[i]
+    }
+  }
+  for (let i = 0, len = nums.length; i < len; i++) {
+    if (i !== nums[i]) return nums[i]
+  }
+  return null
+}
