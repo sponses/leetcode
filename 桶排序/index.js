@@ -35,3 +35,22 @@ var findDisappearedNumbers = function(nums) {
   }
   return res
 }
+/**
+ * 442. 数组中重复的数据（桶排序）
+ * @param {number[]} nums
+ * @return {number[]}
+ */
+var findDuplicates = function(nums) {
+  let res = []
+  for (let i = 0, len = nums.length; i < len; i++) {
+    let cur = nums[i]
+    while (cur !== i + 1 && nums[cur - 1] !== cur) {
+      ;[nums[cur - 1], nums[i]] = [nums[i], nums[cur - 1]]
+      cur = nums[i]
+    }
+  }
+  for (let i = 0, len = nums.length; i < len; i++) {
+    if (nums[i] !== i + 1) res.push(nums[i])
+  }
+  return res
+}
