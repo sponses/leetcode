@@ -426,3 +426,23 @@ var pathSum = function(root, sum) {
   dfs(root, [], sum)
   return res
 }
+/**
+ * 437. 路径总和 III（dfs）
+ * @param {TreeNode} root
+ * @param {number} sum
+ * @return {number}
+ */
+var pathSum = function(root, sum) {
+  function dfs(node, count, arr) {
+    if (!node) return 0
+    let cur = node.val,
+      n = cur === sum ? 1 : 0
+    arr[count] = node.val
+    for (let i = count; i > 0; i--) {
+      cur += arr[i - 1]
+      if (cur === sum) n++
+    }
+    return n + dfs(node.left, count + 1, arr) + dfs(node.right, count + 1, arr)
+  }
+  return dfs(root, 0, [])
+}
