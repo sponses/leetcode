@@ -446,3 +446,24 @@ var pathSum = function(root, sum) {
   }
   return dfs(root, 0, [])
 }
+/**
+ * 257. 二叉树的所有路径（dfs）
+ * @param {TreeNode} root
+ * @return {string[]}
+ */
+var binaryTreePaths = function(root) {
+  let res = []
+  function dfs(node, path) {
+    if (!node) return
+    if (!node.left && !node.right) {
+      path += node.val
+      res.push(path)
+    } else {
+      path += node.val + '->'
+    }
+    dfs(node.left, path)
+    dfs(node.right, path)
+  }
+  dfs(root, '')
+  return res
+}
