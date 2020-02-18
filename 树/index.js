@@ -268,3 +268,24 @@ var levelOrder = function(root) {
   dfs(root, 0)
   return res
 }
+/**
+ * 107. 二叉树的层次遍历 II（dfs）
+ * @param {TreeNode} root
+ * @return {number[][]}
+ */
+var levelOrderBottom = function(root) {
+  let res = []
+  function dfs(node, count) {
+    if (!node) return
+    if (Array.isArray(res[count])) {
+      res[count].push(node.val)
+    } else {
+      res[count] = [node.val]
+    }
+    if (node.left) dfs(node.left, count + 1)
+    if (node.right) dfs(node.right, count + 1)
+  }
+  dfs(root, 0)
+  res.reverse()
+  return res
+}
