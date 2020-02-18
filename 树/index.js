@@ -341,3 +341,27 @@ var averageOfLevels = function(root) {
   }
   return res
 }
+/**
+ * 111. 二叉树的最小深度（队列）
+ * @param {TreeNode} root
+ * @return {number}
+ */
+var minDepth = function(root) {
+  if (!root) return 0
+  let queue = [root],
+    len = 0
+  while (queue.length) {
+    let count = queue.length
+    len++
+    while (count) {
+      let cur = queue.shift()
+      if (cur.left || cur.right) {
+        cur.left && queue.push(cur.left)
+        cur.right && queue.push(cur.right)
+      } else {
+        return len
+      }
+      count--
+    }
+  }
+}
