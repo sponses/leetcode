@@ -385,3 +385,20 @@ var minDepth = function(root) {
   dfs(root, 1)
   return res
 }
+/**
+ * 112. 路径总和（dfs）
+ * @param {TreeNode} root
+ * @param {number} sum
+ * @return {boolean}
+ */
+var hasPathSum = function(root, sum) {
+  function dfs(node, sum) {
+    if (!node) return false
+    sum -= node.val
+    if (!node.right && !node.left) {
+      return sum === 0
+    }
+    return dfs(node.left, sum) || dfs(node.right, sum)
+  }
+  return dfs(root, sum)
+}
