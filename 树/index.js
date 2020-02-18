@@ -365,3 +365,23 @@ var minDepth = function(root) {
     }
   }
 }
+/**
+ * 111. 二叉树的最小深度（dfs）
+ * @param {TreeNode} root
+ * @return {number}
+ */
+var minDepth = function(root) {
+  if (!root) return 0
+  let res = Number.MAX_SAFE_INTEGER
+  function dfs(node, count) {
+    if (!node) return
+    if (node.left || node.right) {
+      node.left && dfs(node.left, count + 1)
+      node.right && dfs(node.right, count + 1)
+    } else {
+      res = Math.min(res, count)
+    }
+  }
+  dfs(root, 1)
+  return res
+}
