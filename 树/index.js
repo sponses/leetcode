@@ -402,3 +402,27 @@ var hasPathSum = function(root, sum) {
   }
   return dfs(root, sum)
 }
+/**
+ * 113. 路径总和 II（dfs）
+ * @param {TreeNode} root
+ * @param {number} sum
+ * @return {number[][]}
+ */
+var pathSum = function(root, sum) {
+  let res = []
+  function dfs(node, temp, sum) {
+    if (!node) return
+    sum -= node.val
+    temp.push(node.val)
+    if (!node.left && !node.right) {
+      if (sum === 0) {
+        res.push(temp)
+      }
+      return
+    }
+    dfs(node.left, [...temp], sum)
+    dfs(node.right, [...temp], sum)
+  }
+  dfs(root, [], sum)
+  return res
+}
