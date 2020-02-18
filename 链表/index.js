@@ -571,3 +571,18 @@ var getIntersectionNode = function(headA, headB) {
   }
   return pA
 }
+/**
+ * 面试题24. 反转链表
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+var reverseList = function(head) {
+  let prev = null
+  while (head) {
+    let temp = head
+    head = head.next
+    temp.next = prev
+    prev = temp
+  }
+  return prev
+}
