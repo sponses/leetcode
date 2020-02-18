@@ -625,3 +625,24 @@ var reverseBetween = function(head, m, n) {
   p.next = rev
   return dummy.next
 }
+let root = {
+  val: 3,
+  left: { val: 9, left: null, right: null },
+  right: { val: 20, left: null, right: null }
+}
+var levelOrder = function(root) {
+  if (!root) return []
+  let res = [],
+    queue = [root, 'ok']
+
+  while (queue.length) {
+    let cur = queue.shift()
+    if (cur.left) {
+      queue.push(cur.left)
+    }
+    if (cur.right) {
+      queue.push(cur.right)
+    }
+  }
+  return res
+}

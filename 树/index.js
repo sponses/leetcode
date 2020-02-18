@@ -189,3 +189,35 @@ var flipEquiv = function(root1, root2) {
     (flipEquiv(root1.left, root2.left) && flipEquiv(root1.right, root2.right))
   )
 }
+/**
+ * 102. 二叉树的层次遍历（队列）
+ * @param {TreeNode} root
+ * @return {number[][]}
+ */
+var levelOrder = function(root) {
+  if (!root) return []
+  let res = [],
+    queue = [root, 'ok'],
+    temp = [],
+    count = 0
+  while (queue.length) {
+    let cur = queue.shift()
+    if (cur === 'ok') {
+      res.push(temp)
+      temp = []
+      if (count) queue.push('ok')
+      count = 0
+    } else {
+      if (cur.left) {
+        queue.push(cur.left)
+        count++
+      }
+      if (cur.right) {
+        queue.push(cur.right)
+        count++
+      }
+      temp.push(cur.val)
+    }
+  }
+  return res
+}
