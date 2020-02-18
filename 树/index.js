@@ -221,3 +221,30 @@ var levelOrder = function(root) {
   }
   return res
 }
+/**
+ * 102. 二叉树的层次遍历（优化）
+ * @param {TreeNode} root
+ * @return {number[][]}
+ */
+var levelOrder = function(root) {
+  if (!root) return []
+  let queue = [root],
+    res = []
+  while (queue.length) {
+    let count = queue.length,
+      temp = []
+    while (count) {
+      let cur = queue.shift()
+      temp.push(cur.val)
+      if (cur.left) {
+        queue.push(cur.left)
+      }
+      if (cur.right) {
+        queue.push(cur.right)
+      }
+      count--
+    }
+    res.push(temp)
+  }
+  return res
+}
