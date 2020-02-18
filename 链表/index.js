@@ -586,3 +586,42 @@ var reverseList = function(head) {
   }
   return prev
 }
+/**
+ * 92. 反转链表 II
+ * @param {ListNode} head
+ * @param {number} m
+ * @param {number} n
+ * @return {ListNode}
+ */
+var reverseBetween = function(head, m, n) {
+  if (!head) return null
+  let count = 1,
+    dummy = new ListNode(null)
+  dummy.next = head
+  let p = dummy,
+    rev = null,
+    last = null
+  while (head) {
+    if (count > n) {
+      p.next = rev
+      last.next = head
+      return dummy.next
+    }
+    if (count >= m) {
+      let temp = head
+      head = head.next
+      count++
+      temp.next = rev
+      rev = temp
+      if (count - 1 === m) {
+        last = rev
+      }
+      continue
+    }
+    p = p.next
+    head = head.next
+    count++
+  }
+  p.next = rev
+  return dummy.next
+}
