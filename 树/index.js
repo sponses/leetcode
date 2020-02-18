@@ -289,3 +289,27 @@ var levelOrderBottom = function(root) {
   res.reverse()
   return res
 }
+/**
+ * 103. 二叉树的锯齿形层次遍历（dfs）
+ * @param {TreeNode} root
+ * @return {number[][]}
+ */
+var zigzagLevelOrder = function(root) {
+  let res = []
+  function dfs(node, count) {
+    if (!node) return
+    if (Array.isArray(res[count])) {
+      if (count % 2 === 0) {
+        res[count].push(node.val)
+      } else {
+        res[count].unshift(node.val)
+      }
+    } else {
+      res[count] = [node.val]
+    }
+    if (node.left) dfs(node.left, count + 1)
+    if (node.right) dfs(node.right, count + 1)
+  }
+  dfs(root, 0)
+  return res
+}
