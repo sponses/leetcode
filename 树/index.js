@@ -313,3 +313,31 @@ var zigzagLevelOrder = function(root) {
   dfs(root, 0)
   return res
 }
+/**
+ * 637. 二叉树的层平均值（队列）
+ * @param {TreeNode} root
+ * @return {number[]}
+ */
+var averageOfLevels = function(root) {
+  if (!root) return []
+  let res = [],
+    queue = [root]
+  while (queue.length) {
+    let count = queue.length,
+      x = count,
+      sum = 0
+    while (count) {
+      let cur = queue.shift()
+      sum += cur.val
+      if (cur.left) {
+        queue.push(cur.left)
+      }
+      if (cur.right) {
+        queue.push(cur.right)
+      }
+      count--
+    }
+    res.push(sum / x)
+  }
+  return res
+}
