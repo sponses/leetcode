@@ -182,3 +182,33 @@ var kthSmallest = function(matrix, k) {
   }
   return heap[1]
 }
+/**
+ * 480. 滑动窗口中位数（排序超时）
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {number[]}
+ */
+var medianSlidingWindow = function(nums, k) {
+  let temp = [],
+    res = [],
+    left = 0,
+    right = 0
+  if (!k) return res
+  while (right < nums.length) {
+    temp.push(nums[right])
+    if (temp.length >= k) {
+      if (temp.length > k) {
+        temp.shift()
+      }
+      let arr = [...temp]
+      arr.sort((a, b) => a - b)
+      if (k % 2 === 0) {
+        res.push((arr[Math.floor((k - 1) / 2)] + arr[k / 2]) / 2)
+      } else {
+        res.push(arr[Math.floor(k / 2)])
+      }
+    }
+    right++
+  }
+  return res
+}
