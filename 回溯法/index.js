@@ -48,3 +48,34 @@ var letterCombinations = function(digits) {
   }
   return res
 }
+/**
+ * 17. 电话号码的字母组合（回溯法）
+ * @param {string} digits
+ * @return {string[]}
+ */
+var letterCombinations = function(digits) {
+  let hash = {
+      2: 'abc',
+      3: 'def',
+      4: 'ghi',
+      5: 'jkl',
+      6: 'mno',
+      7: 'pqrs',
+      8: 'tuv',
+      9: 'wxyz'
+    },
+    res = []
+  if (!digits) return res
+  function backtrack(str, digits) {
+    if (!digits) {
+      res.push(str)
+      return
+    }
+    let cur = hash[digits[0]]
+    for (let i = 0, len = cur.length; i < len; i++) {
+      backtrack(str + cur[i], digits.slice(1))
+    }
+  }
+  backtrack('', digits)
+  return res
+}
