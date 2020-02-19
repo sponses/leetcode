@@ -101,3 +101,19 @@ var permute = function(nums) {
   backtrack([], nums)
   return res
 }
+/**
+ * 78. 子集（回溯法）
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+var subsets = function(nums) {
+  let res = []
+  function backtrack(arr, index) {
+    res.push(arr)
+    for (let i = index, len = nums.length; i < len; i++) {
+      backtrack([...arr, nums[i]], i + 1)
+    }
+  }
+  backtrack([], 0)
+  return res
+}
