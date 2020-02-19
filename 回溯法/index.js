@@ -117,3 +117,21 @@ var subsets = function(nums) {
   backtrack([], 0)
   return res
 }
+/**
+ * 90. 子集 II（排序+回溯）
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+var subsetsWithDup = function(nums) {
+  let res = []
+  nums.sort((a, b) => a - b)
+  function backtrack(arr, index) {
+    res.push(arr)
+    for (let i = index, len = nums.length; i < len; i++) {
+      backtrack([...arr, nums[i]], i + 1)
+      while (nums[i] === nums[i + 1]) i++
+    }
+  }
+  backtrack([], 0)
+  return res
+}
