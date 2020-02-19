@@ -79,3 +79,25 @@ var letterCombinations = function(digits) {
   backtrack('', digits)
   return res
 }
+/**
+ * 46. 全排列（全排列）
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+var permute = function(nums) {
+  let res = []
+  function backtrack(has, left) {
+    if (has.length === nums.length) {
+      res.push(has)
+      return
+    }
+    for (let i = 0, len = left.length; i < len; i++) {
+      backtrack(
+        [...has, left[i]],
+        left.filter(x => x != left[i])
+      )
+    }
+  }
+  backtrack([], nums)
+  return res
+}
