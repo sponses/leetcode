@@ -135,3 +135,37 @@ var subsetsWithDup = function(nums) {
   backtrack([], 0)
   return res
 }
+/**
+ * 784. 字母大小写全排列（回溯法）
+ * @param {string} S
+ * @return {string[]}
+ */
+var letterCasePermutation = function(S) {
+  let res = []
+  const reg = new RegExp('[A-Za-z]')
+  function backtrack(str, index) {
+    if (str.length === S.length) {
+      res.push(str)
+      return
+    }
+    for (let i = index, len = S.length; i < len; i++) {
+      while (!reg.test(S[i])) {
+        str += S[i]
+        i++
+        if (i >= S.length) {
+          str.length === S.length && res.push(str)
+          return
+        }
+      }
+      let letter1 = S[i]
+      let letter2 =
+        letter1.charCodeAt() < 97
+          ? letter1.toLocaleLowerCase()
+          : letter1.toLocaleUpperCase()
+      backtrack(str + letter1, i + 1)
+      backtrack(str + letter2, i + 1)
+    }
+  }
+  backtrack('', 0)
+  return res
+}
