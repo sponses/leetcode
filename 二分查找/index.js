@@ -64,3 +64,41 @@ var mySqrt = function(x) {
   }
   return 0
 }
+/**
+ * 74. 搜索二维矩阵（二分法）
+ * @param {number[][]} matrix
+ * @param {number} target
+ * @return {boolean}
+ */
+var searchMatrix = function(matrix, target) {
+  let left = 0,
+    right = matrix.length - 1
+  while (left <= right) {
+    if (left === right) {
+      let l = 0,
+        r = matrix[0].length - 1
+      while (l <= r) {
+        let mid = l + Math.floor((r - l) / 2)
+        if (matrix[left][mid] === target) return true
+        if (matrix[left][mid] > target) {
+          r = mid - 1
+        } else {
+          l = mid + 1
+        }
+      }
+      return false
+    }
+    let mid = left + Math.floor((right - left) / 2)
+    if (
+      matrix[mid][0] <= target &&
+      matrix[mid][matrix[0].length - 1] >= target
+    ) {
+      left = right = mid
+    } else if (matrix[mid][0] > target) {
+      right = mid - 1
+    } else {
+      left = mid + 1
+    }
+  }
+  return false
+}
