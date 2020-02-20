@@ -190,3 +190,24 @@ var combine = function(n, k) {
   backtrack([], 1)
   return res
 }
+/**
+ * 77. 组合（回溯法剪枝）
+ * @param {number} n
+ * @param {number} k
+ * @return {number[][]}
+ */
+var combine = function(n, k) {
+  let res = []
+  function backtrack(arr, index) {
+    if (arr.length === k) {
+      res.push(arr)
+      return
+    }
+    if (index > n) return
+    for (let i = index; i <= n - (k - arr.length) + 1; i++) {
+      backtrack([...arr, i], i + 1)
+    }
+  }
+  backtrack([], 1)
+  return res
+}
