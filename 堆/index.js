@@ -212,3 +212,60 @@ var medianSlidingWindow = function(nums, k) {
   }
   return res
 }
+/**
+ * 23. 合并K个排序链表（多路归并）
+ * @param {ListNode[]} lists
+ * @return {ListNode}
+ */
+var mergeKLists = function(lists) {
+  const minHeap = [null],
+    dummy = new ListNode(null)
+  let p = dummy
+  for (let i = 0, len = lists.length; i < len; i++) {
+    insert(lists[i], minHeap)
+  }
+  while (minHeap.length > 1) {
+    let l = delTop(minHeap)
+    p.next = new ListNode(l.val)
+    p = p.next
+    if (l.next) insert(l.next, minHeap)
+  }
+
+  //向堆中插入链表
+  function insert(node, heap) {
+    if (!node) return
+    heap.push(node)
+    let i = heap.length - 1
+    while (i > 1) {
+      let p = Math.floor(i / 2)
+      if (node.val >= heap[p].val) return
+      ;[heap[i], heap[p]] = [heap[p], heap[i]]
+      i = p
+    }
+  }
+  //删除堆顶元素
+  function delTop(heap) {
+    if (heap.length <= 1) return null
+    let temp = heap[1]
+    heap[1] = heap[heap.length - 1]
+    heap[heap.length - 1] = temp
+    let res = heap.pop()
+    let i = 1
+    while (i * 2 <= heap.length - 1) {
+      let cur = heap[i],
+        left = heap[i * 2],
+        right = heap[i * 2 + 1]
+      if (cur.val <= left.val && (right === undefined || cur.val <= right.val))
+        return res
+      if (right === undefined || left.val <= right.val) {
+        ;[heap[i * 2], heap[i]] = [heap[i], heap[i * 2]]
+        i = i * 2
+      } else {
+        ;[heap[i * 2 + 1], heap[i]] = [heap[i], heap[i * 2 + 1]]
+        i = i * 2 + 1
+      }
+    }
+    return res
+  }
+  return dummy.next
+}
