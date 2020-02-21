@@ -269,3 +269,53 @@ var mergeKLists = function(lists) {
   }
   return dummy.next
 }
+/**
+ * 378. 有序矩阵中第K小的元素（大顶堆）
+ * @param {number[][]} matrix
+ * @param {number} k
+ * @return {number}
+ */
+var kthSmallest = function(matrix, k) {
+  let maxHeap = [null]
+  for (let i = 0, len1 = matrix.length; i < len1; i++) {
+    for (let j = 0, len2 = matrix[0].length; j < len2; j++) {
+      if (maxHeap.length > k) {
+        if (matrix[i][j] >= maxHeap[1]) continue
+        delTop(maxHeap)
+        insert(matrix[i][j], maxHeap)
+      } else {
+        insert(matrix[i][j], maxHeap)
+      }
+    }
+  }
+  function insert(num, heap) {
+    heap.push(num)
+    let i = heap.length - 1,
+      p = Math.floor(i / 2)
+    while (i > 1 && heap[i] > heap[p]) {
+      ;[heap[i], heap[p]] = [heap[p], heap[i]]
+      i = p
+      p = Math.floor(i / 2)
+    }
+  }
+  function delTop(heap) {
+    if (heap.length <= 1) return
+    ;[heap[1], heap[heap.length - 1]] = [heap[heap.length - 1], heap[1]]
+    heap.pop()
+    let i = 1
+    while (i * 2 < heap.length) {
+      let cur = heap[i],
+        left = heap[i * 2],
+        right = heap[i * 2 + 1]
+      if (cur >= left && (right === undefined || cur >= right)) return
+      if (right === undefined || left > right) {
+        ;[heap[i], heap[i * 2]] = [heap[i * 2], heap[i]]
+        i = i * 2
+      } else {
+        ;[heap[i], heap[i * 2 + 1]] = [heap[i * 2 + 1], heap[i]]
+        i = i * 2 + 1
+      }
+    }
+  }
+  return maxHeap.length > 1 ? maxHeap[1] : null
+}
