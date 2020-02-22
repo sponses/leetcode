@@ -22,3 +22,22 @@ var findJudge = function(N, trust) {
   }
   return -1
 }
+/**
+ * 133. 克隆图（dfs）
+ * @param {Node} node
+ * @return {Node}
+ */
+var cloneGraph = function(node) {
+  let hash = {}
+  function dfs(node) {
+    if (!node) return null
+    if (hash.hasOwnProperty(node.val)) return hash[node.val]
+    let clone = new Node(node.val)
+    hash[node.val] = clone
+    for (let i = 0, len = node.neighbors.length; i < len; i++) {
+      clone.neighbors.push(dfs(node.neighbors[i]))
+    }
+    return clone
+  }
+  return dfs(node)
+}
