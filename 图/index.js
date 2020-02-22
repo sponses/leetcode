@@ -41,3 +41,27 @@ var cloneGraph = function(node) {
   }
   return dfs(node)
 }
+/**
+ * 133. 克隆图（bfs）
+ * @param {Node} node
+ * @return {Node}
+ */
+var cloneGraph = function(node) {
+  if (!node) return null
+  let hash = {},
+    queue = [node],
+    clone = new Node(node.val)
+  hash[node.val] = clone
+  while (queue.length) {
+    let temp = queue.pop()
+    for (let i = 0, len = temp.neighbors.length; i < len; i++) {
+      let cur = temp.neighbors[i]
+      if (!hash.hasOwnProperty(cur.val)) {
+        hash[cur.val] = new Node(cur.val)
+        queue.push(cur)
+      }
+      hash[temp.val].neighbors.push(hash[cur.val])
+    }
+  }
+  return clone
+}
