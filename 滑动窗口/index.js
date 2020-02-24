@@ -273,3 +273,29 @@ var lengthOfLongestSubstring = function(s) {
   }
   return res
 }
+/**
+ * 209. 长度最小的子数组（滑动窗口）
+ * @param {number} s
+ * @param {number[]} nums
+ * @return {number}
+ */
+var minSubArrayLen = function(s, nums) {
+  let left = 0,
+    right = 0,
+    res = Number.MAX_SAFE_INTEGER,
+    sum = 0,
+    count = 0
+  while (right < nums.length) {
+    sum += nums[right]
+    count += nums[right]
+    // left 移动的条件为 count 大于等于 s , 并且 right 大于等于 left
+    while (right >= left && count >= s) {
+      res = Math.min(res, right - left + 1)
+      count -= nums[left]
+      left++
+    }
+    right++
+  }
+  if (sum < s) return 0
+  return res
+}
