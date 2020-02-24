@@ -313,3 +313,24 @@ var findMaxForm = function(strs, m, n) {
   }
   return dp[m][n]
 }
+/**
+ * 139. 单词拆分（动态规划，01背包问题）
+ * @param {string} s
+ * @param {string[]} wordDict
+ * @return {boolean}
+ */
+var wordBreak = function(s, wordDict) {
+  let n = s.length
+  let dp = new Array(n + 1)
+  dp.fill(false)
+  dp[0] = true
+  for (let i = 1; i <= n; i++) {
+    for (let j = 0; j < i; j++) {
+      if (dp[j] && wordDict.indexOf(s.slice(j, i)) !== -1) {
+        dp[i] = true
+        break
+      }
+    }
+  }
+  return dp[n]
+}
