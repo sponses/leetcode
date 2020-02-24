@@ -282,3 +282,34 @@ var lastStoneWeightII = function(stones) {
   }
   return sum - dp[max] * 2
 }
+/**
+ * 474. 一和零（动态规划，01背包问题）
+ * @param {string[]} strs
+ * @param {number} m
+ * @param {number} n
+ * @return {number}
+ */
+var findMaxForm = function(strs, m, n) {
+  let len = strs.length
+  // m为0的个数， n为1的个数
+  let dp = new Array(m + 1)
+  for (let i = 0; i <= m; i++) {
+    dp[i] = new Array(n + 1)
+    dp[i].fill(0)
+  }
+  for (let i = 0; i < len; i++) {
+    let cur = strs[i],
+      zero = 0,
+      one = 0
+    for (let char = 0; char < cur.length; char++) {
+      if (cur[char] === '0') zero++
+    }
+    one = cur.length - zero
+    for (let j = m; j >= zero; j--) {
+      for (let k = n; k >= one; k--) {
+        dp[j][k] = Math.max(dp[j][k], 1 + dp[j - zero][k - one])
+      }
+    }
+  }
+  return dp[m][n]
+}
