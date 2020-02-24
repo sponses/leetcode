@@ -258,6 +258,27 @@ var canPartition = function(nums) {
       dp[j] = dp[j] || dp[j - nums[i]]
     }
   }
-  console.log(dp)
   return dp[c]
+}
+/**
+ * 1049. 最后一块石头的重量 II（动态规划，01背包问题）
+ * @param {number[]} stones
+ * @return {number}
+ */
+var lastStoneWeightII = function(stones) {
+  let sum = 0,
+    n = stones.length
+  for (let i = 0; i < n; i++) {
+    sum += stones[i]
+  }
+  let max = Math.floor(sum / 2)
+  let dp = new Array(max + 1)
+  dp.fill(0)
+  for (let i = 0; i < n; i++) {
+    let cur = stones[i]
+    for (let j = max; j >= cur; j--) {
+      dp[j] = Math.max(dp[j], dp[j - cur] + cur)
+    }
+  }
+  return sum - dp[max] * 2
 }
