@@ -411,3 +411,18 @@ var rob = function(nums) {
   }
   return prev4 > prev2 ? prev4 : prev2
 }
+/**
+ * 70. 爬楼梯（动态规划，斐波那契数列）
+ * @param {number} n
+ * @return {number}
+ */
+var climbStairs = function(n) {
+  let i = 1,
+    j = 1
+  for (let k = 2; k <= n; k++) {
+    let temp = j
+    j = i + temp
+    i = temp
+  }
+  return j
+}
