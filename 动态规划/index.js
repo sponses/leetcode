@@ -236,3 +236,28 @@ var fib = function(N) {
   }
   return b
 }
+/**
+ * 416. 分割等和子集（动态规划，01背包问题）
+ * @param {number[]} nums
+ * @return {boolean}
+ */
+var canPartition = function(nums) {
+  if (nums.length === 0) return true
+  let sum = 0,
+    n = nums.length
+  for (let i = 0; i < n; i++) {
+    sum += nums[i]
+  }
+  if (sum % 2 !== 0) return false
+  let c = sum / 2
+  let dp = new Array(c + 1)
+  dp.fill(false)
+  dp[nums[0]] = true
+  for (let i = 1; i < n; i++) {
+    for (let j = c; j >= nums[i]; j--) {
+      dp[j] = dp[j] || dp[j - nums[i]]
+    }
+  }
+  console.log(dp)
+  return dp[c]
+}
