@@ -355,3 +355,20 @@ var coinChange = function(coins, amount) {
   }
   return dp[amount]
 }
+/**
+ * 518. 零钱兑换 II（动态规划，完全背包）
+ * @param {number} amount
+ * @param {number[]} coins
+ * @return {number}
+ */
+var change = function(amount, coins) {
+  let dp = new Array(amount + 1)
+  dp.fill(0)
+  dp[0] = 1
+  for (let i = 0, len = coins.length; i < len; i++) {
+    for (let j = coins[i]; j <= amount; j++) {
+      dp[j] += dp[j - coins[i]]
+    }
+  }
+  return dp[amount]
+}
