@@ -372,3 +372,19 @@ var change = function(amount, coins) {
   }
   return dp[amount]
 }
+/**
+ * 198. 打家劫舍（动态规划，01背包问题）
+ * @param {number[]} nums
+ * @return {number}
+ */
+var rob = function(nums) {
+  if (!nums.length) return 0
+  let prev1 = 0,
+    prev2 = nums[0]
+  for (let i = 1, len = nums.length; i < len; i++) {
+    let temp = prev2
+    prev2 = Math.max(nums[i] + prev1, temp)
+    prev1 = temp
+  }
+  return prev2 > prev1 ? prev2 : prev1
+}
