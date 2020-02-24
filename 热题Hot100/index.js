@@ -32,3 +32,52 @@ var threeSum = function(nums) {
   }
   return res
 }
+/**
+ * 2. 两数相加（链表）
+ * @param {ListNode} l1
+ * @param {ListNode} l2
+ * @return {ListNode}
+ */
+var addTwoNumbers = function(l1, l2) {
+  let num1 = '',
+    num2 = ''
+  while (l1) {
+    num1 = l1.val + num1
+    l1 = l1.next
+  }
+  while (l2) {
+    num2 = l2.val + num2
+    l2 = l2.next
+  }
+  let l = new ListNode(null),
+    dummy = new ListNode(null)
+  dummy.next = l
+  let index1 = num1.length - 1,
+    index2 = num2.length - 1,
+    surplus = 0
+  while (index1 >= 0 || index2 >= 0 || surplus) {
+    let n1 = 0,
+      n2 = 0
+    if (index1 >= 0) {
+      n1 = +num1[index1]
+      index1--
+    }
+    if (index2 >= 0) {
+      n2 = +num2[index2]
+      index2--
+    }
+    let num = n1 + n2 + surplus
+    if (num >= 10) {
+      num = num % 10
+      surplus = 1
+    } else {
+      surplus = 0
+    }
+    l.val = num
+    if (index1 >= 0 || index2 >= 0 || surplus) {
+      l.next = new ListNode(null)
+      l = l.next
+    }
+  }
+  return dummy.next
+}
