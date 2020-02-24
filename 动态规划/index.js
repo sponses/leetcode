@@ -388,3 +388,26 @@ var rob = function(nums) {
   }
   return prev2 > prev1 ? prev2 : prev1
 }
+/**
+ * 213. 打家劫舍 II（动态规划，01背包问题）
+ * @param {number[]} nums
+ * @return {number}
+ */
+var rob = function(nums) {
+  if (!nums.length) return 0
+  let prev1 = 0,
+    prev2 = nums[0]
+  for (let i = 1, len = nums.length - 1; i < len; i++) {
+    let temp = prev2
+    prev2 = Math.max(temp, prev1 + nums[i])
+    prev1 = temp
+  }
+  let prev3 = 0,
+    prev4 = nums[nums.length - 1]
+  for (let i = nums.length - 2; i > 0; i--) {
+    let temp = prev4
+    prev4 = Math.max(prev3 + nums[i], temp)
+    prev3 = temp
+  }
+  return prev4 > prev2 ? prev4 : prev2
+}
