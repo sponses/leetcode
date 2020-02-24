@@ -334,3 +334,24 @@ var wordBreak = function(s, wordDict) {
   }
   return dp[n]
 }
+/**
+ * 322. 零钱兑换（动态规划，完全背包）
+ * @param {number[]} coins
+ * @param {number} amount
+ * @return {number}
+ */
+var coinChange = function(coins, amount) {
+  let len = coins.length
+  let dp = new Array(amount + 1)
+  dp.fill(-1)
+  dp[0] = 0
+  for (let i = 1; i <= amount; i++) {
+    let temp = Number.MAX_SAFE_INTEGER
+    for (let j = 0; j < len; j++) {
+      if (i - coins[j] >= 0 && dp[i - coins[j]] !== -1)
+        temp = Math.min(temp, 1 + dp[i - coins[j]])
+    }
+    if (temp !== Number.MAX_SAFE_INTEGER) dp[i] = temp
+  }
+  return dp[amount]
+}
