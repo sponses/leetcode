@@ -507,3 +507,31 @@ var longestCommonSubsequence = function(text1, text2) {
   }
   return dp(text1.length - 1, text2.length - 1)
 }
+/**
+ * 1143. 最长公共子序列（动态规划）
+ * @param {string} text1
+ * @param {string} text2
+ * @return {number}
+ */
+var longestCommonSubsequence = function(text1, text2) {
+  let len1 = text1.length,
+    len2 = text2.length
+  let dp = new Array(len1 + 1)
+  for (let i = 0; i <= len1; i++) {
+    dp[i] = new Array(len2 + 1)
+    dp[i][0] = 0
+  }
+  for (let i = 0; i <= len2; i++) {
+    dp[0][i] = 0
+  }
+  for (let i = 1; i <= len1; i++) {
+    for (let j = 1; j <= len2; j++) {
+      if (text1[i - 1] === text2[j - 1]) {
+        dp[i][j] = 1 + dp[i - 1][j - 1]
+      } else {
+        dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1])
+      }
+    }
+  }
+  return dp[len1][len2]
+}
