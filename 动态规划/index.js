@@ -426,3 +426,25 @@ var climbStairs = function(n) {
   }
   return j
 }
+/**
+ * 300. 最长上升子序列（动态规划）
+ * @param {number[]} nums
+ * @return {number}
+ */
+var lengthOfLIS = function(nums) {
+  let len = nums.length,
+    dp = new Array(len)
+  dp.fill(1)
+  for (let i = 1; i < len; i++) {
+    let count = 1
+    for (let j = 0; j < i; j++) {
+      if (nums[i] - nums[j] > 0) count = Math.max(count, dp[j] + 1)
+    }
+    dp[i] = count
+  }
+  let res = 0
+  for (let i = 0; i < len; i++) {
+    res = Math.max(dp[i], res)
+  }
+  return res
+}
