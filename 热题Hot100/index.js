@@ -81,3 +81,17 @@ var addTwoNumbers = function(l1, l2) {
   }
   return dummy.next
 }
+/**
+ * 121. 买卖股票的最佳时机
+ * @param {number[]} prices
+ * @return {number}
+ */
+var maxProfit = function(prices) {
+  let min = Number.MAX_SAFE_INTEGER,
+    profit = 0
+  for (let i = 0, len = prices.length; i < len; i++) {
+    min = Math.min(min, prices[i])
+    profit = Math.max(prices[i] - min, profit)
+  }
+  return profit
+}
