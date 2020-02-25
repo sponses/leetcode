@@ -493,3 +493,17 @@ var minDistance = function(word1, word2) {
   }
   return dp[len1][len2]
 }
+/**
+ * 1143. 最长公共子序列（暴力递归）
+ * @param {string} text1
+ * @param {string} text2
+ * @return {number}
+ */
+var longestCommonSubsequence = function(text1, text2) {
+  function dp(i, j) {
+    if (i === -1 || j === -1) return 0
+    if (text2[j] === text1[i]) return 1 + dp(i - 1, j - 1)
+    return Math.max(dp(i, j - 1), dp(i - 1, j))
+  }
+  return dp(text1.length - 1, text2.length - 1)
+}
