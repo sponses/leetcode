@@ -260,3 +260,22 @@ var maxArea = function(height) {
   }
   return dp(0, height.length - 1)
 }
+/**
+ * 11. 盛最多水的容器（双指针）
+ * @param {number[]} height
+ * @return {number}
+ */
+var maxArea = function(height) {
+  let left = 0,
+    right = height.length - 1
+  let res = (right - left) * Math.min(height[left], height[right])
+  while (left < right) {
+    if (height[left] > height[right]) {
+      right--
+    } else {
+      left++
+    }
+    res = Math.max(res, (right - left) * Math.min(height[left], height[right]))
+  }
+  return res
+}
