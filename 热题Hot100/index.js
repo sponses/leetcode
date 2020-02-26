@@ -111,3 +111,20 @@ var inorderTraversal = function(root) {
   mfs(root)
   return res
 }
+/**
+ * 102. 二叉树的层次遍历（dfs）
+ * @param {TreeNode} root
+ * @return {number[][]}
+ */
+var levelOrder = function(root) {
+  let res = []
+  function dfs(node, i) {
+    if (!node) return
+    if (!Array.isArray(res[i])) res[i] = []
+    res[i].push(node.val)
+    dfs(node.left, i + 1)
+    dfs(node.right, i + 1)
+  }
+  dfs(root, 0)
+  return res
+}
