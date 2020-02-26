@@ -150,3 +150,17 @@ var maxCoins = function(nums) {
   }
   return dp(nums)
 }
+/**
+ * 70. 爬楼梯（暴力递归）
+ * @param {number} n
+ * @return {number}
+ */
+var climbStairs = function(n) {
+  function dp(n) {
+    if (n === 0) return 1
+    if (n === 1) return 1
+    if (n === 2) return 2
+    return dp(n - 1) + dp(n - 2)
+  }
+  return dp(n)
+}
