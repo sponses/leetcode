@@ -222,3 +222,27 @@ var coinChange = function(coins, amount) {
   }
   return dp[amount]
 }
+/**
+ * 39. 组合总和（回溯法）
+ * @param {number[]} candidates
+ * @param {number} target
+ * @return {number[][]}
+ */
+var combinationSum = function(candidates, target) {
+  let res = [],
+    len = candidates.length
+  candidates.sort((a, b) => a - b)
+  function backtrack(i, sum, arr) {
+    if (i >= len || sum > target) return
+    if (sum === target) {
+      res.push(arr)
+      return
+    }
+    for (let j = i; j < len; j++) {
+      if (candidates[j] + sum > target) break
+      backtrack(j, sum + candidates[j], [...arr, candidates[j]])
+    }
+  }
+  backtrack(0, 0, [])
+  return res
+}
