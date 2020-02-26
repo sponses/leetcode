@@ -95,3 +95,19 @@ var maxProfit = function(prices) {
   }
   return profit
 }
+/**
+ * 94. 二叉树的中序遍历
+ * @param {TreeNode} root
+ * @return {number[]}
+ */
+var inorderTraversal = function(root) {
+  let res = []
+  function mfs(node) {
+    if (!node) return null
+    mfs(node.left)
+    res.push(node.val)
+    mfs(node.right)
+  }
+  mfs(root)
+  return res
+}
