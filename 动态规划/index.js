@@ -554,3 +554,16 @@ var longestPalindromeSubseq = function(s) {
   }
   return dp(s.length - 1, '')
 }
+/**
+ * 516. 最长回文子序列（暴力递归Ⅱ）
+ * @param {string} s
+ * @return {number}
+ */
+var longestPalindromeSubseq = function(s) {
+  function dp(i, j) {
+    if (i === j) return 1
+    if (s[i] === s[j]) return j - i > 1 ? dp(i + 1, j - 1) + 2 : 2
+    return Math.max(dp(i + 1, j), dp(i, j - 1))
+  }
+  return dp(0, s.length)
+}
