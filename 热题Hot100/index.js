@@ -179,3 +179,25 @@ var climbStairs = function(n) {
   }
   return b
 }
+/**
+ * 322. 零钱兑换（暴力递归）
+ * @param {number[]} coins
+ * @param {number} amount
+ * @return {number}
+ */
+var coinChange = function(coins, amount) {
+  function dp(n) {
+    if (n < 0) return -1
+    if (n === 0) return 0
+    let res = Number.MAX_SAFE_INTEGER,
+      count = 0
+    for (let i = 0, len = coins.length; i < len; i++) {
+      if (n - coins[i] >= 0) {
+        count++
+        res = Math.min(res, 1 + dp(n - coins[i]))
+      }
+    }
+    return count === 0 ? -1 : res
+  }
+  return dp(amount)
+}
