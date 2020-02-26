@@ -246,3 +246,17 @@ var combinationSum = function(candidates, target) {
   backtrack(0, 0, [])
   return res
 }
+/**
+ * 11. 盛最多水的容器（暴力递归）
+ * @param {number[]} height
+ * @return {number}
+ */
+var maxArea = function(height) {
+  function dp(i, j) {
+    if (i > j) return 0
+    if (i === j) return 0
+    let temp = (j - i) * Math.min(height[i], height[j])
+    return Math.max(temp, dp(i + 1, j), dp(i, j - 1))
+  }
+  return dp(0, height.length - 1)
+}
