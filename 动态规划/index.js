@@ -535,3 +535,22 @@ var longestCommonSubsequence = function(text1, text2) {
   }
   return dp[len1][len2]
 }
+/**
+ * 516. 最长回文子序列（暴力递归）
+ * @param {string} s
+ * @return {number}
+ */
+var longestPalindromeSubseq = function(s) {
+  function dp(n, str) {
+    if (n === -1)
+      return str ===
+        str
+          .split('')
+          .reverse()
+          .join('')
+        ? str.length
+        : 0
+    return Math.max(dp(n - 1, str + s[n]), dp(n - 1, str))
+  }
+  return dp(s.length - 1, '')
+}
