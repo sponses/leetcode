@@ -128,3 +128,25 @@ var levelOrder = function(root) {
   dfs(root, 0)
   return res
 }
+/**
+ * 312. 戳气球（暴力递归）
+ * @param {number[]} nums
+ * @return {number}
+ */
+var maxCoins = function(nums) {
+  function dp(arr) {
+    if (arr.length === 0) return 0
+    if (arr.length === 1) return arr[0]
+    let res = 0
+    for (let i = 0, len = arr.length; i < len; i++) {
+      let left = i === 0 ? 1 : arr[i - 1],
+        right = i === arr.length - 1 ? 1 : arr[i + 1]
+      res = Math.max(
+        res,
+        left * arr[i] * right + dp(arr.filter(x => x !== arr[i]))
+      )
+    }
+    return res
+  }
+  return dp(nums)
+}
