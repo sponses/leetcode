@@ -201,3 +201,24 @@ var coinChange = function(coins, amount) {
   }
   return dp(amount)
 }
+/**
+ * 322. 零钱兑换（动态规划）
+ * @param {number[]} coins
+ * @param {number} amount
+ * @return {number}
+ */
+var coinChange = function(coins, amount) {
+  let dp = new Array(amount + 1)
+  dp.fill(-1)
+  dp[0] = 0
+  for (let i = 1; i <= amount; i++) {
+    let res = Number.MAX_SAFE_INTEGER
+    for (let j = 0, len = coins.length; j < len; j++) {
+      if (coins[j] > i) continue
+      if (dp[i - coins[j]] === -1) continue
+      res = Math.min(res, 1 + dp[i - coins[j]])
+    }
+    if (res !== Number.MAX_SAFE_INTEGER) dp[i] = res
+  }
+  return dp[amount]
+}
