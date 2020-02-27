@@ -567,3 +567,23 @@ var longestPalindromeSubseq = function(s) {
   }
   return dp(0, s.length)
 }
+/**
+ * 435. 无重叠区间（贪心算法）
+ * @param {number[][]} intervals
+ * @return {number}
+ */
+var eraseOverlapIntervals = function(intervals) {
+  if (intervals.length === 0) return 0
+  intervals.sort((a, b) => a[1] - b[1])
+  let end = intervals[0][1],
+    count = 0
+  for (let i = 1; i < intervals.length; i++) {
+    let cur = intervals[i]
+    if (end > cur[0]) {
+      count++
+    } else {
+      end = cur[1]
+    }
+  }
+  return count
+}
