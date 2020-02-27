@@ -587,3 +587,22 @@ var eraseOverlapIntervals = function(intervals) {
   }
   return count
 }
+/**
+ * 452. 用最少数量的箭引爆气球（贪心算法）
+ * @param {number[][]} points
+ * @return {number}
+ */
+var findMinArrowShots = function(points) {
+  if (!points.length) return 0
+  points.sort((a, b) => a[1] - b[1])
+  let end = points[0][1],
+    count = 1
+  for (let i = 0, len = points.length; i < len; i++) {
+    let cur = points[i]
+    if (end < cur[0]) {
+      count++
+      end = cur[1]
+    }
+  }
+  return count
+}
