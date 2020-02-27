@@ -679,3 +679,17 @@ var rob = function(nums) {
   }
   return dp[len]
 }
+/**
+ * 337. 打家劫舍 III（暴力递归）
+ * @param {TreeNode} root
+ * @return {number}
+ */
+var rob = function(root) {
+  function dp(node) {
+    if (!node) return 0
+    let left = node.left ? dp(node.left.left) + dp(node.left.right) : 0,
+      right = node.right ? dp(node.right.left) + dp(node.right.right) : 0
+    return Math.max(node.val + left + right, dp(node.left) + dp(node.right))
+  }
+  return dp(root)
+}
