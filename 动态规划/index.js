@@ -693,3 +693,21 @@ var rob = function(root) {
   }
   return dp(root)
 }
+/**
+ * 538. 把二叉搜索树转换为累加树（逆中序遍历）
+ * @param {TreeNode} root
+ * @return {TreeNode}
+ */
+var convertBST = function(root) {
+  let count = 0
+  function dfs(node) {
+    if (!node) return
+    dfs(node.right)
+    let temp = node.val
+    node.val += count
+    count += temp
+    dfs(node.left)
+  }
+  dfs(root)
+  return root
+}
