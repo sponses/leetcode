@@ -606,3 +606,26 @@ var findMinArrowShots = function(points) {
   }
   return count
 }
+/**
+ * 121. 买卖股票的最佳时机（动态规划）
+ * @param {number[]} prices
+ * @return {number}
+ */
+var maxProfit = function(prices) {
+  if (prices.length === 0) return 0
+  let len = prices.length
+  let dp = new Array(len)
+  for (let i = 0; i < len; i++) {
+    dp[i] = new Array(2)
+  }
+  for (let i = 0; i < len; i++) {
+    if (i === 0) {
+      dp[i][0] = 0
+      dp[i][1] = -prices[i]
+    } else {
+      dp[i][0] = Math.max(dp[i - 1][0], dp[i - 1][1] + prices[i])
+      dp[i][1] = Math.max(dp[i - 1][1], -prices[i])
+    }
+  }
+  return dp[len - 1][0]
+}
