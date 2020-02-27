@@ -652,3 +652,16 @@ var maxProfit = function(prices) {
   }
   return dp[len - 1][0]
 }
+/**
+ * 198. 打家劫舍（暴力递归）
+ * @param {number[]} nums
+ * @return {number}
+ */
+var rob = function(nums) {
+  function dp(i) {
+    if (i < 0) return 0
+    if (i === 0) return nums[i]
+    return Math.max(nums[i] + dp(i - 2), dp(i - 1))
+  }
+  return dp(nums.length - 1)
+}
