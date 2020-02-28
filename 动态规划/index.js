@@ -694,20 +694,21 @@ var rob = function(root) {
   return dp(root)
 }
 /**
- * 538. 把二叉搜索树转换为累加树（逆中序遍历）
- * @param {TreeNode} root
- * @return {TreeNode}
+ * 338. 比特位计数
+ * @param {number} num
+ * @return {number[]}
  */
-var convertBST = function(root) {
-  let count = 0
-  function dfs(node) {
-    if (!node) return
-    dfs(node.right)
-    let temp = node.val
-    node.val += count
-    count += temp
-    dfs(node.left)
+var countBits = function(num) {
+  if (num === 0) return [0]
+  let res = [0, 1],
+    mul = 2
+  for (let i = 2; i <= num; i++) {
+    if (i % mul === 0) {
+      res[i] = 1
+      mul *= 2
+    } else {
+      res[i] = res[mul / 2] + res[i - mul / 2]
+    }
   }
-  dfs(root)
-  return root
+  return res
 }
