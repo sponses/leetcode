@@ -381,3 +381,46 @@ var minDistance = function(word1, word2) {
   }
   return dp(word1.length - 1, word2.length - 1)
 }
+/**
+ * 438. 找到字符串中所有字母异位词（滑动窗口）
+ * @param {string} s
+ * @param {string} p
+ * @return {number[]}
+ */
+var findAnagrams = function(s, p) {
+  let hash = {},
+    left = 0,
+    right = 0,
+    res = [],
+    temp = {}
+  for (let i = 0, len = p.length; i < len; i++) {
+    if (hash.hasOwnProperty(p[i])) {
+      hash[p[i]]++
+    } else {
+      hash[p[i]] = 1
+    }
+  }
+  let count = Object.keys(hash).length
+  while (right < s.length) {
+    let char = s[right]
+    if (temp.hasOwnProperty(char)) {
+      temp[char]++
+    } else {
+      temp[char] = 1
+    }
+    if (hash[char] === temp[char]) count--
+    if (count === 0) res.push(left)
+    if (right - left + 1 === p.length) {
+      let char = s[left]
+      if (temp[char] === hash[char]) count++
+      if (temp[char] === 1) {
+        delete temp[char]
+      } else {
+        temp[char]--
+      }
+      left++
+    }
+    right++
+  }
+  return res
+}
