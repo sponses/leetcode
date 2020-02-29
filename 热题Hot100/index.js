@@ -366,3 +366,18 @@ var diameterOfBinaryTree = function(root) {
   dfs(root)
   return res - 1
 }
+/**
+ * 72. 编辑距离（暴力递归）
+ * @param {string} word1
+ * @param {string} word2
+ * @return {number}
+ */
+var minDistance = function(word1, word2) {
+  function dp(i, j) {
+    if (i < 0 && j < 0) return 0
+    if (i < 0 || j < 0) return Math.abs(j - i)
+    if (word1[i] === word2[j]) return dp(i - 1, j - 1)
+    return 1 + Math.min(dp(i, j - 1), dp(i - 1, j), dp(i - 1, j - 1))
+  }
+  return dp(word1.length - 1, word2.length - 1)
+}
