@@ -297,3 +297,21 @@ var convertBST = function(root) {
   dfs(root)
   return root
 }
+/**
+ * 739. 每日温度
+ * @param {number[]} T
+ * @return {number[]}
+ */
+var dailyTemperatures = function(T) {
+  let res = []
+  for (let i = 0, len = T.length; i < len; i++) {
+    let j = i
+    while (j < len - 1 && T[i] >= T[j]) j++
+    if (T[i] < T[j]) {
+      res.push(j - i)
+    } else {
+      res.push(0)
+    }
+  }
+  return res
+}
