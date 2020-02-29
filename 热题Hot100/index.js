@@ -315,3 +315,54 @@ var dailyTemperatures = function(T) {
   }
   return res
 }
+/**
+ * 394. 字符串解码（栈）
+ * @param {string} s
+ * @return {string}
+ */
+var decodeString = function(s) {
+  let stack = []
+  for (let i = 0, len = s.length; i < len; i++) {
+    if (s[i] !== ']') {
+      stack.push(s[i])
+    } else {
+      let j = stack.length - 1,
+        n = '',
+        str = '',
+        reg = /[0-9]/
+      while (stack[j] !== '[') {
+        str = stack.pop() + str
+        j--
+      }
+      stack.pop()
+      j--
+      while (j >= 0 && reg.test(stack[j])) {
+        n = stack.pop() + n
+        j--
+      }
+      let temp = ''
+      for (let i = 0; i < +n; i++) {
+        temp += str
+      }
+      stack.push(...temp)
+    }
+  }
+  return stack.join('')
+}
+/**
+ * 543. 二叉树的直径（dfs）
+ * @param {TreeNode} root
+ * @return {number}
+ */
+var diameterOfBinaryTree = function(root) {
+  let res = 1
+  function dfs(node) {
+    if (node == null) return 0
+    let L = dfs(node.left)
+    let R = dfs(node.right)
+    res = Math.max(res, L + R + 1)
+    return Math.max(L, R) + 1
+  }
+  dfs(root)
+  return res - 1
+}
