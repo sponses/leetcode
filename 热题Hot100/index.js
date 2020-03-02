@@ -752,3 +752,25 @@ var largestRectangleArea = function(heights) {
   }
   return dp(0, heights.length - 1)
 }
+/**
+ * 84. 柱状图中最大的矩形（动态规划）
+ * @param {number[]} heights
+ * @return {number}
+ */
+var largestRectangleArea = function(heights) {
+  if (heights.length === 0) return 0
+  let len = heights.length,
+    dp = new Array(len)
+  for (let i = 0; i < len; i++) {
+    dp[i] = new Array(len)
+    dp[i][i] = heights[i]
+  }
+  for (let l = 1; l < len; l++) {
+    for (let i = 0; i < len - 1; i++) {
+      let j = l + i,
+        temp = (j - i + 1) * Math.min(...heights.slice(i, j + 1))
+      dp[i][j] = Math.max(temp, dp[i + 1][j], dp[i][j - 1])
+    }
+  }
+  return dp[0][len - 1]
+}
