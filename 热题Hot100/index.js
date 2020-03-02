@@ -630,3 +630,26 @@ var canJump = function(nums) {
   }
   return dp(0)
 }
+/**
+ * 55. 跳跃游戏（动态规划）
+ * @param {number[]} nums
+ * @return {boolean}
+ */
+var canJump = function(nums) {
+  let len = nums.length,
+    dp = new Array(len)
+  dp.fill(false)
+  dp[len - 1] = true
+  for (let i = len - 2; i >= 0; i--) {
+    if (nums[i] > len - i) {
+      dp[i] = true
+      continue
+    }
+    let res = false
+    for (let j = 1; j <= nums[i]; j++) {
+      res = res || dp[i + j]
+    }
+    dp[i] = res
+  }
+  return dp[0]
+}
