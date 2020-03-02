@@ -443,3 +443,29 @@ var findDisappearedNumbers = function(nums) {
   }
   return res
 }
+/**
+ * 34. 在排序数组中查找元素的第一个和最后一个位置（二分法）
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number[]}
+ */
+var searchRange = function(nums, target) {
+  let left = 0,
+    right = nums.length - 1
+  while (left <= right) {
+    let mid = left + Math.floor((right - left) / 2)
+    if (nums[mid] === target) {
+      let start = mid,
+        end = mid
+      while (nums[start] === nums[start - 1]) start--
+      while (nums[end] === nums[end + 1]) end++
+      return [start, end]
+    }
+    if (nums[mid] > target) {
+      right = mid - 1
+    } else {
+      left = mid + 1
+    }
+  }
+  return [-1, -1]
+}
