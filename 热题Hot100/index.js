@@ -424,3 +424,22 @@ var findAnagrams = function(s, p) {
   }
   return res
 }
+/**
+ * 448. 找到所有数组中消失的数字（抽屉原理）
+ * @param {number[]} nums
+ * @return {number[]}
+ */
+var findDisappearedNumbers = function(nums) {
+  for (let i = 0, len = nums.length; i < len; i++) {
+    let cur = nums[i]
+    while (cur !== i + 1 && nums[cur - 1] !== cur) {
+      ;[nums[cur - 1], nums[i]] = [nums[i], nums[cur - 1]]
+      cur = nums[i]
+    }
+  }
+  let res = []
+  for (let i = 0, len = nums.length; i < len; i++) {
+    if (i + 1 !== nums[i]) res.push(i + 1)
+  }
+  return res
+}
