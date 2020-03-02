@@ -703,3 +703,35 @@ var findKthLargest = function(nums, k) {
   }
   return heap[1]
 }
+/**
+ * 128. 最长连续序列（哈希表）
+ * @param {number[]} nums
+ * @return {number}
+ */
+var longestConsecutive = function(nums) {
+  let hash = {}
+  for (let i = 0, len = nums.length; i < len; i++) {
+    hash[nums[i]] = 1
+  }
+  let res = 0
+  while (Object.keys(hash).length) {
+    let keys = Object.keys(hash)
+    let cur = keys[0],
+      count = 1,
+      left = +cur - 1 + '',
+      right = +cur + 1 + ''
+    delete hash[cur]
+    while (hash.hasOwnProperty(left)) {
+      delete hash[left]
+      count++
+      left--
+    }
+    while (hash.hasOwnProperty(right)) {
+      delete hash[right]
+      count++
+      right++
+    }
+    res = Math.max(res, count)
+  }
+  return res
+}
