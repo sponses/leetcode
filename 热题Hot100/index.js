@@ -469,3 +469,38 @@ var searchRange = function(nums, target) {
   }
   return [-1, -1]
 }
+/**
+ * 22. 括号生成（回溯法）
+ * @param {number} n
+ * @return {string[]}
+ */
+var generateParenthesis = function(n) {
+  if (n === 0) return ['']
+  let res = []
+  function backtrack(str, left, right) {
+    if (str.length === n * 2) {
+      let stack = []
+      for (let i = 0, len = str.length; i < len; i++) {
+        if (stack[stack.length - 1] === '(' && str[i] === ')') {
+          stack.pop()
+        } else {
+          stack.push(str[i])
+        }
+      }
+      if (stack.length === 0) {
+        res.push(str)
+      }
+      return
+    }
+    if (left === 0) {
+      backtrack(str + ')', 0, right - 1)
+    } else if (right === 0) {
+      backtrack(str + '(', left - 1, 0)
+    } else {
+      backtrack(str + '(', left - 1, right)
+      backtrack(str + ')', left, right - 1)
+    }
+  }
+  backtrack('(', n - 1, n)
+  return res
+}
