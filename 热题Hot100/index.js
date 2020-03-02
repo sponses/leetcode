@@ -504,3 +504,29 @@ var generateParenthesis = function(n) {
   backtrack('(', n - 1, n)
   return res
 }
+/**
+ * @param {string[]} strs
+ * @return {string[][]}
+ */
+var groupAnagrams = function(strs) {
+  let hash = {},
+    res = [],
+    count = 0
+  for (let i = 0, len = strs.length; i < len; i++) {
+    let cur = strs[i],
+      temp = []
+    for (let j = 0, len = cur.length; j < len; j++) {
+      temp.push(+cur[j].charCodeAt())
+    }
+    temp.sort((a, b) => a - b)
+    let key = temp.join('')
+    if (hash.hasOwnProperty(key)) {
+      res[hash[key]].push(cur)
+    } else {
+      hash[key] = count
+      res[count] = [cur]
+      count++
+    }
+  }
+  return res
+}
