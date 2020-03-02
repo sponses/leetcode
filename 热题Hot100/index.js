@@ -505,6 +505,7 @@ var generateParenthesis = function(n) {
   return res
 }
 /**
+ * 49. 字母异位词分组
  * @param {string[]} strs
  * @return {string[][]}
  */
@@ -593,3 +594,20 @@ Trie.prototype.startsWith = function(prefix) {
  * var param_2 = obj.search(word)
  * var param_3 = obj.startsWith(prefix)
  */
+/**
+ * 226. 翻转二叉树
+ * @param {TreeNode} root
+ * @return {TreeNode}
+ */
+var invertTree = function(root) {
+  function reverse(node) {
+    if (!node) return
+    let temp = node.right
+    node.right = node.left
+    node.left = temp
+    reverse(node.left)
+    reverse(node.right)
+  }
+  reverse(root)
+  return root
+}
