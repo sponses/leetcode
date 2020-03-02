@@ -611,3 +611,22 @@ var invertTree = function(root) {
   reverse(root)
   return root
 }
+/**
+ * 55. 跳跃游戏（暴力递归）
+ * @param {number[]} nums
+ * @return {boolean}
+ */
+var canJump = function(nums) {
+  if (nums.length === 0) return true
+  let len = nums.length
+  function dp(i) {
+    if (i === len - 1) return true
+    if (nums[i] === 0) return false
+    let res = false
+    for (let j = 1; j <= nums[i]; j++) {
+      res = res || dp(i + j)
+    }
+    return res
+  }
+  return dp(0)
+}
