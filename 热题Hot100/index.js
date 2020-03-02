@@ -735,3 +735,20 @@ var longestConsecutive = function(nums) {
   }
   return res
 }
+/**
+ * 84. 柱状图中最大的矩形（暴力递归）
+ * @param {number[]} heights
+ * @return {number}
+ */
+var largestRectangleArea = function(heights) {
+  function dp(i, j) {
+    if (i > j) return 0
+    if (i === j) return heights[i]
+    return Math.max(
+      (j - i + 1) * Math.min(...heights.slice(i, j + 1)),
+      dp(i + 1, j),
+      dp(i, j - 1)
+    )
+  }
+  return dp(0, heights.length - 1)
+}
