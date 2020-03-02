@@ -645,11 +645,61 @@ var canJump = function(nums) {
       dp[i] = true
       continue
     }
-    let res = false
     for (let j = 1; j <= nums[i]; j++) {
-      res = res || dp[i + j]
+      dp[i] = dp[i] || dp[i + j]
     }
-    dp[i] = res
   }
   return dp[0]
+}
+/**
+ * 215. 数组中的第K个最大元素（小顶堆）
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {number}
+ */
+var findKthLargest = function(nums, k) {
+  if (k > nums.length) return -1
+  let heap = [null]
+  function insert(val) {
+    heap.push(val)
+    let i = heap.length - 1,
+      p = Math.floor(i / 2)
+    while (i > 1 && heap[i] < heap[p]) {
+      let temp = heap[i]
+      heap[i] = heap[p]
+      heap[p] = temp
+      i = p
+      p = Math.floor(i / 2)
+    }
+  }
+  function replace(val) {
+    heap.push(val)
+    let temp = heap[1]
+    heap[1] = heap[heap.length - 1]
+    heap[heap.length - 1] = temp
+    heap.pop()
+    let i = 1,
+      len = heap.length
+    while (i * 2 <= len - 1) {
+      let left = i * 2,
+        right = i * 2 + 1
+      if (heap[i] <= heap[left] && (right >= k || heap[i] <= heap[right]))
+        return
+      if (right >= k || heap[left] < heap[right]) {
+        ;[heap[i], heap[left]] = [heap[left], heap[i]]
+        i = left
+      } else {
+        ;[heap[i], heap[right]] = [heap[right], heap[i]]
+        i = right
+      }
+    }
+  }
+  for (let i = 0, len = nums.length; i < len; i++) {
+    if (heap.length <= k) {
+      insert(nums[i])
+    } else {
+      if (heap[1] < nums[i]) replace(nums[i])
+    }
+  }
+  return heap[1]
 }
