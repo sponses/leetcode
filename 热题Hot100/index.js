@@ -530,3 +530,66 @@ var groupAnagrams = function(strs) {
   }
   return res
 }
+/**
+ * 208. 实现 Trie (前缀树)
+ * Initialize your data structure here.
+ */
+var Trie = function() {
+  this.root = {}
+}
+
+/**
+ * Inserts a word into the trie.
+ * @param {string} word
+ * @return {void}
+ */
+Trie.prototype.insert = function(word) {
+  const insert = (node, word) => {
+    if (!word) return
+    let char = word[0]
+    if (!node.hasOwnProperty(char)) node[char] = {}
+    if (word.length === 1) node[char].isEnd = true
+    insert(node[char], word.slice(1))
+  }
+  insert(this.root, word)
+}
+
+/**
+ * Returns if the word is in the trie.
+ * @param {string} word
+ * @return {boolean}
+ */
+Trie.prototype.search = function(word) {
+  const search = (node, word) => {
+    if (!word) return false
+    let char = word[0]
+    if (!node.hasOwnProperty(char)) return false
+    if (word.length === 1 && node[char].isEnd) return true
+    return search(node[char], word.slice(1))
+  }
+  return search(this.root, word)
+}
+
+/**
+ * Returns if there is any word in the trie that starts with the given prefix.
+ * @param {string} prefix
+ * @return {boolean}
+ */
+Trie.prototype.startsWith = function(prefix) {
+  const startsWith = (node, prefix) => {
+    if (!prefix) return false
+    let char = prefix[0]
+    if (!node.hasOwnProperty(char)) return false
+    if (prefix.length === 1) return true
+    return startsWith(node[char], prefix.slice(1))
+  }
+  return startsWith(this.root, prefix)
+}
+
+/**
+ * Your Trie object will be instantiated and called as such:
+ * var obj = new Trie()
+ * obj.insert(word)
+ * var param_2 = obj.search(word)
+ * var param_3 = obj.startsWith(prefix)
+ */
