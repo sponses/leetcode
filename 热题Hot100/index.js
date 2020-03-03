@@ -792,3 +792,24 @@ var lengthOfLIS = function(nums) {
   }
   return dp(0, nums.length - 1)
 }
+/**
+ * 5. 最长回文子串（暴力递归）
+ * @param {string} s
+ * @return {string}
+ */
+var longestPalindrome = function(s) {
+  function dp(i, j) {
+    if (i === j) return s[i]
+    if (j < i) return ''
+    let cur = s.slice(i, j + 1),
+      temp = cur
+        .split('')
+        .reverse()
+        .join('')
+    if (cur === temp) return cur
+    let l = dp(i + 1, j),
+      r = dp(i, j - 1)
+    return l.length > r.length ? l : r
+  }
+  return dp(0, s.length - 1)
+}
