@@ -774,3 +774,21 @@ var largestRectangleArea = function(heights) {
   }
   return dp[0][len - 1]
 }
+/**
+ * 300. 最长上升子序列（暴力递归）
+ * @param {number[]} nums
+ * @return {number}
+ */
+var lengthOfLIS = function(nums) {
+  function dp(i, j) {
+    if (i === j) return 1
+    if (i > j) return 0
+    let res = 1
+    if (nums[j] > nums[i]) res = 2
+    let left = nums[i] > nums[i + 1] ? 0 : 1,
+      right = nums[j] > nums[j - 1] ? 1 : 0
+    res = Math.max(res, left + dp(i + 1, j), right + dp(i, j - 1))
+    return res
+  }
+  return dp(0, nums.length - 1)
+}
