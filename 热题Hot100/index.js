@@ -963,3 +963,17 @@ var wordBreak = function(s, wordDict) {
   }
   return dp(0, 0)
 }
+/**
+ * 62. 不同路径（暴力递归）
+ * @param {number} m
+ * @param {number} n
+ * @return {number}
+ */
+var uniquePaths = function(m, n) {
+  function dp(i, j) {
+    if (i >= m || j >= n) return 0
+    if (i === m - 1 && j === n - 1) return 1
+    return dp(i + 1, j) + dp(i, j + 1)
+  }
+  return dp(0, 0)
+}
