@@ -898,3 +898,19 @@ var longestValidParentheses = function(s) {
   }
   return dp(0, s.length - 1)
 }
+/**
+ * 236. 二叉树的最近公共祖先
+ * @param {TreeNode} root
+ * @param {TreeNode} p
+ * @param {TreeNode} q
+ * @return {TreeNode}
+ */
+var lowestCommonAncestor = function(root, p, q) {
+  if (!root) return null
+  if (p === q) return p
+  if (root === q || root === p) return root
+  let l = lowestCommonAncestor(root.left, p, q),
+    r = lowestCommonAncestor(root.right, p, q)
+  if (l && r) return root
+  return l ? l : r
+}
