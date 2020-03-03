@@ -944,3 +944,22 @@ var maxDepth = function(root) {
   }
   return dfs(root)
 }
+/**
+ * 139. 单词拆分（暴力递归）
+ * @param {string} s
+ * @param {string[]} wordDict
+ * @return {boolean}
+ */
+var wordBreak = function(s, wordDict) {
+  let len = s.length
+  function dp(i, j) {
+    let str = s.slice(i, j + 1),
+      res = false
+    if (!str) return true
+    if (j > len - 1) return false
+    if (wordDict.indexOf(str) !== -1) res = res || dp(j + 1, j + 1)
+    res = res || dp(i, j + 1)
+    return res
+  }
+  return dp(0, 0)
+}
