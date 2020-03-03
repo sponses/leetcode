@@ -914,3 +914,20 @@ var lowestCommonAncestor = function(root, p, q) {
   if (l && r) return root
   return l ? l : r
 }
+/**
+ * 169. 多数元素（摩尔投票）
+ * @param {number[]} nums
+ * @return {number}
+ */
+var majorityElement = function(nums) {
+  let count = 0,
+    res
+  for (let i = 0, len = nums.length; i < len; i++) {
+    if (count === 0) {
+      res = nums[i]
+    } else {
+      count += res === nums[i] ? 1 : -1
+    }
+  }
+  return res
+}
