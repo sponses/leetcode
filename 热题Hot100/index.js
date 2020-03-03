@@ -846,3 +846,31 @@ var longestPalindrome = function(s) {
   }
   return dp[0][len - 1]
 }
+/**
+ * 3. 无重复字符的最长子串（滑动窗口）
+ * @param {string} s
+ * @return {number}
+ */
+var lengthOfLongestSubstring = function(s) {
+  let hash = {},
+    left = 0,
+    right = 0,
+    len = s.length,
+    res = 0
+  while (right < len) {
+    let char = s[right]
+    if (!hash.hasOwnProperty(char)) {
+      res = Math.max(res, right - left + 1)
+      hash[char] = 1
+    } else {
+      while (hash.hasOwnProperty(char)) {
+        delete hash[s[left]]
+        left++
+      }
+      res = Math.max(res, right - left + 1)
+      hash[char] = 1
+    }
+    right++
+  }
+  return res
+}
