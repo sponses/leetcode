@@ -925,9 +925,22 @@ var majorityElement = function(nums) {
   for (let i = 0, len = nums.length; i < len; i++) {
     if (count === 0) {
       res = nums[i]
+      count++
     } else {
       count += res === nums[i] ? 1 : -1
     }
   }
   return res
+}
+/**
+ * 104. 二叉树的最大深度
+ * @param {TreeNode} root
+ * @return {number}
+ */
+var maxDepth = function(root) {
+  function dfs(node) {
+    if (!node) return 0
+    return 1 + Math.max(dfs(node.left), dfs(node.right))
+  }
+  return dfs(root)
 }
