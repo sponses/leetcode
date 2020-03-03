@@ -813,3 +813,36 @@ var longestPalindrome = function(s) {
   }
   return dp(0, s.length - 1)
 }
+/**
+ * 5. 最长回文子串（动态规划）
+ * @param {string} s
+ * @return {string}
+ */
+var longestPalindrome = function(s) {
+  if (s.length === 0) return ''
+  let len = s.length,
+    dp = new Array(len)
+  for (let i = 0; i < len; i++) {
+    dp[i] = new Array(len)
+    dp[i][i] = s[i]
+  }
+  for (let l = 1; l < len; l++) {
+    for (let i = 0; i < len - l; i++) {
+      let j = l + i
+      let cur = s.slice(i, j + 1),
+        temp = cur
+          .split('')
+          .reverse()
+          .join('')
+      if (cur === temp) {
+        dp[i][j] = cur
+      } else {
+        dp[i][j] =
+          dp[i + 1][j].length > dp[i][j - 1].length
+            ? dp[i + 1][j]
+            : dp[i][j - 1]
+      }
+    }
+  }
+  return dp[0][len - 1]
+}
