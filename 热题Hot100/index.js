@@ -874,3 +874,27 @@ var lengthOfLongestSubstring = function(s) {
   }
   return res
 }
+/**
+ * 32. 最长有效括号（暴力递归）
+ * @param {string} s
+ * @return {number}
+ */
+var longestValidParentheses = function(s) {
+  function dp(i, j) {
+    if (i === j) return 0
+    if (i > j) return 0
+    let temp = s.slice(i, j + 1),
+      stack = []
+    for (let i = 0, len = temp.length; i < len; i++) {
+      let cur = temp[i]
+      if (stack[stack.length - 1] === '(' && cur === ')') {
+        stack.pop()
+      } else {
+        stack.push(cur)
+      }
+    }
+    if (stack.length === 0) return j - i + 1
+    return Math.max(dp(i + 1, j), dp(i, j - 1))
+  }
+  return dp(0, s.length - 1)
+}
