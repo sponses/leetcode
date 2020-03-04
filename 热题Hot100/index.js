@@ -1032,3 +1032,19 @@ var isSymmetric = function(root) {
   }
   return isSym(root.left, root.right)
 }
+/**
+ * 78. 子集（回溯法）
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+var subsets = function(nums) {
+  let res = []
+  function backtrack(has, rest) {
+    res.push(has)
+    for (let i = 0, len = rest.length; i < len; i++) {
+      backtrack([...has, rest[i]], rest.slice(i + 1))
+    }
+  }
+  backtrack([], nums)
+  return res
+}
