@@ -1101,3 +1101,19 @@ var maxSubArray = function(nums) {
   }
   return dp(0, nums.length - 1, sum)
 }
+/**
+ * 53. 最大子序和（动态规划）
+ * @param {number[]} nums
+ * @return {number}
+ */
+var maxSubArray = function(nums) {
+  if (nums.length === 0) return 0
+  let len = nums.length,
+    res = Number.MIN_SAFE_INTEGER,
+    prev = 0
+  for (let i = 0; i < len; i++) {
+    prev = Math.max(prev + nums[i], nums[i])
+    res = Math.max(res, prev)
+  }
+  return res
+}
