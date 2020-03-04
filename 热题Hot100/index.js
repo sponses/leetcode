@@ -1003,3 +1003,17 @@ var trap = function(height) {
   }
   return res
 }
+/**
+ * 494. 目标和（暴力递归）
+ * @param {number[]} nums
+ * @param {number} S
+ * @return {number}
+ */
+var findTargetSumWays = function(nums, S) {
+  let len = nums.length
+  function dp(count, i) {
+    if (i === len) return count === S ? 1 : 0
+    return dp(count + nums[i], i + 1) + dp(count - nums[i], i + 1)
+  }
+  return dp(0, 0)
+}
