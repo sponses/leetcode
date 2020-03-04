@@ -1117,3 +1117,24 @@ var maxSubArray = function(nums) {
   }
   return res
 }
+/**
+ * 416. Partition Equal Subset Sum（dynamic planning）
+ * @param {number[]} nums
+ * @return {boolean}
+ */
+var canPartition = function(nums) {
+  let sum = 0,
+    len = nums.length
+  for (let i = 0; i < len; i++) sum += nums[i]
+  if (sum % 2 !== 0) return false
+  let half = sum / 2,
+    dp = new Array(half + 1)
+  dp.fill(false)
+  dp[0] = true
+  for (let i = 0; i < len; i++) {
+    for (let j = half; j >= nums[i]; j--) {
+      dp[j] = dp[j] || dp[j - nums[i]]
+    }
+  }
+  return dp[half]
+}
