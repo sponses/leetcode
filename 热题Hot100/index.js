@@ -1065,3 +1065,21 @@ var subsets = function(nums) {
   backtrack([], 0)
   return res
 }
+/**
+ * 560. 和为K的子数组（暴力循环）
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {number}
+ */
+var subarraySum = function(nums, k) {
+  let res = 0
+  for (let i = 0, len = nums.length; i < len; i++) {
+    let count = nums[i]
+    if (count === k) res++
+    for (let j = i + 1; j < len; j++) {
+      count += nums[j]
+      if (count === k) res++
+    }
+  }
+  return res
+}
