@@ -977,3 +977,29 @@ var uniquePaths = function(m, n) {
   }
   return dp(0, 0)
 }
+/**
+ * 42. 接雨水（双指针）
+ * @param {number[]} height
+ * @return {number}
+ */
+var trap = function(height) {
+  let left = 0,
+    right = height.length - 1,
+    res = 0
+  let l = height[left],
+    r = height[right]
+  while (left < right - 1) {
+    if (l <= r) {
+      let temp = height[left + 1]
+      res += temp < l ? l - temp : 0
+      l = Math.max(l, temp)
+      left++
+    } else {
+      let temp = height[right - 1]
+      res += temp < r ? r - temp : 0
+      r = Math.max(r, temp)
+      right--
+    }
+  }
+  return res
+}
