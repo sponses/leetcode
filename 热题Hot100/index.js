@@ -1048,3 +1048,20 @@ var subsets = function(nums) {
   backtrack([], nums)
   return res
 }
+/**
+ * 78. 子集（回溯法优化）
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+var subsets = function(nums) {
+  let res = [],
+    len = nums.length
+  function backtrack(has, start) {
+    res.push(has)
+    for (let i = start; i < len; i++) {
+      backtrack([...has, nums[i]], i + 1)
+    }
+  }
+  backtrack([], 0)
+  return res
+}
