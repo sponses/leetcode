@@ -1083,3 +1083,21 @@ var subarraySum = function(nums, k) {
   }
   return res
 }
+/**
+ * 53. 最大子序和（暴力递归）
+ * @param {number[]} nums
+ * @return {number}
+ */
+var maxSubArray = function(nums) {
+  let sum = 0
+  for (let i = 0, len = nums.length; i < len; i++) sum += nums[i]
+  function dp(i, j, sum) {
+    if (i === j) return sum
+    return Math.max(
+      sum,
+      dp(i + 1, j, sum - nums[i]),
+      dp(i, j - 1, sum - nums[j])
+    )
+  }
+  return dp(0, nums.length - 1, sum)
+}
