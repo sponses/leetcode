@@ -1143,17 +1143,41 @@ var canPartition = function(nums) {
  * @param {number[]} nums
  * @return {void} Do not return anything, modify nums in-place instead.
  */
-var nextPermutation = function(nums) {
+var maxProduct = function(nums) {
   let len = nums.length,
-    i = len - 1
-  while (i > 0 && nums[i] <= nums[i - 1]) i--
-  if (i === 0) return
-  let j = len - 1
-  while (j >= i && nums[j] <= nums[i - 1]) j--
-  ;[nums[i - 1], nums[j]] = [nums[j], nums[i - 1]]
-  let half = Math.floor((len - i) / 2)
-  for (let k = 0; k < half; k++) {
-    ;[nums[i + k], nums[len - 1 - k]] = [nums[len - 1 - k], nums[i + k]]
+    dp = new Array(len),
+    res = Number.MIN_SAFE_INTEGER
+  for (let i = 0; i < len; i++) {
+    dp[i] = new Array(len)
+    dp[i][i] = nums[i]
+    res = Math.max(res, dp[i][i])
   }
-  return
+  for (let l = 1; l < len; l++) {
+    for (let i = 0; i < len - l; i++) {
+      let j = l + i
+      dp[i][j] = nums[j] * dp[i][j - 1]
+      res = Math.max(res, dp[i][j])
+    }
+  }
+}
+/**
+ * 152. 乘积最大子序列（动态规划）
+ * @param {number[]} nums
+ * @return {number}
+ */
+var maxProduct = function(nums) {
+  let res = Number.MIN_SAFE_INTEGER,
+    max = 1,
+    min = 1
+  for (let i = 0, len = nums.length; i < len; i++) {
+    if (nums[i] < 0) {
+      let temp = max
+      max = min
+      min = temp
+    }
+    max = Math.max(nums[i], max * nums[i])
+    min = Math.min(nums[i], min * nums[i])
+    res = Math.max(res, max)
+  }
+  return res
 }
