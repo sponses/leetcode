@@ -1299,3 +1299,24 @@ var countSubstrings = function(s) {
   }
   return res
 }
+/**
+ * 238. 除自身以外数组的乘积
+ * @param {number[]} nums
+ * @return {number[]}
+ */
+var productExceptSelf = function(nums) {
+  let res = [],
+    len = nums.length
+  let lMul = new Array(len),
+    rMul = new Array(len)
+  ;(lMul[0] = 1), (rMul[len - 1] = 1)
+  for (let i = 1; i < len; i++) {
+    lMul[i] = lMul[i - 1] * nums[i - 1]
+  }
+  res[len - 1] = lMul[len - 1] * rMul[len - 1]
+  for (let j = len - 2; j >= 0; j--) {
+    rMul[j] = rMul[j + 1] * nums[j + 1]
+    res[j] = rMul[j] * lMul[j]
+  }
+  return res
+}
