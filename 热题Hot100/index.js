@@ -1229,3 +1229,19 @@ var moveZeroes = function(nums) {
     p2++
   }
 }
+/**
+ * 234. 回文链表
+ * @param {ListNode} head
+ * @return {boolean}
+ */
+var isPalindrome = function(head) {
+  let arr = []
+  while (head) {
+    arr.push(head.val)
+    head = head.next
+  }
+  for (let i = 0, len = arr.length; i < Math.floor(len / 2); i++) {
+    if (arr[i] !== arr[len - 1 - i]) return false
+  }
+  return true
+}
