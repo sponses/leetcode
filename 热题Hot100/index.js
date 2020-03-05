@@ -1245,3 +1245,38 @@ var isPalindrome = function(head) {
   }
   return true
 }
+/**
+ * 647. 回文子串（滑动窗口）
+ * @param {string} s
+ * @return {number}
+ */
+var countSubstrings = function(s) {
+  let l = 0,
+    r = 0,
+    len = s.length,
+    res = 0
+  while (r < len) {
+    let cur = s.slice(l, r + 1)
+    if (
+      cur
+        .split('')
+        .reverse()
+        .join('') === cur
+    )
+      res++
+    let count = l
+    while (count < r) {
+      count++
+      let cur = s.slice(count, r + 1)
+      if (
+        cur
+          .split('')
+          .reverse()
+          .join('') === cur
+      )
+        res++
+    }
+    r++
+  }
+  return res
+}
