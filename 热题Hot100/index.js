@@ -1280,3 +1280,22 @@ var countSubstrings = function(s) {
   }
   return res
 }
+/**
+ * 647. 回文子串（中心法则）
+ * @param {string} s
+ * @return {number}
+ */
+var countSubstrings = function(s) {
+  let len = s.length,
+    res = 0
+  for (let i = 0, c = 2 * len - 1; i < c; i++) {
+    let l = Math.floor(i / 2),
+      r = l + (i % 2)
+    while (l >= 0 && l < len && s[l] === s[r]) {
+      l--
+      r++
+      res++
+    }
+  }
+  return res
+}
