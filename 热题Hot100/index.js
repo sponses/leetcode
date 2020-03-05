@@ -1341,3 +1341,38 @@ var canPartition = function(nums) {
   }
   return dp[half]
 }
+/**
+ * 279. 完全平方数（动态规划）
+ * @param {number} n
+ * @return {number}
+ */
+var numSquares = function(n) {
+  let squares = []
+  function isSquares(num) {
+    for (let i = 1; i <= num; i++) {
+      if (i * i === num) {
+        squares.push(num)
+        return
+      } else if (i * i > num) return
+    }
+  }
+  for (let i = 1; i <= n; i++) {
+    isSquares(i)
+  }
+  let dp = new Array(n + 1)
+  dp.fill(-1)
+  dp[0] = 0
+  for (let i = 1; i <= n; i++) {
+    for (let j = 0, len = squares.length; j < len; j++) {
+      if (i - squares[j] >= 0) {
+        if (dp[i - squares[j]] !== -1) {
+          dp[i] =
+            dp[i] === -1
+              ? 1 + dp[i - squares[j]]
+              : Math.min(dp[i], 1 + dp[i - squares[j]])
+        }
+      }
+    }
+  }
+  return dp[n]
+}
