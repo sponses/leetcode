@@ -1211,3 +1211,21 @@ var numTrees = function(n) {
   }
   return dp[n]
 }
+/**
+ * 283. 移动零（双指针）
+ * @param {number[]} nums
+ * @return {void} Do not return anything, modify nums in-place instead.
+ */
+var moveZeroes = function(nums) {
+  let p1 = 0,
+    len = nums.length
+  while (nums[p1] !== 0 && p1 < len) p1++
+  let p2 = p1 + 1
+  while (p2 < len) {
+    if (nums[p2] !== 0) {
+      ;[nums[p1], nums[p2]] = [nums[p2], nums[p1]]
+      p1++
+    }
+    p2++
+  }
+}
