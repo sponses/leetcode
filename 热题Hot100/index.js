@@ -1138,3 +1138,22 @@ var canPartition = function(nums) {
   }
   return dp[half]
 }
+/**
+ * 31. 下一个排列
+ * @param {number[]} nums
+ * @return {void} Do not return anything, modify nums in-place instead.
+ */
+var nextPermutation = function(nums) {
+  let len = nums.length,
+    i = len - 1
+  while (i > 0 && nums[i] <= nums[i - 1]) i--
+  if (i === 0) return
+  let j = len - 1
+  while (j >= i && nums[j] <= nums[i - 1]) j--
+  ;[nums[i - 1], nums[j]] = [nums[j], nums[i - 1]]
+  let half = Math.floor((len - i) / 2)
+  for (let k = 0; k < half; k++) {
+    ;[nums[i + k], nums[len - 1 - k]] = [nums[len - 1 - k], nums[i + k]]
+  }
+  return
+}
