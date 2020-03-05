@@ -1195,24 +1195,19 @@ var mergeTrees = function(t1, t2) {
   return t1
 }
 /**
- * 152. 乘积最大子序列（动态规划）
- * @param {number[]} nums
+ * 96. 不同的二叉搜索树（动态规划）
+ * @param {number} n
  * @return {number}
  */
-var maxProduct = function(nums) {
-  let len = nums.length,
-    dp = new Array(len)
-  for (let i = 0; i < len; i++) {
-    dp[i] = new Array(len)
-    dp[i][i] = nums[i]
-  }
-  for (let l = 1; l < len; l++) {
-    for (let i = 0; i < len - l; i++) {
-      let j = l + i
-      let mul = 1
-      for (let k = i; k <= j; k++) mul *= nums[k]
-      dp[i][j] = Math.max(mul, dp[i + 1][j], dp[i][j - 1])
+var numTrees = function(n) {
+  let dp = new Array(n + 1)
+  dp.fill(0)
+  dp[0] = 1
+  dp[1] = 1
+  for (let i = 2; i <= n; i++) {
+    for (let j = 0; j < i; j++) {
+      dp[i] += dp[j] * dp[i - j - 1]
     }
   }
-  return dp[0][len - 1]
+  return dp[n]
 }
