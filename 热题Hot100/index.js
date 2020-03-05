@@ -1194,3 +1194,25 @@ var mergeTrees = function(t1, t2) {
   t1.right = mergeTrees(t1.right, t2.right)
   return t1
 }
+/**
+ * 152. 乘积最大子序列（动态规划）
+ * @param {number[]} nums
+ * @return {number}
+ */
+var maxProduct = function(nums) {
+  let len = nums.length,
+    dp = new Array(len)
+  for (let i = 0; i < len; i++) {
+    dp[i] = new Array(len)
+    dp[i][i] = nums[i]
+  }
+  for (let l = 1; l < len; l++) {
+    for (let i = 0; i < len - l; i++) {
+      let j = l + i
+      let mul = 1
+      for (let k = i; k <= j; k++) mul *= nums[k]
+      dp[i][j] = Math.max(mul, dp[i + 1][j], dp[i][j - 1])
+    }
+  }
+  return dp[0][len - 1]
+}
