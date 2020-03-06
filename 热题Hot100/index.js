@@ -1553,3 +1553,17 @@ var countPrimeSetBits = function(L, R) {
   }
   return res
 }
+/**
+ * 268. 缺失数字（异或）
+ * @param {number[]} nums
+ * @return {number}
+ */
+var missingNumber = function(nums) {
+  let ans = 0
+  for (let i = 0, len = nums.length; i < len; i++) {
+    ans ^= nums[i]
+    ans ^= i
+  }
+  ans ^= nums.length
+  return ans
+}
