@@ -1395,3 +1395,36 @@ var numSquares = function(n) {
   }
   return dp[n]
 }
+/**
+ * 10. 正则表达式匹配（暴力递归）
+ * @param {string} s
+ * @param {string} p
+ * @return {boolean}
+ */
+var isMatch = function(s, p) {
+  function dp(i, j) {
+    if (i < 0 && j < 0) return true
+    if (j < 0) return false
+    if (i < 0) {
+      while (j >= 0) {
+        if (p[j] !== '*') {
+          return false
+        }
+        j -= 2
+      }
+      return true
+    }
+    let charS = s[i],
+      charP = p[j]
+    if (charP === '.' || charS === charP) {
+      return dp(i - 1, j - 1)
+    } else if (charP === '*') {
+      if (p[j - 1] === charS || p[j - 1] === '.')
+        return dp(i - 1, j) || dp(i - 1, j - 2) || dp(i, j - 2)
+      return dp(i, j - 2)
+    } else {
+      return false
+    }
+  }
+  return dp(s.length - 1, p.length - 1)
+}
