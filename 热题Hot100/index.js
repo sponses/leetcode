@@ -1428,3 +1428,39 @@ var isMatch = function(s, p) {
   }
   return dp(s.length - 1, p.length - 1)
 }
+/**
+ * 301. 删除无效的括号（暴力递归）
+ * @param {string} s
+ * @return {string[]}
+ */
+var removeInvalidParentheses = function(s) {
+  let all = [],
+    max = 0
+  function dp(brackets) {
+    let stack = []
+    for (let i = 0, len = brackets.length; i < len; i++) {
+      if (brackets[i] === '(' || brackets[i] === ')') {
+        if (brackets[i] === ')' && stack[stack.length - 1] === '(') {
+          stack.pop()
+        } else {
+          stack.push(brackets[i])
+        }
+      }
+    }
+    if (stack.length === 0) {
+      if (all.indexOf(brackets) === -1) {
+        all.push(brackets)
+        max = Math.max(max, brackets.length)
+      }
+    }
+    for (let i = 0, len = brackets.length; i < len; i++) {
+      dp(brackets.slice(0, i) + brackets.slice(i + 1))
+    }
+  }
+  dp(s)
+  let res = []
+  for (let i = 0, len = all.length; i < len; i++) {
+    if (all[i].length === max) res.push(all[i])
+  }
+  return res
+}
