@@ -1498,3 +1498,15 @@ var removeInvalidParentheses = function(s) {
     return count === 0
   }
 }
+/**
+ * 136. 只出现一次的数字（异或）
+ * @param {number[]} nums
+ * @return {number}
+ */
+var singleNumber = function(nums) {
+  let a = 0
+  for (let i = 0, len = nums.length; i < len; i++) {
+    a ^= nums[i]
+  }
+  return a
+}
