@@ -1510,3 +1510,24 @@ var singleNumber = function(nums) {
   }
   return a
 }
+/**
+ * 1356. 根据数字二进制下 1 的数目排序（位运算）
+ * @param {number[]} arr
+ * @return {number[]}
+ */
+var sortByBits = function(arr) {
+  function compare(n1, n2) {
+    let count1 = 0,
+      count2 = 0,
+      temp = n1 - n2
+    for (let i = 32; i > 0; i--) {
+      if ((n1 & 1) === 1) count1++
+      if ((n2 & 1) === 1) count2++
+      n1 >>= 1
+      n2 >>= 1
+    }
+    return count1 - count2 || temp
+  }
+  arr.sort(compare)
+  return arr
+}
