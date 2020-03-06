@@ -1464,3 +1464,37 @@ var removeInvalidParentheses = function(s) {
   }
   return res
 }
+/**
+ * 301. 删除无效的括号（bfs）
+ * @param {string} s
+ * @return {string[]}
+ */
+var removeInvalidParentheses = function(s) {
+  let queue = [s]
+  while (queue.length) {
+    let res = queue.filter(isValid)
+    if (res.length > 0) return [...new Set(res)]
+    let newQueue = []
+    let temp = []
+    for (let i = 0, len1 = queue.length; i < len1; i++) {
+      for (let j = 0, len2 = queue[i].length; j < len2; j++) {
+        if (queue[i][j] === '(' || queue[i][j] === ')')
+          temp.push(queue[i].slice(0, j) + queue[i].slice(j + 1))
+      }
+    }
+    queue = temp
+  }
+  function isValid(brackets) {
+    let count = 0,
+      len = brackets.length
+    for (let i = 0; i < len; i++) {
+      if (brackets[i] === '(') {
+        count++
+      } else if (brackets[i] === ')') {
+        count--
+      }
+      if (count < 0) return false
+    }
+    return count === 0
+  }
+}
