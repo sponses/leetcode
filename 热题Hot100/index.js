@@ -1588,3 +1588,27 @@ var isValidBST = function(root) {
   mfs(root)
   return res
 }
+/**
+ * 62. 不同路径（动态规划）
+ * @param {number} m
+ * @param {number} n
+ * @return {number}
+ */
+var uniquePaths = function(m, n) {
+  let dp = new Array(m + 1)
+  for (let i = 0; i <= m; i++) {
+    dp[i] = new Array(n + 1)
+    dp[i][n] = 0
+  }
+  dp[m].fill(0)
+  for (let i = m - 1; i >= 0; i--) {
+    for (let j = n - 1; j >= 0; j--) {
+      if (i === m - 1 && j === n - 1) {
+        dp[i][j] = 1
+      } else {
+        dp[i][j] = dp[i + 1][j] + dp[i][j + 1]
+      }
+    }
+  }
+  return dp[0][0]
+}
