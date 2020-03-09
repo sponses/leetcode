@@ -1717,3 +1717,24 @@ var removeNthFromEnd = function(head, n) {
   p.next = p.next.next
   return dummy.next
 }
+/**
+ * 19. 删除链表的倒数第N个节点（遍历一遍）
+ * @param {ListNode} head
+ * @param {number} n
+ * @return {ListNode}
+ */
+var removeNthFromEnd = function(head, n) {
+  let dummy = new ListNode(null)
+  dummy.next = head
+  let p = dummy
+  while (n > 0) {
+    n--
+    head = head.next
+  }
+  while (head) {
+    head = head.next
+    p = p.next
+  }
+  p.next = p.next.next
+  return dummy.next
+}
