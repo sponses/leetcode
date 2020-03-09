@@ -1810,3 +1810,21 @@ var buildTree = function(preorder, inorder) {
   tree.right = buildTree(preRight, inRight)
   return tree
 }
+/**
+ * 739. 每日温度（单调栈）
+ * @param {number[]} T
+ * @return {number[]}
+ */
+var dailyTemperatures = function(T) {
+  let stack = [],
+    res = []
+  for (let i = 0, len = T.length; i < len; i++) {
+    while (stack.length !== 0 && T[stack[stack.length - 1]] < T[i]) {
+      let cur = stack.pop()
+      res[cur] = i - cur
+    }
+    stack.push(i)
+  }
+  for (let i = 0, len = stack.length; i < len; i++) res[stack[i]] = 0
+  return res
+}
