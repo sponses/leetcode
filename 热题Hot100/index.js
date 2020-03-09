@@ -1776,3 +1776,18 @@ var largestRectangleArea = function(heights) {
   }
   return res
 }
+/**
+ * 461. 汉明距离（位运算）
+ * @param {number} x
+ * @param {number} y
+ * @return {number}
+ */
+var hammingDistance = function(x, y) {
+  let z = x ^ y,
+    res = 0
+  for (let i = 32; i > 0; i--) {
+    if ((z & 1) === 1) res++
+    z >>= 1
+  }
+  return res
+}
