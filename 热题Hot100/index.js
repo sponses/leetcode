@@ -1474,7 +1474,6 @@ var removeInvalidParentheses = function(s) {
   while (queue.length) {
     let res = queue.filter(isValid)
     if (res.length > 0) return [...new Set(res)]
-    let newQueue = []
     let temp = []
     for (let i = 0, len1 = queue.length; i < len1; i++) {
       for (let j = 0, len2 = queue[i].length; j < len2; j++) {
@@ -1566,4 +1565,26 @@ var missingNumber = function(nums) {
   }
   ans ^= nums.length
   return ans
+}
+/**
+ * 98. 验证二叉搜索树（中序遍历）
+ * @param {TreeNode} root
+ * @return {boolean}
+ */
+var isValidBST = function(root) {
+  let temp = Number.MIN_SAFE_INTEGER,
+    res = true
+  function mfs(node) {
+    if (!node) return
+    mfs(node.left)
+    if (node.val > temp) {
+      temp = node.val
+    } else {
+      res = false
+      return
+    }
+    mfs(node.right)
+  }
+  mfs(root)
+  return res
 }
