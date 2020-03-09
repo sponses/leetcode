@@ -1632,3 +1632,65 @@ var sortColors = function(nums) {
     }
   }
 }
+/**
+ * 297. 二叉树的序列化与反序列化
+ * Encodes a tree to a single string.
+ *
+ * @param {TreeNode} root
+ * @return {string}
+ */
+var serialize = function(root) {
+  const nodes = [],
+    queue = [root]
+  while (queue.length) {
+    let cur = queue.shift()
+    if (cur) {
+      nodes.push(cur.val)
+      queue.push(cur.left, cur.right)
+    } else {
+      nodes.push(null)
+    }
+  }
+  while (nodes.length && nodes[nodes.length - 1] === null) nodes.pop()
+  let res = '['
+  for (let i = 0, len = nodes.length; i < len; i++) {
+    res += nodes[i] + ','
+  }
+  res = res.slice(0, res.length - 1)
+  return res + ']'
+}
+
+/**
+ * Decodes your encoded data to tree.
+ *
+ * @param {string} data
+ * @return {TreeNode}
+ */
+var deserialize = function(data) {
+  data = data.slice(1, data.length - 1)
+  if (!data) return null
+  data = data.split(',')
+  let i = 1,
+    len = data.length,
+    root = new TreeNode(data[0]),
+    queue = [root]
+  while (i < len && queue.length) {
+    let left = i < len ? data[i++] : 'null'
+    let right = i < len ? data[i++] : 'null'
+    let node = queue.shift()
+    if (left !== 'null') {
+      node.left = new TreeNode(left)
+      queue.push(node.left)
+    }
+    if (right !== 'null') {
+      node.right = new TreeNode(right)
+      queue.push(node.right)
+    }
+  }
+  return root
+}
+
+/**
+ * Your functions will be called as such:
+ * deserialize(serialize(root));
+ */
