@@ -1612,3 +1612,23 @@ var uniquePaths = function(m, n) {
   }
   return dp[0][0]
 }
+/**
+ * 75. 颜色分类（双指针）
+ * @param {number[]} nums
+ * @return {void} Do not return anything, modify nums in-place instead.
+ */
+var sortColors = function(nums) {
+  let l = 0,
+    len = nums.length,
+    r = len - 1
+  for (let i = 0; i <= r; i++) {
+    if (nums[i] === 2) {
+      ;[nums[i], nums[r]] = [nums[r], nums[i]]
+      r--
+      i--
+    } else if (nums[i] === 0) {
+      ;[nums[i], nums[l]] = [nums[l], nums[i]]
+      l++
+    }
+  }
+}
