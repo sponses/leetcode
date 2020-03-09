@@ -1791,3 +1791,22 @@ var hammingDistance = function(x, y) {
   }
   return res
 }
+/**
+ * 105. 从前序与中序遍历序列构造二叉树
+ * @param {number[]} preorder
+ * @param {number[]} inorder
+ * @return {TreeNode}
+ */
+var buildTree = function(preorder, inorder) {
+  if (preorder.length === 0) return null
+  let cur = preorder[0],
+    index = inorder.indexOf(cur)
+  let tree = new TreeNode(cur)
+  let preLeft = preorder.slice(1, index + 1),
+    preRight = preorder.slice(index + 1)
+  let inLeft = inorder.slice(0, index),
+    inRight = inorder.slice(index + 1)
+  tree.left = buildTree(preLeft, inLeft)
+  tree.right = buildTree(preRight, inRight)
+  return tree
+}
