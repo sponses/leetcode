@@ -1759,3 +1759,20 @@ var longestValidParentheses = function(s) {
   }
   return res
 }
+/**
+ * 84. 柱状图中最大的矩形（暴力循环）
+ * @param {number[]} heights
+ * @return {number}
+ */
+var largestRectangleArea = function(heights) {
+  let res = 0
+  for (let i = 0, len = heights.length; i < len; i++) {
+    let min = heights[i]
+    res = Math.max(res, min)
+    for (let j = i + 1; j < len; j++) {
+      min = Math.min(min, heights[j])
+      res = Math.max(res, (j - i + 1) * min)
+    }
+  }
+  return res
+}
