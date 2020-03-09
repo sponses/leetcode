@@ -1738,3 +1738,24 @@ var removeNthFromEnd = function(head, n) {
   p.next = p.next.next
   return dummy.next
 }
+/**
+ * 32. 最长有效括号（暴力循环）
+ * @param {string} s
+ * @return {number}
+ */
+var longestValidParentheses = function(s) {
+  let res = 0
+  for (let i = 0, len = s.length; i < len; i++) {
+    let count = s[i] === '(' ? 1 : -1
+    for (let j = i + 1; j < len; j++) {
+      if (count < 0) break
+      if (s[j] === '(') {
+        count++
+      } else {
+        count--
+      }
+      if (count === 0) res = Math.max(res, j - i + 1)
+    }
+  }
+  return res
+}
