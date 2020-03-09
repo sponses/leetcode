@@ -1694,3 +1694,26 @@ var deserialize = function(data) {
  * Your functions will be called as such:
  * deserialize(serialize(root));
  */
+/**
+ * 19. 删除链表的倒数第N个节点
+ * @param {ListNode} head
+ * @param {number} n
+ * @return {ListNode}
+ */
+var removeNthFromEnd = function(head, n) {
+  let dummy = new ListNode(null)
+  dummy.next = head
+  let len = 0
+  while (head) {
+    len++
+    head = head.next
+  }
+  let count = len - n,
+    p = dummy
+  while (count > 0) {
+    count--
+    p = p.next
+  }
+  p.next = p.next.next
+  return dummy.next
+}
