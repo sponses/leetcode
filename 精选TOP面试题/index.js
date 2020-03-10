@@ -191,3 +191,23 @@ const twoSum = function(nums, target) {
     hash[nums[i]] = i
   }
 }
+/**
+ * 42. 接雨水（单调栈）
+ * @param {number[]} height
+ * @return {number}
+ */
+var trap = function(height) {
+  let res = 0,
+    stack = []
+  for (let i = 0, len = height.length; i < len; i++) {
+    while (stack.length > 0 && height[i] > height[stack[stack.length - 1]]) {
+      let h = height[stack.pop()]
+      if (stack.length !== 0) {
+        let w = i - stack[stack.length - 1] - 1
+        res += (Math.min(height[stack[stack.length - 1]], height[i]) - h) * w
+      }
+    }
+    stack.push(i)
+  }
+  return res
+}
