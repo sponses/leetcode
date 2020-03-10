@@ -75,3 +75,21 @@ var isMatch = function(s, p) {
   }
   return dp(s.length - 1, p.length - 1)
 }
+/**
+ * 98. 验证二叉搜索树（中序遍历）
+ * @param {TreeNode} root
+ * @return {boolean}
+ */
+var isValidBST = function(root) {
+  let compare = Number.MIN_SAFE_INTEGER,
+    res = true
+  function mfs(node) {
+    if (!node) return
+    mfs(node.left)
+    if (compare >= node.val) res = false
+    compare = node.val
+    mfs(node.right)
+  }
+  mfs(root)
+  return res
+}
