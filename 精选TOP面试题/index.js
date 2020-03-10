@@ -110,3 +110,26 @@ var isValid = function(s) {
   }
   return stack.length === 0
 }
+/**
+ * 125. 验证回文串
+ * @param {string} s
+ * @return {boolean}
+ */
+var isPalindrome = function(s) {
+  let res = ''
+  for (let i = 0, len = s.length; i < len; i++) {
+    let cur = s[i]
+    if (cur.charCodeAt() >= 65 && cur.charCodeAt() <= 90)
+      res += cur.toLocaleLowerCase()
+    if (cur.charCodeAt() >= 97 && cur.charCodeAt() <= 122) res += cur
+    if (!isNaN(cur) && cur !== ' ') res += cur
+  }
+  for (
+    let i = 0, len = Math.floor(res.length / 2), l = res.length;
+    i < len;
+    i++
+  ) {
+    if (res[i] !== res[l - i - 1]) return false
+  }
+  return true
+}
