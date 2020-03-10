@@ -93,3 +93,20 @@ var isValidBST = function(root) {
   mfs(root)
   return res
 }
+/**
+ * 20. 有效的括号（栈）
+ * @param {string} s
+ * @return {boolean}
+ */
+var isValid = function(s) {
+  const hash = { ')': '(', '}': '{', ']': '[' }
+  let stack = []
+  for (let i = 0, len = s.length; i < len; i++) {
+    if (hash.hasOwnProperty(s[i]) && stack[stack.length - 1] === hash[s[i]]) {
+      stack.pop()
+    } else {
+      stack.push(s[i])
+    }
+  }
+  return stack.length === 0
+}
