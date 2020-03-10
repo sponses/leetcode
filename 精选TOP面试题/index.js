@@ -133,3 +133,30 @@ var isPalindrome = function(s) {
   }
   return true
 }
+/**
+ * 242. 有效的字母异位词（hash表）
+ * @param {string} s
+ * @param {string} t
+ * @return {boolean}
+ */
+var isAnagram = function(s, t) {
+  let hashS = {}
+  for (let i = 0, len = s.length; i < len; i++) {
+    if (!hashS.hasOwnProperty(s[i])) {
+      hashS[s[i]] = 1
+    } else {
+      hashS[s[i]]++
+    }
+  }
+  let count = 0,
+    hashT = {}
+  for (let i = 0, len = t.length; i < len; i++) {
+    if (!hashT.hasOwnProperty(t[i])) {
+      hashT[t[i]] = 1
+    } else {
+      hashT[t[i]]++
+    }
+    if (hashS[t[i]] === hashT[t[i]]) count++
+  }
+  return s.length === t.length && count === Object.keys(hashS).length
+}
