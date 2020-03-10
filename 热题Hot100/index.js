@@ -1850,22 +1850,27 @@ var nextLargerNodes = function(head) {
   return res
 }
 /**
- * 312. 戳气球（暴力解）
+ * 312. 戳气球（备忘录）
  * @param {number[]} nums
  * @return {number}
  */
 var maxCoins = function(nums) {
-  let len = nums.length
-  if (len === 0) return 0
-  if (len === 1) return nums[0]
-  let res = 0
-  for (let i = 0; i < len; i++) {
-    let l = i === 0 ? 1 : nums[i - 1],
-      r = i === len - 1 ? 1 : nums[i + 1]
-    res = Math.max(
-      res,
-      l * r * nums[i] + maxCoins(nums.slice(0, i).concat(nums.slice(i + 1)))
-    )
+  let hash = {}
+  function dp(nums) {
+    let len = nums.length
+    if (len === 0) return 0
+    if (len === 1) return nums[0]
+    let res = 0
+    for (let i = 0; i < len; i++) {
+      let l = i === 0 ? 1 : nums[i - 1],
+        r = i === len - 1 ? 1 : nums[i + 1]
+      let arr = nums.slice(0, i).concat(nums.slice(i + 1))
+      if (!hash.hasOwnProperty(arr.toString())) {
+        hash[arr.toString()] = dp(arr)
+      }
+      res = Math.max(res, l * r * nums[i] + hash[arr.toString()])
+    }
+    return res
   }
-  return res
+  return dp(nums)
 }
