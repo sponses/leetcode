@@ -160,3 +160,20 @@ var isAnagram = function(s, t) {
   }
   return s.length === t.length && count === Object.keys(hashS).length
 }
+/**
+ * 242. 有效的字母异位词（排序）
+ * @param {string} s
+ * @param {string} t
+ * @return {boolean}
+ */
+var isAnagram = function(s, t) {
+  s = s
+    .split('')
+    .sort((a, b) => a.charCodeAt() - b.charCodeAt())
+    .join('')
+  t = t
+    .split('')
+    .sort((a, b) => a.charCodeAt() - b.charCodeAt())
+    .join('')
+  return s === t
+}
