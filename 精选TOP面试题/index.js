@@ -42,3 +42,36 @@ var wordBreak = function(s, wordDict) {
   }
   return dp[len]
 }
+/**
+ * 44. 通配符匹配（暴力解）
+ * @param {string} s
+ * @param {string} p
+ * @return {boolean}
+ */
+var isMatch = function(s, p) {
+  function dp(i, j) {
+    if (i < 0 && j < 0) return true
+    if (j < 0) return false
+    if (i < 0) {
+      while (j >= 0) {
+        if (p[j] !== '*') return false
+        j--
+      }
+      return true
+    }
+    const charS = s[i],
+      charP = p[j]
+    if (charS === charP || charP === '?') {
+      return dp(i - 1, j - 1)
+    } else if (charP === '*') {
+      let res = false
+      for (let n = -1; n <= i; n++) {
+        res = res || dp(n, j - 1)
+      }
+      return res
+    } else {
+      return false
+    }
+  }
+  return dp(s.length - 1, p.length - 1)
+}
