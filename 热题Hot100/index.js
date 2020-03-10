@@ -1828,3 +1828,24 @@ var dailyTemperatures = function(T) {
   for (let i = 0, len = stack.length; i < len; i++) res[stack[i]] = 0
   return res
 }
+/**
+ * 1019. 链表中的下一个更大节点（单调栈）
+ * @param {ListNode} head
+ * @return {number[]}
+ */
+var nextLargerNodes = function(head) {
+  let stack = [],
+    res = [],
+    count = 0
+  while (head) {
+    while (stack.length > 0 && stack[stack.length - 1].val < head.val) {
+      let temp = stack.pop()
+      res[temp.key] = head.val
+    }
+    stack.push({ key: count, val: head.val })
+    count++
+    head = head.next
+  }
+  for (let i = 0, len = stack.length; i < len; i++) res[stack[i].key] = 0
+  return res
+}
