@@ -425,3 +425,20 @@ var exist = function(board, word) {
   }
   return false
 }
+/**
+ * 78. 子集（回溯法）
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+var subsets = function(nums) {
+  const res = [],
+    len = nums.length
+  function backtrack(has, i) {
+    res.push(has)
+    for (let n = i; n < len; n++) {
+      backtrack([...has, nums[n]], n + 1)
+    }
+  }
+  backtrack([], 0)
+  return res
+}
