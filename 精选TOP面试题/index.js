@@ -262,3 +262,45 @@ var isSymmetric = function(root) {
   }
   return isSym(root.left, root.right)
 }
+/**
+ * 130. 被围绕的区域（dfs）
+ * @param {character[][]} board
+ * @return {void} Do not return anything, modify board in-place instead.
+ */
+var solve = function(board) {
+  if (!board || !board.length) return
+  const h = board.length,
+    w = board[0].length
+  for (let i = 0; i < h; i++) {
+    for (let j = 0; j < w; j++) {
+      if (
+        (i === 0 || i === h - 1 || j === 0 || j === w - 1) &&
+        board[i][j] === 'O'
+      ) {
+        dfs(i, j)
+      }
+    }
+  }
+  function dfs(i, j) {
+    if (
+      i < 0 ||
+      i >= h ||
+      j < 0 ||
+      j >= w ||
+      board[i][j] === 'X' ||
+      board[i][j] === '#'
+    )
+      return
+    board[i][j] = '#'
+    dfs(i - 1, j)
+    dfs(i + 1, j)
+    dfs(i, j - 1)
+    dfs(i, j + 1)
+  }
+  for (let i = 0; i < h; i++) {
+    for (let j = 0; j < w; j++) {
+      if (board[i][j] === 'O') board[i][j] = 'X'
+      if (board[i][j] === '#') board[i][j] = 'O'
+    }
+  }
+}
