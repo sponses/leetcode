@@ -373,3 +373,55 @@ var getSum = function(a, b) {
   }
   return a
 }
+/**
+ * 79. 单词搜索（dfs）
+ * @param {character[][]} board
+ * @param {string} word
+ * @return {boolean}
+ */
+var exist = function(board, word) {
+  const len = word.length,
+    h = board.length,
+    w = board[0].length
+  for (let i = 0; i < h; i++) {
+    for (let j = 0; j < w; j++) {
+      if (board[i][j] === word[0]) {
+        if (dfs(i, j, 1, [i + ',' + j])) return true
+      }
+    }
+  }
+  function dfs(i, j, k, used) {
+    if (k === len) return true
+    let res = false
+    if (
+      i - 1 >= 0 &&
+      board[i - 1][j] === word[k] &&
+      used.indexOf(i - 1 + ',' + j) === -1
+    ) {
+      res = res || dfs(i - 1, j, k + 1, used.concat([i - 1 + ',' + j]))
+    }
+    if (
+      i + 1 < h &&
+      board[i + 1][j] === word[k] &&
+      used.indexOf(i + 1 + ',' + j) === -1
+    ) {
+      res = res || dfs(i + 1, j, k + 1, used.concat([i + 1 + ',' + j]))
+    }
+    if (
+      j - 1 >= 0 &&
+      board[i][j - 1] === word[k] &&
+      used.indexOf(i + ',' + (j - 1)) === -1
+    ) {
+      res = res || dfs(i, j - 1, k + 1, used.concat([i + ',' + (j - 1)]))
+    }
+    if (
+      j + 1 < w &&
+      board[i][j + 1] === word[k] &&
+      used.indexOf(i + ',' + (j + 1)) === -1
+    ) {
+      res = res || dfs(i, j + 1, k + 1, used.concat([i + ',' + (j + 1)]))
+    }
+    return res
+  }
+  return false
+}
