@@ -442,3 +442,20 @@ var subsets = function(nums) {
   backtrack([], 0)
   return res
 }
+/**
+ * 8. 字符串转换整数 (atoi)
+ * @param {string} str
+ * @return {number}
+ */
+var myAtoi = function(str) {
+  let i = 0,
+    len = str.length,
+    res = ''
+  while (str[i] === ' ') i++
+  if (str[i] === '-' || str[i] === '+') res += str[i++]
+  while (!Number.isNaN(+str[i]) && str[i] !== ' ' && i < len) res += str[i++]
+  if (Number.isNaN(+res)) return 0
+  if (+res < -Math.pow(2, 31)) return -Math.pow(2, 31)
+  if (+res > Math.pow(2, 31) - 1) return Math.pow(2, 31) - 1
+  return +res
+}
