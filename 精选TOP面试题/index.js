@@ -211,3 +211,22 @@ var trap = function(height) {
   }
   return res
 }
+/**
+ * 84. 柱状图中最大的矩形（单调栈）
+ * @param {number[]} heights
+ * @return {number}
+ */
+var largestRectangleArea = function(heights) {
+  let stack = [],
+    res = 0
+  heights.push(0)
+  heights.unshift(0)
+  for (let i = 0, len = heights.length; i < len; i++) {
+    while (stack.length > 0 && heights[stack[stack.length - 1]] > heights[i]) {
+      let temp = stack.pop()
+      res = Math.max(res, (i - stack[stack.length - 1] - 1) * heights[temp])
+    }
+    stack.push(i)
+  }
+  return res
+}
