@@ -304,3 +304,58 @@ var solve = function(board) {
     }
   }
 }
+/**
+ * 130. 被围绕的区域（非递归dfs）
+ * @param {character[][]} board
+ * @return {void} Do not return anything, modify board in-place instead.
+ */
+var solve = function(board) {
+  if (!board || !board.length) return
+  const h = board.length,
+    w = board[0].length
+  for (let i = 0; i < h; i++) {
+    for (let j = 0; j < w; j++) {
+      if (
+        (i === 0 || i === h - 1 || j === 0 || j === w - 1) &&
+        board[i][j] === 'O'
+      ) {
+        dfs(i, j)
+      }
+    }
+  }
+  function dfs(i, j) {
+    const stack = []
+    stack.push({ i, j })
+    board[i][j] = '#'
+    while (stack.length) {
+      let cur = stack[stack.length - 1]
+      if (cur.i - 1 >= 0 && board[cur.i - 1][cur.j] === 'O') {
+        board[cur.i - 1][cur.j] = '#'
+        stack.push({ i: cur.i - 1, j: cur.j })
+        continue
+      }
+      if (cur.i + 1 < h && board[cur.i + 1][cur.j] === 'O') {
+        board[cur.i + 1][cur.j] = '#'
+        stack.push({ i: cur.i + 1, j: cur.j })
+        continue
+      }
+      if (cur.j - 1 >= 0 && board[cur.i][cur.j - 1] === 'O') {
+        board[cur.i][cur.j - 1] = '#'
+        stack.push({ i: cur.i, j: cur.j - 1 })
+        continue
+      }
+      if (cur.j - 1 < w && board[cur.i][cur.j + 1] === 'O') {
+        board[cur.i][cur.j + 1] = '#'
+        stack.push({ i: cur.i, j: cur.j + 1 })
+        continue
+      }
+      stack.pop()
+    }
+  }
+  for (let i = 0; i < h; i++) {
+    for (let j = 0; j < w; j++) {
+      if (board[i][j] === 'O') board[i][j] = 'X'
+      if (board[i][j] === '#') board[i][j] = 'O'
+    }
+  }
+}
