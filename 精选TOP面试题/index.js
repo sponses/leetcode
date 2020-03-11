@@ -470,3 +470,27 @@ var mySqrt = function(x) {
     if (i * i === x || (i * i < x && (i + 1) * (i + 1) > x)) return i
   }
 }
+/**
+ * 54. 螺旋矩阵（定义边界）
+ * @param {number[][]} matrix
+ * @return {number[]}
+ */
+var spiralOrder = function(matrix) {
+  if (!matrix.length) return []
+  let l = 0,
+    r = matrix[0].length - 1,
+    t = 0,
+    b = matrix.length - 1
+  const res = []
+  while (true) {
+    for (let n = l; n <= r; n++) res.push(matrix[t][n])
+    if (++t > b) break
+    for (let n = t; n <= b; n++) res.push(matrix[n][r])
+    if (--r < l) break
+    for (let n = r; n >= l; n--) res.push(matrix[b][n])
+    if (--b < t) break
+    for (let n = b; n >= t; n--) res.push(matrix[n][l])
+    if (++l > r) break
+  }
+  return res
+}
