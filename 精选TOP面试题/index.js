@@ -459,3 +459,14 @@ var myAtoi = function(str) {
   if (+res > Math.pow(2, 31) - 1) return Math.pow(2, 31) - 1
   return +res
 }
+/**
+ * 69. x 的平方根
+ * @param {number} x
+ * @return {number}
+ */
+var mySqrt = function(x) {
+  if (x === 0) return 0
+  for (let i = 1; i <= x; i++) {
+    if (i * i === x || (i * i < x && (i + 1) * (i + 1) > x)) return i
+  }
+}
