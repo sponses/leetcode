@@ -551,3 +551,29 @@ var sortList = function(head) {
     return dummy.next
   }
 }
+/**
+ * 239. 滑动窗口最大值（队列）
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {number[]}
+ */
+var maxSlidingWindow = function(nums, k) {
+  const queue = [],
+    res = [],
+    len = nums.length
+  let l = 0,
+    r = 0
+  while (r < len) {
+    while (queue.length > 0 && nums[queue[queue.length - 1]] < nums[r]) {
+      queue.pop()
+    }
+    queue.push(r)
+    if (r - l + 1 === k) {
+      res.push(nums[queue[0]])
+      l++
+      if (queue[0] < l) queue.shift()
+    }
+    r++
+  }
+  return res
+}
