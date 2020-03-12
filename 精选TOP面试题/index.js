@@ -587,3 +587,38 @@ var singleNumber = function(nums) {
   for (let i = 0, len = nums.length; i < len; i++) res ^= nums[i]
   return res
 }
+/**
+ * 73. 矩阵置零（dfs）
+ * @param {number[][]} matrix
+ * @return {void} Do not return anything, modify matrix in-place instead.
+ */
+var setZeroes = function(matrix) {
+  const h = matrix.length,
+    w = matrix[0].length
+  function dfs(i, j, dir) {
+    if (i < 0 || i >= h || j < 0 || j >= w || matrix[i][j] === 0) return
+    matrix[i][j] = '#'
+    if (dir === 'l') return dfs(i, j - 1, 'l')
+    if (dir === 'r') return dfs(i, j + 1, 'r')
+    if (dir === 'u') return dfs(i - 1, j, 'u')
+    if (dir === 'd') return dfs(i + 1, j, 'd')
+  }
+  for (let i = 0; i < h; i++) {
+    for (let j = 0; j < w; j++) {
+      if (matrix[i][j] === 0) {
+        matrix[i][j] = '#'
+        dfs(i - 1, j, 'u')
+        dfs(i + 1, j, 'd')
+        dfs(i, j - 1, 'l')
+        dfs(i, j + 1, 'r')
+      }
+    }
+  }
+  for (let i = 0; i < h; i++) {
+    for (let j = 0; j < w; j++) {
+      if (matrix[i][j] === '#') {
+        matrix[i][j] = '0'
+      }
+    }
+  }
+}
