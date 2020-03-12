@@ -622,3 +622,13 @@ var setZeroes = function(matrix) {
     }
   }
 }
+/**
+ * 344. 反转字符串（双指针）
+ * @param {character[]} s
+ * @return {void} Do not return anything, modify s in-place instead.
+ */
+var reverseString = function(s) {
+  for (let i = 0, len = s.length; i < Math.floor(len / 2); i++) {
+    ;[s[i], s[len - i - 1]] = [s[len - i - 1], s[i]]
+  }
+}
