@@ -632,3 +632,17 @@ var reverseString = function(s) {
     ;[s[i], s[len - i - 1]] = [s[len - i - 1], s[i]]
   }
 }
+/**
+ * 206. 反转链表（递归）
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+var reverseList = function(head) {
+  function reverse(prev, l) {
+    if (!l) return prev
+    const temp = l.next
+    l.next = prev
+    return reverse(l, temp)
+  }
+  return reverse(null, head)
+}
