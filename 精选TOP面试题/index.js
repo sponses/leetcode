@@ -577,3 +577,13 @@ var maxSlidingWindow = function(nums, k) {
   }
   return res
 }
+/**
+ * 136. 只出现一次的数字（异或）
+ * @param {number[]} nums
+ * @return {number}
+ */
+var singleNumber = function(nums) {
+  let res = 0
+  for (let i = 0, len = nums.length; i < len; i++) res ^= nums[i]
+  return res
+}
