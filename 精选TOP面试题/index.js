@@ -494,3 +494,60 @@ var spiralOrder = function(matrix) {
   }
   return res
 }
+/**
+ * 148. 排序链表（归并排序）
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+var sortList = function(head) {
+  let p = head,
+    len = 0
+  while (head) {
+    len++
+    head = head.next
+  }
+  const dummy = new ListNode(null)
+  let t = dummy,
+    step = 1
+  while (step <= len) {
+    while (p) {
+      let l = p,
+        r = cut(l, step)
+      p = cut(r, step)
+      t.next = merge(l, r)
+      while (t.next) t = t.next
+    }
+    step <<= 1
+    p = dummy.next
+    t = dummy
+  }
+  return dummy.next
+  function cut(node, step) {
+    if (step === 0 || !node) return node
+    while (step > 1 && node.next) {
+      node = node.next
+      step--
+    }
+    const temp = node.next
+    node.next = null
+    return temp
+  }
+  function merge(l1, l2) {
+    if (!l1 || !l2) return l1 ? l1 : l2
+    let p = new ListNode(null),
+      dummy = p
+    while (l1 && l2) {
+      if (l1.val < l2.val) {
+        p.next = l1
+        p = l1
+        l1 = l1.next
+      } else {
+        p.next = l2
+        p = l2
+        l2 = l2.next
+      }
+    }
+    p.next = l1 ? l1 : l2
+    return dummy.next
+  }
+}
