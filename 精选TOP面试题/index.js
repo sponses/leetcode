@@ -647,23 +647,39 @@ var reverseList = function(head) {
   return reverse(null, head)
 }
 /**
-116. 填充每个节点的下一个右侧节点指针
+ * 116. 填充每个节点的下一个右侧节点指针
  * @param {Node} root
  * @return {Node}
  */
 var connect = function(root) {
-    function point(l,r){
-        if(!l && !r) return 
-        l.next = r
-        point(l.left,l.right)
-        if(r) {
-            point(l.right,r.left)
-            point(r.left,r.right)
-            point(r.right,null)
-        }else {
-            point(l.right,null)
-        }
+  function point(l, r) {
+    if (!l && !r) return
+    l.next = r
+    point(l.left, l.right)
+    if (r) {
+      point(l.right, r.left)
+      point(r.left, r.right)
+      point(r.right, null)
+    } else {
+      point(l.right, null)
     }
-    point(root,null)
-    return root
-};
+  }
+  point(root, null)
+  return root
+}
+/**
+ * 50. Pow(x, n)
+ * @param {number} x
+ * @param {number} n
+ * @return {number}
+ */
+var myPow = function(x, n) {
+  if (x === 0) return 0
+  if (n === 0) return 1
+  if (n === 1) return x
+  let absN = Math.abs(n),
+    halfN = Math.floor(absN / 2)
+  let halfRes = myPow(x, halfN)
+  let res = absN % 2 === 0 ? halfRes * halfRes : halfRes * halfRes * x
+  return n > 0 ? res : 1 / res
+}
