@@ -646,3 +646,24 @@ var reverseList = function(head) {
   }
   return reverse(null, head)
 }
+/**
+116. 填充每个节点的下一个右侧节点指针
+ * @param {Node} root
+ * @return {Node}
+ */
+var connect = function(root) {
+    function point(l,r){
+        if(!l && !r) return 
+        l.next = r
+        point(l.left,l.right)
+        if(r) {
+            point(l.right,r.left)
+            point(r.left,r.right)
+            point(r.right,null)
+        }else {
+            point(l.right,null)
+        }
+    }
+    point(root,null)
+    return root
+};
