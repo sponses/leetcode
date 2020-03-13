@@ -819,3 +819,25 @@ var plusOne = function(digits) {
   }
   return digits
 }
+/**
+ * 5. 最长回文子串（中心扩展）
+ * @param {string} s
+ * @return {string}
+ */
+var longestPalindrome = function(s) {
+  const len = s.length,
+    N = len * 2 - 1
+  let res = ''
+  for (let i = 0; i < N; i++) {
+    let l = Math.ceil(i / 2) - 1,
+      r = l + 1 + (i % 2 === 0 ? 1 : 0)
+    let count = i % 2 === 0 ? 1 : 0
+    while (l >= 0 && r < len && s[l] === s[r]) {
+      l--
+      r++
+      count += 2
+    }
+    if (count > res.length) res = s.slice(l + 1, r)
+  }
+  return res
+}
