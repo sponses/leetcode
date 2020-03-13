@@ -774,3 +774,25 @@ var isPowerOfThree = function(n) {
   }
   return res === n
 }
+/**
+ * 238. 除自身以外数组的乘积
+ * @param {number[]} nums
+ * @return {number[]}
+ */
+var productExceptSelf = function(nums) {
+  const pre = [],
+    suf = [],
+    res = []
+  let l = 1
+  for (let i = 0, len = nums.length; i < len; i++) {
+    pre.push(l)
+    l *= nums[i]
+  }
+  let r = 1
+  for (let len = nums.length, i = len - 1; i >= 0; i--) {
+    suf[i] = r
+    r *= nums[i]
+  }
+  for (let i = 0, len = nums.length; i < len; i++) res.push(pre[i] * suf[i])
+  return res
+}
