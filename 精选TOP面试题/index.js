@@ -744,3 +744,21 @@ NumArray.prototype.sumRange = function(i, j) {
  * obj.update(i,val)
  * var param_2 = obj.sumRange(i,j)
  */
+/**
+ * 327. 区间和的个数（暴力循环）
+ * @param {number[]} nums
+ * @param {number} lower
+ * @param {number} upper
+ * @return {number}
+ */
+var countRangeSum = function(nums, lower, upper) {
+  let ans = 0
+  for (let i = 0, len = nums.length; i < len; i++) {
+    let sum = 0
+    for (let j = i; j < len; j++) {
+      sum += nums[j]
+      if (sum >= lower && sum <= upper) ans++
+    }
+  }
+  return ans
+}
