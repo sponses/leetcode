@@ -796,3 +796,26 @@ var productExceptSelf = function(nums) {
   for (let i = 0, len = nums.length; i < len; i++) res.push(pre[i] * suf[i])
   return res
 }
+/**
+ * 66. 加一
+ * @param {number[]} digits
+ * @return {number[]}
+ */
+var plusOne = function(digits) {
+  const len = digits.length
+  if (digits[len - 1] !== 9) {
+    digits[len - 1]++
+  } else {
+    let i = 1
+    while (i <= len && digits[len - i] === 9) {
+      digits[len - i] = 0
+      i++
+    }
+    if (len - i < 0) {
+      digits.unshift(1)
+      return digits
+    }
+    digits[len - i]++
+  }
+  return digits
+}
