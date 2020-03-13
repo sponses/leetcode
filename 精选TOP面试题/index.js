@@ -841,3 +841,21 @@ var longestPalindrome = function(s) {
   }
   return res
 }
+/**
+ * 334. 递增的三元子序列
+ * @param {number[]} nums
+ * @return {boolean}
+ */
+var increasingTriplet = function(nums) {
+  let first = Number.MAX_SAFE_INTEGER,
+    second = Number.MAX_SAFE_INTEGER
+  for (let i = 0, len = nums.length; i < len; i++) {
+    if (nums[i] <= first) {
+      first = nums[i]
+    } else if (nums[i] < second) {
+      second = nums[i]
+    }
+    if (nums[i] > second) return true
+  }
+  return false
+}
