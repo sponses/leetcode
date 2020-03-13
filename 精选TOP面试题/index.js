@@ -683,3 +683,64 @@ var myPow = function(x, n) {
   let res = absN % 2 === 0 ? halfRes * halfRes : halfRes * halfRes * x
   return n > 0 ? res : 1 / res
 }
+/**
+ * 307. 区域和检索 - 数组可修改（线段树）
+ * @param {number[]} nums
+ */
+var NumArray = function(nums) {
+  let len = nums.length
+  this.tree = new Array(len * 2)
+  for (let i = 0; i < len; i++) {
+    this.tree[len + i] = nums[i]
+  }
+  for (let i = len - 1; i > 0; i--) {
+    this.tree[i] = this.tree[i * 2] + this.tree[i * 2 + 1]
+  }
+}
+
+/**
+ * @param {number} i
+ * @param {number} val
+ * @return {void}
+ */
+NumArray.prototype.update = function(i, val) {
+  i += this.tree.length / 2
+  this.tree[i] = val
+  while (i > 1) {
+    let parent = Math.floor(i / 2)
+    let other = i % 2 == 1 ? i - 1 : i + 1
+    this.tree[parent] = this.tree[i] + this.tree[other]
+    i = parent
+  }
+}
+
+/**
+ * @param {number} i
+ * @param {number} j
+ * @return {number}
+ */
+NumArray.prototype.sumRange = function(i, j) {
+  let l = this.tree.length / 2 + i
+  let r = this.tree.length / 2 + j
+  let sum = 0
+  while (l <= r) {
+    if (l % 2 == 1) {
+      sum += this.tree[l]
+      l++
+    }
+    if (r % 2 == 0) {
+      sum += this.tree[r]
+      r--
+    }
+    l /= 2
+    r = Math.floor(r / 2)
+  }
+  return sum
+}
+
+/**
+ * Your NumArray object will be instantiated and called as such:
+ * var obj = new NumArray(nums)
+ * obj.update(i,val)
+ * var param_2 = obj.sumRange(i,j)
+ */
