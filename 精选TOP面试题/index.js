@@ -859,3 +859,30 @@ var increasingTriplet = function(nums) {
   }
   return false
 }
+/**
+ * 350. 两个数组的交集 II（排序）
+ * @param {number[]} nums1
+ * @param {number[]} nums2
+ * @return {number[]}
+ */
+var intersect = function(nums1, nums2) {
+  nums1.sort((a, b) => a - b)
+  nums2.sort((a, b) => a - b)
+  const ans = []
+  let i = 0,
+    j = 0,
+    len1 = nums1.length,
+    len2 = nums2.length
+  while (i < len1 && j < len2) {
+    if (nums1[i] === nums2[j]) {
+      ans.push(nums1[i])
+      i++
+      j++
+    } else if (nums1[i] < nums2[j]) {
+      i++
+    } else {
+      j++
+    }
+  }
+  return ans
+}
