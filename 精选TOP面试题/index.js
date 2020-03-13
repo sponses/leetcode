@@ -762,3 +762,15 @@ var countRangeSum = function(nums, lower, upper) {
   }
   return ans
 }
+/**
+ * 326. 3的幂
+ * @param {number} n
+ * @return {boolean}
+ */
+var isPowerOfThree = function(n) {
+  let res = 1
+  while (res < n) {
+    res *= 3
+  }
+  return res === n
+}
