@@ -886,3 +886,24 @@ var intersect = function(nums1, nums2) {
   }
   return ans
 }
+/**
+ * 134. 加油站
+ * @param {number[]} gas
+ * @param {number[]} cost
+ * @return {number}
+ */
+var canCompleteCircuit = function(gas, cost) {
+  let total = 0,
+    len = gas.length,
+    sum = 0,
+    start = 0
+  for (let i = 0; i < len; i++) {
+    sum += gas[i] - cost[i]
+    total += gas[i] - cost[i]
+    if (sum < 0) {
+      sum = 0
+      start = i + 1
+    }
+  }
+  return total >= 0 ? start : -1
+}
