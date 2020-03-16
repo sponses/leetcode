@@ -1018,3 +1018,21 @@ var countAndSay = function(n) {
   }
   return ans
 }
+/**
+ * 315. 计算右侧小于当前元素的个数（暴力循环）
+ * @param {number[]} nums
+ * @return {number[]}
+ */
+var countSmaller = function(nums) {
+  if (nums.length === 0) return []
+  const ans = []
+  for (let i = 0, len = nums.length; i < len - 1; i++) {
+    let temp = 0
+    for (let j = i + 1; j < len; j++) {
+      if (nums[i] > nums[j]) temp++
+    }
+    ans.push(temp)
+  }
+  ans.push(0)
+  return ans
+}
