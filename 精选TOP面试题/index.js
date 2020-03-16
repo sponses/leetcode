@@ -1084,3 +1084,16 @@ var copyRandomList = function(head) {
   node.random = copyRandomList(head.random)
   return node
 }
+/**
+ * 171. Excel表列序号
+ * @param {string} s
+ * @return {number}
+ */
+var titleToNumber = function(s) {
+  const len = s.length
+  let ans = 0
+  for (let i = 0; i < len; i++) {
+    ans += (s[i].charCodeAt() - 64) * Math.pow(26, len - i - 1)
+  }
+  return ans
+}
