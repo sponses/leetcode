@@ -1140,3 +1140,16 @@ var longestCommonPrefix = function(strs) {
   }
   return ans
 }
+/**
+ * 191. 位1的个数（位运算）
+ * @param {number} n - a positive integer
+ * @return {number}
+ */
+var hammingWeight = function(n) {
+  let ans = 0
+  for (let i = 32; i > 0; i--) {
+    ans += n & 1
+    n >>= 1
+  }
+  return ans
+}
