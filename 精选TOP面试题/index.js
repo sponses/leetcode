@@ -1097,3 +1097,22 @@ var titleToNumber = function(s) {
   }
   return ans
 }
+/**
+ * 204. 计数质数
+ * @param {number} n
+ * @return {number}
+ */
+var countPrimes = function(n) {
+  const prims = new Array(n)
+  prims.fill(true)
+  for (let i = 2; i * i <= n; i++) {
+    if (prims[i]) {
+      for (let j = 2; i * j <= n; j++) {
+        prims[i * j] = false
+      }
+    }
+  }
+  let ans = 0
+  for (let i = 2; i <= n; i++) if (prims[i]) ans++
+  return ans
+}
