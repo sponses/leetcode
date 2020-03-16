@@ -1068,3 +1068,19 @@ var copyRandomList = function(head) {
   copy(cHead, head)
   return cHead
 }
+/**
+ * 138. 复制带随机指针的链表（回溯）
+ * @param {Node} head
+ * @return {Node}
+ */
+const hash = new Map()
+var copyRandomList = function(head) {
+  if (!head) return null
+  if (hash.has(head)) return hash.get(head)
+  const node = new Node()
+  node.val = head.val
+  hash.set(head, node)
+  node.next = copyRandomList(head.next)
+  node.random = copyRandomList(head.random)
+  return node
+}
