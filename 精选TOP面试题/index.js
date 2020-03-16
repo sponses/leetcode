@@ -1036,3 +1036,35 @@ var countSmaller = function(nums) {
   ans.push(0)
   return ans
 }
+/**
+ * 138. 复制带随机指针的链表（hash）
+ * @param {Node} head
+ * @return {Node}
+ */
+var copyRandomList = function(head) {
+  const hash = new Map()
+  if (!head) return null
+  let cHead = new Node()
+  function copy(cNode, node) {
+    cNode.val = node.val
+    hash.set(node, cNode)
+    if (node.next) {
+      if (hash.has(node.next)) {
+        cNode.next = hash.get(node.next)
+      } else {
+        cNode.next = new Node()
+        copy(cNode.next, node.next)
+      }
+    }
+    if (node.random) {
+      if (hash.has(node.random)) {
+        cNode.random = hash.get(node.random)
+      } else {
+        cNode.random = new Node()
+        copy(cNode.random.node.random)
+      }
+    }
+  }
+  copy(cHead, head)
+  return cHead
+}
