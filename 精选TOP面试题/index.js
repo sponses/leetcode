@@ -907,3 +907,39 @@ var canCompleteCircuit = function(gas, cost) {
   }
   return total >= 0 ? start : -1
 }
+/**
+ * 387. 字符串中的第一个唯一字符（hash）
+ * @param {string} s
+ * @return {number}
+ */
+var firstUniqChar = function(s) {
+  const hash = {}
+  for (let i = 0, len = s.length; i < len; i++) {
+    if (hash.hasOwnProperty(s[i])) {
+      hash[s[i]]++
+    } else {
+      hash[s[i]] = 1
+    }
+  }
+  for (let i = 0, len = s.length; i < len; i++) {
+    if (hash[s[i]] === 1) return i
+  }
+  return -1
+}
+/**
+ * 124. 二叉树中的最大路径和
+ * @param {TreeNode} root
+ * @return {number}
+ */
+var maxPathSum = function(root) {
+  let res = Number.MIN_SAFE_INTEGER
+  function getMax(node) {
+    if (!node) return 0
+    let l = Math.max(0, getMax(node.left))
+    let r = Math.max(0, getMax(node.right))
+    res = Math.max(res, node.val + l + r)
+    return Math.max(l, r) + node.val
+  }
+  getMax(root)
+  return res
+}
