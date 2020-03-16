@@ -996,3 +996,25 @@ var sortedArrayToBST = function(nums) {
   root.right = sortedArrayToBST(nums.slice(mid + 1))
   return root
 }
+/**
+ * 38. 外观数列
+ * @param {number} n
+ * @return {string}
+ */
+var countAndSay = function(n) {
+  let ans = '1'
+  for (let i = 2; i <= n; i++) {
+    let temp = ''
+    for (let j = 0, len = ans.length; j < len; j++) {
+      let cur = ans[j],
+        count = 1
+      while (cur === ans[j + 1]) {
+        count++
+        j++
+      }
+      temp += count + cur
+    }
+    ans = temp
+  }
+  return ans
+}
