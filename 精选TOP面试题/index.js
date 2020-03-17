@@ -1233,3 +1233,31 @@ var longestSubstring = function(s, k) {
   }
   return ans
 }
+/**
+ * 88. 合并两个有序数组
+ * @param {number[]} nums1
+ * @param {number} m
+ * @param {number[]} nums2
+ * @param {number} n
+ * @return {void} Do not return anything, modify nums1 in-place instead.
+ */
+var merge = function(nums1, m, nums2, n) {
+  let i = 0,
+    j = 0
+  while (i < m && j < n) {
+    if (nums1[i] > nums2[j]) {
+      for (let k = m; k > i; k--) {
+        nums1[k] = nums1[k - 1]
+      }
+      m++
+      nums1[i] = nums2[j]
+      j++
+      i++
+    } else {
+      i++
+    }
+  }
+  while (j < n) {
+    nums1[m++] = nums2[j++]
+  }
+}
