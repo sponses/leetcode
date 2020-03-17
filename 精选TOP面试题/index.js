@@ -1179,3 +1179,25 @@ var partition = function(s) {
   backtrack(0, [])
   return ans
 }
+/**
+ * 5. 最长回文子串（中心扩展）
+ * @param {string} s
+ * @return {string}
+ */
+var longestPalindrome = function(s) {
+  const len = s.length,
+    N = len * 2 - 1
+  let ans = ''
+  for (let i = 0; i < N; i++) {
+    let l = (i - 1) >> 1
+    let r = l + (i % 2 === 0 ? 1 : 0) + 1
+    let count = i % 2 === 0 ? 1 : 0
+    while (l >= 0 && r < len && s[l] === s[r]) {
+      l--
+      r++
+      count += 2
+    }
+    if (ans.length < count) ans = s.slice(l + 1, r)
+  }
+  return ans
+}
