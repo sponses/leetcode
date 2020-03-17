@@ -1,27 +1,21 @@
-var largestNumber = function(nums) {
-  const used = [],
-    len = nums.length
-  let ans = ''
-  while (used.length < len) {
-    let temp = -1
-    for (let i = 0; i < len; i++) {
-      if (used.indexOf(i) === -1) {
-        if (temp === -1) {
-          temp = i
-        } else {
-          let t = nums[temp],
-            cur = nums[i]
-          if (t[0] < cur[0]) {
-            temp = i
-          } else if (t[0] === cur[0]) {
-            if (t + cur < cur + t) temp = i
-          }
-        }
-      }
+var numDecodings = function(s) {
+  if (s[0] === 0) return 0
+  let prev1 = 1,
+    prev2 = 1
+  const len = s.length
+  for (let i = 1; i < len; i++) {
+    let temp = 0
+    if (s[i] === 0 && (s[i - 1] === 0 || s[i - 1] > 2)) return 0
+    if (s[i] === 0) {
+      temp = prev1
+    } else if (s[i - 1] === 0 || +(s[i - 1] + s[i]) > 26) {
+      temp = prev2
+    } else {
+      temp = prev1 + prev2
     }
-    used.push(temp)
-    ans += nums[temp]
+    prev1 = prev2
+    prev2 = temp
   }
-  return ans
+  return prev2
 }
-largestNumber([3, 30, 34, 5, 9])
+numDecodings('2260')
