@@ -1261,3 +1261,23 @@ var merge = function(nums1, m, nums2, n) {
     nums1[m++] = nums2[j++]
   }
 }
+/**
+ * 412. Fizz Buzz（极度简单，引起舒适）
+ * @param {number} n
+ * @return {string[]}
+ */
+var fizzBuzz = function(n) {
+  const ans = []
+  for (let i = 1; i <= n; i++) {
+    if (i % 3 === 0 && i % 5 === 0) {
+      ans.push('FizzBuzz')
+    } else if (i % 3 === 0) {
+      ans.push('Fizz')
+    } else if (i % 5 === 0) {
+      ans.push('Buzz')
+    } else {
+      ans.push(i + '')
+    }
+  }
+  return ans
+}

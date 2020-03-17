@@ -1,26 +1,27 @@
-var longestSubstring = function(s, k) {
-  const queue = [s]
-  let ans = 0
-  while (queue.length) {
-    const cur = queue.pop(),
-      hash = {}
-    for (let i = 0, len = cur.length; i < len; i++) {
-      if (hash.hasOwnProperty(cur[i])) {
-        hash[cur[i]]++
-      } else {
-        hash[cur[i]] = 0
+var largestNumber = function(nums) {
+  const used = [],
+    len = nums.length
+  let ans = ''
+  while (used.length < len) {
+    let temp = -1
+    for (let i = 0; i < len; i++) {
+      if (used.indexOf(i) === -1) {
+        if (temp === -1) {
+          temp = i
+        } else {
+          let t = nums[temp],
+            cur = nums[i]
+          if (t[0] < cur[0]) {
+            temp = i
+          } else if (t[0] === cur[0]) {
+            if (t + cur < cur + t) temp = i
+          }
+        }
       }
     }
-    let i = 0,
-      prev = 0
-    for (i = 0, len = cur.length; i < len; i++) {
-      if (hash[cur[i]] < k) {
-        queue.push(cur.slice(prev, i))
-        prev = i + 1
-      }
-    }
-    if (prev === 0) ans = Math.max(ans, cur.length)
+    used.push(temp)
+    ans += nums[temp]
   }
   return ans
 }
-longestSubstring('aaabb', 3)
+largestNumber([3, 30, 34, 5, 9])
