@@ -1153,3 +1153,29 @@ var hammingWeight = function(n) {
   }
   return ans
 }
+/**
+ * 131. 分割回文串（回溯法）
+ * @param {string} s
+ * @return {string[][]}
+ */
+var partition = function(s) {
+  const ans = [],
+    len = s.length
+  function backtrack(i, temp) {
+    if (i === len) ans.push(temp)
+    for (let count = i; count < len; count++) {
+      let cur = s.slice(i, count + 1)
+      if (
+        cur ===
+        cur
+          .split('')
+          .reverse()
+          .join('')
+      ) {
+        backtrack(count + 1, [...temp, cur])
+      }
+    }
+  }
+  backtrack(0, [])
+  return ans
+}
