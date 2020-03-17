@@ -1201,3 +1201,35 @@ var longestPalindrome = function(s) {
   }
   return ans
 }
+/**
+ * 395. 至少有K个重复字符的最长子串（分治法）
+ * @param {string} s
+ * @param {number} k
+ * @return {number}
+ */
+var longestSubstring = function(s, k) {
+  const queue = [s]
+  let ans = 0
+  while (queue.length) {
+    const cur = queue.pop(),
+      hash = {}
+    for (let i = 0, len = cur.length; i < len; i++) {
+      if (hash.hasOwnProperty(cur[i])) {
+        hash[cur[i]]++
+      } else {
+        hash[cur[i]] = 1
+      }
+    }
+    let i = 0,
+      prev = 0
+    for (i = 0, len = cur.length; i < len; i++) {
+      if (hash[cur[i]] < k) {
+        queue.push(cur.slice(prev, i))
+        prev = i + 1
+      }
+    }
+    if (prev === 0) ans = Math.max(ans, cur.length)
+    if (prev !== 0) queue.push(cur.slice(prev))
+  }
+  return ans
+}

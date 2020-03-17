@@ -1,21 +1,26 @@
-var longestCommonPrefix = function(strs) {
-  let ans = ''
-  if (strs.length === 0) return ans
-  if (strs.length === 1) return strs[0]
-  const len = strs.length,
-    firstL = strs[0].length
-  for (let i = 0; i < firstL; i++) {
-    let temp = strs[0].slice(0, i + 1)
-    let j
-    for (j = 1; j < len; j++) {
-      if (temp !== strs[j].slice(0, i + 1)) break
+var longestSubstring = function(s, k) {
+  const queue = [s]
+  let ans = 0
+  while (queue.length) {
+    const cur = queue.pop(),
+      hash = {}
+    for (let i = 0, len = cur.length; i < len; i++) {
+      if (hash.hasOwnProperty(cur[i])) {
+        hash[cur[i]]++
+      } else {
+        hash[cur[i]] = 0
+      }
     }
-    if (j === len - 1) {
-      ans = temp
-    } else {
-      break
+    let i = 0,
+      prev = 0
+    for (i = 0, len = cur.length; i < len; i++) {
+      if (hash[cur[i]] < k) {
+        queue.push(cur.slice(prev, i))
+        prev = i + 1
+      }
     }
+    if (prev === 0) ans = Math.max(ans, cur.length)
   }
   return ans
 }
-longestCommonPrefix(['flower', 'flow', 'flight'])
+longestSubstring('aaabb', 3)
