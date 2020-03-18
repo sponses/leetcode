@@ -38,3 +38,23 @@ var numWays = function(n) {
   }
   return p2
 }
+/**
+ * 面试题22. 链表中倒数第k个节点
+ * @param {ListNode} head
+ * @param {number} k
+ * @return {ListNode}
+ */
+var getKthFromEnd = function(head, k) {
+  let p = head,
+    len = 0
+  while (p) {
+    len++
+    p = p.next
+  }
+  k = len - k
+  while (k > 0) {
+    head = head.next
+    k--
+  }
+  return head
+}
