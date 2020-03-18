@@ -1339,3 +1339,21 @@ var isMatch = function(s, p) {
   }
   return dp[0][0]
 }
+/**
+ * 118. 杨辉三角
+ * @param {number} numRows
+ * @return {number[][]}
+ */
+var generate = function(numRows) {
+  if (numRows === 0) return []
+  const ans = [[1]]
+  for (let i = 1; i < numRows; i++) {
+    const cur = [1]
+    for (let j = 1; j < i; j++) {
+      cur.push(ans[i - 1][j - 1] + ans[i - 1][j])
+    }
+    cur.push(1)
+    ans.push(cur)
+  }
+  return ans
+}
