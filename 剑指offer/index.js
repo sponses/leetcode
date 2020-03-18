@@ -22,3 +22,19 @@ var spiralOrder = function(matrix) {
   }
   return ans
 }
+/**
+ * 面试题10- II. 青蛙跳台阶问题
+ * @param {number} n
+ * @return {number}
+ */
+var numWays = function(n) {
+  if (n === 0) return 1
+  let p1 = 0,
+    p2 = 1
+  for (let i = 1; i <= n; i++) {
+    let temp = (p1 + p2) % 1000000007
+    p1 = p2
+    p2 = temp
+  }
+  return p2
+}
