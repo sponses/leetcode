@@ -92,3 +92,17 @@ var buildTree = function(preorder, inorder) {
   node.right = buildTree(preorder.slice(i + 1), inorder.slice(i + 1))
   return node
 }
+/**
+ * 面试题42. 连续子数组的最大和
+ * @param {number[]} nums
+ * @return {number}
+ */
+var maxSubArray = function(nums) {
+  let prev = 0,
+    ans = Number.MIN_SAFE_INTEGER
+  for (let i = 0, len = nums.length; i < len; i++) {
+    prev = Math.max(nums[i], prev + nums[i])
+    ans = Math.max(prev, ans)
+  }
+  return ans
+}
