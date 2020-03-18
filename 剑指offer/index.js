@@ -58,3 +58,22 @@ var getKthFromEnd = function(head, k) {
   }
   return head
 }
+/**
+ * 面试题22. 链表中倒数第k个节点
+ * @param {ListNode} head
+ * @param {number} k
+ * @return {ListNode}
+ */
+var getKthFromEnd = function(head, k) {
+  let fast = head,
+    slow = head
+  while (k > 1) {
+    fast = fast.next
+    k--
+  }
+  while (fast.next) {
+    fast = fast.next
+    slow = slow.next
+  }
+  return slow
+}
