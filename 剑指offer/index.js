@@ -106,3 +106,23 @@ var maxSubArray = function(nums) {
   }
   return ans
 }
+/**
+ * 面试题21. 调整数组顺序使奇数位于偶数前面
+ * @param {number[]} nums
+ * @return {number[]}
+ */
+var exchange = function(nums) {
+  let even = nums.length - 1,
+    odds = 0
+  for (let i = 0, len = nums.length; i <= even; i++) {
+    if (nums[i] % 2 === 0) {
+      ;[nums[i], nums[even]] = [nums[even], nums[i]]
+      even--
+      i--
+    } else {
+      ;[nums[i], nums[odds]] = [nums[odds], nums[i]]
+      odds++
+    }
+  }
+  return nums
+}
