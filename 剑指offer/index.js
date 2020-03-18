@@ -126,3 +126,19 @@ var exchange = function(nums) {
   }
   return nums
 }
+/**
+ * 面试题58 - I. 翻转单词顺序
+ * @param {string} s
+ * @return {string}
+ */
+var reverseWords = function(s) {
+  let ans = ''
+  let len = s.length - 1
+  while (len >= 0) {
+    while (s[len] === ' ' && len >= 0) len--
+    let temp = ''
+    while (s[len] !== ' ' && len >= 0) temp = s[len--] + temp
+    ans += temp + (temp === '' ? '' : ' ')
+  }
+  return ans.slice(0, ans.length - 1)
+}
