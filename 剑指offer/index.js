@@ -77,3 +77,18 @@ var getKthFromEnd = function(head, k) {
   }
   return slow
 }
+/**
+ * 面试题07. 重建二叉树
+ * @param {number[]} preorder
+ * @param {number[]} inorder
+ * @return {TreeNode}
+ */
+var buildTree = function(preorder, inorder) {
+  if (preorder.length === 0) return null
+  const cur = preorder[0]
+  const node = new TreeNode(cur)
+  const i = inorder.indexOf(cur)
+  node.left = buildTree(preorder.slice(1, i + 1), inorder.slice(0, i))
+  node.right = buildTree(preorder.slice(i + 1), inorder.slice(i + 1))
+  return node
+}
