@@ -179,3 +179,24 @@ var firstUniqChar = function(s) {
   }
   return ' '
 }
+/**
+ * 面试题47. 礼物的最大价值
+ * @param {number[][]} grid
+ * @return {number}
+ */
+var maxValue = function(grid) {
+  const h = grid.length,
+    w = grid[0].length
+  const dp = new Array(w)
+  dp.fill(0)
+  for (let i = 0; i < h; i++) {
+    for (let j = 0; j < w; j++) {
+      if (j === 0) {
+        dp[0] += grid[i][j]
+      } else {
+        dp[j] = grid[i][j] + Math.max(dp[j - 1], dp[j])
+      }
+    }
+  }
+  return dp[w - 1]
+}
