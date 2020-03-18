@@ -160,3 +160,22 @@ var missingNumber = function(nums) {
   }
   return l
 }
+/**
+ * 面试题50. 第一个只出现一次的字符
+ * @param {string} s
+ * @return {character}
+ */
+var firstUniqChar = function(s) {
+  const hash = {}
+  for (let i = 0, len = s.length; i < len; i++) {
+    if (hash.hasOwnProperty(s[i])) {
+      hash[s[i]]++
+    } else {
+      hash[s[i]] = 1
+    }
+  }
+  for (let i = 0, len = s.length; i < len; i++) {
+    if (hash[s[i]] === 1) return s[i]
+  }
+  return ' '
+}
