@@ -285,3 +285,20 @@ var isSub = function(node1, node2) {
   if (node1.val !== node2.val) return false
   return isSub(node1.left, node2.left) && isSub(node1.right, node2.right)
 }
+/**
+ * 面试题66. 构建乘积数组
+ * @param {number[]} a
+ * @return {number[]}
+ */
+var constructArr = function(a) {
+  const pre = [1],
+    suf = [1],
+    ans = [],
+    len = a.length
+  for (let i = 1; i < len; i++) {
+    pre.push(pre[i - 1] * a[i - 1])
+    suf.unshift(suf[0] * a[len - i])
+  }
+  for (let i = 0; i < len; i++) ans.push(pre[i] * suf[i])
+  return ans
+}
