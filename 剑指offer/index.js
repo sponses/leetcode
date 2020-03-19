@@ -330,3 +330,27 @@ var movingCount = function(m, n, k) {
   dfs(0, 0)
   return ans
 }
+/**
+ * 面试题48. 最长不含重复字符的子字符串
+ * @param {string} s
+ * @return {number}
+ */
+var lengthOfLongestSubstring = function(s) {
+  let l = 0,
+    r = 0,
+    len = s.length,
+    ans = 0
+  const hash = {}
+  while (r < len) {
+    const cur = s[r]
+    while (hash.hasOwnProperty(cur)) {
+      const temp = s[l]
+      delete hash[temp]
+      l++
+    }
+    hash[cur] = 1
+    ans = Math.max(ans, r - l + 1)
+    r++
+  }
+  return ans
+}

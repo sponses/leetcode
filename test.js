@@ -1,35 +1,55 @@
-var movingCount = function(m, n, k) {
-  const board = new Array(m)
-  for (let i = 0; i < m; i++) board[i] = new Array(n)
-  let ans = 0
-  function dfs(i, j, temp) {
-    if (i < 0 || i >= m || j < 0 || j >= n) {
-      ans = Math.max(ans, temp)
-      return
-    }
-    let cur = '' + i + j,
-      sum = 0
-    for (let i = 0, len = cur.length; i < len; i++) sum += +cur[i]
-    if (sum > k) {
-      ans = Math.max(ans, cur)
-      return
-    }
-    if (board[i][j] === '#') {
-      dfs(i - 1, j, temp)
-      dfs(i + 1, j, temp)
-      dfs(i, j - 1, temp)
-      dfs(i, j + 1, temp)
-    } else {
-      board[i][j] = '#'
-      temp++
-      dfs(i - 1, j, temp)
-      dfs(i + 1, j, temp)
-      dfs(i, j - 1, temp)
-      dfs(i, j + 1, temp)
-      board[i][j] = undefined
+/**
+ * @param {string} s
+ * @param {string} p
+ * @return {boolean}
+ */
+var isMatch = function(s, p) {
+  // function dp(i,j){
+  //     if(i < 0 && j < 0) return true
+  //     if(j < 0) return false
+  //     if(i < 0){
+  //         while(p[j] === '*') j -= 2
+  //         return j < 0
+  //     }
+  //     const charS = s[i], charP = p[j]
+  //     if(charS === charP || charP === '.'){
+  //         return dp(i-1,j-1)
+  //     }else if(charP === '*'){
+  //         if(p[j-1] !== charS && p[j-1] !== '.') return dp(i,j-2)
+  //         return dp(i,j-2) || dp(i-1,j-2) || dp(i-1,j)
+  //     }else {
+  //         return false
+  //     }
+  // }
+  // return dp(s.length-1,p.length-1)
+  const lenS = s.length,
+    lenP = p.length
+  const dp = new Array(lenS)
+  for (let i = 0; i < lenS; i++) {
+    dp[i] = new Array(lenP)
+    dp[i].fill(false)
+  }
+  for (let i = 0; i < lenS; i++) {
+    for (let j = 0; j < lenP; j++) {
+      const charS = s[i],
+        charP = p[j]
+      if (i === 0 && j === 0) {
+        dp[i][j] = charS === charP || charP === '.'
+        continue
+      }
+      if (charP === charS || charP === '.') {
+        dp[i][j] = dp[i - 1][j - 1]
+      } else if (charP === '*') {
+        if (p[j - 1] !== charS && p[j - 1] !== '.') {
+          dp[i][j] = j < 2 || dp[i][j - 2]
+        } else {
+          dp[i][j] = j < 2 || dp[i - 1][j - 2] || dp[i][j - 2] || dp[i - 1][j]
+        }
+      } else {
+        dp[i][j] = false
+      }
     }
   }
-  dfs(0, 0, 0)
-  return ans
+  return dp[lenS - 1][lenP - 1]
 }
-movingCount(1, 2, 1)
+isMatch('aa', 'a')
