@@ -235,3 +235,28 @@ var exist = function(board, word) {
   }
   return res
 }
+/**
+ * 面试题59 - I. 滑动窗口的最大值
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {number[]}
+ */
+var maxSlidingWindow = function(nums, k) {
+  const stack = [],
+    len = nums.length,
+    ans = []
+  let l = 0,
+    r = 0
+  while (r < len) {
+    const cur = nums[r]
+    while (stack.length && nums[stack[stack.length - 1]] < cur) stack.pop()
+    stack.push(r)
+    if (r - l + 1 === k) {
+      ans.push(nums[stack[0]])
+      l++
+      if (stack[0] < l) stack.shift()
+    }
+    r++
+  }
+  return ans
+}
