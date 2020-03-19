@@ -302,3 +302,31 @@ var constructArr = function(a) {
   for (let i = 0; i < len; i++) ans.push(pre[i] * suf[i])
   return ans
 }
+/**
+ * 面试题13. 机器人的运动范围
+ * @param {number} m
+ * @param {number} n
+ * @param {number} k
+ * @return {number}
+ */
+var movingCount = function(m, n, k) {
+  const board = new Array(m)
+  for (let i = 0; i < m; i++) board[i] = new Array(n)
+  let ans = 0
+  function dfs(i, j) {
+    if (i < 0 || i >= m || j < 0 || j >= n) return
+    let cur = '' + i + j,
+      sum = 0
+    for (let i = 0, len = cur.length; i < len; i++) sum += +cur[i]
+    if (sum > k) return
+    if (board[i][j] === '#') return
+    board[i][j] = '#'
+    ans++
+    dfs(i - 1, j)
+    dfs(i + 1, j)
+    dfs(i, j - 1)
+    dfs(i, j + 1)
+  }
+  dfs(0, 0)
+  return ans
+}

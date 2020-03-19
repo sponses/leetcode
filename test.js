@@ -1,36 +1,35 @@
-var exist = function(board, word) {
-  const row = board.length,
-    col = board[0].length,
-    len = word.length
-  function dfs(i, j, k) {
-    if (i < 0 || i >= row || j < 0 || j >= col || word[k] !== board[i][j])
-      return false
-    if (k === len - 1) return true
-    const temp = board[i][j]
-    board[i][j] = '#'
-    let res =
-      dfs(i - 1, j, k + 1) ||
-      dfs(i + 1, j, k + 1) ||
-      dfs(i, j - 1, k + 1) ||
-      dfs(i, j + 1, k + 1)
-    board[i][j] = temp
-    return res
-  }
-  let res = false
-  for (let i = 0; i < row; i++) {
-    for (let j = 0; j < col; j++) {
-      if (board[i][j] === word[0]) {
-        res = res || dfs(i, j, 0)
-      }
-      if (res) return true
+var movingCount = function(m, n, k) {
+  const board = new Array(m)
+  for (let i = 0; i < m; i++) board[i] = new Array(n)
+  let ans = 0
+  function dfs(i, j, temp) {
+    if (i < 0 || i >= m || j < 0 || j >= n) {
+      ans = Math.max(ans, temp)
+      return
+    }
+    let cur = '' + i + j,
+      sum = 0
+    for (let i = 0, len = cur.length; i < len; i++) sum += +cur[i]
+    if (sum > k) {
+      ans = Math.max(ans, cur)
+      return
+    }
+    if (board[i][j] === '#') {
+      dfs(i - 1, j, temp)
+      dfs(i + 1, j, temp)
+      dfs(i, j - 1, temp)
+      dfs(i, j + 1, temp)
+    } else {
+      board[i][j] = '#'
+      temp++
+      dfs(i - 1, j, temp)
+      dfs(i + 1, j, temp)
+      dfs(i, j - 1, temp)
+      dfs(i, j + 1, temp)
+      board[i][j] = undefined
     }
   }
-  return res
+  dfs(0, 0, 0)
+  return ans
 }
-exist(
-  [
-    ['a', 'b'],
-    ['c', 'd']
-  ],
-  'abcd'
-)
+movingCount(1, 2, 1)
