@@ -268,3 +268,20 @@ var maxSlidingWindow = function(nums, k) {
 var sumNums = function(n) {
   return n && n + sumNums(n - 1)
 }
+/**
+ * 面试题26. 树的子结构
+ * @param {TreeNode} A
+ * @param {TreeNode} B
+ * @return {boolean}
+ */
+var isSubStructure = function(A, B) {
+  if (!A || !B) return false
+  return isSub(A, B) || isSubStructure(A.left, B) || isSubStructure(A.right, B)
+}
+
+var isSub = function(node1, node2) {
+  if (!node2) return true
+  if (!node1) return false
+  if (node1.val !== node2.val) return false
+  return isSub(node1.left, node2.left) && isSub(node1.right, node2.right)
+}
