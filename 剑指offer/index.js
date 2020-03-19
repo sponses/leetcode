@@ -365,3 +365,23 @@ var replaceSpace = function(s) {
     ans += s[i] === ' ' ? '%20' : s[i]
   return ans
 }
+/**
+ * 面试题11. 旋转数组的最小数字
+ * @param {number[]} numbers
+ * @return {number}
+ */
+var minArray = function(numbers) {
+  let l = 0,
+    r = numbers.length - 1
+  while (l < r) {
+    let m = (l + r) >> 1
+    if (numbers[r] < numbers[m]) {
+      l = m + 1
+    } else if (numbers[r] > numbers[m]) {
+      r = m
+    } else {
+      r--
+    }
+  }
+  return numbers[l]
+}
