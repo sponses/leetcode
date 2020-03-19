@@ -1,20 +1,19 @@
-var minArray = function(numbers) {
-  let l = 0,
-    r = numbers.length - 1
-  while (l < r) {
-    let m = (l + r) >> 1
-    let countL = 0,
-      countR = 0
-    for (let i = l; i <= m; i++) if (numbers[i] <= numbers[m]) countL++
-    for (let i = m + 1; i <= r; i++) if (numbers[i] <= numbers[r]) countR++
-    if (countL === m - l + 1 && countR === r - m) {
-      return numbers[l] >= numbers[r] ? numbers[m + 1] : numbers[l]
-    }
-    if (countL < m - l + 1) {
-      r = m
+var singleNumbers = function(nums) {
+  let sum = 0
+  for (let i = 0, len = nums.length; i < len; i++) sum ^= nums[i]
+  let a = 1
+  for (let i = 32; i > 0; i--) {
+    if (sum & (a === 0)) a <<= 1
+  }
+  let ans1 = 0,
+    ans2 = 0
+  for (let i = 0, len = nums.length; i < len; i++) {
+    if (nums[i] & (a === 0)) {
+      ans1 ^= nums[i]
     } else {
-      l = m + 1
+      ans2 ^= nums[i]
     }
   }
+  return [ans1, ans2]
 }
-minArray([10, 1, 10, 10, 10])
+singleNumbers([4, 1, 4, 6])
