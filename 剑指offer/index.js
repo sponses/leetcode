@@ -354,3 +354,14 @@ var lengthOfLongestSubstring = function(s) {
   }
   return ans
 }
+/**
+ * 面试题05. 替换空格
+ * @param {string} s
+ * @return {string}
+ */
+var replaceSpace = function(s) {
+  let ans = ''
+  for (let i = 0, len = s.length; i < len; i++)
+    ans += s[i] === ' ' ? '%20' : s[i]
+  return ans
+}
