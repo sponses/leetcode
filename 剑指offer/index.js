@@ -260,3 +260,11 @@ var maxSlidingWindow = function(nums, k) {
   }
   return ans
 }
+/**
+ * 面试题64. 求1+2+…+n
+ * @param {number} n
+ * @return {number}
+ */
+var sumNums = function(n) {
+  return n && n + sumNums(n - 1)
+}
