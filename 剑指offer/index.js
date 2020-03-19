@@ -444,3 +444,19 @@ var reversePairs = function(nums) {
   sort(0, nums.length - 1)
   return ans
 }
+/**
+ * 面试题10- I. 斐波那契数列
+ * @param {number} n
+ * @return {number}
+ */
+var fib = function(n) {
+  if (n === 0) return 0
+  let p1 = 0,
+    p2 = 1
+  for (let i = 2; i <= n; i++) {
+    let temp = (p1 + p2) % 1000000007
+    p1 = p2
+    p2 = temp
+  }
+  return p2
+}
