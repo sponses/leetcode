@@ -460,3 +460,18 @@ var fib = function(n) {
   }
   return p2
 }
+/**
+ * 面试题39. 数组中出现次数超过一半的数字
+ * @param {number[]} nums
+ * @return {number}
+ */
+var majorityElement = function(nums) {
+  const len = nums.length
+  let res = 0,
+    count = 0
+  for (let i = 0; i < len; i++) {
+    if (count === 0) res = i
+    count += nums[i] === nums[res] ? 1 : -1
+  }
+  return nums[res]
+}
