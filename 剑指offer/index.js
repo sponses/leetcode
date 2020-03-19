@@ -408,3 +408,39 @@ var singleNumbers = function(nums) {
   }
   return [ans1, ans2]
 }
+/**
+ * 面试题51. 数组中的逆序对
+ * @param {number[]} nums
+ * @return {number}
+ */
+var reversePairs = function(nums) {
+  let ans = 0
+  const temp = []
+  function sort(l, r) {
+    if (l < r) {
+      let m = (l + r) >> 1
+      sort(l, m)
+      sort(m + 1, r)
+      merge(l, m, r)
+    }
+  }
+  function merge(l, m, r) {
+    let i = l,
+      j = m + 1,
+      t = 0
+    while (i <= m && j <= r) {
+      if (nums[j] < nums[i]) {
+        ans += m - i + 1
+        temp[t++] = nums[j++]
+      } else {
+        temp[t++] = nums[i++]
+      }
+    }
+    while (i <= m) temp[t++] = nums[i++]
+    while (j <= r) temp[t++] = nums[j++]
+    t = 0
+    while (l <= r) nums[l++] = temp[t++]
+  }
+  sort(0, nums.length - 1)
+  return ans
+}
