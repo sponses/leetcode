@@ -519,3 +519,18 @@ var mergeTwoLists = function(l1, l2) {
   p.next = l1 ? l1 : l2
   return dummy.next
 }
+/**
+ * 面试题24. 反转链表
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+var reverseList = function(head) {
+  let prev = null
+  while (head) {
+    const temp = head.next
+    head.next = prev
+    prev = head
+    head = temp
+  }
+  return prev
+}
