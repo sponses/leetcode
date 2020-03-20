@@ -611,3 +611,19 @@ var cuttingRope = function(n) {
   }
   return dp[n]
 }
+/**
+ * 面试题14- II. 剪绳子 II
+ * @param {number} n
+ * @return {number}
+ */
+var cuttingRope = function(n) {
+  if (n === 2) return 1
+  if (n === 3) return 2
+  let m = 1
+  while (n > 4) {
+    m *= 3
+    m = m % 1000000007
+    n -= 3
+  }
+  return (m * n) % 1000000007
+}
