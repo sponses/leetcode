@@ -590,3 +590,24 @@ MinStack.prototype.min = function() {
  * var param_3 = obj.top()
  * var param_4 = obj.min()
  */
+/**
+ * 面试题14- I. 剪绳子
+ * @param {number} n
+ * @return {number}
+ */
+var cuttingRope = function(n) {
+  const dp = new Array(n + 1)
+  dp.fill(0)
+  dp[1] = 1
+  dp[2] = 1
+  for (let i = 3; i <= n; i++) {
+    let l = 1
+    const half = i >> 1
+    while (l <= half) {
+      const r = i - l
+      dp[i] = Math.max(Math.max(dp[l], l) * Math.max(dp[r], r), dp[i])
+      l++
+    }
+  }
+  return dp[n]
+}

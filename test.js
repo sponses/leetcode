@@ -1,17 +1,19 @@
-var permutation = function(s) {
-  const ans = []
-  s = s
-    .split('')
-    .sort((a, b) => a.charCodeAt() - b.charCodeAt())
-    .join('')
-  function backtrack(has, rest) {
-    if (rest.length === 0) ans.push(has)
-    for (let i = 0, len = rest.length; i < len; i++) {
-      if (rest[i] === rest[i + 1]) continue
-      backtrack(has + rest[i], rest.slice(0, i) + rest.slice(i + 1))
+var cuttingRope = function(n) {
+  const dp = new Array(n + 1)
+  dp.fill(0)
+  dp[1] = 1
+  dp[2] = 1
+  dp[3] = 2
+  for (let i = 4; i <= n; i++) {
+    let temp = 0
+    let l = 1
+    while (l <= i << 1) {
+      const r = i - l
+      temp = Math.max(dp[l], l) * Math.max(dp[r], r)
+      dp[i] = Math.max(temp, dp[i])
+      l++
     }
   }
-  backtrack('', s)
-  return ans
+  dp[n]
 }
-permutation('aabbadkwkee')
+cuttingRope(10)
