@@ -641,3 +641,19 @@ var deleteNode = function(head, val) {
   p.next = p.next.next
   return dummy.next
 }
+/**
+ * 面试题32 - I. 从上到下打印二叉树
+ * @param {TreeNode} root
+ * @return {number[]}
+ */
+var levelOrder = function(root) {
+  const ans = [],
+    queue = [root]
+  while (queue.length) {
+    const cur = queue.shift()
+    if (!cur) continue
+    ans.push(cur.val)
+    queue.push(cur.left, cur.right)
+  }
+  return ans
+}
