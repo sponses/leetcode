@@ -1,19 +1,17 @@
-var singleNumbers = function(nums) {
-  let sum = 0
-  for (let i = 0, len = nums.length; i < len; i++) sum ^= nums[i]
-  let a = 1
-  for (let i = 32; i > 0; i--) {
-    if (sum & (a === 0)) a <<= 1
-  }
-  let ans1 = 0,
-    ans2 = 0
-  for (let i = 0, len = nums.length; i < len; i++) {
-    if (nums[i] & (a === 0)) {
-      ans1 ^= nums[i]
-    } else {
-      ans2 ^= nums[i]
+var permutation = function(s) {
+  const ans = []
+  s = s
+    .split('')
+    .sort((a, b) => a.charCodeAt() - b.charCodeAt())
+    .join('')
+  function backtrack(has, rest) {
+    if (rest.length === 0) ans.push(has)
+    for (let i = 0, len = rest.length; i < len; i++) {
+      if (rest[i] === rest[i + 1]) continue
+      backtrack(has + rest[i], rest.slice(0, i) + rest.slice(i + 1))
     }
   }
-  return [ans1, ans2]
+  backtrack('', s)
+  return ans
 }
-singleNumbers([4, 1, 4, 6])
+permutation('aabbadkwkee')
