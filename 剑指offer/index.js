@@ -496,3 +496,26 @@ var permutation = function(s) {
   backtrack('', s)
   return ans
 }
+/**
+ * 面试题25. 合并两个排序的链表
+ * @param {ListNode} l1
+ * @param {ListNode} l2
+ * @return {ListNode}
+ */
+var mergeTwoLists = function(l1, l2) {
+  const dummy = new ListNode(null)
+  let p = dummy
+  while (l1 && l2) {
+    if (l1.val <= l2.val) {
+      p.next = l1
+      p = l1
+      l1 = l1.next
+    } else {
+      p.next = l2
+      p = l2
+      l2 = l2.next
+    }
+  }
+  p.next = l1 ? l1 : l2
+  return dummy.next
+}
