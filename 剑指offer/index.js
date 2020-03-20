@@ -627,3 +627,17 @@ var cuttingRope = function(n) {
   }
   return (m * n) % 1000000007
 }
+/**
+ * 面试题18. 删除链表的节点
+ * @param {ListNode} head
+ * @param {number} val
+ * @return {ListNode}
+ */
+var deleteNode = function(head, val) {
+  const dummy = new ListNode(null)
+  dummy.next = head
+  let p = dummy
+  while (p.next && p.next.val !== val) p = p.next
+  p.next = p.next.next
+  return dummy.next
+}
