@@ -534,3 +534,59 @@ var reverseList = function(head) {
   }
   return prev
 }
+/**
+ * 面试题30. 包含min函数的栈
+ * initialize your data structure here.
+ */
+var MinStack = function() {
+  this.increStack = []
+  this.stack = []
+}
+
+/**
+ * @param {number} x
+ * @return {void}
+ */
+MinStack.prototype.push = function(x) {
+  this.stack.push(x)
+  if (
+    this.increStack.length === 0 ||
+    this.stack[this.increStack[this.increStack.length - 1]] > x
+  ) {
+    this.increStack.push(this.stack.length - 1)
+  }
+}
+
+/**
+ * @return {void}
+ */
+MinStack.prototype.pop = function() {
+  this.stack.pop()
+  const cur = this.stack.length
+  if (this.increStack[this.increStack.length - 1] === cur) this.increStack.pop()
+}
+
+/**
+ * @return {number}
+ */
+MinStack.prototype.top = function() {
+  if (this.stack.length === 0) return null
+  return this.stack[this.stack.length - 1]
+}
+
+/**
+ * @return {number}
+ */
+MinStack.prototype.min = function() {
+  if (this.stack.length === 0) return null
+  return this.stack[this.increStack[this.increStack.length - 1]]
+}
+
+/**
+ * Your MinStack object will be instantiated and called as such:
+ * var obj = new MinStack()
+ * obj.push(x)
+ * obj.pop()
+ * var param_3 = obj.top()
+ * var param_4 = obj.min()
+ */
