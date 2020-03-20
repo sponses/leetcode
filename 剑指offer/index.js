@@ -657,3 +657,27 @@ var levelOrder = function(root) {
   }
   return ans
 }
+/**
+ * 面试题32 - III. 从上到下打印二叉树 III
+ * @param {TreeNode} root
+ * @return {number[][]}
+ */
+var levelOrder = function(root) {
+  const ans = []
+  function dfs(node, i) {
+    if (!node) return
+    if (Array.isArray(ans[i])) {
+      if (i % 2 === 0) {
+        ans[i].push(node.val)
+      } else {
+        ans[i].unshift(node.val)
+      }
+    } else {
+      ans[i] = [node.val]
+    }
+    dfs(node.left, i + 1)
+    dfs(node.right, i + 1)
+  }
+  dfs(root, 0)
+  return ans
+}
