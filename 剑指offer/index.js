@@ -836,3 +836,21 @@ var kthLargest = function(root, k) {
   pfs(root)
   return ans
 }
+/**
+ * 面试题33. 二叉搜索树的后序遍历序列
+ * @param {number[]} postorder
+ * @return {boolean}
+ */
+var verifyPostorder = function(postorder) {
+  if (postorder.length <= 1) return true
+  let i = postorder.length - 2,
+    len = postorder.length,
+    root = postorder[len - 1]
+  while (postorder[i] > root && i >= 0) i--
+  const m = i
+  while (i >= 0) if (postorder[i--] >= root) return false
+  return (
+    verifyPostorder(postorder.slice(0, m + 1)) &&
+    verifyPostorder(postorder.slice(m + 1, len - 1))
+  )
+}
