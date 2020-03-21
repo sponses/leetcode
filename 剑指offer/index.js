@@ -747,3 +747,25 @@ var hammingWeight = function(n) {
   }
   return ans
 }
+/**
+ * 面试题04. 二维数组中的查找
+ * @param {number[][]} matrix
+ * @param {number} target
+ * @return {boolean}
+ */
+var findNumberIn2DArray = function(matrix, target) {
+  if (matrix.length === 0) return false
+  const n = matrix.length,
+    m = matrix[0].length
+  let i = n - 1,
+    j = 0
+  while (i >= 0 && j < m) {
+    if (matrix[i][j] === target) return true
+    if (matrix[i][j] > target) {
+      i--
+    } else {
+      j++
+    }
+  }
+  return false
+}
