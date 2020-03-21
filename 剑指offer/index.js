@@ -819,3 +819,20 @@ var lowestCommonAncestor = function(root, p, q) {
   if (l && r) return root
   return l ? l : r
 }
+/**
+ * 面试题54. 二叉搜索树的第k大节点
+ * @param {TreeNode} root
+ * @param {number} k
+ * @return {number}
+ */
+var kthLargest = function(root, k) {
+  let ans
+  function pfs(node) {
+    if (!node) return
+    pfs(node.right)
+    if (--k === 0) ans = node.val
+    pfs(node.left)
+  }
+  pfs(root)
+  return ans
+}
