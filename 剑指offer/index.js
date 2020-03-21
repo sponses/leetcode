@@ -734,3 +734,16 @@ var levelOrder = function(root) {
   dfs(root, 0)
   return ans
 }
+/**
+ * 面试题15. 二进制中1的个数
+ * @param {number} n - a positive integer
+ * @return {number}
+ */
+var hammingWeight = function(n) {
+  let ans = 0
+  for (let i = 32; i > 0; i--) {
+    if ((n & 1) === 1) ans++
+    n >>= 1
+  }
+  return ans
+}
