@@ -854,3 +854,31 @@ var verifyPostorder = function(postorder) {
     verifyPostorder(postorder.slice(m + 1, len - 1))
   )
 }
+/**
+ * 面试题36. 二叉搜索树与双向链表
+ * @param {Node} root
+ * @return {Node}
+ */
+var treeToDoublyList = function(root) {
+  if (!root) return null
+  let pre = null,
+    head = null,
+    tail = null
+  function mfs(node) {
+    if (!node) return
+    mfs(node.left)
+    if (!head) {
+      head = node
+    } else {
+      pre.right = node
+    }
+    node.left = pre
+    pre = node
+    tail = node
+    mfs(node.right)
+  }
+  mfs(root)
+  head.left = tail
+  tail.right = head
+  return head
+}
