@@ -1,19 +1,16 @@
-var cuttingRope = function(n) {
-  const dp = new Array(n + 1)
+var nthUglyNumber = function(n) {
+  const dp = new Array(n)
   dp.fill(0)
-  dp[1] = 1
-  dp[2] = 1
-  dp[3] = 2
-  for (let i = 4; i <= n; i++) {
-    let temp = 0
-    let l = 1
-    while (l <= i << 1) {
-      const r = i - l
-      temp = Math.max(dp[l], l) * Math.max(dp[r], r)
-      dp[i] = Math.max(temp, dp[i])
-      l++
-    }
+  dp[0] = 1
+  let p2 = 0,
+    p3 = 0,
+    p5 = 0
+  for (let i = 1; i < n; i++) {
+    dp[i] = Math.min(dp[p2] * 2, dp[p3] * 3, dp[p5] * 5)
+    if (dp[i] === dp[p2] * 2) p2++
+    if (dp[i] === dp[p3] * 3) p3++
+    if (dp[i] === dp[p5] * 5) p5++
   }
-  dp[n]
+  return dp[n - 1]
 }
-cuttingRope(10)
+nthUglyNumber(11)
