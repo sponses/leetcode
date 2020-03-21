@@ -714,3 +714,23 @@ var reversePrint = function(head) {
   }
   return ans
 }
+/**
+ * 面试题32 - II. 从上到下打印二叉树 II
+ * @param {TreeNode} root
+ * @return {number[][]}
+ */
+var levelOrder = function(root) {
+  const ans = []
+  function dfs(node, i) {
+    if (!node) return
+    if (Array.isArray(ans[i])) {
+      ans[i].push(node.val)
+    } else {
+      ans[i] = [node.val]
+    }
+    dfs(node.left, i + 1)
+    dfs(node.right, i + 1)
+  }
+  dfs(root, 0)
+  return ans
+}
