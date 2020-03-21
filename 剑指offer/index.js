@@ -882,3 +882,18 @@ var treeToDoublyList = function(root) {
   tail.right = head
   return head
 }
+/**
+ * 面试题52. 两个链表的第一个公共节点
+ * @param {ListNode} headA
+ * @param {ListNode} headB
+ * @return {ListNode}
+ */
+var getIntersectionNode = function(headA, headB) {
+  let pA = headA,
+    pB = headB
+  while (pA !== pB) {
+    pA = pA ? pA.next : headB
+    pB = pB ? pB.next : headA
+  }
+  return pA
+}
