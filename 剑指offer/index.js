@@ -769,3 +769,17 @@ var findNumberIn2DArray = function(matrix, target) {
   }
   return false
 }
+/**
+ * 面试题27. 二叉树的镜像
+ * @param {TreeNode} root
+ * @return {TreeNode}
+ */
+var mirrorTree = function(root) {
+  if (!root) return null
+  const temp = root.left
+  root.left = root.right
+  root.right = temp
+  mirrorTree(root.left)
+  mirrorTree(root.right)
+  return root
+}
