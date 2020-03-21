@@ -804,3 +804,18 @@ var maxDepth = function(root) {
   }
   return ans
 }
+/**
+ * 236. 二叉树的最近公共祖先
+ * @param {TreeNode} root
+ * @param {TreeNode} p
+ * @param {TreeNode} q
+ * @return {TreeNode}
+ */
+var lowestCommonAncestor = function(root, p, q) {
+  if (!root) return null
+  if (root === p || root === q) return root
+  const l = lowestCommonAncestor(root.left, p, q),
+    r = lowestCommonAncestor(root.right, p, q)
+  if (l && r) return root
+  return l ? l : r
+}
