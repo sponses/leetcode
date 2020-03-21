@@ -783,3 +783,24 @@ var mirrorTree = function(root) {
   mirrorTree(root.right)
   return root
 }
+/**
+ * 面试题55 - I. 二叉树的深度（bfs）
+ * @param {TreeNode} root
+ * @return {number}
+ */
+var maxDepth = function(root) {
+  if (!root) return 0
+  const queue = [root]
+  let ans = 0
+  while (queue.length) {
+    let count = queue.length
+    ans++
+    while (count) {
+      const cur = queue.shift()
+      if (cur.left) queue.push(cur.left)
+      if (cur.right) queue.push(cur.right)
+      count--
+    }
+  }
+  return ans
+}
