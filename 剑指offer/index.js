@@ -701,3 +701,16 @@ var nthUglyNumber = function(n) {
   }
   return dp[n - 1]
 }
+/**
+ * 面试题06. 从尾到头打印链表
+ * @param {ListNode} head
+ * @return {number[]}
+ */
+var reversePrint = function(head) {
+  const ans = []
+  while (head) {
+    ans.unshift(head.val)
+    head = head.next
+  }
+  return ans
+}
