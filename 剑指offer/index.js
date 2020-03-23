@@ -942,3 +942,20 @@ var maxProfit = function(prices) {
   }
   return prev1
 }
+/**
+ * 714. 买卖股票的最佳时机含手续费
+ * @param {number[]} prices
+ * @param {number} fee
+ * @return {number}
+ */
+var maxProfit = function(prices, fee) {
+  const len = prices.length
+  if (!len) return 0
+  let prev0 = -prices[0],
+    prev1 = 0
+  for (let i = 1; i < len; i++) {
+    prev0 = Math.max(prev0, prev1 - prices[i])
+    prev1 = Math.max(prev1, prev0 + prices[i] - fee)
+  }
+  return prev1
+}
