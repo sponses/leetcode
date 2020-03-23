@@ -926,3 +926,19 @@ var maxProfit = function(prices) {
   }
   return prevSold
 }
+/**
+ * 122. 买卖股票的最佳时机 II
+ * @param {number[]} prices
+ * @return {number}
+ */
+var maxProfit = function(prices) {
+  const len = prices.length
+  if (!len) return 0
+  let prev0 = -prices[0],
+    prev1 = 0
+  for (let i = 0; i < len; i++) {
+    prev0 = Math.max(prev0, prev1 - prices[i])
+    prev1 = Math.max(prev0 + prices[i], prev1)
+  }
+  return prev1
+}
