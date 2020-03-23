@@ -1,16 +1,26 @@
-var nthUglyNumber = function(n) {
-  const dp = new Array(n)
-  dp.fill(0)
-  dp[0] = 1
-  let p2 = 0,
-    p3 = 0,
-    p5 = 0
-  for (let i = 1; i < n; i++) {
-    dp[i] = Math.min(dp[p2] * 2, dp[p3] * 3, dp[p5] * 5)
-    if (dp[i] === dp[p2] * 2) p2++
-    if (dp[i] === dp[p3] * 3) p3++
-    if (dp[i] === dp[p5] * 5) p5++
+/**
+ * @param {number[]} prices
+ * @return {number}
+ */
+var maxProfit = function(prices) {
+  // let ans = 0
+  // for(let i = 0,len = prices.length;i<len-1;i++){
+  //     for(let j = i+1;j<len;j++){
+  //         ans = Math.max(ans,-prices[i] + prices[j])
+  //     }
+  // }
+  // return ans
+  const len = prices.length,
+    dp = new Array(len)
+  for (let i = 0; i < len; i++) {
+    if (i === 0) {
+      dp[i] = [-prices[i], 0]
+    } else {
+      dp[i] = []
+      dp[i][0] = Math.max(dp[i - 1][0], -prices[i])
+      dp[i][1] = Math.max(dp[i - 1][0] + prices[i], dp[i - 1][1])
+    }
   }
-  return dp[n - 1]
+  return dp[len - 1]
 }
-nthUglyNumber(11)
+maxProfit([7, 1, 5, 3, 6, 4])

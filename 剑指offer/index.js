@@ -911,3 +911,18 @@ var add = function(a, b) {
   }
   return a
 }
+/**
+ * 面试题63. 股票的最大利润
+ * @param {number[]} prices
+ * @return {number}
+ */
+var maxProfit = function(prices) {
+  if (!prices.length) return 0
+  let prevHas = -prices[0],
+    prevSold = 0
+  for (let i = 1, len = prices.length; i < len; i++) {
+    prevHas = Math.max(prevHas, -prices[i])
+    prevSold = Math.max(prevHas + prices[i], prevSold)
+  }
+  return prevSold
+}
