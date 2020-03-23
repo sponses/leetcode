@@ -959,3 +959,20 @@ var maxProfit = function(prices, fee) {
   }
   return prev1
 }
+/**
+ * 面试题56 - II. 数组中数字出现的次数 II
+ * @param {number[]} nums
+ * @return {number}
+ */
+var singleNumber = function(nums) {
+  let ans = 0
+  for (let i = 0; i < 32; i++) {
+    let bit = 1 << i
+    let count = 0
+    for (let j = 0, len = nums.length; j < len; j++) {
+      if (nums[j] & bit) count++
+    }
+    if (count % 3 !== 0) ans = ans | bit
+  }
+  return ans
+}
