@@ -1030,3 +1030,20 @@ var isSymmetric = function(root) {
     return isSym(node1.left, node2.right) && isSym(node1.right, node2.left)
   }
 }
+/**
+ * 面试题55 - II. 平衡二叉树
+ * @param {TreeNode} root
+ * @return {boolean}
+ */
+var isBalanced = function(root) {
+  let ans = true
+  function getHeight(node) {
+    if (!node) return 0
+    let l = getHeight(node.left),
+      r = getHeight(node.right)
+    if (Math.abs(l - r) > 1) ans = false
+    return 1 + Math.max(l, r)
+  }
+  getHeight(root)
+  return ans
+}
