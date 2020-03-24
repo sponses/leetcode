@@ -1047,3 +1047,26 @@ var isBalanced = function(root) {
   getHeight(root)
   return ans
 }
+/**
+ * 437. 路径总和 III
+ * @param {TreeNode} root
+ * @param {number} sum
+ * @return {number}
+ */
+var pathSum = function(root, sum) {
+  let ans = 0
+  function dp(node, tred) {
+    if (!node) return
+    tred.push(node.val)
+    let i = tred.length - 1,
+      temp = 0
+    while (i >= 0) {
+      temp += tred[i--]
+      if (temp === sum) ans++
+    }
+    dp(node.left, [...tred])
+    dp(node.right, [...tred])
+  }
+  dp(root, [])
+  return ans
+}
