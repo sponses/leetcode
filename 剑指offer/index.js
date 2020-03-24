@@ -1002,14 +1002,31 @@ var largestNumber = function(nums) {
  * @return {number}
  */
 var maxProfit = function(prices) {
-    const len = prices.length
-    if(!len) return 0
-    let pre_1 = -prices[0], pre_cold_0 = 0, pre_0 = 0
-    for(let i = 1;i<len;i++){
-        const temp = pre_cold_0
-        pre_1 = Math.max(pre_1,pre_0 - prices[i])
-        pre_cold_0 = Math.max(pre_cold_0,pre_1+prices[i])
-        pre_0 = temp
-    }
-    return pre_cold_0
-};
+  const len = prices.length
+  if (!len) return 0
+  let pre_1 = -prices[0],
+    pre_cold_0 = 0,
+    pre_0 = 0
+  for (let i = 1; i < len; i++) {
+    const temp = pre_cold_0
+    pre_1 = Math.max(pre_1, pre_0 - prices[i])
+    pre_cold_0 = Math.max(pre_cold_0, pre_1 + prices[i])
+    pre_0 = temp
+  }
+  return pre_cold_0
+}
+/**
+ * 面试题28. 对称的二叉树
+ * @param {TreeNode} root
+ * @return {boolean}
+ */
+var isSymmetric = function(root) {
+  if (!root) return true
+  return isSym(root.left, root.right)
+  function isSym(node1, node2) {
+    if (!node1 && !node2) return true
+    if (!node1 || !node2) return false
+    if (node1.val !== node2.val) return false
+    return isSym(node1.left, node2.right) && isSym(node1.right, node2.left)
+  }
+}

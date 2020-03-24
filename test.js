@@ -1,11 +1,16 @@
 var translateNum = function(num) {
   num += ''
-  function dp(i) {
-    if (i <= 0) return 1
-    const cur = num[i]
-    if (+(num[i - 1] + cur) > 25 || num[i - 1] == 0) return dp(i - 1)
-    return dp(i - 1) + dp(i - 2)
+  const len = num.length,
+    dp = new Array(len + 1)
+  dp[0] = 1
+  dp[1] = 1
+  for (let i = 1; i < len; i++) {
+    if (+(num[i - 1] + num[i]) > 25 || num[i - 1] == '0') {
+      dp[i + 1] = dp[i]
+    } else {
+      dp[i + 1] = dp[i] + dp[i - 1]
+    }
   }
-  return dp(num.length - 1)
+  return dp[len]
 }
-translateNum(9418020810)
+translateNum(40184034802)
