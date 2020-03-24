@@ -996,3 +996,20 @@ var largestNumber = function(nums) {
   let temp = nums.join('')
   return temp[0] == 0 ? '0' : temp
 }
+/**
+ * 309. 最佳买卖股票时机含冷冻期
+ * @param {number[]} prices
+ * @return {number}
+ */
+var maxProfit = function(prices) {
+    const len = prices.length
+    if(!len) return 0
+    let pre_1 = -prices[0], pre_cold_0 = 0, pre_0 = 0
+    for(let i = 1;i<len;i++){
+        const temp = pre_cold_0
+        pre_1 = Math.max(pre_1,pre_0 - prices[i])
+        pre_cold_0 = Math.max(pre_cold_0,pre_1+prices[i])
+        pre_0 = temp
+    }
+    return pre_cold_0
+};

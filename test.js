@@ -1,15 +1,11 @@
-var maxProfit = function(prices) {
-  const len = prices.length,
-    dp = new Array(len)
-  for (let i = 0; i < len; i++) {
-    if (i === 0) {
-      dp[i] = [-prices[i], 0]
-    } else {
-      dp[i] = []
-      dp[i][0] = Math.max(dp[i - 1][0], dp[i - 1][1] - prices[i])
-      dp[i][1] = Math.max(dp[i - 1][0] + prices[i], dp[i - 1][1])
-    }
+var translateNum = function(num) {
+  num += ''
+  function dp(i) {
+    if (i <= 0) return 1
+    const cur = num[i]
+    if (+(num[i - 1] + cur) > 25 || num[i - 1] == 0) return dp(i - 1)
+    return dp(i - 1) + dp(i - 2)
   }
-  return dp[len - 1][0]
+  return dp(num.length - 1)
 }
-maxProfit([7, 1, 5, 3, 6, 4])
+translateNum(9418020810)
