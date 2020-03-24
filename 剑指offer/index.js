@@ -986,3 +986,13 @@ var minNumber = function(nums) {
   nums.sort((a, b) => a + b - (b + a))
   return nums.join('')
 }
+/**
+ * 179. 最大数
+ * @param {number[]} nums
+ * @return {string}
+ */
+var largestNumber = function(nums) {
+  nums.sort((a, b) => b + '' + a - (a + '' + b))
+  let temp = nums.join('')
+  return temp[0] == 0 ? '0' : temp
+}
