@@ -760,3 +760,25 @@ var numDistinct = function(s, t) {
   }
   return dp[0][0]
 }
+/**
+ * 956. 最高的广告牌
+ * @param {number[]} rods
+ * @return {number}
+ */
+var tallestBillboard = function(rods) {
+  const len = rods.length
+  let res = 0
+  let sum = 0
+  for (let i = 0; i < len; i++) sum += rods[i]
+  rods.sort((a, b) => b - a)
+  function dp(i, l, r, remain) {
+    if (Math.abs(l - r) > remain || (l + r + remain) >> 1 <= res) return
+    if (l === r) res = Math.max(res, l)
+    if (i >= len) return
+    dp(i + 1, l + rods[i], r, remain - rods[i])
+    dp(i + 1, l, r + rods[i], remain - rods[i])
+    dp(i + 1, l, r, remain - rods[i])
+  }
+  dp(0, 0, 0, sum)
+  return res
+}
