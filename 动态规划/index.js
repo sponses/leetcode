@@ -734,3 +734,29 @@ var canPartition = function(nums) {
   }
   return dp[half]
 }
+/**
+ * 115. 不同的子序列
+ * @param {string} s
+ * @param {string} t
+ * @return {number}
+ */
+var numDistinct = function(s, t) {
+  const lenS = s.length,
+    lenT = t.length
+  const dp = new Array(lenS + 1)
+  for (let i = 0; i <= lenS; i++) {
+    dp[i] = new Array(lenT + 1)
+    dp[i].fill(0)
+    dp[i][lenT] = 1
+  }
+  for (let i = lenS - 1; i >= 0; i--) {
+    for (let j = lenT - 1; j >= 0; j--) {
+      if (s[i] === t[j]) {
+        dp[i][j] = dp[i + 1][j + 1] + dp[i + 1][j]
+      } else {
+        dp[i][j] = dp[i + 1][j]
+      }
+    }
+  }
+  return dp[0][0]
+}

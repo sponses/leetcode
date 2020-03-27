@@ -1,16 +1,23 @@
-var translateNum = function(num) {
-  num += ''
-  const len = num.length,
-    dp = new Array(len + 1)
-  dp[0] = 1
-  dp[1] = 1
-  for (let i = 1; i < len; i++) {
-    if (+(num[i - 1] + num[i]) > 25 || num[i - 1] == '0') {
-      dp[i + 1] = dp[i]
-    } else {
-      dp[i + 1] = dp[i] + dp[i - 1]
+var tallestBillboard = function(rods) {
+  const len = rods.length
+  let sum = 0
+  for (let i = 0; i < len; i++) sum += rods[i]
+  const half = sum >> 1
+  const dp = new Array(half + 1)
+  dp.fill(false)
+  dp[0] = true
+  for (let i = 0; i < len; i++) {
+    for (let j = half; j >= rods[i]; j--) {
+      if (
+        (dp[j - rods[i]] === '#' || dp[j - rods[i]] === true) &&
+        dp[j] === '#'
+      ) {
+        dp[j] = true
+      } else {
+        dp[j] = dp[j - rods[i]] ? '#' : dp[j]
+      }
     }
   }
-  return dp[len]
+  for (let i = half; i >= 0; i--) if (dp[i] === true) return i
 }
-translateNum(40184034802)
+tallestBillboard([1, 2, 3, 4, 5, 6])
