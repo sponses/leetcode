@@ -272,3 +272,16 @@ var maxArea = function(height) {
   }
   return res
 }
+/**
+ * 283. 移动零
+ * @param {number[]} nums
+ * @return {void} Do not return anything, modify nums in-place instead.
+ */
+var moveZeroes = function(nums) {
+  let l = 0
+  for (let i = 0, len = nums.length; i < len; i++) {
+    if (nums[i] !== 0) nums[l++] = nums[i]
+  }
+  for (let i = l, len = nums.length; i < len; i++) nums[i] = 0
+  return nums
+}
