@@ -112,3 +112,27 @@ const twoSum = function(nums, target) {
     hash[nums[i]] = i
   }
 }
+/**
+ * 290. 单词规律
+ * @param {string} pattern
+ * @param {string} str
+ * @return {boolean}
+ */
+var wordPattern = function(pattern, str) {
+  const hashP = {},
+    hashS = {}
+  str = str.split(' ')
+  if (pattern.length !== str.length) return false
+  for (let i = 0, len = pattern.length; i < len; i++) {
+    const p = pattern[i],
+      s = str[i]
+    if (hashP.hasOwnProperty(p)) {
+      if (hashP[p] !== s) return false
+    } else {
+      if (hashS.hasOwnProperty(s)) return false
+      hashP[p] = s
+      hashS[s] = p
+    }
+  }
+  return true
+}
