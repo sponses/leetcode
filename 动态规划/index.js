@@ -835,3 +835,20 @@ var optimalDivision = function(nums) {
   ans += ')'
   return ans
 }
+/**
+ * 1217. 玩筹码
+ * @param {number[]} chips
+ * @return {number}
+ */
+var minCostToMoveChips = function(chips) {
+  let ans1 = 0,
+    ans2 = 0
+  for (let i = 0, len = chips.length; i < len; i++) {
+    if (chips[i] % 2 === 0) {
+      ans1++
+    } else {
+      ans2++
+    }
+  }
+  return Math.min(ans1, ans2)
+}
