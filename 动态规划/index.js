@@ -852,3 +852,31 @@ var minCostToMoveChips = function(chips) {
   }
   return Math.min(ans1, ans2)
 }
+/**
+ * 115. 不同的子序列
+ * @param {string} s
+ * @param {string} t
+ * @return {number}
+ */
+var numDistinct = function(s, t) {
+  const lenS = s.length,
+    lenT = t.length
+  const dp = new Array(lenT + 1)
+  dp.fill(0)
+  dp[lenT] = 1
+  for (let i = lenS - 1; i >= 0; i--) {
+    let prev = dp[lenT]
+    for (let j = lenT - 1; j >= 0; j--) {
+      let temp = dp[j]
+      const charS = s[i],
+        charT = t[j]
+      if (charS === charT) {
+        dp[j] = prev + dp[j]
+      } else {
+        dp[j] = dp[j]
+      }
+      prev = temp
+    }
+  }
+  return dp[0]
+}
