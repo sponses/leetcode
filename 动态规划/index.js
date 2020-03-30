@@ -819,3 +819,19 @@ var numRollsToTarget = function(d, f, target) {
   }
   return dp[d][target]
 }
+/**
+ * 553. 最优除法
+ * @param {number[]} nums
+ * @return {string}
+ */
+var optimalDivision = function(nums) {
+  if (nums.length === 1) return nums.toString()
+  if (nums.length === 2) return nums.join('/')
+  let ans = nums[0] + '/' + '('
+  for (let i = 1, len = nums.length; i < len; i++) {
+    ans += nums[i]
+    if (i !== len - 1) ans += '/'
+  }
+  ans += ')'
+  return ans
+}

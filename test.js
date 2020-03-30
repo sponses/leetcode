@@ -1,24 +1,14 @@
-/**
- * @param {number} d
- * @param {number} f
- * @param {number} target
- * @return {number}
- */
-var numRollsToTarget = function(d, f, target) {
-  const dp = new Array(d + 1)
-  for (let i = 0; i <= d; i++) {
-    dp[i] = new Array(target + 1)
-    dp[i].fill(0)
+var minCostToMoveChips = function(chips) {
+  let ans = Number.MAX_SAFE_INTEGER
+  const len = chips.length
+  function dp(target, i, temp) {
+    if (i === len) return 0
+    temp += Math.abs(chips[i] - target) % 2
+    return temp + dp(target, i + 1, temp)
   }
-  dp[0][0] = 1
-  for (let i = 1; i <= d; i++) {
-    for (let j = 1; j <= target; j++) {
-      let res = 0
-      for (let k = 1; k <= f; k++) {
-        res += dp[i - 1][j - k] ? dp[i - 1][j - k] % 1000000007 : 0
-      }
-    }
+  for (let i = 0, len = chips.length; i < len; i++) {
+    ans = Math.min(dp(chips[i], 0, 0), ans)
   }
-  return dp[d][target]
+  return ans
 }
-numRollsToTarget(2, 6, 7)
+minCostToMoveChips([1, 2, 3])
