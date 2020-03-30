@@ -467,3 +467,30 @@ var binaryTreePaths = function(root) {
   dfs(root, '')
   return res
 }
+/**
+ * 987. 二叉树的垂序遍历
+ * @param {TreeNode} root
+ * @return {number[][]}
+ */
+var verticalTraversal = function(root) {
+  const arr = []
+  const ans = []
+  function dfs(root, x, y) {
+    if (!root) return
+    arr.push({ x, y, val: root.val })
+    dfs(root.left, x - 1, y - 1)
+    dfs(root.right, x + 1, y - 1)
+  }
+  dfs(root, 0, 0)
+  function compare(a, b) {
+    return a.x - b.x || b.y - a.y || a.val - b.val
+  }
+  arr.sort(compare)
+  for (let i = 0, len = arr.length; i < len; i++) {
+    ans.push([arr[i].val])
+    while (arr[i + 1] && arr[i].x === arr[i + 1].x) {
+      ans[ans.length - 1].push(arr[++i].val)
+    }
+  }
+  return ans
+}
