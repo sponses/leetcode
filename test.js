@@ -1,23 +1,24 @@
-var tallestBillboard = function(rods) {
-  const len = rods.length
-  let sum = 0
-  for (let i = 0; i < len; i++) sum += rods[i]
-  const half = sum >> 1
-  const dp = new Array(half + 1)
-  dp.fill(false)
-  dp[0] = true
-  for (let i = 0; i < len; i++) {
-    for (let j = half; j >= rods[i]; j--) {
-      if (
-        (dp[j - rods[i]] === '#' || dp[j - rods[i]] === true) &&
-        dp[j] === '#'
-      ) {
-        dp[j] = true
-      } else {
-        dp[j] = dp[j - rods[i]] ? '#' : dp[j]
+/**
+ * @param {number} d
+ * @param {number} f
+ * @param {number} target
+ * @return {number}
+ */
+var numRollsToTarget = function(d, f, target) {
+  const dp = new Array(d + 1)
+  for (let i = 0; i <= d; i++) {
+    dp[i] = new Array(target + 1)
+    dp[i].fill(0)
+  }
+  dp[0][0] = 1
+  for (let i = 1; i <= d; i++) {
+    for (let j = 1; j <= target; j++) {
+      let res = 0
+      for (let k = 1; k <= f; k++) {
+        res += dp[i - 1][j - k] ? dp[i - 1][j - k] % 1000000007 : 0
       }
     }
   }
-  for (let i = half; i >= 0; i--) if (dp[i] === true) return i
+  return dp[d][target]
 }
-tallestBillboard([1, 2, 3, 4, 5, 6])
+numRollsToTarget(2, 6, 7)

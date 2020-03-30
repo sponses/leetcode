@@ -782,3 +782,40 @@ var tallestBillboard = function(rods) {
   dp(0, 0, 0, sum)
   return res
 }
+/**
+ * 1155. 掷骰子的N种方法
+ * @param {number} d
+ * @param {number} f
+ * @param {number} target
+ * @return {number}
+ */
+var numRollsToTarget = function(d, f, target) {
+  // 暴力递归
+  // function dp(d,remain){
+  //     if(d === 0 && remain === 0) return 1
+  //     if(remain < 0 || d === 0 || remain > d*f) return 0
+  //     let res = 0
+  //     for(let i = 1;i<=f;i++){
+  //         res += dp(d-1,remain-i)
+  //     }
+  //     return res
+  // }
+  // return dp(d,target)
+
+  const dp = new Array(d + 1)
+  for (let i = 0; i <= d; i++) {
+    dp[i] = new Array(target + 1)
+    dp[i].fill(0)
+  }
+  dp[0][0] = 1
+  for (let i = 1; i <= d; i++) {
+    for (let j = 1; j <= target; j++) {
+      let res = 0
+      for (let k = 1; k <= f; k++) {
+        res += dp[i - 1][j - k] ? dp[i - 1][j - k] : 0
+      }
+      dp[i][j] = res % 1000000007
+    }
+  }
+  return dp[d][target]
+}
