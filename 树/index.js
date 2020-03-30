@@ -494,3 +494,36 @@ var verticalTraversal = function(root) {
   }
   return ans
 }
+/**
+ * 623. 在二叉树中增加一行
+ * @param {TreeNode} root
+ * @param {number} v
+ * @param {number} d
+ * @return {TreeNode}
+ */
+var addOneRow = function(root, v, d) {
+  if (d === 1) {
+    const node = new TreeNode(v)
+    node.left = root
+    return node
+  } else {
+    const ans = root
+    dfs(root, v, 1, d)
+    return ans
+  }
+}
+
+function dfs(node, v, n, d) {
+  if (!node) return
+  if (n === d - 1) {
+    let l = node.left,
+      r = node.right
+    node.left = new TreeNode(v)
+    node.left.left = l
+    node.right = new TreeNode(v)
+    node.right.right = r
+    return
+  }
+  dfs(node.left, v, n + 1, d)
+  dfs(node.right, v, n + 1, d)
+}
