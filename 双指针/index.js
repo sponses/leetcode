@@ -283,5 +283,4 @@ var moveZeroes = function(nums) {
     if (nums[i] !== 0) nums[l++] = nums[i]
   }
   for (let i = l, len = nums.length; i < len; i++) nums[i] = 0
-  return nums
 }

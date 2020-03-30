@@ -50,3 +50,37 @@ var isSubsequence = function(s, t) {
   }
   return count === s.length
 }
+/**
+ * 659. 分割数组为连续子序列
+ * @param {number[]} nums
+ * @return {boolean}
+ */
+var isPossible = function(nums) {
+  const counts = {},
+    tail = {}
+  for (let i = 0, len = nums.length; i < len; i++) {
+    if (counts.hasOwnProperty(nums[i])) {
+      counts[nums[i]]++
+    } else {
+      counts[nums[i]] = 1
+    }
+    tail[nums[i]] = 0
+  }
+  for (let i = 0, len = nums.length; i < len; i++) {
+    const cur = nums[i]
+    if (counts[cur] <= 0) continue
+    if (tail[cur - 1] > 0) {
+      counts[cur]--
+      tail[cur - 1]--
+      tail[cur]++
+    } else if (counts[cur + 1] > 0 && counts[cur + 2] > 0) {
+      counts[cur]--
+      counts[cur + 1]--
+      counts[cur + 2]--
+      tail[cur + 2]++
+    } else {
+      return false
+    }
+  }
+  return true
+}
