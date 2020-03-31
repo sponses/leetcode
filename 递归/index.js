@@ -85,3 +85,27 @@ var numberOfSteps = function(num) {
   if (num % 2 === 0) return 1 + numberOfSteps(num / 2)
   return 1 + numberOfSteps(num - 1)
 }
+/**
+ * 1387. 将整数按权重排序
+ * @param {number} lo
+ * @param {number} hi
+ * @param {number} k
+ * @return {number}
+ */
+var getKth = function(lo, hi, k) {
+  const hash = {}
+  function toOne(num) {
+    if (num === 1) return 0
+    if (!hash.hasOwnProperty(num)) {
+      hash[num] = 1 + (num % 2 === 0 ? toOne(num / 2) : toOne(3 * num + 1))
+    }
+    return hash[num]
+  }
+  const arr = []
+  let j = 0
+  for (let i = lo; i <= hi; i++) arr[j++] = i
+  arr.sort((a, b) => {
+    return toOne(a) - toOne(b) || a - b
+  })
+  return arr[k - 1]
+}
