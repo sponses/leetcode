@@ -557,3 +557,22 @@ var findFrequentTreeSum = function(root) {
   getSum(root)
   return hash.max.val
 }
+/**
+ * 907. 子数组的最小值之和
+ * @param {number[]} A
+ * @return {number}
+ */
+var sumSubarrayMins = function(A) {
+  let ans = 0
+  const stack = []
+  A.push(Number.MIN_SAFE_INTEGER)
+  A.unshift(Number.MIN_SAFE_INTEGER)
+  for (let i = 0, len = A.length; i < len; i++) {
+    while (stack.length > 1 && A[stack[stack.length - 1]] > A[i]) {
+      const cur = stack.pop()
+      ans += A[cur] * (i - cur) * (cur - stack[stack.length - 1])
+    }
+    stack.push(i)
+  }
+  return ans % 1000000007
+}
