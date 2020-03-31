@@ -527,3 +527,33 @@ function dfs(node, v, n, d) {
   dfs(node.left, v, n + 1, d)
   dfs(node.right, v, n + 1, d)
 }
+/**
+ * 508. 出现次数最多的子树元素和
+ * @param {TreeNode} root
+ * @return {number[]}
+ */
+var findFrequentTreeSum = function(root) {
+  const hash = {}
+  const max = { count: 0, val: [] }
+  hash.max = max
+  function getSum(node) {
+    if (!node) return 0
+    const l = getSum(node.left)
+    const r = getSum(node.right)
+    const sum = node.val + l + r
+    if (hash[sum]) {
+      hash[sum]++
+    } else {
+      hash[sum] = 1
+    }
+    if (hash[sum] > hash.max.count) {
+      hash.max.count = hash[sum]
+      hash.max.val = [sum]
+    } else if (hash[sum] === hash.max.count) {
+      hash.max.val.push(sum)
+    }
+    return sum
+  }
+  getSum(root)
+  return hash.max.val
+}
