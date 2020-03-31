@@ -75,3 +75,13 @@ var tribonacci = function(n) {
   }
   return c
 }
+/**
+ * 1342. 将数字变成 0 的操作次数
+ * @param {number} num
+ * @return {number}
+ */
+var numberOfSteps = function(num) {
+  if (num === 0) return 0
+  if (num % 2 === 0) return 1 + numberOfSteps(num / 2)
+  return 1 + numberOfSteps(num - 1)
+}
