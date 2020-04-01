@@ -576,3 +576,24 @@ var sumSubarrayMins = function(A) {
   }
   return ans % 1000000007
 }
+/**
+ * 662. 二叉树最大宽度
+ * @param {TreeNode} root
+ * @return {number}
+ */
+var widthOfBinaryTree = function(root) {
+  const hash = {}
+  let ans = 1
+  function dfs(node, i, pos) {
+    if (!node) return
+    if (hash.hasOwnProperty(i)) {
+      ans = Math.max(Math.abs(pos - hash[i] + 1), ans)
+    } else {
+      hash[i] = pos
+    }
+    dfs(node.left, i + 1, pos * 2)
+    dfs(node.right, i + 1, pos * 2 + 1)
+  }
+  dfs(root, 0, 1)
+  return ans
+}
