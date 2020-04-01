@@ -576,27 +576,3 @@ var sumSubarrayMins = function(A) {
   }
   return ans % 1000000007
 }
-
-var getMaxRepetitions = function(s1, n1, s2, n2) {
-  let S1 = '',
-    S2 = ''
-  while (n1) {
-    S1 += s1
-    n1--
-  }
-  while (n2) {
-    S2 += s2
-    n2--
-  }
-  const lenS1 = S1.length,
-    lenS2 = S2.length
-  function dp(i, j) {
-    if (j === lenS2) return 1 + dp(i, 0)
-    if (i === lenS1) return 0
-    const charS1 = S1[i],
-      charS2 = S2[j]
-    if (charS1 !== charS2) return dp(i + 1, j)
-    return Math.max(dp(i + 1, j + 1), dp(i + 1, j))
-  }
-  return dp(0, 0)
-}

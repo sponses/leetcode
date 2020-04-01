@@ -76,3 +76,18 @@ var thirdMax = function(nums) {
   if (arr.length < 3) return Math.max(...arr)
   return arr[arr.length - 3]
 }
+/**
+ * 766. 托普利茨矩阵
+ * @param {number[][]} matrix
+ * @return {boolean}
+ */
+var isToeplitzMatrix = function(matrix) {
+  const hash = {}
+  for (let i = 0, h = matrix.length; i < h; i++) {
+    for (let j = 0, w = matrix[0].length; j < w; j++) {
+      if (i === 0 || j === 0) continue
+      if (matrix[i][j] !== matrix[i - 1][j - 1]) return false
+    }
+  }
+  return true
+}
