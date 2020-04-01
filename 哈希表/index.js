@@ -136,3 +136,37 @@ var wordPattern = function(pattern, str) {
   }
   return true
 }
+/**
+ * 692. 前K个高频单词
+ * @param {string[]} words
+ * @param {number} k
+ * @return {string[]}
+ */
+var topKFrequent = function(words, k) {
+  const hash = {},
+    ans = []
+  for (let i = 0, len = words.length; i < len; i++) {
+    const cur = words[i]
+    if (hash.hasOwnProperty(cur)) {
+      hash[cur]++
+    } else {
+      hash[cur] = 1
+      ans.push(cur)
+    }
+  }
+  function compare(a, b) {
+    let i = 0,
+      j = 0
+    while (i < a.length && j < b.length && a[i] === b[j]) {
+      i++
+      j++
+    }
+    if (i === a.length) return -1
+    if (j === b.length) return 1
+    return a[i].charCodeAt() - b[j].charCodeAt()
+  }
+  ans.sort((a, b) => {
+    return hash[b] - hash[a] || compare(a, b)
+  })
+  return ans.slice(0, k)
+}
