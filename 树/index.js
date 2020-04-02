@@ -597,3 +597,28 @@ var widthOfBinaryTree = function(root) {
   dfs(root, 0, 1)
   return ans
 }
+/**
+ * 889. 根据前序和后序遍历构造二叉树
+ * @param {number[]} pre
+ * @param {number[]} post
+ * @return {TreeNode}
+ */
+var constructFromPrePost = function(pre, post) {
+  if (!pre.length) return null
+  const cur = pre[0]
+  const node = new TreeNode(cur)
+  const l = pre[1],
+    r = post[post.length - 2]
+  if (l || l === r) {
+    const i = post.indexOf(l)
+    node.left = constructFromPrePost(pre.slice(1, i + 2), post.slice(0, i + 1))
+  }
+  if (r && l !== r) {
+    const i = pre.indexOf(r)
+    node.right = constructFromPrePost(
+      pre.slice(i),
+      post.slice(i - 1, post.length - 1)
+    )
+  }
+  return node
+}
