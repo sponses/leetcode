@@ -919,3 +919,28 @@ var findLongestChain = function(pairs) {
   }
   return max
 }
+/**
+ * 354. 俄罗斯套娃信封问题
+ * @param {number[][]} envelopes
+ * @return {number}
+ */
+var maxEnvelopes = function(envelopes) {
+  envelopes.sort((a, b) => a[1] - b[1])
+  const len = envelopes.length
+  if (!len) return 0
+  const dp = new Array(len)
+  dp.fill(1)
+  let max = 1
+  for (let i = 1; i < len; i++) {
+    for (let j = 0; j < i; j++) {
+      if (
+        envelopes[i][0] > envelopes[j][0] &&
+        envelopes[i][1] !== envelopes[j][1]
+      ) {
+        dp[i] = Math.max(dp[i], dp[j] + 1)
+      }
+    }
+    max = Math.max(max, dp[i])
+  }
+  return max
+}
