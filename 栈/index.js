@@ -75,3 +75,26 @@ var decodeString = function(s) {
   }
   return stack.join('')
 }
+/**
+ * 862. 和至少为 K 的最短子数组
+ * @param {number[]} A
+ * @param {number} K
+ * @return {number}
+ */
+var shortestSubarray = function(A, K) {
+  const N = A.length
+  const pre = new Array(N + 1)
+  pre[0] = 0
+  for (let i = 0; i < N; i++) pre[i + 1] = pre[i] + A[i]
+  const deque = []
+  let ans = N + 1
+  for (let i = 0; i <= N; i++) {
+    while (deque.length && pre[deque[deque.length - 1]] >= pre[i]) deque.pop()
+    while (deque.length && pre[i] - pre[deque[0]] >= K) {
+      ans = Math.min(ans, i - deque[0])
+      deque.shift()
+    }
+    deque.push(i)
+  }
+  return ans > N ? -1 : ans
+}
