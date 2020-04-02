@@ -899,3 +899,23 @@ var lengthOfLIS = function(nums) {
   }
   return max
 }
+/**
+ * 646. 最长数对链
+ * @param {number[][]} pairs
+ * @return {number}
+ */
+var findLongestChain = function(pairs) {
+  if (!pairs.length) return 0
+  pairs.sort((a, b) => a[0] - b[0])
+  const len = pairs.length
+  const dp = new Array(len)
+  dp.fill(1)
+  let max = 1
+  for (let i = 1; i < len; i++) {
+    for (let j = 0; j < i; j++) {
+      if (pairs[i][0] > pairs[j][1]) dp[i] = Math.max(dp[j] + 1, dp[i])
+    }
+    max = Math.max(dp[i], max)
+  }
+  return max
+}
