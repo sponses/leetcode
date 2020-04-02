@@ -880,3 +880,22 @@ var numDistinct = function(s, t) {
   }
   return dp[0]
 }
+/**
+ * 300. 最长上升子序列
+ * @param {number[]} nums
+ * @return {number}
+ */
+var lengthOfLIS = function(nums) {
+  const len = nums.length
+  const dp = new Array(len)
+  if (!len) return 0
+  dp.fill(1)
+  let max = 1
+  for (let i = 1; i < len; i++) {
+    for (let j = 0; j < i; j++) {
+      if (nums[i] > nums[j]) dp[i] = Math.max(dp[j] + 1, dp[i])
+    }
+    max = Math.max(max, dp[i])
+  }
+  return max
+}

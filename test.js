@@ -1,14 +1,19 @@
-var minCostToMoveChips = function(chips) {
-  let ans = Number.MAX_SAFE_INTEGER
-  const len = chips.length
-  function dp(target, i, temp) {
-    if (i === len) return 0
-    temp += Math.abs(chips[i] - target) % 2
-    return temp + dp(target, i + 1, temp)
+var shortestSubarray = function(A, K) {
+  const N = A.length
+  const pre = new Array(N + 1)
+  pre[0] = 0
+  for (let i = 0; i < N; i++) pre[i + 1] = pre[i] + A[i]
+  const dequeue = []
+  let ans = N + 1
+  for (let i = 0, len = pre.length; i < len; i++) {
+    while (!dequeue.length && pre[dequeue[dequeue.length - 1]] >= pre[i]) {
+      dequeue.pop()
+    }
+    while (!dequeue.length && pre[i] - pre[dequeue[0]] >= K) {
+      ans = Math.min(i - dequeue[0])
+    }
+    dequeue.push(i)
   }
-  for (let i = 0, len = chips.length; i < len; i++) {
-    ans = Math.min(dp(chips[i], 0, 0), ans)
-  }
-  return ans
+  return ans > N ? 0 : ans
 }
-minCostToMoveChips([1, 2, 3])
+shortestSubarray([1])
