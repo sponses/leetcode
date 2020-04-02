@@ -84,3 +84,22 @@ var isPossible = function(nums) {
   }
   return true
 }
+/**
+ * 646. 最长数对链
+ * @param {number[][]} pairs
+ * @return {number}
+ */
+var findLongestChain = function(pairs) {
+  if (!pairs.length) return 0
+  pairs.sort((a, b) => a[1] - b[1])
+  const len = pairs.length
+  let end = pairs[0][1]
+  let ans = 1
+  for (let i = 1; i < len; i++) {
+    if (pairs[i][0] > end) {
+      ans++
+      end = pairs[i][1]
+    }
+  }
+  return ans
+}
