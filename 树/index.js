@@ -3,7 +3,7 @@
  * @param {TreeNode} root
  * @return {boolean}
  */
-var isSymmetric = function(root) {
+var isSymmetric = function (root) {
   if (!root) return true
 
   function compare(root1, root2) {
@@ -21,7 +21,7 @@ var isSymmetric = function(root) {
  * @param {number} R
  * @return {number}
  */
-var rangeSumBST = function(root, L, R) {
+var rangeSumBST = function (root, L, R) {
   let arr = []
   //哈哈哈我疯了中序遍历把每个值保存进数组
   function midOrderTraversal(root) {
@@ -46,7 +46,7 @@ var rangeSumBST = function(root, L, R) {
  * @param {number} k
  * @return {boolean}
  */
-var findTarget = function(root, k) {
+var findTarget = function (root, k) {
   //思路就是遍历它
   let arr = []
 
@@ -63,7 +63,7 @@ var findTarget = function(root, k) {
  * @param {TreeNode} root
  * @return {number}
  */
-var sumOfLeftLeaves = function(root) {
+var sumOfLeftLeaves = function (root) {
   if (!root) return 0
   let result = 0
   if (root.left && !root.left.left && !root.left.right) result += root.left.val
@@ -81,7 +81,7 @@ var sumOfLeftLeaves = function(root) {
  * @param {TreeNode} root
  * @return {string[]}
  */
-var binaryTreePaths = function(root) {
+var binaryTreePaths = function (root) {
   let res = []
   if (!root) return res
 
@@ -106,7 +106,7 @@ var binaryTreePaths = function(root) {
  * @param {TreeNode} root
  * @return {TreeNode}
  */
-var bstToGst = function(root) {
+var bstToGst = function (root) {
   let sum = 0
   function updateNode(node) {
     if (!node) return
@@ -124,7 +124,7 @@ var bstToGst = function(root) {
  * @param {TreeNode} root
  * @return {void} Do not return anything, modify root in-place instead.
  */
-var flatten = function(root) {
+var flatten = function (root) {
   function flat(root) {
     if (!root || (!root.left && !root.right)) return
 
@@ -153,7 +153,7 @@ var flatten = function(root) {
  * @param {number} k
  * @return {number}
  */
-var kthSmallest = function(root, k) {
+var kthSmallest = function (root, k) {
   let count = 1,
     res = null
   function getTthSmallest(node) {
@@ -178,7 +178,7 @@ var kthSmallest = function(root, k) {
  * @param {TreeNode} root2
  * @return {boolean}
  */
-var flipEquiv = function(root1, root2) {
+var flipEquiv = function (root1, root2) {
   if (!root1 && !root2) return true
   if ((!root1 && root2) || (root1 && !root2)) return false
   if (root1.val !== root2.val) return false
@@ -194,7 +194,7 @@ var flipEquiv = function(root1, root2) {
  * @param {TreeNode} root
  * @return {number[][]}
  */
-var levelOrder = function(root) {
+var levelOrder = function (root) {
   if (!root) return []
   let res = [],
     queue = [root, 'ok'],
@@ -226,7 +226,7 @@ var levelOrder = function(root) {
  * @param {TreeNode} root
  * @return {number[][]}
  */
-var levelOrder = function(root) {
+var levelOrder = function (root) {
   if (!root) return []
   let queue = [root],
     res = []
@@ -253,7 +253,7 @@ var levelOrder = function(root) {
  * @param {TreeNode} root
  * @return {number[][]}
  */
-var levelOrder = function(root) {
+var levelOrder = function (root) {
   let res = []
   function dfs(node, count) {
     if (!node) return
@@ -273,7 +273,7 @@ var levelOrder = function(root) {
  * @param {TreeNode} root
  * @return {number[][]}
  */
-var levelOrderBottom = function(root) {
+var levelOrderBottom = function (root) {
   let res = []
   function dfs(node, count) {
     if (!node) return
@@ -294,7 +294,7 @@ var levelOrderBottom = function(root) {
  * @param {TreeNode} root
  * @return {number[][]}
  */
-var zigzagLevelOrder = function(root) {
+var zigzagLevelOrder = function (root) {
   let res = []
   function dfs(node, count) {
     if (!node) return
@@ -318,7 +318,7 @@ var zigzagLevelOrder = function(root) {
  * @param {TreeNode} root
  * @return {number[]}
  */
-var averageOfLevels = function(root) {
+var averageOfLevels = function (root) {
   if (!root) return []
   let res = [],
     queue = [root]
@@ -346,7 +346,7 @@ var averageOfLevels = function(root) {
  * @param {TreeNode} root
  * @return {number}
  */
-var minDepth = function(root) {
+var minDepth = function (root) {
   if (!root) return 0
   let queue = [root],
     len = 0
@@ -370,7 +370,7 @@ var minDepth = function(root) {
  * @param {TreeNode} root
  * @return {number}
  */
-var minDepth = function(root) {
+var minDepth = function (root) {
   if (!root) return 0
   let res = Number.MAX_SAFE_INTEGER
   function dfs(node, count) {
@@ -391,7 +391,7 @@ var minDepth = function(root) {
  * @param {number} sum
  * @return {boolean}
  */
-var hasPathSum = function(root, sum) {
+var hasPathSum = function (root, sum) {
   function dfs(node, sum) {
     if (!node) return false
     sum -= node.val
@@ -408,7 +408,7 @@ var hasPathSum = function(root, sum) {
  * @param {number} sum
  * @return {number[][]}
  */
-var pathSum = function(root, sum) {
+var pathSum = function (root, sum) {
   let res = []
   function dfs(node, temp, sum) {
     if (!node) return
@@ -432,7 +432,7 @@ var pathSum = function(root, sum) {
  * @param {number} sum
  * @return {number}
  */
-var pathSum = function(root, sum) {
+var pathSum = function (root, sum) {
   function dfs(node, count, arr) {
     if (!node) return 0
     let cur = node.val,
@@ -451,7 +451,7 @@ var pathSum = function(root, sum) {
  * @param {TreeNode} root
  * @return {string[]}
  */
-var binaryTreePaths = function(root) {
+var binaryTreePaths = function (root) {
   let res = []
   function dfs(node, path) {
     if (!node) return
@@ -472,7 +472,7 @@ var binaryTreePaths = function(root) {
  * @param {TreeNode} root
  * @return {number[][]}
  */
-var verticalTraversal = function(root) {
+var verticalTraversal = function (root) {
   const arr = []
   const ans = []
   function dfs(root, x, y) {
@@ -501,7 +501,7 @@ var verticalTraversal = function(root) {
  * @param {number} d
  * @return {TreeNode}
  */
-var addOneRow = function(root, v, d) {
+var addOneRow = function (root, v, d) {
   if (d === 1) {
     const node = new TreeNode(v)
     node.left = root
@@ -532,7 +532,7 @@ function dfs(node, v, n, d) {
  * @param {TreeNode} root
  * @return {number[]}
  */
-var findFrequentTreeSum = function(root) {
+var findFrequentTreeSum = function (root) {
   const hash = {}
   const max = { count: 0, val: [] }
   hash.max = max
@@ -562,7 +562,7 @@ var findFrequentTreeSum = function(root) {
  * @param {number[]} A
  * @return {number}
  */
-var sumSubarrayMins = function(A) {
+var sumSubarrayMins = function (A) {
   let ans = 0
   const stack = []
   A.push(Number.MIN_SAFE_INTEGER)
@@ -581,7 +581,7 @@ var sumSubarrayMins = function(A) {
  * @param {TreeNode} root
  * @return {number}
  */
-var widthOfBinaryTree = function(root) {
+var widthOfBinaryTree = function (root) {
   const hash = {}
   let ans = 1
   function dfs(node, i, pos) {
@@ -603,7 +603,7 @@ var widthOfBinaryTree = function(root) {
  * @param {number[]} post
  * @return {TreeNode}
  */
-var constructFromPrePost = function(pre, post) {
+var constructFromPrePost = function (pre, post) {
   if (!pre.length) return null
   const cur = pre[0]
   const node = new TreeNode(cur)
@@ -621,4 +621,32 @@ var constructFromPrePost = function(pre, post) {
     )
   }
   return node
+}
+/**
+ * 1161. 最大层内元素和
+ * @param {TreeNode} root
+ * @return {number}
+ */
+var maxLevelSum = function (root) {
+  let sum = Number.MIN_SAFE_INTEGER,
+    ans = 0,
+    n = 0
+  const queue = [root]
+  while (queue.length) {
+    let count = queue.length
+    let temp = 0
+    while (count) {
+      const cur = queue.shift()
+      if (cur) temp += cur.val
+      if (cur.left) queue.push(cur.left)
+      if (cur.right) queue.push(cur.right)
+      count--
+    }
+    n++
+    if (temp > sum) {
+      ans = n
+      sum = temp
+    }
+  }
+  return ans
 }
