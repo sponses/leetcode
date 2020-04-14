@@ -91,3 +91,53 @@ var openLock = function (deadends, target) {
   }
   return -1
 }
+/**
+ * 743. 网络延迟时间
+ * @param {number[][]} times
+ * @param {number} N
+ * @param {number} K
+ * @return {number}
+ */
+var networkDelayTime = function (times, N, K) {
+  const graph = new Array(N + 1)
+  for (let i = 0; i <= N; i++) {
+    graph[i] = new Array(N + 1)
+    graph[i].fill(-1)
+  }
+  for (let i = 0, len = times.length; i < len; i++) {
+    const time = times[i]
+    graph[time[0]][time[1]] = time[2]
+  }
+  const cost = new Array(N + 1)
+  for (let i = 1; i <= N; i++) {
+    cost[i] = graph[K][i]
+  }
+  cost[K] = 0
+  const visited = new Array(N + 1)
+  visited.fill(false)
+  visited[K] = true
+  for (let c = 0; c < N - 1; c++) {
+    let minVal = Number.MAX_SAFE_INTEGER
+    let minIndex = -1
+    for (let i = 1; i <= N; i++) {
+      if (cost[i] !== -1 && !visited[i] && minVal > cost[i]) {
+        minVal = cost[i]
+        minIndex = i
+      }
+    }
+    if (minIndex === -1) break
+    visited[minIndex] = true
+    for (let i = 1; i <= N; i++) {
+      if (graph[minIndex][i] !== -1) {
+        const temp = graph[minIndex][i] + cost[minIndex]
+        cost[i] = cost[i] === -1 ? temp : Math.min(temp, cost[i])
+      }
+    }
+  }
+  let ans = -1
+  for (let i = 1; i <= N; i++) {
+    if (cost[i] === -1) return -1
+    ans = Math.max(ans, cost[i])
+  }
+  return ans
+}
