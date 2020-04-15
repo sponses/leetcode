@@ -141,3 +141,42 @@ var networkDelayTime = function (times, N, K) {
   }
   return ans
 }
+/**
+ *310. 最小高度树
+ * @param {number} n
+ * @param {number[][]} edges
+ * @return {number[]}
+ */
+var findMinHeightTrees = function(n, edges) {
+    const visited = new Array(n)
+    visited.fill(false)
+    const inDegree = new Array(n)
+    inDegree.fill(0)
+    for(let i = 0, len = edges.length; i<len; i++){
+        const temp = edges[i]
+        inDegree[temp[0]]++
+        inDegree[temp[1]]++
+    }
+    while(true){
+        const temp = []
+        let flag = false
+        for(let i = 0; i<n; i++){
+            if(inDegree[i] > 1) flag = true
+            if(inDegree[i] === 1) temp.push(i)
+        }
+        if(!flag) break
+        for(let i = 0, len = temp.length; i<len;i++){
+            visited[temp[i]] = true
+            for(let j = 0, len2 = edges.length; j<len2; j++){
+                if(temp[i] === edges[j][0] || temp[i] === edges[j][1]) {
+                    const item = edges[j]
+                    inDegree[item[0]]--
+                    inDegree[item[1]]--
+                }
+            }
+        }
+    }
+    const ans = []
+    for(let i = 0; i<n; i++) if(!visited[i]) ans.push(i)
+    return ans
+};
