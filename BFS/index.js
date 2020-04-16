@@ -142,7 +142,7 @@ var networkDelayTime = function (times, N, K) {
   return ans
 }
 /**
- *310. 最小高度树
+ * 310. 最小高度树
  * @param {number} n
  * @param {number[][]} edges
  * @return {number[]}
@@ -179,4 +179,69 @@ var findMinHeightTrees = function(n, edges) {
     const ans = []
     for(let i = 0; i<n; i++) if(!visited[i]) ans.push(i)
     return ans
+};
+
+/**
+ * 1293. 网格中的最短路径(DFS)
+ * @param {number[][]} grid
+ * @param {number} k
+ * @return {number}
+ */
+var shortestPath = function(grid, k) {
+    const h = grid.length, w = grid[0].length
+    function dp(i,j,k){
+        if(k < 0) return Number.MAX_SAFE_INTEGER
+        if(i === h - 1 && j === w - 1) return 0
+        if(grid[i][j] === '#') return Number.MAX_SAFE_INTEGER
+        const temp = grid[i][j]
+        grid[i][j] = '#'
+        let ans = Number.MAX_SAFE_INTEGER
+        if(j + 1 < w) ans = Math.min(dp(i,j+1,k - (grid[i][j+1] === 1 ? 1 : 0)),ans)
+        if(j - 1 >= 0) ans = Math.min(dp(i,j-1,k - (grid[i][j-1] === 1 ? 1 : 0)),ans)
+        if(i + 1 < h) ans = Math.min(dp(i+1,j,k - (grid[i+1][j] === 1 ? 1 : 0)),ans)
+        if(i - 1 >= 0) ans = Math.min(dp(i-1,j,k - (grid[i-1][j] === 1 ? 1 : 0)),ans)
+        grid[i][j] = temp
+        return 1 + ans
+    }
+    const ans = dp(0,0,k)
+    return ans >= Number.MAX_SAFE_INTEGER ? -1 : ans
+};
+/**
+ * 1293. 网格中的最短路径
+ * @param {number[][]} grid
+ * @param {number} k
+ * @return {number}
+ */
+var shortestPath = function(grid, k) {
+    const h = grid.length, w = grid[0].length
+    const queue = [{x:0,y:0,rest:k}]
+    const next = [[-1,0],[1,0],[0,-1],[0,1]]
+    const visited = {}
+    if(h == 1 && w === 1) return 0
+    visited[0 + '-' + 0 + '-' +k] = true
+    let ans = 0
+    while(queue.length){
+        let count = queue.length
+        while(count){
+            count--
+            const {x,y,rest} = queue.shift()
+            for(let i = 0; i < 4;i++){
+                const nx = x + next[i][0]
+                const ny = y + next[i][1]
+                if(0 <= nx && nx < h && 0 <= ny && ny < w){
+                    if(nx === h-1 && ny === w-1) return ans + 1
+                    if(grid[nx][ny] === 1 && rest > 0 && !visited[nx+'-'+ny+'-'+(rest-1)]) {
+                        queue.push({x:nx,y:ny,rest:(rest-1)}) 
+                        visited[nx+'-'+ny+'-'+(rest-1)] = true
+                    }
+                    if(grid[nx][ny] === 0 && !visited[nx+'-'+ny+'-'+rest]) {
+                        queue.push({x:nx,y:ny,rest})
+                        visited[nx+'-'+ny+'-'+rest] = true
+                    }
+                }
+            }
+        }
+        ans++
+    }
+    return -1
 };
