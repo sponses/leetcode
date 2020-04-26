@@ -4,7 +4,7 @@
  * @param {number} amount
  * @return {number}
  */
-var coinChange = function(coins, amount) {
+var coinChange = function (coins, amount) {
   if (amount === 0) return 0
 
   let min = Number.MAX_SAFE_INTEGER
@@ -24,7 +24,7 @@ var coinChange = function(coins, amount) {
  * @param {number} amount
  * @return {number}
  */
-var coinChange = function(coins, amount) {
+var coinChange = function (coins, amount) {
   let obj = {},
     len = coins.length
 
@@ -51,7 +51,7 @@ var coinChange = function(coins, amount) {
  * @param {number} amount
  * @return {number}
  */
-var coinChange = function(coins, amount) {
+var coinChange = function (coins, amount) {
   let arr = new Array(amount + 1)
   arr.fill(-1)
 
@@ -77,7 +77,7 @@ var coinChange = function(coins, amount) {
  * @param {number[]} nums
  * @return {number}
  */
-var maxSubArray = function(nums) {
+var maxSubArray = function (nums) {
   let max = Number.MIN_SAFE_INTEGER
 
   for (let i = 0, len = nums.length; i < len; i++) {
@@ -94,7 +94,7 @@ var maxSubArray = function(nums) {
  * @param {number[]} nums
  * @return {number}
  */
-var maxSubArray = function(nums) {
+var maxSubArray = function (nums) {
   let res = nums[0],
     last = nums[0]
   for (let i = 1, len = nums.length; i < len; i++) {
@@ -109,7 +109,7 @@ var maxSubArray = function(nums) {
  * @param {number[]} nums
  * @return {number}
  */
-var rob = function(nums) {
+var rob = function (nums) {
   if (nums.length === 0) return 0
   if (nums.length === 1) return nums[0]
   if (nums.length === 2) return Math.max(nums[0], nums[1])
@@ -131,7 +131,7 @@ var rob = function(nums) {
  * @param {number} n
  * @return {number}
  */
-var climbStairs = function(n) {
+var climbStairs = function (n) {
   if (n === 1) return 1
 
   let a = 1,
@@ -148,20 +148,14 @@ var climbStairs = function(n) {
  * @param {string} s
  * @return {string}
  */
-var longestPalindrome = function(s) {
+var longestPalindrome = function (s) {
   let max = ''
   for (let i = 0, len = s.length; i < len; i++) {
     let temp = '',
       ans = ''
     for (let j = i; j < len; j++) {
       temp += s[j]
-      if (
-        temp ===
-        temp
-          .split('')
-          .reverse()
-          .join('')
-      ) {
+      if (temp === temp.split('').reverse().join('')) {
         ans = temp
       }
     }
@@ -174,7 +168,7 @@ var longestPalindrome = function(s) {
  * @param {number[]} nums
  * @return {number}
  */
-var lengthOfLIS = function(nums) {
+var lengthOfLIS = function (nums) {
   if (!nums.length) return 0
 
   let dp = new Array(nums.length)
@@ -197,7 +191,7 @@ var lengthOfLIS = function(nums) {
  * @param {number[][]} grid
  * @return {number}
  */
-var minPathSum = function(grid) {
+var minPathSum = function (grid) {
   const dp = new Array(grid.length)
   dp.fill(new Array(grid[0].length))
   let temp1 = 0,
@@ -224,7 +218,7 @@ var minPathSum = function(grid) {
  * @param {number} N
  * @return {number}
  */
-var fib = function(N) {
+var fib = function (N) {
   if (N === 0) return 0
   if (N === 1) return 1
   let a = 0,
@@ -241,7 +235,7 @@ var fib = function(N) {
  * @param {number[]} nums
  * @return {boolean}
  */
-var canPartition = function(nums) {
+var canPartition = function (nums) {
   if (nums.length === 0) return true
   let sum = 0,
     n = nums.length
@@ -265,7 +259,7 @@ var canPartition = function(nums) {
  * @param {number[]} stones
  * @return {number}
  */
-var lastStoneWeightII = function(stones) {
+var lastStoneWeightII = function (stones) {
   let sum = 0,
     n = stones.length
   for (let i = 0; i < n; i++) {
@@ -289,7 +283,7 @@ var lastStoneWeightII = function(stones) {
  * @param {number} n
  * @return {number}
  */
-var findMaxForm = function(strs, m, n) {
+var findMaxForm = function (strs, m, n) {
   let len = strs.length
   // m为0的个数， n为1的个数
   let dp = new Array(m + 1)
@@ -319,7 +313,7 @@ var findMaxForm = function(strs, m, n) {
  * @param {string[]} wordDict
  * @return {boolean}
  */
-var wordBreak = function(s, wordDict) {
+var wordBreak = function (s, wordDict) {
   let n = s.length
   let dp = new Array(n + 1)
   dp.fill(false)
@@ -340,7 +334,7 @@ var wordBreak = function(s, wordDict) {
  * @param {number} amount
  * @return {number}
  */
-var coinChange = function(coins, amount) {
+var coinChange = function (coins, amount) {
   let len = coins.length
   let dp = new Array(amount + 1)
   dp.fill(-1)
@@ -361,7 +355,7 @@ var coinChange = function(coins, amount) {
  * @param {number[]} coins
  * @return {number}
  */
-var change = function(amount, coins) {
+var change = function (amount, coins) {
   let dp = new Array(amount + 1)
   dp.fill(0)
   dp[0] = 1
@@ -377,7 +371,7 @@ var change = function(amount, coins) {
  * @param {number[]} nums
  * @return {number}
  */
-var rob = function(nums) {
+var rob = function (nums) {
   if (!nums.length) return 0
   let prev1 = 0,
     prev2 = nums[0]
@@ -393,7 +387,7 @@ var rob = function(nums) {
  * @param {number[]} nums
  * @return {number}
  */
-var rob = function(nums) {
+var rob = function (nums) {
   if (!nums.length) return 0
   let prev1 = 0,
     prev2 = nums[0]
@@ -416,7 +410,7 @@ var rob = function(nums) {
  * @param {number} n
  * @return {number}
  */
-var climbStairs = function(n) {
+var climbStairs = function (n) {
   let i = 1,
     j = 1
   for (let k = 2; k <= n; k++) {
@@ -431,7 +425,7 @@ var climbStairs = function(n) {
  * @param {number[]} nums
  * @return {number}
  */
-var lengthOfLIS = function(nums) {
+var lengthOfLIS = function (nums) {
   let len = nums.length,
     dp = new Array(len)
   dp.fill(1)
@@ -454,7 +448,7 @@ var lengthOfLIS = function(nums) {
  * @param {string} word2
  * @return {number}
  */
-var minDistance = function(word1, word2) {
+var minDistance = function (word1, word2) {
   function dp(i, j) {
     if (i === -1 && j === -1) return 0
     if (i === -1) return j + 1
@@ -471,7 +465,7 @@ var minDistance = function(word1, word2) {
  * @param {string} word2
  * @return {number}
  */
-var minDistance = function(word1, word2) {
+var minDistance = function (word1, word2) {
   let len1 = word1.length,
     len2 = word2.length
   let dp = new Array(len1 + 1)
@@ -499,7 +493,7 @@ var minDistance = function(word1, word2) {
  * @param {string} text2
  * @return {number}
  */
-var longestCommonSubsequence = function(text1, text2) {
+var longestCommonSubsequence = function (text1, text2) {
   function dp(i, j) {
     if (i === -1 || j === -1) return 0
     if (text2[j] === text1[i]) return 1 + dp(i - 1, j - 1)
@@ -513,7 +507,7 @@ var longestCommonSubsequence = function(text1, text2) {
  * @param {string} text2
  * @return {number}
  */
-var longestCommonSubsequence = function(text1, text2) {
+var longestCommonSubsequence = function (text1, text2) {
   let len1 = text1.length,
     len2 = text2.length
   let dp = new Array(len1 + 1)
@@ -540,16 +534,10 @@ var longestCommonSubsequence = function(text1, text2) {
  * @param {string} s
  * @return {number}
  */
-var longestPalindromeSubseq = function(s) {
+var longestPalindromeSubseq = function (s) {
   function dp(n, str) {
     if (n === -1)
-      return str ===
-        str
-          .split('')
-          .reverse()
-          .join('')
-        ? str.length
-        : 0
+      return str === str.split('').reverse().join('') ? str.length : 0
     return Math.max(dp(n - 1, str + s[n]), dp(n - 1, str))
   }
   return dp(s.length - 1, '')
@@ -559,7 +547,7 @@ var longestPalindromeSubseq = function(s) {
  * @param {string} s
  * @return {number}
  */
-var longestPalindromeSubseq = function(s) {
+var longestPalindromeSubseq = function (s) {
   function dp(i, j) {
     if (i === j) return 1
     if (s[i] === s[j]) return j - i > 1 ? dp(i + 1, j - 1) + 2 : 2
@@ -572,7 +560,7 @@ var longestPalindromeSubseq = function(s) {
  * @param {number[][]} intervals
  * @return {number}
  */
-var eraseOverlapIntervals = function(intervals) {
+var eraseOverlapIntervals = function (intervals) {
   if (intervals.length === 0) return 0
   intervals.sort((a, b) => a[1] - b[1])
   let end = intervals[0][1],
@@ -592,7 +580,7 @@ var eraseOverlapIntervals = function(intervals) {
  * @param {number[][]} points
  * @return {number}
  */
-var findMinArrowShots = function(points) {
+var findMinArrowShots = function (points) {
   if (!points.length) return 0
   points.sort((a, b) => a[1] - b[1])
   let end = points[0][1],
@@ -611,7 +599,7 @@ var findMinArrowShots = function(points) {
  * @param {number[]} prices
  * @return {number}
  */
-var maxProfit = function(prices) {
+var maxProfit = function (prices) {
   if (prices.length === 0) return 0
   let len = prices.length
   let dp = new Array(len)
@@ -634,7 +622,7 @@ var maxProfit = function(prices) {
  * @param {number[]} prices
  * @return {number}
  */
-var maxProfit = function(prices) {
+var maxProfit = function (prices) {
   if (prices.length === 0) return 0
   let len = prices.length,
     dp = new Array(len)
@@ -657,7 +645,7 @@ var maxProfit = function(prices) {
  * @param {number[]} nums
  * @return {number}
  */
-var rob = function(nums) {
+var rob = function (nums) {
   function dp(i) {
     if (i < 0) return 0
     if (i === 0) return nums[i]
@@ -670,7 +658,7 @@ var rob = function(nums) {
  * @param {number[]} nums
  * @return {number}
  */
-var rob = function(nums) {
+var rob = function (nums) {
   let len = nums.length,
     dp = new Array(len + 1)
   ;(dp[0] = 0), (dp[1] = nums[0])
@@ -684,7 +672,7 @@ var rob = function(nums) {
  * @param {TreeNode} root
  * @return {number}
  */
-var rob = function(root) {
+var rob = function (root) {
   function dp(node) {
     if (!node) return 0
     let left = node.left ? dp(node.left.left) + dp(node.left.right) : 0,
@@ -698,7 +686,7 @@ var rob = function(root) {
  * @param {number} num
  * @return {number[]}
  */
-var countBits = function(num) {
+var countBits = function (num) {
   if (num === 0) return [0]
   let res = [0, 1],
     mul = 2
@@ -717,7 +705,7 @@ var countBits = function(num) {
  * @param {number[]} nums
  * @return {boolean}
  */
-var canPartition = function(nums) {
+var canPartition = function (nums) {
   const len = nums.length
   if (!len) return false
   let sum = 0
@@ -740,7 +728,7 @@ var canPartition = function(nums) {
  * @param {string} t
  * @return {number}
  */
-var numDistinct = function(s, t) {
+var numDistinct = function (s, t) {
   const lenS = s.length,
     lenT = t.length
   const dp = new Array(lenS + 1)
@@ -765,7 +753,7 @@ var numDistinct = function(s, t) {
  * @param {number[]} rods
  * @return {number}
  */
-var tallestBillboard = function(rods) {
+var tallestBillboard = function (rods) {
   const len = rods.length
   let res = 0
   let sum = 0
@@ -789,7 +777,7 @@ var tallestBillboard = function(rods) {
  * @param {number} target
  * @return {number}
  */
-var numRollsToTarget = function(d, f, target) {
+var numRollsToTarget = function (d, f, target) {
   // 暴力递归
   // function dp(d,remain){
   //     if(d === 0 && remain === 0) return 1
@@ -824,7 +812,7 @@ var numRollsToTarget = function(d, f, target) {
  * @param {number[]} nums
  * @return {string}
  */
-var optimalDivision = function(nums) {
+var optimalDivision = function (nums) {
   if (nums.length === 1) return nums.toString()
   if (nums.length === 2) return nums.join('/')
   let ans = nums[0] + '/' + '('
@@ -840,7 +828,7 @@ var optimalDivision = function(nums) {
  * @param {number[]} chips
  * @return {number}
  */
-var minCostToMoveChips = function(chips) {
+var minCostToMoveChips = function (chips) {
   let ans1 = 0,
     ans2 = 0
   for (let i = 0, len = chips.length; i < len; i++) {
@@ -858,7 +846,7 @@ var minCostToMoveChips = function(chips) {
  * @param {string} t
  * @return {number}
  */
-var numDistinct = function(s, t) {
+var numDistinct = function (s, t) {
   const lenS = s.length,
     lenT = t.length
   const dp = new Array(lenT + 1)
@@ -885,7 +873,7 @@ var numDistinct = function(s, t) {
  * @param {number[]} nums
  * @return {number}
  */
-var lengthOfLIS = function(nums) {
+var lengthOfLIS = function (nums) {
   const len = nums.length
   const dp = new Array(len)
   if (!len) return 0
@@ -904,7 +892,7 @@ var lengthOfLIS = function(nums) {
  * @param {number[][]} pairs
  * @return {number}
  */
-var findLongestChain = function(pairs) {
+var findLongestChain = function (pairs) {
   if (!pairs.length) return 0
   pairs.sort((a, b) => a[0] - b[0])
   const len = pairs.length
@@ -924,7 +912,7 @@ var findLongestChain = function(pairs) {
  * @param {number[][]} envelopes
  * @return {number}
  */
-var maxEnvelopes = function(envelopes) {
+var maxEnvelopes = function (envelopes) {
   envelopes.sort((a, b) => a[1] - b[1])
   const len = envelopes.length
   if (!len) return 0
@@ -943,4 +931,35 @@ var maxEnvelopes = function(envelopes) {
     max = Math.max(max, dp[i])
   }
   return max
+}
+/**
+ * 877. 石子游戏
+ * @param {number[]} piles
+ * @return {boolean}
+ */
+var stoneGame = function (piles) {
+  const len = piles.length
+  const dp = new Array(len)
+  for (let i = 0; i < len; i++) {
+    dp[i] = new Array(len)
+    for (let j = 0; j < len; j++) {
+      dp[i][j] = [0, 0]
+      dp[i][i] = [piles[i], 0]
+    }
+  }
+  for (let l = 1; l < len; l++) {
+    for (let i = 0; i < len - l; i++) {
+      let j = i + l
+      const left = piles[i] + dp[i + 1][j][1]
+      const right = piles[j] + dp[i][j - 1][1]
+      if (left > right) {
+        dp[i][j][0] = left
+        dp[i][j][1] = dp[i + 1][j][0]
+      } else {
+        dp[i][j][0] = right
+        dp[i][j][1] = dp[i][j - 1][0]
+      }
+    }
+  }
+  return dp[len - 1][len - 1][0] > dp[len - 1][len - 1][1]
 }
