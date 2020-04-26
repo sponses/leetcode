@@ -650,3 +650,26 @@ var maxLevelSum = function (root) {
   }
   return ans
 }
+/**
+ * 701. 二叉搜索树中的插入操作
+ * @param {TreeNode} root
+ * @param {number} val
+ * @return {TreeNode}
+ */
+var insertIntoBST = function (root, val) {
+  if (!root) return new TreeNode(val)
+  if (root.val < val) {
+    if (root.right) {
+      insertIntoBST(root.right, val)
+    } else {
+      root.right = new TreeNode(val)
+    }
+  } else {
+    if (root.left) {
+      insertIntoBST(root.left, val)
+    } else {
+      root.left = new TreeNode(val)
+    }
+  }
+  return root
+}
