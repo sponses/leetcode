@@ -3,7 +3,7 @@
  * @param {number[]} nums
  * @return {boolean}
  */
-var containsDuplicate = function(nums) {
+var containsDuplicate = function (nums) {
   let obj = {}
   for (let i = 0, len = nums.length; i < len; i++) {
     if (obj.hasOwnProperty(nums[i])) {
@@ -19,7 +19,7 @@ var containsDuplicate = function(nums) {
  * @param {number} k
  * @return {boolean}
  */
-var containsNearbyDuplicate = function(nums, k) {
+var containsNearbyDuplicate = function (nums, k) {
   let obj = {}
   for (let i = 0, len = nums.length; i < len; i++) {
     if (obj.hasOwnProperty(nums[i])) {
@@ -36,7 +36,7 @@ var containsNearbyDuplicate = function(nums, k) {
  * @param {number} t
  * @return {boolean}
  */
-var containsNearbyAlmostDuplicate = function(nums, k, t) {
+var containsNearbyAlmostDuplicate = function (nums, k, t) {
   for (let i = 0, len = nums.length; i < len; i++) {
     for (let j = i + 1; j < len; j++) {
       if (j - i <= k && Math.abs(nums[i] - nums[j]) <= t) return true
@@ -49,7 +49,7 @@ var containsNearbyAlmostDuplicate = function(nums, k, t) {
  * @param {number[]} nums
  * @return {number}
  */
-var findMaxLength = function(nums) {
+var findMaxLength = function (nums) {
   let result = 0
   for (let i = 0, len = nums.length; i < len; i++) {
     let zero = 0,
@@ -72,7 +72,7 @@ var findMaxLength = function(nums) {
  * @param {string} s
  * @return {number}
  */
-var longestPalindrome = function(s) {
+var longestPalindrome = function (s) {
   let obj = {}
   for (let i = 0, len = s.length; i < len; i++) {
     if (!obj.hasOwnProperty(s[i])) {
@@ -104,7 +104,7 @@ var longestPalindrome = function(s) {
  * @param {number} target
  * @return {number[]}
  */
-const twoSum = function(nums, target) {
+const twoSum = function (nums, target) {
   let hash = {}
   for (let i = 0, len = nums.length; i < len; i++) {
     if (hash.hasOwnProperty(target - nums[i]))
@@ -118,7 +118,7 @@ const twoSum = function(nums, target) {
  * @param {string} str
  * @return {boolean}
  */
-var wordPattern = function(pattern, str) {
+var wordPattern = function (pattern, str) {
   const hashP = {},
     hashS = {}
   str = str.split(' ')
@@ -142,7 +142,7 @@ var wordPattern = function(pattern, str) {
  * @param {number} k
  * @return {string[]}
  */
-var topKFrequent = function(words, k) {
+var topKFrequent = function (words, k) {
   const hash = {},
     ans = []
   for (let i = 0, len = words.length; i < len; i++) {
@@ -170,3 +170,50 @@ var topKFrequent = function(words, k) {
   })
   return ans.slice(0, k)
 }
+
+/**
+ * 535. TinyURL 的加密与解密
+ */
+const hash = new Map()
+let cnt = 1000000000
+const str = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
+const x = new Map()
+for (let i = 0; i < 62; i++) {
+  x.set(i, str[i])
+}
+const baseUrl = 'http://tyj.com/'
+/**
+ * Encodes a URL to a shortened URL.
+ *
+ * @param {string} longUrl
+ * @return {string}
+ */
+var encode = function (longUrl) {
+  cnt++
+  let code = ''
+  let num = cnt
+  while (num) {
+    const temp = num % 62
+    code = x.get(temp) + code
+    num = Math.floor(num / 62)
+  }
+  hash.set(code, longUrl)
+  return baseUrl + code
+}
+
+/**
+ * Decodes a shortened URL to its original URL.
+ *
+ * @param {string} shortUrl
+ * @return {string}
+ */
+var decode = function (shortUrl) {
+  const n = baseUrl.length
+  const code = shortUrl.slice(n)
+  return hash.get(code)
+}
+
+/**
+ * Your functions will be called as such:
+ * decode(encode(url));
+ */
