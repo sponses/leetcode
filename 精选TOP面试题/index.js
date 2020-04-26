@@ -4,7 +4,7 @@
  * @param {string[]} wordDict
  * @return {string[]}
  */
-var wordBreak = function(s, wordDict) {
+var wordBreak = function (s, wordDict) {
   let res = [],
     len = s.length
   function dp(i, j, str) {
@@ -30,7 +30,7 @@ var wordBreak = function(s, wordDict) {
  * @param {string[]} wordDict
  * @return {boolean}
  */
-var wordBreak = function(s, wordDict) {
+var wordBreak = function (s, wordDict) {
   const len = s.length
   const dp = new Array(len + 1)
   dp.fill(false)
@@ -48,7 +48,7 @@ var wordBreak = function(s, wordDict) {
  * @param {string} p
  * @return {boolean}
  */
-var isMatch = function(s, p) {
+var isMatch = function (s, p) {
   function dp(i, j) {
     if (i < 0 && j < 0) return true
     if (j < 0) return false
@@ -80,7 +80,7 @@ var isMatch = function(s, p) {
  * @param {TreeNode} root
  * @return {boolean}
  */
-var isValidBST = function(root) {
+var isValidBST = function (root) {
   let compare = Number.MIN_SAFE_INTEGER,
     res = true
   function mfs(node) {
@@ -98,7 +98,7 @@ var isValidBST = function(root) {
  * @param {string} s
  * @return {boolean}
  */
-var isValid = function(s) {
+var isValid = function (s) {
   const hash = { ')': '(', '}': '{', ']': '[' }
   let stack = []
   for (let i = 0, len = s.length; i < len; i++) {
@@ -115,7 +115,7 @@ var isValid = function(s) {
  * @param {string} s
  * @return {boolean}
  */
-var isPalindrome = function(s) {
+var isPalindrome = function (s) {
   let res = ''
   for (let i = 0, len = s.length; i < len; i++) {
     let cur = s[i]
@@ -139,7 +139,7 @@ var isPalindrome = function(s) {
  * @param {string} t
  * @return {boolean}
  */
-var isAnagram = function(s, t) {
+var isAnagram = function (s, t) {
   let hashS = {}
   for (let i = 0, len = s.length; i < len; i++) {
     if (!hashS.hasOwnProperty(s[i])) {
@@ -166,7 +166,7 @@ var isAnagram = function(s, t) {
  * @param {string} t
  * @return {boolean}
  */
-var isAnagram = function(s, t) {
+var isAnagram = function (s, t) {
   s = s
     .split('')
     .sort((a, b) => a.charCodeAt() - b.charCodeAt())
@@ -183,7 +183,7 @@ var isAnagram = function(s, t) {
  * @param {number} target
  * @return {number[]}
  */
-const twoSum = function(nums, target) {
+const twoSum = function (nums, target) {
   const hash = {}
   for (let i = 0, len = nums.length; i < len; i++) {
     if (hash.hasOwnProperty(target - nums[i]))
@@ -196,7 +196,7 @@ const twoSum = function(nums, target) {
  * @param {number[]} height
  * @return {number}
  */
-var trap = function(height) {
+var trap = function (height) {
   let res = 0,
     stack = []
   for (let i = 0, len = height.length; i < len; i++) {
@@ -216,7 +216,7 @@ var trap = function(height) {
  * @param {number[]} heights
  * @return {number}
  */
-var largestRectangleArea = function(heights) {
+var largestRectangleArea = function (heights) {
   let stack = [],
     res = 0
   heights.push(0)
@@ -235,7 +235,7 @@ var largestRectangleArea = function(heights) {
  * @param {number[]} nums
  * @return {boolean}
  */
-var find132pattern = function(nums) {
+var find132pattern = function (nums) {
   let sec = Number.MIN_SAFE_INTEGER
   const stack = []
   for (let i = nums.length - 1; i >= 0; i--) {
@@ -252,7 +252,7 @@ var find132pattern = function(nums) {
  * @param {TreeNode} root
  * @return {boolean}
  */
-var isSymmetric = function(root) {
+var isSymmetric = function (root) {
   if (!root) return true
   function isSym(node1, node2) {
     if (!node1 && !node2) return true
@@ -267,7 +267,7 @@ var isSymmetric = function(root) {
  * @param {character[][]} board
  * @return {void} Do not return anything, modify board in-place instead.
  */
-var solve = function(board) {
+var solve = function (board) {
   if (!board || !board.length) return
   const h = board.length,
     w = board[0].length
@@ -309,7 +309,7 @@ var solve = function(board) {
  * @param {character[][]} board
  * @return {void} Do not return anything, modify board in-place instead.
  */
-var solve = function(board) {
+var solve = function (board) {
   if (!board || !board.length) return
   const h = board.length,
     w = board[0].length
@@ -365,7 +365,7 @@ var solve = function(board) {
  * @param {number} b
  * @return {number}
  */
-var getSum = function(a, b) {
+var getSum = function (a, b) {
   while (b !== 0) {
     let temp = a ^ b
     b = (a & b) << 1
@@ -379,7 +379,7 @@ var getSum = function(a, b) {
  * @param {string} word
  * @return {boolean}
  */
-var exist = function(board, word) {
+var exist = function (board, word) {
   const len = word.length,
     h = board.length,
     w = board[0].length
@@ -430,7 +430,7 @@ var exist = function(board, word) {
  * @param {number[]} nums
  * @return {number[][]}
  */
-var subsets = function(nums) {
+var subsets = function (nums) {
   const res = [],
     len = nums.length
   function backtrack(has, i) {
@@ -447,7 +447,7 @@ var subsets = function(nums) {
  * @param {string} str
  * @return {number}
  */
-var myAtoi = function(str) {
+var myAtoi = function (str) {
   let i = 0,
     len = str.length,
     res = ''
@@ -464,7 +464,7 @@ var myAtoi = function(str) {
  * @param {number} x
  * @return {number}
  */
-var mySqrt = function(x) {
+var mySqrt = function (x) {
   if (x === 0) return 0
   for (let i = 1; i <= x; i++) {
     if (i * i === x || (i * i < x && (i + 1) * (i + 1) > x)) return i
@@ -475,7 +475,7 @@ var mySqrt = function(x) {
  * @param {number[][]} matrix
  * @return {number[]}
  */
-var spiralOrder = function(matrix) {
+var spiralOrder = function (matrix) {
   if (!matrix.length) return []
   let l = 0,
     r = matrix[0].length - 1,
@@ -499,7 +499,7 @@ var spiralOrder = function(matrix) {
  * @param {ListNode} head
  * @return {ListNode}
  */
-var sortList = function(head) {
+var sortList = function (head) {
   let p = head,
     len = 0
   while (head) {
@@ -557,7 +557,7 @@ var sortList = function(head) {
  * @param {number} k
  * @return {number[]}
  */
-var maxSlidingWindow = function(nums, k) {
+var maxSlidingWindow = function (nums, k) {
   const queue = [],
     res = [],
     len = nums.length
@@ -582,7 +582,7 @@ var maxSlidingWindow = function(nums, k) {
  * @param {number[]} nums
  * @return {number}
  */
-var singleNumber = function(nums) {
+var singleNumber = function (nums) {
   let res = 0
   for (let i = 0, len = nums.length; i < len; i++) res ^= nums[i]
   return res
@@ -592,7 +592,7 @@ var singleNumber = function(nums) {
  * @param {number[][]} matrix
  * @return {void} Do not return anything, modify matrix in-place instead.
  */
-var setZeroes = function(matrix) {
+var setZeroes = function (matrix) {
   const h = matrix.length,
     w = matrix[0].length
   function dfs(i, j, dir) {
@@ -627,7 +627,7 @@ var setZeroes = function(matrix) {
  * @param {character[]} s
  * @return {void} Do not return anything, modify s in-place instead.
  */
-var reverseString = function(s) {
+var reverseString = function (s) {
   for (let i = 0, len = s.length; i < Math.floor(len / 2); i++) {
     ;[s[i], s[len - i - 1]] = [s[len - i - 1], s[i]]
   }
@@ -637,7 +637,7 @@ var reverseString = function(s) {
  * @param {ListNode} head
  * @return {ListNode}
  */
-var reverseList = function(head) {
+var reverseList = function (head) {
   function reverse(prev, l) {
     if (!l) return prev
     const temp = l.next
@@ -651,7 +651,7 @@ var reverseList = function(head) {
  * @param {Node} root
  * @return {Node}
  */
-var connect = function(root) {
+var connect = function (root) {
   function point(l, r) {
     if (!l && !r) return
     l.next = r
@@ -673,7 +673,7 @@ var connect = function(root) {
  * @param {number} n
  * @return {number}
  */
-var myPow = function(x, n) {
+var myPow = function (x, n) {
   if (x === 0) return 0
   if (n === 0) return 1
   if (n === 1) return x
@@ -687,7 +687,7 @@ var myPow = function(x, n) {
  * 307. 区域和检索 - 数组可修改（线段树）
  * @param {number[]} nums
  */
-var NumArray = function(nums) {
+var NumArray = function (nums) {
   let len = nums.length
   this.tree = new Array(len * 2)
   for (let i = 0; i < len; i++) {
@@ -703,7 +703,7 @@ var NumArray = function(nums) {
  * @param {number} val
  * @return {void}
  */
-NumArray.prototype.update = function(i, val) {
+NumArray.prototype.update = function (i, val) {
   i += this.tree.length / 2
   this.tree[i] = val
   while (i > 1) {
@@ -719,7 +719,7 @@ NumArray.prototype.update = function(i, val) {
  * @param {number} j
  * @return {number}
  */
-NumArray.prototype.sumRange = function(i, j) {
+NumArray.prototype.sumRange = function (i, j) {
   let l = this.tree.length / 2 + i
   let r = this.tree.length / 2 + j
   let sum = 0
@@ -751,7 +751,7 @@ NumArray.prototype.sumRange = function(i, j) {
  * @param {number} upper
  * @return {number}
  */
-var countRangeSum = function(nums, lower, upper) {
+var countRangeSum = function (nums, lower, upper) {
   let ans = 0
   for (let i = 0, len = nums.length; i < len; i++) {
     let sum = 0
@@ -767,7 +767,7 @@ var countRangeSum = function(nums, lower, upper) {
  * @param {number} n
  * @return {boolean}
  */
-var isPowerOfThree = function(n) {
+var isPowerOfThree = function (n) {
   let res = 1
   while (res < n) {
     res *= 3
@@ -779,7 +779,7 @@ var isPowerOfThree = function(n) {
  * @param {number[]} nums
  * @return {number[]}
  */
-var productExceptSelf = function(nums) {
+var productExceptSelf = function (nums) {
   const pre = [],
     suf = [],
     res = []
@@ -801,7 +801,7 @@ var productExceptSelf = function(nums) {
  * @param {number[]} digits
  * @return {number[]}
  */
-var plusOne = function(digits) {
+var plusOne = function (digits) {
   const len = digits.length
   if (digits[len - 1] !== 9) {
     digits[len - 1]++
@@ -824,7 +824,7 @@ var plusOne = function(digits) {
  * @param {string} s
  * @return {string}
  */
-var longestPalindrome = function(s) {
+var longestPalindrome = function (s) {
   const len = s.length,
     N = len * 2 - 1
   let res = ''
@@ -846,7 +846,7 @@ var longestPalindrome = function(s) {
  * @param {number[]} nums
  * @return {boolean}
  */
-var increasingTriplet = function(nums) {
+var increasingTriplet = function (nums) {
   let first = Number.MAX_SAFE_INTEGER,
     second = Number.MAX_SAFE_INTEGER
   for (let i = 0, len = nums.length; i < len; i++) {
@@ -865,7 +865,7 @@ var increasingTriplet = function(nums) {
  * @param {number[]} nums2
  * @return {number[]}
  */
-var intersect = function(nums1, nums2) {
+var intersect = function (nums1, nums2) {
   nums1.sort((a, b) => a - b)
   nums2.sort((a, b) => a - b)
   const ans = []
@@ -892,7 +892,7 @@ var intersect = function(nums1, nums2) {
  * @param {number[]} cost
  * @return {number}
  */
-var canCompleteCircuit = function(gas, cost) {
+var canCompleteCircuit = function (gas, cost) {
   let total = 0,
     len = gas.length,
     sum = 0,
@@ -912,7 +912,7 @@ var canCompleteCircuit = function(gas, cost) {
  * @param {string} s
  * @return {number}
  */
-var firstUniqChar = function(s) {
+var firstUniqChar = function (s) {
   const hash = {}
   for (let i = 0, len = s.length; i < len; i++) {
     if (hash.hasOwnProperty(s[i])) {
@@ -931,7 +931,7 @@ var firstUniqChar = function(s) {
  * @param {TreeNode} root
  * @return {number}
  */
-var maxPathSum = function(root) {
+var maxPathSum = function (root) {
   let res = Number.MIN_SAFE_INTEGER
   function getMax(node) {
     if (!node) return 0
@@ -948,7 +948,7 @@ var maxPathSum = function(root) {
  * @param {string} s
  * @return {number}
  */
-var calculate = function(s) {
+var calculate = function (s) {
   let stack = []
   for (let i = 0, len = s.length; i < len; i++) {
     if (s[i] === ' ') continue
@@ -988,7 +988,7 @@ var calculate = function(s) {
  * @param {number[]} nums
  * @return {TreeNode}
  */
-var sortedArrayToBST = function(nums) {
+var sortedArrayToBST = function (nums) {
   if (nums.length === 0) return null
   let mid = Math.floor(nums.length / 2)
   let root = new TreeNode(nums[mid])
@@ -1001,7 +1001,7 @@ var sortedArrayToBST = function(nums) {
  * @param {number} n
  * @return {string}
  */
-var countAndSay = function(n) {
+var countAndSay = function (n) {
   let ans = '1'
   for (let i = 2; i <= n; i++) {
     let temp = ''
@@ -1023,7 +1023,7 @@ var countAndSay = function(n) {
  * @param {number[]} nums
  * @return {number[]}
  */
-var countSmaller = function(nums) {
+var countSmaller = function (nums) {
   if (nums.length === 0) return []
   const ans = []
   for (let i = 0, len = nums.length; i < len - 1; i++) {
@@ -1041,7 +1041,7 @@ var countSmaller = function(nums) {
  * @param {Node} head
  * @return {Node}
  */
-var copyRandomList = function(head) {
+var copyRandomList = function (head) {
   const hash = new Map()
   if (!head) return null
   let cHead = new Node()
@@ -1074,7 +1074,7 @@ var copyRandomList = function(head) {
  * @return {Node}
  */
 const hash = new Map()
-var copyRandomList = function(head) {
+var copyRandomList = function (head) {
   if (!head) return null
   if (hash.has(head)) return hash.get(head)
   const node = new Node()
@@ -1089,7 +1089,7 @@ var copyRandomList = function(head) {
  * @param {string} s
  * @return {number}
  */
-var titleToNumber = function(s) {
+var titleToNumber = function (s) {
   const len = s.length
   let ans = 0
   for (let i = 0; i < len; i++) {
@@ -1102,7 +1102,7 @@ var titleToNumber = function(s) {
  * @param {number} n
  * @return {number}
  */
-var countPrimes = function(n) {
+var countPrimes = function (n) {
   const prims = new Array(n)
   prims.fill(true)
   for (let i = 2; i * i <= n; i++) {
@@ -1120,7 +1120,7 @@ var countPrimes = function(n) {
  * @param {string[]} strs
  * @return {string}
  */
-var longestCommonPrefix = function(strs) {
+var longestCommonPrefix = function (strs) {
   let ans = ''
   if (strs.length === 0) return ans
   if (strs.length === 1) return strs[0]
@@ -1145,7 +1145,7 @@ var longestCommonPrefix = function(strs) {
  * @param {number} n - a positive integer
  * @return {number}
  */
-var hammingWeight = function(n) {
+var hammingWeight = function (n) {
   let ans = 0
   for (let i = 32; i > 0; i--) {
     ans += n & 1
@@ -1158,20 +1158,14 @@ var hammingWeight = function(n) {
  * @param {string} s
  * @return {string[][]}
  */
-var partition = function(s) {
+var partition = function (s) {
   const ans = [],
     len = s.length
   function backtrack(i, temp) {
     if (i === len) ans.push(temp)
     for (let count = i; count < len; count++) {
       let cur = s.slice(i, count + 1)
-      if (
-        cur ===
-        cur
-          .split('')
-          .reverse()
-          .join('')
-      ) {
+      if (cur === cur.split('').reverse().join('')) {
         backtrack(count + 1, [...temp, cur])
       }
     }
@@ -1184,7 +1178,7 @@ var partition = function(s) {
  * @param {string} s
  * @return {string}
  */
-var longestPalindrome = function(s) {
+var longestPalindrome = function (s) {
   const len = s.length,
     N = len * 2 - 1
   let ans = ''
@@ -1207,7 +1201,7 @@ var longestPalindrome = function(s) {
  * @param {number} k
  * @return {number}
  */
-var longestSubstring = function(s, k) {
+var longestSubstring = function (s, k) {
   const queue = [s]
   let ans = 0
   while (queue.length) {
@@ -1241,7 +1235,7 @@ var longestSubstring = function(s, k) {
  * @param {number} n
  * @return {void} Do not return anything, modify nums1 in-place instead.
  */
-var merge = function(nums1, m, nums2, n) {
+var merge = function (nums1, m, nums2, n) {
   let i = 0,
     j = 0
   while (i < m && j < n) {
@@ -1266,7 +1260,7 @@ var merge = function(nums1, m, nums2, n) {
  * @param {number} n
  * @return {string[]}
  */
-var fizzBuzz = function(n) {
+var fizzBuzz = function (n) {
   const ans = []
   for (let i = 1; i <= n; i++) {
     if (i % 3 === 0 && i % 5 === 0) {
@@ -1286,7 +1280,7 @@ var fizzBuzz = function(n) {
  * @param {string} s
  * @return {number}
  */
-var numDecodings = function(s) {
+var numDecodings = function (s) {
   if (s[0] == 0) return 0
   let prev1 = 1,
     prev2 = 1
@@ -1312,7 +1306,7 @@ var numDecodings = function(s) {
  * @param {string} p
  * @return {boolean}
  */
-var isMatch = function(s, p) {
+var isMatch = function (s, p) {
   const lenS = s.length,
     lenP = p.length
   const dp = new Array(lenS + 1)
@@ -1344,7 +1338,7 @@ var isMatch = function(s, p) {
  * @param {number} numRows
  * @return {number[][]}
  */
-var generate = function(numRows) {
+var generate = function (numRows) {
   if (numRows === 0) return []
   const ans = [[1]]
   for (let i = 1; i < numRows; i++) {
@@ -1354,6 +1348,22 @@ var generate = function(numRows) {
     }
     cur.push(1)
     ans.push(cur)
+  }
+  return ans
+}
+/**
+ * 1108. IP 地址无效化
+ * @param {string} address
+ * @return {string}
+ */
+var defangIPaddr = function (address) {
+  let ans = ''
+  for (let i = 0, len = address.length; i < len; i++) {
+    if (address[i] === '.') {
+      ans += '[.]'
+    } else {
+      ans += address[i]
+    }
   }
   return ans
 }
