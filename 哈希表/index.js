@@ -217,3 +217,26 @@ var decode = function (shortUrl) {
  * Your functions will be called as such:
  * decode(encode(url));
  */
+/**
+ * 451. 根据字符出现频率排序
+ * @param {string} s
+ * @return {string}
+ */
+var frequencySort = function (s) {
+  const hash = {}
+  let cnt = 0
+  for (let i = 0, len = s.length; i < len; i++) {
+    if (hash.hasOwnProperty(s[i])) {
+      hash[s[i]]++
+    } else {
+      hash[s[i]] = 1
+    }
+  }
+  return [...s]
+    .sort(
+      (a, b) =>
+        hash[b] - hash[a] ||
+        (hash[a] === hash[b] && a.charCodeAt() - b.charCodeAt())
+    )
+    .join('')
+}
