@@ -3,7 +3,7 @@
  * @param {string} s
  * @return {boolean}
  */
-var isPalindrome = function(s) {
+var isPalindrome = function (s) {
   s = s.replace(
     /[\ |\~|\`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\-|\_|\+|\=|\||\\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?]/g,
     ''
@@ -26,7 +26,7 @@ var isPalindrome = function(s) {
  * @param {string} s
  * @return {boolean}
  */
-var isPalindrome = function(s) {
+var isPalindrome = function (s) {
   s = s.replace(
     /[\ |\~|\`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\-|\_|\+|\=|\||\\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?]/g,
     ''
@@ -46,7 +46,7 @@ var isPalindrome = function(s) {
  * @param {string} s
  * @return {string}
  */
-var decodeString = function(s) {
+var decodeString = function (s) {
   let stack = []
   for (let i = 0, len = s.length; i < len; i++) {
     if (s[i] !== ']') {
@@ -81,7 +81,7 @@ var decodeString = function(s) {
  * @param {number} K
  * @return {number}
  */
-var shortestSubarray = function(A, K) {
+var shortestSubarray = function (A, K) {
   const N = A.length
   const pre = new Array(N + 1)
   pre[0] = 0
@@ -97,4 +97,20 @@ var shortestSubarray = function(A, K) {
     deque.push(i)
   }
   return ans > N ? -1 : ans
+}
+/**
+ * 921. 使括号有效的最少添加
+ * @param {string} S
+ * @return {number}
+ */
+var minAddToMakeValid = function (S) {
+  const stack = []
+  for (let i = 0, len = S.length; i < len; i++) {
+    if (stack[stack.length - 1] === '(' && S[i] === ')') {
+      stack.pop()
+    } else {
+      stack.push(S[i])
+    }
+  }
+  return stack.length
 }
