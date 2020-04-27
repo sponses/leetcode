@@ -115,3 +115,32 @@ var longestMountain = function (A) {
   }
   return ans
 }
+/**
+ * 846. 一手顺子
+ * @param {number[]} hand
+ * @param {number} W
+ * @return {boolean}
+ */
+var isNStraightHand = function (hand, W) {
+  const hash = {}
+  for (let i = 0, len = hand.length; i < len; i++) {
+    if (hash.hasOwnProperty(hand[i])) {
+      hash[hand[i]]++
+    } else {
+      hash[hand[i]] = 1
+    }
+  }
+  hand.sort((a, b) => a - b)
+  for (let i = 0, len = hand.length; i < len; i++) {
+    let cur = hand[i]
+    if (hash[cur] <= 0) continue
+    hash[cur]--
+    let cnt = W - 1
+    while (cnt) {
+      if (!hash[cur + W - cnt] || hash[cur + W - cnt] <= 0) return false
+      hash[cur + W - cnt]--
+      cnt--
+    }
+  }
+  return true
+}
