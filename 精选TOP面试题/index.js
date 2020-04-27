@@ -1367,3 +1367,14 @@ var defangIPaddr = function (address) {
   }
   return ans
 }
+/**
+ * 1317. 将整数转换为两个无零整数的和
+ * @param {number} n
+ * @return {number[]}
+ */
+var getNoZeroIntegers = function (n) {
+  for (let i = 1; i < n; i++) {
+    let temp = n - i
+    if (!/0/.test(i) && !/0/.test(temp)) return [i, temp]
+  }
+}
