@@ -3,7 +3,7 @@
  * @param {number[]} nums
  * @return {number}
  */
-var findUnsortedSubarray = function(nums) {
+var findUnsortedSubarray = function (nums) {
   let arr = [...nums].sort((a, b) => a - b)
   let start = nums.length,
     end = 0,
@@ -23,7 +23,7 @@ var findUnsortedSubarray = function(nums) {
  * @param {number[]} deck
  * @return {boolean}
  */
-var hasGroupsSizeX = function(deck) {
+var hasGroupsSizeX = function (deck) {
   if (!deck.length) return false
   function gcd(a, b) {
     if (a % b === 0) return b
@@ -54,7 +54,7 @@ var hasGroupsSizeX = function(deck) {
  * @param {number[]} A
  * @return {boolean}
  */
-var validMountainArray = function(A) {
+var validMountainArray = function (A) {
   const len = A.length
   let i = 0
   while (i < len - 1 && A[i] < A[i + 1]) {
@@ -71,7 +71,7 @@ var validMountainArray = function(A) {
  * @param {number[]} nums
  * @return {number}
  */
-var thirdMax = function(nums) {
+var thirdMax = function (nums) {
   let arr = [...new Set(nums)].sort((a, b) => a - b)
   if (arr.length < 3) return Math.max(...arr)
   return arr[arr.length - 3]
@@ -81,7 +81,7 @@ var thirdMax = function(nums) {
  * @param {number[][]} matrix
  * @return {boolean}
  */
-var isToeplitzMatrix = function(matrix) {
+var isToeplitzMatrix = function (matrix) {
   const hash = {}
   for (let i = 0, h = matrix.length; i < h; i++) {
     for (let j = 0, w = matrix[0].length; j < w; j++) {
@@ -90,4 +90,28 @@ var isToeplitzMatrix = function(matrix) {
     }
   }
   return true
+}
+/**
+ * 845. 数组中的最长山脉
+ * @param {number[]} A
+ * @return {number}
+ */
+var longestMountain = function (A) {
+  const len = A.length
+  let ans = 0
+  let i = 0
+  while (i < len - 1) {
+    while (i < len - 1 && A[i] >= A[i + 1]) i++
+    let x = i
+    while (i < len - 1 && A[i] <= A[i + 1]) {
+      if (A[i] === A[i + 1]) x = i + 1
+      i++
+    }
+    let y = i
+    while (i < len - 1 && A[i] > A[i + 1]) i++
+    if (i > y && y > x) {
+      ans = Math.max(ans, i - x + 1)
+    }
+  }
+  return ans
 }
