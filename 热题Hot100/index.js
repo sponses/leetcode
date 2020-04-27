@@ -3,7 +3,7 @@
  * @param {number[]} nums
  * @return {number[][]}
  */
-var threeSum = function(nums) {
+var threeSum = function (nums) {
   nums.sort((a, b) => a - b)
   let res = []
   for (let i = 0, len = nums.length; i < len; i++) {
@@ -38,7 +38,7 @@ var threeSum = function(nums) {
  * @param {ListNode} l2
  * @return {ListNode}
  */
-var addTwoNumbers = function(l1, l2) {
+var addTwoNumbers = function (l1, l2) {
   let num1 = '',
     num2 = ''
   while (l1) {
@@ -86,7 +86,7 @@ var addTwoNumbers = function(l1, l2) {
  * @param {number[]} prices
  * @return {number}
  */
-var maxProfit = function(prices) {
+var maxProfit = function (prices) {
   let min = Number.MAX_SAFE_INTEGER,
     profit = 0
   for (let i = 0, len = prices.length; i < len; i++) {
@@ -100,7 +100,7 @@ var maxProfit = function(prices) {
  * @param {TreeNode} root
  * @return {number[]}
  */
-var inorderTraversal = function(root) {
+var inorderTraversal = function (root) {
   let res = []
   function mfs(node) {
     if (!node) return null
@@ -116,7 +116,7 @@ var inorderTraversal = function(root) {
  * @param {TreeNode} root
  * @return {number[][]}
  */
-var levelOrder = function(root) {
+var levelOrder = function (root) {
   let res = []
   function dfs(node, i) {
     if (!node) return
@@ -133,7 +133,7 @@ var levelOrder = function(root) {
  * @param {number[]} nums
  * @return {number}
  */
-var maxCoins = function(nums) {
+var maxCoins = function (nums) {
   function dp(arr) {
     if (arr.length === 0) return 0
     if (arr.length === 1) return arr[0]
@@ -143,7 +143,7 @@ var maxCoins = function(nums) {
         right = i === arr.length - 1 ? 1 : arr[i + 1]
       res = Math.max(
         res,
-        left * arr[i] * right + dp(arr.filter(x => x !== arr[i]))
+        left * arr[i] * right + dp(arr.filter((x) => x !== arr[i]))
       )
     }
     return res
@@ -155,7 +155,7 @@ var maxCoins = function(nums) {
  * @param {number} n
  * @return {number}
  */
-var climbStairs = function(n) {
+var climbStairs = function (n) {
   function dp(n) {
     if (n === 0) return 1
     if (n === 1) return 1
@@ -169,7 +169,7 @@ var climbStairs = function(n) {
  * @param {number} n
  * @return {number}
  */
-var climbStairs = function(n) {
+var climbStairs = function (n) {
   let a = 1,
     b = 1
   for (let i = 2; i <= n; i++) {
@@ -185,7 +185,7 @@ var climbStairs = function(n) {
  * @param {number} amount
  * @return {number}
  */
-var coinChange = function(coins, amount) {
+var coinChange = function (coins, amount) {
   function dp(n) {
     if (n < 0) return -1
     if (n === 0) return 0
@@ -207,7 +207,7 @@ var coinChange = function(coins, amount) {
  * @param {number} amount
  * @return {number}
  */
-var coinChange = function(coins, amount) {
+var coinChange = function (coins, amount) {
   let dp = new Array(amount + 1)
   dp.fill(-1)
   dp[0] = 0
@@ -228,7 +228,7 @@ var coinChange = function(coins, amount) {
  * @param {number} target
  * @return {number[][]}
  */
-var combinationSum = function(candidates, target) {
+var combinationSum = function (candidates, target) {
   let res = [],
     len = candidates.length
   candidates.sort((a, b) => a - b)
@@ -251,7 +251,7 @@ var combinationSum = function(candidates, target) {
  * @param {number[]} height
  * @return {number}
  */
-var maxArea = function(height) {
+var maxArea = function (height) {
   function dp(i, j) {
     if (i > j) return 0
     if (i === j) return 0
@@ -265,7 +265,7 @@ var maxArea = function(height) {
  * @param {number[]} height
  * @return {number}
  */
-var maxArea = function(height) {
+var maxArea = function (height) {
   let left = 0,
     right = height.length - 1
   let res = (right - left) * Math.min(height[left], height[right])
@@ -284,7 +284,7 @@ var maxArea = function(height) {
  * @param {TreeNode} root
  * @return {TreeNode}
  */
-var convertBST = function(root) {
+var convertBST = function (root) {
   let count = 0
   function dfs(node) {
     if (!node) return
@@ -302,7 +302,7 @@ var convertBST = function(root) {
  * @param {number[]} T
  * @return {number[]}
  */
-var dailyTemperatures = function(T) {
+var dailyTemperatures = function (T) {
   let res = []
   for (let i = 0, len = T.length; i < len; i++) {
     let j = i
@@ -320,7 +320,7 @@ var dailyTemperatures = function(T) {
  * @param {string} s
  * @return {string}
  */
-var decodeString = function(s) {
+var decodeString = function (s) {
   let stack = []
   for (let i = 0, len = s.length; i < len; i++) {
     if (s[i] !== ']') {
@@ -354,7 +354,7 @@ var decodeString = function(s) {
  * @param {TreeNode} root
  * @return {number}
  */
-var diameterOfBinaryTree = function(root) {
+var diameterOfBinaryTree = function (root) {
   let res = 1
   function dfs(node) {
     if (node == null) return 0
@@ -372,7 +372,7 @@ var diameterOfBinaryTree = function(root) {
  * @param {string} word2
  * @return {number}
  */
-var minDistance = function(word1, word2) {
+var minDistance = function (word1, word2) {
   function dp(i, j) {
     if (i < 0 && j < 0) return 0
     if (i < 0 || j < 0) return Math.abs(j - i)
@@ -387,7 +387,7 @@ var minDistance = function(word1, word2) {
  * @param {string} p
  * @return {number[]}
  */
-var findAnagrams = function(s, p) {
+var findAnagrams = function (s, p) {
   let hash = {},
     left = 0,
     right = 0,
@@ -429,7 +429,7 @@ var findAnagrams = function(s, p) {
  * @param {number[]} nums
  * @return {number[]}
  */
-var findDisappearedNumbers = function(nums) {
+var findDisappearedNumbers = function (nums) {
   for (let i = 0, len = nums.length; i < len; i++) {
     let cur = nums[i]
     while (cur !== i + 1 && nums[cur - 1] !== cur) {
@@ -449,7 +449,7 @@ var findDisappearedNumbers = function(nums) {
  * @param {number} target
  * @return {number[]}
  */
-var searchRange = function(nums, target) {
+var searchRange = function (nums, target) {
   let left = 0,
     right = nums.length - 1
   while (left <= right) {
@@ -474,7 +474,7 @@ var searchRange = function(nums, target) {
  * @param {number} n
  * @return {string[]}
  */
-var generateParenthesis = function(n) {
+var generateParenthesis = function (n) {
   if (n === 0) return ['']
   let res = []
   function backtrack(str, left, right) {
@@ -509,7 +509,7 @@ var generateParenthesis = function(n) {
  * @param {string[]} strs
  * @return {string[][]}
  */
-var groupAnagrams = function(strs) {
+var groupAnagrams = function (strs) {
   let hash = {},
     res = [],
     count = 0
@@ -535,7 +535,7 @@ var groupAnagrams = function(strs) {
  * 208. 实现 Trie (前缀树)
  * Initialize your data structure here.
  */
-var Trie = function() {
+var Trie = function () {
   this.root = {}
 }
 
@@ -544,7 +544,7 @@ var Trie = function() {
  * @param {string} word
  * @return {void}
  */
-Trie.prototype.insert = function(word) {
+Trie.prototype.insert = function (word) {
   const insert = (node, word) => {
     if (!word) return
     let char = word[0]
@@ -560,7 +560,7 @@ Trie.prototype.insert = function(word) {
  * @param {string} word
  * @return {boolean}
  */
-Trie.prototype.search = function(word) {
+Trie.prototype.search = function (word) {
   const search = (node, word) => {
     if (!word) return false
     let char = word[0]
@@ -576,7 +576,7 @@ Trie.prototype.search = function(word) {
  * @param {string} prefix
  * @return {boolean}
  */
-Trie.prototype.startsWith = function(prefix) {
+Trie.prototype.startsWith = function (prefix) {
   const startsWith = (node, prefix) => {
     if (!prefix) return false
     let char = prefix[0]
@@ -599,7 +599,7 @@ Trie.prototype.startsWith = function(prefix) {
  * @param {TreeNode} root
  * @return {TreeNode}
  */
-var invertTree = function(root) {
+var invertTree = function (root) {
   function reverse(node) {
     if (!node) return
     let temp = node.right
@@ -616,7 +616,7 @@ var invertTree = function(root) {
  * @param {number[]} nums
  * @return {boolean}
  */
-var canJump = function(nums) {
+var canJump = function (nums) {
   if (nums.length === 0) return true
   let len = nums.length
   function dp(i) {
@@ -635,7 +635,7 @@ var canJump = function(nums) {
  * @param {number[]} nums
  * @return {boolean}
  */
-var canJump = function(nums) {
+var canJump = function (nums) {
   let len = nums.length,
     dp = new Array(len)
   dp.fill(false)
@@ -657,7 +657,7 @@ var canJump = function(nums) {
  * @param {number} k
  * @return {number}
  */
-var findKthLargest = function(nums, k) {
+var findKthLargest = function (nums, k) {
   if (k > nums.length) return -1
   let heap = [null]
   function insert(val) {
@@ -708,7 +708,7 @@ var findKthLargest = function(nums, k) {
  * @param {number[]} nums
  * @return {number}
  */
-var longestConsecutive = function(nums) {
+var longestConsecutive = function (nums) {
   let hash = {}
   for (let i = 0, len = nums.length; i < len; i++) {
     hash[nums[i]] = 1
@@ -740,7 +740,7 @@ var longestConsecutive = function(nums) {
  * @param {number[]} heights
  * @return {number}
  */
-var largestRectangleArea = function(heights) {
+var largestRectangleArea = function (heights) {
   function dp(i, j) {
     if (i > j) return 0
     if (i === j) return heights[i]
@@ -757,7 +757,7 @@ var largestRectangleArea = function(heights) {
  * @param {number[]} heights
  * @return {number}
  */
-var largestRectangleArea = function(heights) {
+var largestRectangleArea = function (heights) {
   if (heights.length === 0) return 0
   let len = heights.length,
     dp = new Array(len)
@@ -779,7 +779,7 @@ var largestRectangleArea = function(heights) {
  * @param {number[]} nums
  * @return {number}
  */
-var lengthOfLIS = function(nums) {
+var lengthOfLIS = function (nums) {
   function dp(i, j) {
     if (i === j) return 1
     if (i > j) return 0
@@ -797,15 +797,12 @@ var lengthOfLIS = function(nums) {
  * @param {string} s
  * @return {string}
  */
-var longestPalindrome = function(s) {
+var longestPalindrome = function (s) {
   function dp(i, j) {
     if (i === j) return s[i]
     if (j < i) return ''
     let cur = s.slice(i, j + 1),
-      temp = cur
-        .split('')
-        .reverse()
-        .join('')
+      temp = cur.split('').reverse().join('')
     if (cur === temp) return cur
     let l = dp(i + 1, j),
       r = dp(i, j - 1)
@@ -818,7 +815,7 @@ var longestPalindrome = function(s) {
  * @param {string} s
  * @return {string}
  */
-var longestPalindrome = function(s) {
+var longestPalindrome = function (s) {
   if (s.length === 0) return ''
   let len = s.length,
     dp = new Array(len)
@@ -830,10 +827,7 @@ var longestPalindrome = function(s) {
     for (let i = 0; i < len - l; i++) {
       let j = l + i
       let cur = s.slice(i, j + 1),
-        temp = cur
-          .split('')
-          .reverse()
-          .join('')
+        temp = cur.split('').reverse().join('')
       if (cur === temp) {
         dp[i][j] = cur
       } else {
@@ -851,7 +845,7 @@ var longestPalindrome = function(s) {
  * @param {string} s
  * @return {number}
  */
-var lengthOfLongestSubstring = function(s) {
+var lengthOfLongestSubstring = function (s) {
   let hash = {},
     left = 0,
     right = 0,
@@ -879,7 +873,7 @@ var lengthOfLongestSubstring = function(s) {
  * @param {string} s
  * @return {number}
  */
-var longestValidParentheses = function(s) {
+var longestValidParentheses = function (s) {
   function dp(i, j) {
     if (i === j) return 0
     if (i > j) return 0
@@ -905,7 +899,7 @@ var longestValidParentheses = function(s) {
  * @param {TreeNode} q
  * @return {TreeNode}
  */
-var lowestCommonAncestor = function(root, p, q) {
+var lowestCommonAncestor = function (root, p, q) {
   if (!root) return null
   if (p === q) return p
   if (root === q || root === p) return root
@@ -919,7 +913,7 @@ var lowestCommonAncestor = function(root, p, q) {
  * @param {number[]} nums
  * @return {number}
  */
-var majorityElement = function(nums) {
+var majorityElement = function (nums) {
   let count = 0,
     res
   for (let i = 0, len = nums.length; i < len; i++) {
@@ -937,7 +931,7 @@ var majorityElement = function(nums) {
  * @param {TreeNode} root
  * @return {number}
  */
-var maxDepth = function(root) {
+var maxDepth = function (root) {
   function dfs(node) {
     if (!node) return 0
     return 1 + Math.max(dfs(node.left), dfs(node.right))
@@ -950,7 +944,7 @@ var maxDepth = function(root) {
  * @param {string[]} wordDict
  * @return {boolean}
  */
-var wordBreak = function(s, wordDict) {
+var wordBreak = function (s, wordDict) {
   let len = s.length
   function dp(i, j) {
     let str = s.slice(i, j + 1),
@@ -969,7 +963,7 @@ var wordBreak = function(s, wordDict) {
  * @param {number} n
  * @return {number}
  */
-var uniquePaths = function(m, n) {
+var uniquePaths = function (m, n) {
   function dp(i, j) {
     if (i >= m || j >= n) return 0
     if (i === m - 1 && j === n - 1) return 1
@@ -982,7 +976,7 @@ var uniquePaths = function(m, n) {
  * @param {number[]} height
  * @return {number}
  */
-var trap = function(height) {
+var trap = function (height) {
   let left = 0,
     right = height.length - 1,
     res = 0
@@ -1009,7 +1003,7 @@ var trap = function(height) {
  * @param {number} S
  * @return {number}
  */
-var findTargetSumWays = function(nums, S) {
+var findTargetSumWays = function (nums, S) {
   let len = nums.length
   function dp(count, i) {
     if (i === len) return count === S ? 1 : 0
@@ -1022,7 +1016,7 @@ var findTargetSumWays = function(nums, S) {
  * @param {TreeNode} root
  * @return {boolean}
  */
-var isSymmetric = function(root) {
+var isSymmetric = function (root) {
   if (!root) return true
   function isSym(node1, node2) {
     if (!node1 && !node2) return true
@@ -1037,7 +1031,7 @@ var isSymmetric = function(root) {
  * @param {number[]} nums
  * @return {number[][]}
  */
-var subsets = function(nums) {
+var subsets = function (nums) {
   let res = []
   function backtrack(has, rest) {
     res.push(has)
@@ -1053,7 +1047,7 @@ var subsets = function(nums) {
  * @param {number[]} nums
  * @return {number[][]}
  */
-var subsets = function(nums) {
+var subsets = function (nums) {
   let res = [],
     len = nums.length
   function backtrack(has, start) {
@@ -1071,7 +1065,7 @@ var subsets = function(nums) {
  * @param {number} k
  * @return {number}
  */
-var subarraySum = function(nums, k) {
+var subarraySum = function (nums, k) {
   let res = 0
   for (let i = 0, len = nums.length; i < len; i++) {
     let count = nums[i]
@@ -1088,7 +1082,7 @@ var subarraySum = function(nums, k) {
  * @param {number[]} nums
  * @return {number}
  */
-var maxSubArray = function(nums) {
+var maxSubArray = function (nums) {
   let sum = 0
   for (let i = 0, len = nums.length; i < len; i++) sum += nums[i]
   function dp(i, j, sum) {
@@ -1106,7 +1100,7 @@ var maxSubArray = function(nums) {
  * @param {number[]} nums
  * @return {number}
  */
-var maxSubArray = function(nums) {
+var maxSubArray = function (nums) {
   if (nums.length === 0) return 0
   let len = nums.length,
     res = Number.MIN_SAFE_INTEGER,
@@ -1122,7 +1116,7 @@ var maxSubArray = function(nums) {
  * @param {number[]} nums
  * @return {boolean}
  */
-var canPartition = function(nums) {
+var canPartition = function (nums) {
   let sum = 0,
     len = nums.length
   for (let i = 0; i < len; i++) sum += nums[i]
@@ -1143,7 +1137,7 @@ var canPartition = function(nums) {
  * @param {number[]} nums
  * @return {void} Do not return anything, modify nums in-place instead.
  */
-var maxProduct = function(nums) {
+var maxProduct = function (nums) {
   let len = nums.length,
     dp = new Array(len),
     res = Number.MIN_SAFE_INTEGER
@@ -1165,7 +1159,7 @@ var maxProduct = function(nums) {
  * @param {number[]} nums
  * @return {number}
  */
-var maxProduct = function(nums) {
+var maxProduct = function (nums) {
   let res = Number.MIN_SAFE_INTEGER,
     max = 1,
     min = 1
@@ -1187,7 +1181,7 @@ var maxProduct = function(nums) {
  * @param {TreeNode} t2
  * @return {TreeNode}
  */
-var mergeTrees = function(t1, t2) {
+var mergeTrees = function (t1, t2) {
   if (!t1 || !t2) return t1 ? t1 : t2
   t1.val = t1.val + t2.val
   t1.left = mergeTrees(t1.left, t2.left)
@@ -1199,7 +1193,7 @@ var mergeTrees = function(t1, t2) {
  * @param {number} n
  * @return {number}
  */
-var numTrees = function(n) {
+var numTrees = function (n) {
   let dp = new Array(n + 1)
   dp.fill(0)
   dp[0] = 1
@@ -1216,7 +1210,7 @@ var numTrees = function(n) {
  * @param {number[]} nums
  * @return {void} Do not return anything, modify nums in-place instead.
  */
-var moveZeroes = function(nums) {
+var moveZeroes = function (nums) {
   let p1 = 0,
     len = nums.length
   while (nums[p1] !== 0 && p1 < len) p1++
@@ -1234,7 +1228,7 @@ var moveZeroes = function(nums) {
  * @param {ListNode} head
  * @return {boolean}
  */
-var isPalindrome = function(head) {
+var isPalindrome = function (head) {
   let arr = []
   while (head) {
     arr.push(head.val)
@@ -1250,31 +1244,19 @@ var isPalindrome = function(head) {
  * @param {string} s
  * @return {number}
  */
-var countSubstrings = function(s) {
+var countSubstrings = function (s) {
   let l = 0,
     r = 0,
     len = s.length,
     res = 0
   while (r < len) {
     let cur = s.slice(l, r + 1)
-    if (
-      cur
-        .split('')
-        .reverse()
-        .join('') === cur
-    )
-      res++
+    if (cur.split('').reverse().join('') === cur) res++
     let count = l
     while (count < r) {
       count++
       let cur = s.slice(count, r + 1)
-      if (
-        cur
-          .split('')
-          .reverse()
-          .join('') === cur
-      )
-        res++
+      if (cur.split('').reverse().join('') === cur) res++
     }
     r++
   }
@@ -1285,7 +1267,7 @@ var countSubstrings = function(s) {
  * @param {string} s
  * @return {number}
  */
-var countSubstrings = function(s) {
+var countSubstrings = function (s) {
   let len = s.length,
     res = 0
   for (let i = 0, c = 2 * len - 1; i < c; i++) {
@@ -1304,7 +1286,7 @@ var countSubstrings = function(s) {
  * @param {number[]} nums
  * @return {number[]}
  */
-var productExceptSelf = function(nums) {
+var productExceptSelf = function (nums) {
   let res = [],
     len = nums.length
   let lMul = new Array(len),
@@ -1325,7 +1307,7 @@ var productExceptSelf = function(nums) {
  * @param {number[]} nums
  * @return {boolean}
  */
-var canPartition = function(nums) {
+var canPartition = function (nums) {
   let sum = 0,
     len = nums.length
   for (let i = 0; i < len; i++) sum += nums[i]
@@ -1346,7 +1328,7 @@ var canPartition = function(nums) {
  * @param {number} n
  * @return {number}
  */
-var numSquares = function(n) {
+var numSquares = function (n) {
   let squares = []
   function isSquares(num) {
     for (let i = 1; i <= num; i++) {
@@ -1381,7 +1363,7 @@ var numSquares = function(n) {
  * @param {number} n
  * @return {number}
  */
-var numSquares = function(n) {
+var numSquares = function (n) {
   let dp = new Array(n + 1)
   dp.fill(-1)
   dp[0] = 0
@@ -1401,7 +1383,7 @@ var numSquares = function(n) {
  * @param {string} p
  * @return {boolean}
  */
-var isMatch = function(s, p) {
+var isMatch = function (s, p) {
   function dp(i, j) {
     if (i < 0 && j < 0) return true
     if (j < 0) return false
@@ -1433,7 +1415,7 @@ var isMatch = function(s, p) {
  * @param {string} s
  * @return {string[]}
  */
-var removeInvalidParentheses = function(s) {
+var removeInvalidParentheses = function (s) {
   let all = [],
     max = 0
   function dp(brackets) {
@@ -1469,7 +1451,7 @@ var removeInvalidParentheses = function(s) {
  * @param {string} s
  * @return {string[]}
  */
-var removeInvalidParentheses = function(s) {
+var removeInvalidParentheses = function (s) {
   let queue = [s]
   while (queue.length) {
     let res = queue.filter(isValid)
@@ -1502,7 +1484,7 @@ var removeInvalidParentheses = function(s) {
  * @param {number[]} nums
  * @return {number}
  */
-var singleNumber = function(nums) {
+var singleNumber = function (nums) {
   let a = 0
   for (let i = 0, len = nums.length; i < len; i++) {
     a ^= nums[i]
@@ -1514,7 +1496,7 @@ var singleNumber = function(nums) {
  * @param {number[]} arr
  * @return {number[]}
  */
-var sortByBits = function(arr) {
+var sortByBits = function (arr) {
   function compare(n1, n2) {
     let count1 = 0,
       count2 = 0,
@@ -1536,7 +1518,7 @@ var sortByBits = function(arr) {
  * @param {number} R
  * @return {number}
  */
-var countPrimeSetBits = function(L, R) {
+var countPrimeSetBits = function (L, R) {
   const prime = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31]
   let res = 0
   function countOne(n) {
@@ -1557,7 +1539,7 @@ var countPrimeSetBits = function(L, R) {
  * @param {number[]} nums
  * @return {number}
  */
-var missingNumber = function(nums) {
+var missingNumber = function (nums) {
   let ans = 0
   for (let i = 0, len = nums.length; i < len; i++) {
     ans ^= nums[i]
@@ -1571,7 +1553,7 @@ var missingNumber = function(nums) {
  * @param {TreeNode} root
  * @return {boolean}
  */
-var isValidBST = function(root) {
+var isValidBST = function (root) {
   let temp = Number.MIN_SAFE_INTEGER,
     res = true
   function mfs(node) {
@@ -1594,7 +1576,7 @@ var isValidBST = function(root) {
  * @param {number} n
  * @return {number}
  */
-var uniquePaths = function(m, n) {
+var uniquePaths = function (m, n) {
   let dp = new Array(m + 1)
   for (let i = 0; i <= m; i++) {
     dp[i] = new Array(n + 1)
@@ -1617,7 +1599,7 @@ var uniquePaths = function(m, n) {
  * @param {number[]} nums
  * @return {void} Do not return anything, modify nums in-place instead.
  */
-var sortColors = function(nums) {
+var sortColors = function (nums) {
   let l = 0,
     len = nums.length,
     r = len - 1
@@ -1639,7 +1621,7 @@ var sortColors = function(nums) {
  * @param {TreeNode} root
  * @return {string}
  */
-var serialize = function(root) {
+var serialize = function (root) {
   const nodes = [],
     queue = [root]
   while (queue.length) {
@@ -1666,7 +1648,7 @@ var serialize = function(root) {
  * @param {string} data
  * @return {TreeNode}
  */
-var deserialize = function(data) {
+var deserialize = function (data) {
   data = data.slice(1, data.length - 1)
   if (!data) return null
   data = data.split(',')
@@ -1700,7 +1682,7 @@ var deserialize = function(data) {
  * @param {number} n
  * @return {ListNode}
  */
-var removeNthFromEnd = function(head, n) {
+var removeNthFromEnd = function (head, n) {
   let dummy = new ListNode(null)
   dummy.next = head
   let len = 0
@@ -1723,7 +1705,7 @@ var removeNthFromEnd = function(head, n) {
  * @param {number} n
  * @return {ListNode}
  */
-var removeNthFromEnd = function(head, n) {
+var removeNthFromEnd = function (head, n) {
   let dummy = new ListNode(null)
   dummy.next = head
   let p = dummy
@@ -1743,7 +1725,7 @@ var removeNthFromEnd = function(head, n) {
  * @param {string} s
  * @return {number}
  */
-var longestValidParentheses = function(s) {
+var longestValidParentheses = function (s) {
   let res = 0
   for (let i = 0, len = s.length; i < len; i++) {
     let count = s[i] === '(' ? 1 : -1
@@ -1764,7 +1746,7 @@ var longestValidParentheses = function(s) {
  * @param {number[]} heights
  * @return {number}
  */
-var largestRectangleArea = function(heights) {
+var largestRectangleArea = function (heights) {
   let res = 0
   for (let i = 0, len = heights.length; i < len; i++) {
     let min = heights[i]
@@ -1782,7 +1764,7 @@ var largestRectangleArea = function(heights) {
  * @param {number} y
  * @return {number}
  */
-var hammingDistance = function(x, y) {
+var hammingDistance = function (x, y) {
   let z = x ^ y,
     res = 0
   for (let i = 32; i > 0; i--) {
@@ -1797,7 +1779,7 @@ var hammingDistance = function(x, y) {
  * @param {number[]} inorder
  * @return {TreeNode}
  */
-var buildTree = function(preorder, inorder) {
+var buildTree = function (preorder, inorder) {
   if (preorder.length === 0) return null
   let cur = preorder[0],
     index = inorder.indexOf(cur)
@@ -1815,7 +1797,7 @@ var buildTree = function(preorder, inorder) {
  * @param {number[]} T
  * @return {number[]}
  */
-var dailyTemperatures = function(T) {
+var dailyTemperatures = function (T) {
   let stack = [],
     res = []
   for (let i = 0, len = T.length; i < len; i++) {
@@ -1833,7 +1815,7 @@ var dailyTemperatures = function(T) {
  * @param {ListNode} head
  * @return {number[]}
  */
-var nextLargerNodes = function(head) {
+var nextLargerNodes = function (head) {
   let stack = [],
     res = [],
     count = 0
@@ -1854,7 +1836,7 @@ var nextLargerNodes = function(head) {
  * @param {number[]} nums
  * @return {number}
  */
-var maxCoins = function(nums) {
+var maxCoins = function (nums) {
   let hash = {}
   function dp(nums) {
     let len = nums.length
@@ -1873,4 +1855,24 @@ var maxCoins = function(nums) {
     return res
   }
   return dp(nums)
+}
+/**
+ * 415. 字符串相加
+ * @param {string} num1
+ * @param {string} num2
+ * @return {string}
+ */
+var addStrings = function (num1, num2) {
+  let i = num1.length - 1,
+    j = num2.length - 1
+  let ans = ''
+  let pre = 0
+  while (i >= 0 || j >= 0 || pre) {
+    let n1 = i >= 0 ? +num1[i--] : 0
+    let n2 = j >= 0 ? +num2[j--] : 0
+    let sum = n1 + n2 + pre
+    ans = (sum % 10) + ans
+    pre = Math.floor(sum / 10)
+  }
+  return ans
 }
