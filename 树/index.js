@@ -762,3 +762,34 @@ var postorder = function (root) {
   }
   return ans.reverse()
 }
+/**
+ * 1041. 困于环中的机器人
+ * @param {string} instructions
+ * @return {boolean}
+ */
+var isRobotBounded = function (instructions) {
+  const hash = {
+    0: [1, 0],
+    90: [0, 1],
+    180: [-1, 0],
+    270: [0, -1],
+  }
+  let cnt = 4
+  let x = 0,
+    y = 0,
+    ang = 0
+  while (cnt--) {
+    for (let i = 0, len = instructions.length; i < len; i++) {
+      if (instructions[i] === 'G') {
+        const temp = hash[ang]
+        x += temp[0]
+        y += temp[1]
+      } else if (instructions[i] === 'L') {
+        ang = (ang + 90) % 360
+      } else {
+        ang = ang - 90 < 0 ? ang - 90 + 360 : ang - 90
+      }
+    }
+  }
+  return x === 0 && y === 0
+}
