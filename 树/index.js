@@ -725,3 +725,22 @@ MyCalendar.prototype.book = function (start, end) {
  * var obj = new MyCalendar()
  * var param_1 = obj.book(start,end)
  */
+
+/**
+ * 589. N叉树的前序遍历
+ * @param {Node} root
+ * @return {number[]}
+ */
+var preorder = function (root) {
+  const ans = []
+  if (!root) return ans
+  const stack = [root]
+  while (stack.length) {
+    const cur = stack.pop()
+    ans.push(cur.val)
+    for (let i = cur.children.length - 1; i >= 0; i--) {
+      stack.push(cur.children[i])
+    }
+  }
+  return ans
+}
