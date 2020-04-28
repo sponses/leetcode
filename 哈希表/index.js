@@ -240,3 +240,39 @@ var frequencySort = function (s) {
     )
     .join('')
 }
+/**
+ * 1267. 统计参与通信的服务器
+ * @param {number[][]} grid
+ * @return {number}
+ */
+var countServers = function (grid) {
+  let ans = 0
+  const hash = {}
+  for (let i = 0, h = grid.length; i < h; i++) {
+    for (let j = 0, w = grid[0].length; j < w; j++) {
+      if (grid[i][j] === 0) continue
+      if (hash.hasOwnProperty('y' + i)) {
+        hash['y' + i]++
+      } else {
+        hash['y' + i] = 1
+      }
+      if (hash.hasOwnProperty('x' + j)) {
+        hash['x' + j]++
+      } else {
+        hash['x' + j] = 1
+      }
+    }
+  }
+  for (let i = 0, h = grid.length; i < h; i++) {
+    for (let j = 0, w = grid[0].length; j < w; j++) {
+      if (grid[i][j] === 0) continue
+      if (
+        (hash.hasOwnProperty('y' + i) && hash['y' + i] > 1) ||
+        (hash.hasOwnProperty('x' + j) && hash['x' + j] > 1)
+      ) {
+        ans++
+      }
+    }
+  }
+  return ans
+}
