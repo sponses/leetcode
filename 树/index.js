@@ -673,3 +673,55 @@ var insertIntoBST = function (root, val) {
   }
   return root
 }
+/**
+ * 729. 我的日程安排表 I
+ */
+var MyCalendar = function () {
+  this.cal = null
+}
+
+function SegNode(s, e) {
+  this.start = s
+  this.end = e
+  this.left = null
+  this.right = null
+}
+
+/**
+ *
+ * @param {number} start
+ * @param {number} end
+ * @return {boolean}
+ */
+MyCalendar.prototype.book = function (start, end) {
+  if (this.cal === null) {
+    this.cal = new SegNode(start, end)
+    return true
+  }
+  let node = this.cal
+  while (true) {
+    if (node.start >= end) {
+      if (node.left) {
+        node = node.left
+      } else {
+        node.left = new SegNode(start, end)
+        return true
+      }
+    } else if (node.end <= start) {
+      if (node.right) {
+        node = node.right
+      } else {
+        node.right = new SegNode(start, end)
+        return true
+      }
+    } else {
+      return false
+    }
+  }
+}
+
+/**
+ * Your MyCalendar object will be instantiated and called as such:
+ * var obj = new MyCalendar()
+ * var param_1 = obj.book(start,end)
+ */
