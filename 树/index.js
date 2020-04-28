@@ -744,3 +744,21 @@ var preorder = function (root) {
   }
   return ans
 }
+/**
+ * 590. N叉树的后序遍历
+ * @param {Node} root
+ * @return {number[]}
+ */
+var postorder = function (root) {
+  const ans = []
+  if (!root) return ans
+  const stack = [root]
+  while (stack.length) {
+    const cur = stack.pop()
+    ans.push(cur.val)
+    for (let i = 0, len = cur.children.length; i < len; i++) {
+      stack.push(cur.children[i])
+    }
+  }
+  return ans.reverse()
+}
