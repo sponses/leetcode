@@ -1378,3 +1378,19 @@ var getNoZeroIntegers = function (n) {
     if (!/0/.test(i) && !/0/.test(temp)) return [i, temp]
   }
 }
+/**
+ * 1313. 解压缩编码列表
+ * @param {number[]} nums
+ * @return {number[]}
+ */
+var decompressRLElist = function (nums) {
+  const ans = []
+  let i = 0
+  const len = nums.length
+  while (i < len) {
+    const cnt = nums[i++]
+    const val = nums[i++]
+    for (j = 0; j < cnt; j++) ans.push(val)
+  }
+  return ans
+}
