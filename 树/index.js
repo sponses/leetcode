@@ -793,3 +793,37 @@ var isRobotBounded = function (instructions) {
   }
   return x === 0 && y === 0
 }
+/**
+ * 731. 我的日程安排表 II
+ */
+var MyCalendarTwo = function () {
+  this.repeat = []
+  this.cal = []
+}
+
+/**
+ * @param {number} start
+ * @param {number} end
+ * @return {boolean}
+ */
+MyCalendarTwo.prototype.book = function (start, end) {
+  for (let i = 0, len = this.repeat.length; i < len; i++) {
+    if (start >= this.repeat[i][1] || end <= this.repeat[i][0]) continue
+    return false
+  }
+  for (let i = 0, len = this.cal.length; i < len; i++) {
+    if (start >= this.cal[i][1] || end <= this.cal[i][0]) continue
+    this.repeat.push([
+      Math.max(start, this.cal[i][0]),
+      Math.min(end, this.cal[i][1]),
+    ])
+  }
+  this.cal.push([start, end])
+  return true
+}
+
+/**
+ * Your MyCalendarTwo object will be instantiated and called as such:
+ * var obj = new MyCalendarTwo()
+ * var param_1 = obj.book(start,end)
+ */
