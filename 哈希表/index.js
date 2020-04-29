@@ -276,3 +276,22 @@ var countServers = function (grid) {
   }
   return ans
 }
+/**
+ * 888. 公平的糖果交换
+ * @param {number[]} A
+ * @param {number[]} B
+ * @return {number[]}
+ */
+var fairCandySwap = function (A, B) {
+  const hash = new Map()
+  let sumA = 0,
+    sumB = 0
+  for (let i = 0, len = A.length; i < len; i++) sumA += A[i]
+  for (let i = 0, len = B.length; i < len; i++) {
+    sumB += B[i]
+    if (!hash.has(B[i])) hash.set(B[i], 1)
+  }
+  const dif = (sumB - sumA) >> 1
+  for (let i = 0, len = A.length; i < len; i++)
+    if (hash.has(A[i] + dif)) return [A[i], A[i] + dif]
+}
