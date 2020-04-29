@@ -1394,3 +1394,47 @@ var decompressRLElist = function (nums) {
   }
   return ans
 }
+/**
+ * 592. 分数加减运算
+ * @param {string} expression
+ * @return {string}
+ */
+var fractionAddition = function (expression) {
+  const arr = [],
+    len = expression.length
+  let i = 0
+  while (i < len) {
+    let nu = '',
+      de = ''
+    if (expression[i] === '+') {
+      i++
+      continue
+    }
+    while (i < len && expression[i] !== '/') nu += expression[i++]
+    i++
+    while (i < len && expression[i] !== '+' && expression[i] !== '-')
+      de += expression[i++]
+    arr.push([+nu, +de])
+  }
+  const ans = arr[0]
+  for (let i = 1, len = arr.length; i < len; i++) {
+    const temp = arr[i]
+    if (ans[1] !== temp[1]) {
+      const a = ans[1],
+        b = temp[1]
+      ans[0] *= b
+      ans[1] *= b
+      temp[0] *= a
+      temp[1] *= a
+    }
+    ans[0] += temp[0]
+  }
+  function dp(a, b) {
+    if (b === 0) return a
+    return dp(b, a % b)
+  }
+  let x = dp(Math.abs(ans[0]), Math.abs(ans[1]))
+  ans[0] /= x
+  ans[1] /= x
+  return '' + ans[0] + '/' + ans[1]
+}
