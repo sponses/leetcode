@@ -4,7 +4,7 @@
  * @param {number} target
  * @return {number}
  */
-var search = function(nums, target) {
+var search = function (nums, target) {
   let left = 0,
     right = nums.length - 1
   while (left <= right) {
@@ -25,7 +25,7 @@ var search = function(nums, target) {
  * @param {number} target
  * @return {number[]}
  */
-var searchRange = function(nums, target) {
+var searchRange = function (nums, target) {
   let left = 0,
     right = nums.length - 1
   while (left <= right) {
@@ -50,7 +50,7 @@ var searchRange = function(nums, target) {
  * @param {number} x
  * @return {number}
  */
-var mySqrt = function(x) {
+var mySqrt = function (x) {
   let left = 1,
     right = x
   while (left <= right) {
@@ -70,7 +70,7 @@ var mySqrt = function(x) {
  * @param {number} target
  * @return {boolean}
  */
-var searchMatrix = function(matrix, target) {
+var searchMatrix = function (matrix, target) {
   let left = 0,
     right = matrix.length - 1
   while (left <= right) {
@@ -98,6 +98,28 @@ var searchMatrix = function(matrix, target) {
       right = mid - 1
     } else {
       left = mid + 1
+    }
+  }
+  return false
+}
+/**
+ * 240. 搜索二维矩阵 II
+ * @param {number[][]} matrix
+ * @param {number} target
+ * @return {boolean}
+ */
+var searchMatrix = function (matrix, target) {
+  const h = matrix.length
+  if (!h) return false
+  const w = matrix[0].length
+  let i = h - 1,
+    j = 0
+  while (i >= 0 && j < w) {
+    if (matrix[i][j] === target) return true
+    if (matrix[i][j] < target) {
+      j++
+    } else {
+      i--
     }
   }
   return false
