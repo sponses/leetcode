@@ -1876,3 +1876,20 @@ var addStrings = function (num1, num2) {
   }
   return ans
 }
+
+/**
+ * 22. 括号生成
+ * @param {number} n
+ * @return {string[]}
+ */
+var generateParenthesis = function (n) {
+  const ans = []
+  function dp(l, r, str) {
+    if (l === n && r === n) ans.push(str)
+    if (r > l || l > n || r > n) return
+    dp(l + 1, r, str + '(')
+    dp(l, r + 1, str + ')')
+  }
+  dp(0, 0, '')
+  return ans
+}
