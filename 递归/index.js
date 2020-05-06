@@ -10,7 +10,7 @@
  * @param {TreeNode} root
  * @return {number}
  */
-var minDiffInBST = function(root) {
+var minDiffInBST = function (root) {
   let arr = []
 
   function dfs(root) {
@@ -41,7 +41,7 @@ var minDiffInBST = function(root) {
  * @param {TreeNode} root
  * @return {number}
  */
-var minDiffInBST = function(root) {
+var minDiffInBST = function (root) {
   let prev = null,
     min = Number.MAX_SAFE_INTEGER
 
@@ -60,7 +60,7 @@ var minDiffInBST = function(root) {
  * @param {number} n
  * @return {number}
  */
-var tribonacci = function(n) {
+var tribonacci = function (n) {
   let a = 0,
     b = 1,
     c = 1
@@ -80,7 +80,7 @@ var tribonacci = function(n) {
  * @param {number} num
  * @return {number}
  */
-var numberOfSteps = function(num) {
+var numberOfSteps = function (num) {
   if (num === 0) return 0
   if (num % 2 === 0) return 1 + numberOfSteps(num / 2)
   return 1 + numberOfSteps(num - 1)
@@ -92,7 +92,7 @@ var numberOfSteps = function(num) {
  * @param {number} k
  * @return {number}
  */
-var getKth = function(lo, hi, k) {
+var getKth = function (lo, hi, k) {
   const hash = {}
   function toOne(num) {
     if (num === 1) return 0
@@ -108,4 +108,16 @@ var getKth = function(lo, hi, k) {
     return toOne(a) - toOne(b) || a - b
   })
   return arr[k - 1]
+}
+/**
+ * 779. 第K个语法符号
+ * @param {number} N
+ * @param {number} K
+ * @return {number}
+ */
+var kthGrammar = function (N, K) {
+  if (N === 1) return '0'
+  const p = kthGrammar(N - 1, Math.ceil(K / 2))
+  if (K % 2 === 1) return p
+  return p === '0' ? '1' : '0'
 }
