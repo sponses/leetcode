@@ -162,3 +162,33 @@ var getRow = function (rowIndex) {
   }
   return prev
 }
+/**
+ * 1170. 比较字符串最小字母出现频次
+ * @param {string[]} queries
+ * @param {string[]} words
+ * @return {number[]}
+ */
+var numSmallerByFrequency = function (queries, words) {
+  const ans = new Array(queries.length)
+  ans.fill(0)
+  function getNums(str) {
+    const arr = new Array(26)
+    arr.fill(0)
+    for (let i = 0, len = str.length; i < len; i++) {
+      arr[str[i].charCodeAt() - 97]++
+    }
+    for (let i = 0; i < 26; i++) if (arr[i]) return arr[i]
+  }
+  const counts = []
+  for (let i = 0, len = words.length; i < len; i++) {
+    counts.push(getNums(words[i]))
+  }
+  counts.sort((a, b) => a - b)
+  for (let i = 0, len = queries.length; i < len; i++) {
+    const cur = getNums(queries[i])
+    let j = 0
+    while (cur >= counts[j]) j++
+    ans[i] = counts.length - j
+  }
+  return ans
+}
