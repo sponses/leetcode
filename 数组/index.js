@@ -144,3 +144,21 @@ var isNStraightHand = function (hand, W) {
   }
   return true
 }
+/**
+ * 119. 杨辉三角 II
+ * @param {number} rowIndex
+ * @return {number[]}
+ */
+var getRow = function (rowIndex) {
+  if (rowIndex === 0) return [1]
+  let prev = [1, 1]
+  for (let i = 1; i < rowIndex; i++) {
+    let temp = [1]
+    for (let i = 0, len = prev.length; i < len - 1; i++) {
+      temp.push(prev[i] + prev[i + 1])
+    }
+    temp.push(1)
+    prev = temp
+  }
+  return prev
+}
