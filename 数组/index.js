@@ -192,3 +192,24 @@ var numSmallerByFrequency = function (queries, words) {
   }
   return ans
 }
+/**
+ * 1422. 分割字符串的最大得分
+ * @param {string} s
+ * @return {number}
+ */
+var maxScore = function (s) {
+  const len = s.length
+  const prev = new Array(len + 1)
+  const post = new Array(len + 1)
+  prev[0] = 0
+  post[len] = 0
+  for (let i = 0; i < len; i++) {
+    prev[i + 1] = prev[i]
+    if (s[i] === '0') prev[i + 1]++
+    post[len - i - 1] = post[len - i]
+    if (s[len - i - 1] === '1') post[len - i - 1]++
+  }
+  let ans = 0
+  for (let i = 1; i < len; i++) ans = Math.max(ans, prev[i] + post[i])
+  return ans
+}
