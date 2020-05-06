@@ -1912,3 +1912,22 @@ var checkStraightLine = function (coordinates) {
   }
   return true
 }
+/**
+ * LCP 07. 传递信息
+ * @param {number} n
+ * @param {number[][]} relation
+ * @param {number} k
+ * @return {number}
+ */
+var numWays = function (n, relation, k) {
+  function dfs(cur, times) {
+    if (cur === n - 1 && times === 0) return 1
+    if (times < 0) return 0
+    let res = 0
+    for (let i = 0, len = relation.length; i < len; i++) {
+      if (relation[i][0] === cur) res += dfs(relation[i][1], times - 1)
+    }
+    return res
+  }
+  return dfs(0, k)
+}
