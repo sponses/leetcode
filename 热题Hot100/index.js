@@ -1893,3 +1893,22 @@ var generateParenthesis = function (n) {
   dp(0, 0, '')
   return ans
 }
+/**
+ * 1232. 缀点成线
+ * @param {number[][]} coordinates
+ * @return {boolean}
+ */
+var checkStraightLine = function (coordinates) {
+  const slope =
+    (coordinates[1][1] - coordinates[0][1]) /
+    (coordinates[1][0] - coordinates[0][0])
+  for (let i = 1, len = coordinates.length; i < len - 1; i++) {
+    if (
+      (coordinates[i + 1][1] - coordinates[i][1]) /
+        (coordinates[i + 1][0] - coordinates[i][0]) !==
+      slope
+    )
+      return false
+  }
+  return true
+}
