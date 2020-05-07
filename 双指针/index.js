@@ -3,7 +3,7 @@
  * @param {character[]} s
  * @return {void} Do not return anything, modify s in-place instead.
  */
-var reverseString = function(s) {
+var reverseString = function (s) {
   if (s.length < 2) return s
   for (let i = 0, len = s.length; i < len; i++) {
     ;[s[i], s[len - i - 1]] = [s[len - i - 1], s[i]]
@@ -15,7 +15,7 @@ var reverseString = function(s) {
  * @param {number[]} A
  * @return {number[]}
  */
-var sortedSquares = function(A) {
+var sortedSquares = function (A) {
   let j = 0,
     len = A.length
   while (A[j] < 0) {
@@ -68,7 +68,7 @@ function removeElement(nums, val) {
  * @param {number[]} nums
  * @return {number}
  */
-var arrayPairSum = function(nums) {
+var arrayPairSum = function (nums) {
   nums.sort((a, b) => a - b)
   let res = 0
   for (let i = 0, len = nums.length; i < len; i += 2) {
@@ -81,7 +81,7 @@ var arrayPairSum = function(nums) {
  * @param {number[]} nums
  * @return {number}
  */
-var removeDuplicates = function(nums) {
+var removeDuplicates = function (nums) {
   if (!nums.length) return 0
   let i = 0
   for (let j = 1; j < nums.length; j++) {
@@ -97,7 +97,7 @@ var removeDuplicates = function(nums) {
  * @param {number[]} nums
  * @return {number}
  */
-var removeDuplicates = function(nums) {
+var removeDuplicates = function (nums) {
   let left = 1,
     right = 2
   while (right < nums.length) {
@@ -115,7 +115,7 @@ var removeDuplicates = function(nums) {
  * @param {number} target
  * @return {number[]}
  */
-var twoSum = function(numbers, target) {
+var twoSum = function (numbers, target) {
   let left = 0,
     len = numbers.length,
     right = len - 1
@@ -134,38 +134,29 @@ var twoSum = function(numbers, target) {
  * @param {number[]} nums
  * @return {number[][]}
  */
-var threeSum = function(nums) {
-  if (nums.length < 3) return []
-  let len = nums.length,
-    p1 = 0,
-    p2,
-    p3,
-    res = []
+var threeSum = function (nums) {
   nums.sort((a, b) => a - b)
-  while (p1 <= len - 3) {
-    p2 = p1 + 1
-    p3 = len - 1
-    while (p2 < p3) {
-      if (nums[p1] + nums[p2] + nums[p3] === 0) {
-        res.push([nums[p1], nums[p2], nums[p3]])
-        while (nums[p2] === nums[p2 + 1] && nums[p3] === nums[p3 - 1]) {
-          p2++
-          p3--
-        }
-        p3--
-        p2++
-      } else if (nums[p1] + nums[p2] + nums[p3] > 0) {
-        p3--
+  const ans = []
+  for (let i = 0, len = nums.length; i < len; i++) {
+    let j = i + 1
+    let k = len - 1
+    while (j < k) {
+      const temp = nums[i] + nums[j] + nums[k]
+      if (temp > 0) {
+        k--
+      } else if (temp < 0) {
+        j++
       } else {
-        p2++
+        ans.push([nums[i], nums[j++], nums[k--]])
+        while (nums[j] === nums[j - 1] && nums[k] === nums[k + 1]) {
+          j++
+          k--
+        }
       }
     }
-    while (nums[p1] === nums[p1 + 1]) {
-      p1++
-    }
-    p1++
+    while (nums[i] === nums[i + 1]) i++
   }
-  return res
+  return ans
 }
 /**
  * 16. 最接近的三数之和（双指针）
@@ -173,7 +164,7 @@ var threeSum = function(nums) {
  * @param {number} target
  * @return {number}
  */
-var threeSumClosest = function(nums, target) {
+var threeSumClosest = function (nums, target) {
   let temp = Number.MAX_SAFE_INTEGER,
     p1 = 0,
     len = nums.length,
@@ -208,7 +199,7 @@ var threeSumClosest = function(nums, target) {
  * @param {number} target
  * @return {number[][]}
  */
-var fourSum = function(nums, target) {
+var fourSum = function (nums, target) {
   let len = nums.length,
     p1 = 0,
     p2,
@@ -255,7 +246,7 @@ var fourSum = function(nums, target) {
  * @param {number[]} height
  * @return {number}
  */
-var maxArea = function(height) {
+var maxArea = function (height) {
   let left = 0,
     len = height.length,
     right = len - 1,
@@ -277,7 +268,7 @@ var maxArea = function(height) {
  * @param {number[]} nums
  * @return {void} Do not return anything, modify nums in-place instead.
  */
-var moveZeroes = function(nums) {
+var moveZeroes = function (nums) {
   let l = 0
   for (let i = 0, len = nums.length; i < len; i++) {
     if (nums[i] !== 0) nums[l++] = nums[i]

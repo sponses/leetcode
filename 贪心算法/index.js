@@ -4,7 +4,7 @@
  * @param {number[]} s
  * @return {number}
  */
-var findContentChildren = function(g, s) {
+var findContentChildren = function (g, s) {
   let child = 0,
     cookie = 0
   g = g.sort((a, b) => a - b)
@@ -23,7 +23,7 @@ var findContentChildren = function(g, s) {
  * @param {number[]} prices
  * @return {number}
  */
-var maxProfit = function(prices) {
+var maxProfit = function (prices) {
   let maxProfit = 0
   for (let i = 0, len = prices.length - 1; i < len; i++) {
     if (prices[i] < prices[i + 1]) {
@@ -38,7 +38,7 @@ var maxProfit = function(prices) {
  * @param {string} t
  * @return {boolean}
  */
-var isSubsequence = function(s, t) {
+var isSubsequence = function (s, t) {
   let count = 0
   for (let i = 0, len = t.length; i < len; i++) {
     if (count === s.length) {
@@ -55,7 +55,7 @@ var isSubsequence = function(s, t) {
  * @param {number[]} nums
  * @return {boolean}
  */
-var isPossible = function(nums) {
+var isPossible = function (nums) {
   const counts = {},
     tail = {}
   for (let i = 0, len = nums.length; i < len; i++) {
@@ -89,7 +89,7 @@ var isPossible = function(nums) {
  * @param {number[][]} pairs
  * @return {number}
  */
-var findLongestChain = function(pairs) {
+var findLongestChain = function (pairs) {
   if (!pairs.length) return 0
   pairs.sort((a, b) => a[1] - b[1])
   const len = pairs.length
@@ -102,4 +102,31 @@ var findLongestChain = function(pairs) {
     }
   }
   return ans
+}
+/**
+ * 984. 不含 AAA 或 BBB 的字符串
+ * @param {number} A
+ * @param {number} B
+ * @return {string}
+ */
+var strWithout3a3b = function (A, B) {
+  let S = '',
+    a = 'a',
+    b = 'b'
+  if (A < B) {
+    const temp = A
+    A = B
+    B = temp
+    a = 'b'
+    b = 'a'
+  }
+  while (A) {
+    if (A--) S += a
+    if (A >= B && A > 0) {
+      S += a
+      A--
+    }
+    if (B--) S += b
+  }
+  return S
 }
