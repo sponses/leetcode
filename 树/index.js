@@ -823,7 +823,25 @@ MyCalendarTwo.prototype.book = function (start, end) {
 }
 
 /**
- * Your MyCalendarTwo object will be instantiated and called as such:
- * var obj = new MyCalendarTwo()
- * var param_1 = obj.book(start,end)
+ * 998. 最大二叉树 II
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
  */
+/**
+ * @param {TreeNode} root
+ * @param {number} val
+ * @return {TreeNode}
+ */
+var insertIntoMaxTree = function (root, val) {
+  const node = new TreeNode(val)
+  if (!root) return node
+  if (root.val < val) {
+    node.left = root
+    return node
+  }
+  root.right = insertIntoMaxTree(root.right, val)
+  return root
+}
