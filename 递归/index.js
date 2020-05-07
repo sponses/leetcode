@@ -121,3 +121,20 @@ var kthGrammar = function (N, K) {
   if (K % 2 === 1) return p
   return p === '0' ? '1' : '0'
 }
+/**
+ * 50. Pow(x, n)
+ * @param {number} x
+ * @param {number} n
+ * @return {number}
+ */
+var myPow = function (x, n) {
+  if (n === 0) return 1
+  if (n === 1) return x
+  const temp = n
+  n = Math.abs(n)
+  let ans = 1
+  if (n & (1 === 1)) ans *= x
+  const half = myPow(x, n >> 1)
+  ans *= half * half
+  return temp > 0 ? ans : ans <= 0 ? 0 : 1 / ans
+}
