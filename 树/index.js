@@ -860,3 +860,19 @@ var trimBST = function (root, L, R) {
   root.right = trimBST(root.right, L, R)
   return root
 }
+/**
+ * 654. 最大二叉树
+ * @param {number[]} nums
+ * @return {TreeNode}
+ */
+var constructMaximumBinaryTree = function (nums) {
+  if (!nums.length) return null
+  let maxIndex = 0
+  for (let i = 1, len = nums.length; i < len; i++) {
+    if (nums[maxIndex] < nums[i]) maxIndex = i
+  }
+  const root = new TreeNode(nums[maxIndex])
+  root.left = constructMaximumBinaryTree(nums.slice(0, maxIndex))
+  root.right = constructMaximumBinaryTree(nums.slice(maxIndex + 1))
+  return root
+}
