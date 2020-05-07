@@ -213,3 +213,25 @@ var maxScore = function (s) {
   for (let i = 1; i < len; i++) ans = Math.max(ans, prev[i] + post[i])
   return ans
 }
+/**
+ * 1013. 将数组分成和相等的三个部分
+ * @param {number[]} A
+ * @return {boolean}
+ */
+var canThreePartsEqualSum = function (A) {
+  let sum = 0
+  for (let i = 0, len = A.length; i < len; i++) sum += A[i]
+  if (sum % 3 !== 0) return false
+  const third = sum / 3
+  let cnt = 0
+  let temp = 0
+  for (let i = 0, len = A.length; i < len; i++) {
+    temp += A[i]
+    if (temp === third) {
+      cnt++
+      temp = 0
+    }
+    if (cnt === 2 && i < len - 1) return true
+  }
+  return false
+}
