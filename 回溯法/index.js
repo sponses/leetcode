@@ -234,3 +234,51 @@ var countArrangement = function (N) {
   backTrack(1)
   return ans
 }
+/**
+ * 51. N皇后
+ * @param {number} n
+ * @return {string[][]}
+ */
+var solveNQueens = function (n) {
+  const ans = []
+  const grid = new Array(n)
+  for (let i = 0; i < n; i++) {
+    grid[i] = new Array(n)
+    grid[i].fill('.')
+  }
+  function backTrack(i) {
+    if (i === n) {
+      const temp = new Array()
+      grid.forEach((item) => {
+        temp.push(item.join(''))
+      })
+      ans.push(temp)
+      return
+    }
+    for (let j = 0; j < n; j++) {
+      if (isOk(i, j, grid)) {
+        grid[i][j] = 'Q'
+        backTrack(i + 1)
+        grid[i][j] = '.'
+      }
+    }
+  }
+  backTrack(0)
+  return ans
+}
+
+function isOk(i, j, grid) {
+  for (let k = 0; k < i; k++) {
+    if (grid[k][j] === 'Q') return false
+  }
+  let a = i,
+    b = j
+  while (a >= 0 && b >= 0) {
+    if (grid[a--][b--] === 'Q') return false
+  }
+  ;(a = i), (b = j)
+  while (a >= 0 && b < grid[0].length) {
+    if (grid[a--][b++] === 'Q') return false
+  }
+  return true
+}
