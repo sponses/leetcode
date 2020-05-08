@@ -130,3 +130,22 @@ var strWithout3a3b = function (A, B) {
   }
   return S
 }
+/**
+ * 1266. 访问所有点的最小时间
+ * @param {number[][]} points
+ * @return {number}
+ */
+var minTimeToVisitAllPoints = function (points) {
+  const len = points.length
+  if (len <= 1) return 0
+  let ans = 0
+  let start = points[0]
+  for (let i = 1, len = points.length; i < len; i++) {
+    const cur = points[i]
+    const x = Math.abs(cur[0] - start[0])
+    const y = Math.abs(cur[1] - start[1])
+    ans += Math.abs(x - y) + Math.min(x, y)
+    start = cur
+  }
+  return ans
+}
