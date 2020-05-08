@@ -3,7 +3,7 @@
  * @param {number[]} nums
  * @return {number[][]}
  */
-var subsets = function(nums) {
+var subsets = function (nums) {
   let res = [[]]
   for (let i = 0, len = nums.length; i < len; i++) {
     let count = res.length
@@ -21,7 +21,7 @@ var subsets = function(nums) {
  * @param {string} digits
  * @return {string[]}
  */
-var letterCombinations = function(digits) {
+var letterCombinations = function (digits) {
   let hash = {
       2: 'abc',
       3: 'def',
@@ -30,7 +30,7 @@ var letterCombinations = function(digits) {
       6: 'mno',
       7: 'pqrs',
       8: 'tuv',
-      9: 'wxyz'
+      9: 'wxyz',
     },
     res = []
   if (digits <= 1) return res
@@ -53,7 +53,7 @@ var letterCombinations = function(digits) {
  * @param {string} digits
  * @return {string[]}
  */
-var letterCombinations = function(digits) {
+var letterCombinations = function (digits) {
   let hash = {
       2: 'abc',
       3: 'def',
@@ -62,7 +62,7 @@ var letterCombinations = function(digits) {
       6: 'mno',
       7: 'pqrs',
       8: 'tuv',
-      9: 'wxyz'
+      9: 'wxyz',
     },
     res = []
   if (!digits) return res
@@ -84,7 +84,7 @@ var letterCombinations = function(digits) {
  * @param {number[]} nums
  * @return {number[][]}
  */
-var permute = function(nums) {
+var permute = function (nums) {
   let res = []
   function backtrack(has, left) {
     if (has.length === nums.length) {
@@ -94,7 +94,7 @@ var permute = function(nums) {
     for (let i = 0, len = left.length; i < len; i++) {
       backtrack(
         [...has, left[i]],
-        left.filter(x => x != left[i])
+        left.filter((x) => x != left[i])
       )
     }
   }
@@ -106,7 +106,7 @@ var permute = function(nums) {
  * @param {number[]} nums
  * @return {number[][]}
  */
-var subsets = function(nums) {
+var subsets = function (nums) {
   let res = []
   function backtrack(arr, index) {
     res.push(arr)
@@ -122,7 +122,7 @@ var subsets = function(nums) {
  * @param {number[]} nums
  * @return {number[][]}
  */
-var subsetsWithDup = function(nums) {
+var subsetsWithDup = function (nums) {
   let res = []
   nums.sort((a, b) => a - b)
   function backtrack(arr, index) {
@@ -140,7 +140,7 @@ var subsetsWithDup = function(nums) {
  * @param {string} S
  * @return {string[]}
  */
-var letterCasePermutation = function(S) {
+var letterCasePermutation = function (S) {
   let res = []
   const reg = new RegExp('[A-Za-z]')
   function backtrack(str, index) {
@@ -175,7 +175,7 @@ var letterCasePermutation = function(S) {
  * @param {number} k
  * @return {number[][]}
  */
-var combine = function(n, k) {
+var combine = function (n, k) {
   let res = []
   function backtrack(arr, index) {
     if (arr.length === k) {
@@ -196,7 +196,7 @@ var combine = function(n, k) {
  * @param {number} k
  * @return {number[][]}
  */
-var combine = function(n, k) {
+var combine = function (n, k) {
   let res = []
   function backtrack(arr, index) {
     if (arr.length === k) {
@@ -210,4 +210,27 @@ var combine = function(n, k) {
   }
   backtrack([], 1)
   return res
+}
+/**
+ * 526. 优美的排列
+ * @param {number} N
+ * @return {number}
+ */
+var countArrangement = function (N) {
+  const visited = new Array(N + 1)
+  visited.fill(false)
+  let ans = 0
+  function backTrack(i) {
+    if (i > N) ans++
+    for (let j = 1; j <= N; j++) {
+      if (visited[j]) continue
+      if (i % j === 0 || j % i === 0) {
+        visited[j] = true
+        backTrack(i + 1)
+        visited[j] = false
+      }
+    }
+  }
+  backTrack(1)
+  return ans
 }
