@@ -114,3 +114,35 @@ var minAddToMakeValid = function (S) {
   }
   return stack.length
 }
+/**
+ * 1249. 移除无效的括号
+ * @param {string} s
+ * @return {string}
+ */
+var minRemoveToMakeValid = function (s) {
+  let ans = ''
+  const stack = []
+  let l = 0,
+    r = 0
+  for (let i = 0, len = s.length; i < len; i++) {
+    if (s[i] === '(') {
+      l++
+    } else if (s[i] === ')') {
+      if (l === r) continue
+      r++
+    }
+    stack.push(s[i])
+  }
+  l = 0
+  r = 0
+  for (let i = stack.length - 1; i >= 0; i--) {
+    if (stack[i] === ')') {
+      r++
+    } else if (stack[i] === '(') {
+      if (l === r) continue
+      l++
+    }
+    ans += stack[i]
+  }
+  return [...ans].reverse().join('')
+}
