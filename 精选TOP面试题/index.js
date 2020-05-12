@@ -1438,3 +1438,20 @@ var fractionAddition = function (expression) {
   ans[1] /= x
   return '' + ans[0] + '/' + ans[1]
 }
+
+/**
+ * 7. 整数反转
+ * @param {number} x
+ * @return {number}
+ */
+var reverse = function (x) {
+  let ans = 0
+  let n = Math.abs(x)
+  const max = Math.pow(2, 31)
+  while (n) {
+    ans = ans * 10 + (n % 10)
+    n = Math.floor(n / 10)
+    if (ans >= max) return 0
+  }
+  return x > 0 ? ans : -ans
+}
