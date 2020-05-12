@@ -124,3 +124,26 @@ var searchMatrix = function (matrix, target) {
   }
   return false
 }
+/**
+ * 33. 搜索旋转排序数组
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number}
+ */
+var search = function (nums, target) {
+  let l = 0,
+    r = nums.length - 1
+  while (l <= r) {
+    const m = l + ((r - l) >> 1)
+    if (nums[m] === target) return m
+    const temp =
+      (nums[0] < nums[m] && target >= nums[0] && target < nums[m]) ||
+      (nums[0] > nums[m] && (target < nums[m] || target >= nums[0]))
+    if (temp) {
+      r = m - 1
+    } else {
+      l = m + 1
+    }
+  }
+  return -1
+}
