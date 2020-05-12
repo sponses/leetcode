@@ -235,3 +235,28 @@ var canThreePartsEqualSum = function (A) {
   }
   return false
 }
+/**
+ * 59. 螺旋矩阵 II
+ * @param {number} n
+ * @return {number[][]}
+ */
+var generateMatrix = function (n) {
+  const ans = new Array(n)
+  for (let i = 0; i < n; i++) ans[i] = new Array(n)
+  let cnt = 1
+  let t = 0,
+    b = n - 1,
+    l = 0,
+    r = n - 1
+  while (true) {
+    for (let i = l; i <= r; i++) ans[t][i] = cnt++
+    if (++t > b) break
+    for (let i = t; i <= b; i++) ans[i][r] = cnt++
+    if (--r < l) break
+    for (let i = r; i >= l; i--) ans[b][i] = cnt++
+    if (--b < t) break
+    for (let i = b; i >= t; i--) ans[i][l] = cnt++
+    if (++l > r) break
+  }
+  return ans
+}
