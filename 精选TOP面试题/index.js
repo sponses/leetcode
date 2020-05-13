@@ -1478,3 +1478,22 @@ var isPalindrome = function (x) {
   }
   return rev === x
 }
+// const coins = [25,10,5,1]
+//     const mod = 1000000007
+//     const dp = new Array(n+1)
+//     dp.fill(0)
+//     dp[0] = 1
+//     for(let i = 0; i<4; i++){
+//         for(let j = coins[i]; j<=n;j++){
+//             dp[j] += dp[j-coins[i]]
+//         }
+//     }
+//     return dp[n]
+/**
+ * 292. Nim 游戏
+ * @param {number} n
+ * @return {boolean}
+ */
+var canWinNim = function (n) {
+  return n % 4 !== 0
+}
