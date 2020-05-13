@@ -1931,3 +1931,46 @@ var numWays = function (n, relation, k) {
   }
   return dfs(0, k)
 }
+/**
+ * 43. 字符串相乘
+ * @param {string} num1
+ * @param {string} num2
+ * @return {string}
+ */
+var multiply = function (num1, num2) {
+  if (num1 === '0' || num2 === '0') return '0'
+  let ans = '',
+    prev = ''
+  for (let i = 0, len = num1.length; i < len; i++) {
+    ans = add(mul(num2, num1[i]), ans + prev)
+    prev = '0'
+  }
+  return ans
+}
+
+function mul(str, n) {
+  let ans = '',
+    prev = 0
+  for (let i = str.length - 1; i >= 0; i--) {
+    const temp = str[i] * n + prev
+    prev = Math.floor(temp / 10)
+    ans = (temp % 10) + ans
+  }
+  if (prev) ans = prev + ans
+  return ans
+}
+
+function add(str1, str2) {
+  let ans = '',
+    prev = 0,
+    i = str1.length - 1,
+    j = str2.length - 1
+  while (i >= 0 || j >= 0 || prev) {
+    const a = i >= 0 ? +str1[i--] : 0
+    const b = j >= 0 ? +str2[j--] : 0
+    const temp = a + b + prev
+    ans = (temp % 10) + ans
+    prev = Math.floor(temp / 10)
+  }
+  return ans
+}
