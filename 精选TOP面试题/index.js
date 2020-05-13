@@ -1463,3 +1463,18 @@ var reverse = function (x) {
 var isPowerOfTwo = function (n) {
   return n > 0 && (n & (n - 1)) === 0
 }
+/**
+ * 9. 回文数
+ * @param {number} x
+ * @return {boolean}
+ */
+var isPalindrome = function (x) {
+  if (x < 0) return false
+  let rev = 0
+  let n = x
+  while (n) {
+    rev = rev * 10 + (n % 10)
+    n = Math.floor(n / 10)
+  }
+  return rev === x
+}
