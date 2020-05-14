@@ -876,3 +876,20 @@ var constructMaximumBinaryTree = function (nums) {
   root.right = constructMaximumBinaryTree(nums.slice(maxIndex + 1))
   return root
 }
+/**
+ * 235. 二叉搜索树的最近公共祖先
+ * @param {TreeNode} root
+ * @param {TreeNode} p
+ * @param {TreeNode} q
+ * @return {TreeNode}
+ */
+var lowestCommonAncestor = function(root, p, q) {
+    if(!root) return null
+    const a = p.val, m = root.val, b = q.val
+    if((a<m && b>m) || (a>m && b<m) || m===a || m===b) return root
+    if(a > m){
+        return lowestCommonAncestor(root.right,p,q)
+    }else{
+        return lowestCommonAncestor(root.left,p,q)
+    }
+};
