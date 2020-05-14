@@ -10,7 +10,7 @@
  * @param {ListNode} head
  * @return {ListNode}
  */
-var reverseList = function(head) {
+var reverseList = function (head) {
   let prev = null
   while (head) {
     let temp = head.next
@@ -33,7 +33,7 @@ var reverseList = function(head) {
  * @param {number} val
  * @return {ListNode}
  */
-var removeElements = function(head, val) {
+var removeElements = function (head, val) {
   while (head && head.val === val) {
     head = head.next
   }
@@ -60,7 +60,7 @@ var removeElements = function(head, val) {
  * @param {ListNode} head
  * @return {ListNode}
  */
-var deleteDuplicates = function(head) {
+var deleteDuplicates = function (head) {
   if (!head) return head
   let prev = head
   while (prev.next) {
@@ -84,7 +84,7 @@ var deleteDuplicates = function(head) {
  * @param {ListNode} head
  * @return {ListNode}
  */
-var middleNode = function(head) {
+var middleNode = function (head) {
   let fast = head,
     low = head
   while (fast && fast.next) {
@@ -99,7 +99,7 @@ var middleNode = function(head) {
  * @param {ListNode} headB
  * @return {ListNode}
  */
-var getIntersectionNode = function(headA, headB) {
+var getIntersectionNode = function (headA, headB) {
   let pointerA = headA,
     pointerB = headB
   while (pointerB) {
@@ -120,7 +120,7 @@ var getIntersectionNode = function(headA, headB) {
  * @param {ListNode} headB
  * @return {ListNode}
  */
-var getIntersectionNode = function(headA, headB) {
+var getIntersectionNode = function (headA, headB) {
   let pointerA = headA,
     pointerB = headB,
     x = new WeakSet()
@@ -139,7 +139,7 @@ var getIntersectionNode = function(headA, headB) {
  * @param {ListNode} head
  * @return {boolean}
  */
-var hasCycle = function(head) {
+var hasCycle = function (head) {
   const x = new WeakSet()
   while (head) {
     if (x.has(head)) return true
@@ -153,7 +153,7 @@ var hasCycle = function(head) {
  * @param {ListNode} head
  * @return {boolean}
  */
-var hasCycle = function(head) {
+var hasCycle = function (head) {
   if (!head) return false
   let low = head,
     fast = head.next
@@ -177,7 +177,7 @@ var hasCycle = function(head) {
  * @param {ListNode} head
  * @return {ListNode}
  */
-var oddEvenList = function(head) {
+var oddEvenList = function (head) {
   if (!head) return null
   let odd = head,
     even = head.next,
@@ -204,7 +204,7 @@ var oddEvenList = function(head) {
  * @param {ListNode} l2
  * @return {ListNode}
  */
-var mergeTwoLists = function(l1, l2) {
+var mergeTwoLists = function (l1, l2) {
   let result = new ListNode(null),
     dummy = result
 
@@ -242,7 +242,7 @@ var mergeTwoLists = function(l1, l2) {
  *     ListNode(int x) { val = x; }
  * }
  */
-var insertionSortList = function(head) {
+var insertionSortList = function (head) {
   let dummy = new ListNode(null)
   dummy.next = head
   while (head && head.next) {
@@ -277,7 +277,7 @@ var insertionSortList = function(head) {
  * @param {ListNode} head
  * @return {void} Do not return anything, modify head in-place instead.
  */
-var reorderList = function(head) {
+var reorderList = function (head) {
   while (head && head.next && head.next) {
     let penult = getPenult(head)
     let last = penult.next
@@ -306,7 +306,7 @@ var reorderList = function(head) {
  * @param {ListNode} head
  * @return {void} Do not return anything, modify head in-place instead.
  */
-var reorderList = function(head) {
+var reorderList = function (head) {
   if (!head || !head.next) return
 
   let fast = head,
@@ -347,7 +347,7 @@ var reorderList = function(head) {
  * @param {number} k
  * @return {ListNode}
  */
-var rotateRight = function(head, k) {
+var rotateRight = function (head, k) {
   if (!head || !head.next) return head
   //求出链表的长度
   let len = 0
@@ -391,7 +391,7 @@ var rotateRight = function(head, k) {
  * @param {number} k
  * @return {ListNode}
  */
-var rotateRight = function(head, k) {
+var rotateRight = function (head, k) {
   if (!head || !head.next) return head
 
   let p = head,
@@ -425,7 +425,7 @@ var rotateRight = function(head, k) {
  * @param {ListNode} head
  * @return {ListNode}
  */
-var swapPairs = function(head) {
+var swapPairs = function (head) {
   let dummy = new ListNode(null)
   dummy.next = head
   let prev = dummy
@@ -447,7 +447,7 @@ var swapPairs = function(head) {
  * @param {ListNode} l2
  * @return {ListNode}
  */
-var addTwoNumbers = function(l1, l2) {
+var addTwoNumbers = function (l1, l2) {
   let dummy = new ListNode(null),
     p = dummy,
     val = 0
@@ -486,7 +486,7 @@ var addTwoNumbers = function(l1, l2) {
  * @param {ListNode} head
  * @return {TreeNode}
  */
-var sortedListToBST = function(head) {
+var sortedListToBST = function (head) {
   let list = []
   while (head) {
     list.push(head.val)
@@ -519,7 +519,7 @@ var sortedListToBST = function(head) {
  * @param {number} k
  * @return {ListNode}
  */
-var reverseKGroup = function(head, k) {
+var reverseKGroup = function (head, k) {
   if (k === 1) return head
   let dummy = new ListNode(null)
   dummy.next = head
@@ -561,7 +561,7 @@ var reverseKGroup = function(head, k) {
  * @param {ListNode} headB
  * @return {ListNode}
  */
-var getIntersectionNode = function(headA, headB) {
+var getIntersectionNode = function (headA, headB) {
   if (!headA || !headB) return null
   let pA = headA,
     pB = headB
@@ -576,7 +576,7 @@ var getIntersectionNode = function(headA, headB) {
  * @param {ListNode} head
  * @return {ListNode}
  */
-var reverseList = function(head) {
+var reverseList = function (head) {
   let prev = null
   while (head) {
     let temp = head
@@ -593,7 +593,7 @@ var reverseList = function(head) {
  * @param {number} n
  * @return {ListNode}
  */
-var reverseBetween = function(head, m, n) {
+var reverseBetween = function (head, m, n) {
   if (!head) return null
   let count = 1,
     dummy = new ListNode(null)
@@ -628,9 +628,9 @@ var reverseBetween = function(head, m, n) {
 let root = {
   val: 3,
   left: { val: 9, left: null, right: null },
-  right: { val: 20, left: null, right: null }
+  right: { val: 20, left: null, right: null },
 }
-var levelOrder = function(root) {
+var levelOrder = function (root) {
   if (!root) return []
   let res = [],
     queue = [root, 'ok']
@@ -652,7 +652,7 @@ var levelOrder = function(root) {
  * @param {ListNode} l2
  * @return {ListNode}
  */
-var mergeTwoLists = function(l1, l2) {
+var mergeTwoLists = function (l1, l2) {
   if (!l1 || !l2) return l1 ? l1 : l2
   let p = new ListNode(null),
     dummy = p
@@ -676,7 +676,7 @@ var mergeTwoLists = function(l1, l2) {
  * @param {ListNode} l2
  * @return {ListNode}
  */
-var mergeTwoLists = function(l1, l2) {
+var mergeTwoLists = function (l1, l2) {
   if (!l1 || !l2) return l1 ? l1 : l2
   if (l1.val <= l2.val) {
     l1.next = mergeTwoLists(l1.next, l2)
@@ -685,4 +685,25 @@ var mergeTwoLists = function(l1, l2) {
     l1 = l2
   }
   return l1
+}
+/**
+ * 142. 环形链表 II
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+var detectCycle = function (head) {
+  let f = head
+  let s = head
+  while (f) {
+    f = f.next ? f.next.next : f.next
+    s = s.next
+    if (s && s === f) {
+      while (head !== s) {
+        s = s.next
+        head = head.next
+      }
+      return head
+    }
+  }
+  return null
 }
