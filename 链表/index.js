@@ -154,16 +154,14 @@ var hasCycle = function (head) {
  * @return {boolean}
  */
 var hasCycle = function (head) {
-  if (!head) return false
-  let low = head,
-    fast = head.next
-
-  while (low !== fast) {
-    if (!fast || !fast.next) return false
-    low = low.next
-    fast = fast.next.next
+  let s = head,
+    f = head
+  while (f) {
+    s = s.next
+    f = f.next ? f.next.next : f.next
+    if (s && s === f) return true
   }
-  return true
+  return false
 }
 /**
  * 328.奇偶链表

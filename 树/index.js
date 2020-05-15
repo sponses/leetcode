@@ -883,13 +883,42 @@ var constructMaximumBinaryTree = function (nums) {
  * @param {TreeNode} q
  * @return {TreeNode}
  */
-var lowestCommonAncestor = function(root, p, q) {
-    if(!root) return null
-    const a = p.val, m = root.val, b = q.val
-    if((a<m && b>m) || (a>m && b<m) || m===a || m===b) return root
-    if(a > m){
-        return lowestCommonAncestor(root.right,p,q)
-    }else{
-        return lowestCommonAncestor(root.left,p,q)
+var lowestCommonAncestor = function (root, p, q) {
+  if (!root) return null
+  const a = p.val,
+    m = root.val,
+    b = q.val
+  if ((a < m && b > m) || (a > m && b < m) || m === a || m === b) return root
+  if (a > m) {
+    return lowestCommonAncestor(root.right, p, q)
+  } else {
+    return lowestCommonAncestor(root.left, p, q)
+  }
+}
+
+/**
+ * 145. 二叉树的后序遍历
+ * @param {TreeNode} root
+ * @return {number[]}
+ */
+var postorderTraversal = function (root) {
+  const ans = []
+  const stack = []
+  let cur = root
+  let prev = null
+  while (cur || stack.length) {
+    if (cur) {
+      stack.push(cur)
+      cur = cur.left
+    } else {
+      const temp = stack[stack.length - 1]
+      if (temp.right && temp.right !== prev) {
+        cur = temp.right
+      } else {
+        prev = stack.pop()
+        ans.push(prev.val)
+      }
     }
-};
+  }
+  return ans
+}
