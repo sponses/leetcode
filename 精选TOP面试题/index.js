@@ -1509,3 +1509,40 @@ var grayCode = function (n) {
   }
   return ans
 }
+/**
+ * 874. 模拟行走机器人
+ * @param {number[]} commands
+ * @param {number[][]} obstacles
+ * @return {number}
+ */
+var robotSim = function (commands, obstacles) {
+  const obs_hash = new Map()
+  for (let i = 0, len = obstacles.length; i < len; i++) {
+    const temp = obstacles[i]
+    obs_hash.set(temp[0] + '-' + temp[1])
+  }
+  let x = 0,
+    y = 0,
+    dx = 0,
+    dy = 1,
+    angle = 0,
+    ans = 0
+  for (let i = 0, len = commands.length; i < len; i++) {
+    let cur = commands[i]
+    if (cur === -1 || cur === -2) {
+      if (cur === -1) angle = (angle + 90) % 360
+      if (cur === -2) angle = angle ? angle - 90 : 270
+      if (angle === 0) [dx, dy] = [0, 1]
+      if (angle === 90) [dx, dy] = [1, 0]
+      if (angle === 180) [dx, dy] = [0, -1]
+      if (angle === 270) [dx, dy] = [-1, 0]
+    } else {
+      while (cur-- && !obs_hash.has(x + dx + '-' + (y + dy))) {
+        x += dx
+        y += dy
+        ans = Math.max(ans, x * x + y * y)
+      }
+    }
+  }
+  return ans
+}
