@@ -445,37 +445,24 @@ var swapPairs = function (head) {
  * @param {ListNode} l2
  * @return {ListNode}
  */
+/**
+ * @param {ListNode} l1
+ * @param {ListNode} l2
+ * @return {ListNode}
+ */
 var addTwoNumbers = function (l1, l2) {
-  let dummy = new ListNode(null),
-    p = dummy,
-    val = 0
-  while (l1 || l2 || val) {
-    let newNode = new ListNode(null)
-    if (!l1 && !l2) {
-      newNode.val = val
-      p.next = newNode
-      break
-    } else if (l1 && !l2) {
-      newNode.val = l1.val + val >= 10 ? (l1.val + val) % 10 : l1.val + val
-      p.next = newNode
-      val = l1.val + val >= 10 ? 1 : 0
-      l1 = l1.next
-    } else if (!l1 && l2) {
-      newNode.val = l2.val + val >= 10 ? (l2.val + val) % 10 : l2.val + val
-      p.next = newNode
-      val = l2.val + val >= 10 ? 1 : 0
-      l2 = l2.next
-    } else {
-      newNode.val =
-        l1.val + val + l2.val >= 10
-          ? (l1.val + val + l2.val) % 10
-          : l1.val + val + l2.val
-      p.next = newNode
-      val = l1.val + val + l2.val >= 10 ? 1 : 0
-      l1 = l1.next
-      l2 = l2.next
-    }
+  const dummy = new ListNode(null)
+  let prev = 0
+  let p = dummy
+  while (l1 || l2 || prev) {
+    const val_1 = l1 ? l1.val : 0
+    const val_2 = l2 ? l2.val : 0
+    const sum = val_1 + val_2 + prev
+    p.next = new ListNode(sum % 10)
+    prev = Math.floor(sum / 10)
     p = p.next
+    l1 = l1 ? l1.next : l1
+    l2 = l2 ? l2.next : l2
   }
   return dummy.next
 }

@@ -50,3 +50,31 @@ var numWays = function (steps, arrLen) {
   }
   return dp(steps, 0)
 }
+/**
+ * 679. 24 点游戏
+ * @param {number[]} nums
+ * @return {boolean}
+ */
+var judgePoint24 = function (nums) {
+  function dfs(arr) {
+    // 判断条件这里重点 与24比较小于1e-6为真
+    if (arr.length === 1) return Math.abs(arr[0] - 24) < 1e-6
+    for (let i = 0; i < arr.length; i++) {
+      for (let j = 0; j < arr.length; j++) {
+        if (i === j) continue
+        const a = arr[i],
+          b = arr[j]
+        const temp = [a + b, a - b, a * b]
+        if (b) temp.push(a / b)
+        const arr_filter = arr.filter(
+          (item, index) => index !== i && index !== j
+        )
+        for (let k = 0; k < temp.length; k++) {
+          if (dfs([...arr_filter, temp[k]])) return true
+        }
+      }
+    }
+    return false
+  }
+  return dfs(nums)
+}

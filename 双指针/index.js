@@ -165,33 +165,22 @@ var threeSum = function (nums) {
  * @return {number}
  */
 var threeSumClosest = function (nums, target) {
-  let temp = Number.MAX_SAFE_INTEGER,
-    p1 = 0,
-    len = nums.length,
-    p2,
-    p3,
-    res
-  if (len < 3) return null
   nums.sort((a, b) => a - b)
-  while (p1 <= len - 3) {
-    p2 = p1 + 1
-    p3 = len - 1
-    while (p2 < p3) {
-      let diff = target - (nums[p1] + nums[p2] + nums[p3])
-      if (temp > Math.abs(diff)) {
-        temp = Math.abs(diff)
-        res = nums[p1] + nums[p2] + nums[p3]
-      }
-      if (diff === 0) return res
-      if (diff < 0) {
-        p3--
+  let ans = Number.MAX_SAFE_INTEGER
+  for (let i = 0, len = nums.length; i < len; i++) {
+    let j = i + 1,
+      k = len - 1
+    while (j < k) {
+      const temp = nums[i] + nums[j] + nums[k]
+      if (Math.abs(ans - target) > Math.abs(temp - target)) ans = temp
+      if (temp > target) {
+        k--
       } else {
-        p2++
+        j++
       }
     }
-    p1++
   }
-  return res
+  return ans
 }
 /**
  * 18. 四数之和（双指针）
