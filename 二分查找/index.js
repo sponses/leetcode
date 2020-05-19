@@ -147,3 +147,22 @@ var search = function (nums, target) {
   }
   return -1
 }
+/**
+ * 540. 有序数组中的单一元素
+ * @param {number[]} nums
+ * @return {number}
+ */
+var singleNonDuplicate = function(nums) {
+    let l = 0, r = nums.length-1
+    while(l <= r){
+        let m = l + ((r-l)>>1)
+        if(nums[m] !== nums[m+1] && nums[m] !== nums[m-1]) return nums[m]
+        if(nums[m] === nums[m-1]) m = m-1
+        const len_l = m - l, len_r = r - m - 1
+        if(len_l%2 === 0){
+            l = m+2
+        }else{
+            r = m-1
+        }
+    }
+};
