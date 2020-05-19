@@ -279,3 +279,19 @@ var rotate = function (nums, k) {
   reverse(0, k - 1)
   reverse(k, nums.length - 1)
 }
+/**
+ * 1103. 分糖果 II
+ * @param {number} candies
+ * @param {number} num_people
+ * @return {number[]}
+ */
+var distributeCandies = function (candies, num_people) {
+  const ans = new Array(num_people)
+  ans.fill(0)
+  for (let i = 0; ; ) {
+    ans[i++ % num_people] += i > candies ? candies : i
+    candies -= i
+    if (candies <= 0) break
+  }
+  return ans
+}
