@@ -78,3 +78,35 @@ var judgePoint24 = function (nums) {
   }
   return dfs(nums)
 }
+/**
+ * 1420. 生成数组
+ * @param {number} n
+ * @param {number} m
+ * @param {number} k
+ * @return {number}
+ */
+var numOfArrays = function (n, m, k) {
+  const mod = 1000000007
+  const visited = new Map()
+  function dfs(n, i, k) {
+    if (n === 0 && k === 0) return 1
+    if (n < 0 || m - i < k || k < 0) return 0
+    if (visited.has(n + '-' + i + '-' + k))
+      return visited.get(n + '-' + i + '-' + k)
+    let res = 0
+    for (let j = 1; j <= m; j++) {
+      let str = ''
+      if (j > i) {
+        str = n - 1 + '-' + j + '-' + (k - 1)
+        if (!visited.has(str)) visited.set(str, dfs(n - 1, j, k - 1) % mod)
+      } else {
+        str = n - 1 + '-' + i + '-' + k
+        if (!visited.has(str)) visited.set(str, dfs(n - 1, i, k) % mod)
+      }
+      res += visited.get(str)
+    }
+    visited.set(n + '-' + i + '-' + k, res % mod)
+    return visited.get(n + '-' + i + '-' + k)
+  }
+  return dfs(n, 0, k)
+}
