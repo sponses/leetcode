@@ -149,3 +149,23 @@ var minTimeToVisitAllPoints = function (points) {
   }
   return ans
 }
+/**
+ * 135. 分发糖果
+ * @param {number[]} ratings
+ * @return {number}
+ */
+var candy = function (ratings) {
+  let ans = 0
+  const len = ratings.length
+  const arr_left = new Array(len),
+    arr_right = new Array(len)
+  arr_left.fill(1)
+  arr_right.fill(1)
+  for (let i = 1; i < len; i++) {
+    if (ratings[i] > ratings[i - 1]) arr_left[i] = arr_left[i - 1] + 1
+    if (ratings[len - i - 1] > ratings[len - i])
+      arr_right[len - i - 1] = arr_right[len - i] + 1
+  }
+  for (let i = 0; i < len; i++) ans += Math.max(arr_left[i], arr_right[i])
+  return ans
+}
