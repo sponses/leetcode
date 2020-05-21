@@ -138,3 +138,20 @@ var myPow = function (x, n) {
   ans *= half * half
   return temp > 0 ? ans : ans <= 0 ? 0 : 1 / ans
 }
+/**
+ * 1250. 检查「好数组」
+ * @param {number[]} nums
+ * @return {boolean}
+ */
+var isGoodArray = function (nums) {
+  let ans = nums[0]
+  for (let i = 1, len = nums.length; i < len; i++) {
+    ans = gcd(ans, nums[i])
+  }
+  return ans === 1
+}
+
+function gcd(a, b) {
+  if (b === 0) return a
+  return gcd(b, a % b)
+}
