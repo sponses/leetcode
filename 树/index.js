@@ -922,3 +922,22 @@ var postorderTraversal = function (root) {
   }
   return ans
 }
+/**
+ * 968. 监控二叉树
+ * @param {TreeNode} root
+ * @return {number}
+ */
+var minCameraCover = function (root) {
+  function dfs(node) {
+    if (!node) return [0, 0, 1]
+    const l = dfs(node.left),
+      r = dfs(node.right)
+    const ans = []
+    ans[0] = l[1] + r[1]
+    ans[1] = Math.min(l[2] + r[1], l[2] + r[2], l[1] + r[2])
+    ans[2] = 1 + Math.min(...l) + Math.min(...r)
+    return ans
+  }
+  const ans = dfs(root)
+  return Math.min(ans[1], ans[2])
+}
