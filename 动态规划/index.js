@@ -983,3 +983,23 @@ var numberOfArithmeticSlices = function (A) {
   }
   return ans
 }
+/**
+ * 940. 不同的子序列 II
+ * @param {string} S
+ * @return {number}
+ */
+var distinctSubseqII = function (S) {
+  const len = S.length,
+    mod = 1000000007
+  const dp = new Array(len + 1)
+  dp[0] = 1
+  for (let i = 0; i < len; i++) {
+    dp[i + 1] = 2 * dp[i]
+    let j = i - 1
+    while (j >= 0 && S[j] !== S[i]) j--
+    if (j >= 0) dp[i + 1] -= dp[j]
+    dp[i + 1] %= mod
+  }
+  if (dp[len] < 0) dp[len] += mod
+  return dp[len] - 1
+}
