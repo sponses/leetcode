@@ -963,3 +963,23 @@ var stoneGame = function (piles) {
   }
   return dp[len - 1][len - 1][0] > dp[len - 1][len - 1][1]
 }
+/**
+ * 446. 等差数列划分 II - 子序列
+ * @param {number[]} A
+ * @return {number}
+ */
+var numberOfArithmeticSlices = function (A) {
+  let ans = 0
+  const len = A.length,
+    dp = new Array(len)
+  for (let i = 0; i < len; i++) {
+    dp[i] = new Map()
+    for (let j = 0; j < i; j++) {
+      const diff = A[i] - A[j]
+      const sum = dp[j].get(diff) || 0
+      ans += sum
+      dp[i].set(diff, (dp[i].get(diff) || 0) + sum + 1)
+    }
+  }
+  return ans
+}
