@@ -1974,3 +1974,18 @@ function add(str1, str2) {
   }
   return ans
 }
+/**
+ * 829. 连续整数求和
+ * @param {number} N
+ * @return {number}
+ */
+var consecutiveNumbersSum = function (N) {
+  N *= 2
+  let n = 1,
+    res = 0
+  while (n * n < N) {
+    if (N % n === 0 && (n % 2 || (N / n) % 2)) res++
+    n++
+  }
+  return res
+}
