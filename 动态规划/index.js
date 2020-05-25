@@ -1003,3 +1003,22 @@ var distinctSubseqII = function (S) {
   if (dp[len] < 0) dp[len] += mod
   return dp[len] - 1
 }
+/**
+ * 1425. 带限制的子序列和
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {number}
+ */
+var constrainedSubsetSum = function(nums, k) {
+    const dequeue = [], len = nums.length, dp = new Array(len)
+    let ans = Number.MIN_SAFE_INTEGER
+    for(let i = 0; i<len; i++){
+        const pre_max = dequeue.length?dp[dequeue[0]]:0
+        dp[i] = Math.max(pre_max+nums[i],nums[i])
+        ans = Math.max(ans,dp[i])
+        while(dequeue.length && dp[dequeue[dequeue.length-1]] < dp[i]) dequeue.pop()
+        dequeue.push(i)
+        if(dequeue.length > 1 && dequeue[dequeue.length-1] - dequeue[0] >= k) dequeue.shift()
+    }
+    return ans
+};
