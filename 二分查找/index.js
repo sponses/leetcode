@@ -152,17 +152,45 @@ var search = function (nums, target) {
  * @param {number[]} nums
  * @return {number}
  */
-var singleNonDuplicate = function(nums) {
-    let l = 0, r = nums.length-1
-    while(l <= r){
-        let m = l + ((r-l)>>1)
-        if(nums[m] !== nums[m+1] && nums[m] !== nums[m-1]) return nums[m]
-        if(nums[m] === nums[m-1]) m = m-1
-        const len_l = m - l, len_r = r - m - 1
-        if(len_l%2 === 0){
-            l = m+2
-        }else{
-            r = m-1
-        }
+var singleNonDuplicate = function (nums) {
+  let l = 0,
+    r = nums.length - 1
+  while (l <= r) {
+    let m = l + ((r - l) >> 1)
+    if (nums[m] !== nums[m + 1] && nums[m] !== nums[m - 1]) return nums[m]
+    if (nums[m] === nums[m - 1]) m = m - 1
+    const len_l = m - l,
+      len_r = r - m - 1
+    if (len_l % 2 === 0) {
+      l = m + 2
+    } else {
+      r = m - 1
     }
-};
+  }
+}
+/**
+ * 719. 找出第 k 小的距离对
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {number}
+ */
+var smallestDistancePair = function (nums, k) {
+  nums.sort((a, b) => a - b)
+  let l = 0,
+    r = nums[nums.length - 1] - nums[0]
+  while (l < r) {
+    const m = (r + l) >> 1
+    let cnt = 0,
+      left = 0
+    for (let right = 0, len = nums.length; right < len; right++) {
+      while (nums[right] - nums[left] > m) left++
+      cnt += right - left
+    }
+    if (cnt >= k) {
+      r = m
+    } else {
+      l = m + 1
+    }
+  }
+  return l
+}
