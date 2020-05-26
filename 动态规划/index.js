@@ -1009,16 +1009,54 @@ var distinctSubseqII = function (S) {
  * @param {number} k
  * @return {number}
  */
-var constrainedSubsetSum = function(nums, k) {
-    const dequeue = [], len = nums.length, dp = new Array(len)
-    let ans = Number.MIN_SAFE_INTEGER
-    for(let i = 0; i<len; i++){
-        const pre_max = dequeue.length?dp[dequeue[0]]:0
-        dp[i] = Math.max(pre_max+nums[i],nums[i])
-        ans = Math.max(ans,dp[i])
-        while(dequeue.length && dp[dequeue[dequeue.length-1]] < dp[i]) dequeue.pop()
-        dequeue.push(i)
-        if(dequeue.length > 1 && dequeue[dequeue.length-1] - dequeue[0] >= k) dequeue.shift()
+var constrainedSubsetSum = function (nums, k) {
+  const dequeue = [],
+    len = nums.length,
+    dp = new Array(len)
+  let ans = Number.MIN_SAFE_INTEGER
+  for (let i = 0; i < len; i++) {
+    const pre_max = dequeue.length ? dp[dequeue[0]] : 0
+    dp[i] = Math.max(pre_max + nums[i], nums[i])
+    ans = Math.max(ans, dp[i])
+    while (dequeue.length && dp[dequeue[dequeue.length - 1]] < dp[i])
+      dequeue.pop()
+    dequeue.push(i)
+    if (dequeue.length > 1 && dequeue[dequeue.length - 1] - dequeue[0] >= k)
+      dequeue.shift()
+  }
+  return ans
+}
+
+/**
+ * 123. 买卖股票的最佳时机 III
+ * @param {number[]} prices
+ * @return {number}
+ */
+var maxProfit = function (prices) {
+  // function dfs(i,k){
+  //     if(i < 0 || k === 0) return [0,Number.MIN_SAFE_INTEGER]
+  //     const status_0 = Math.max(dfs(i-1,k)[0],dfs(i-1,k)[1]+prices[i])
+  //     const status_1 = Math.max(dfs(i-1,k)[1],dfs(i-1,k-1)[0]-prices[i])
+  //     return [status_0,status_1]
+  // }
+  // return dfs(prices.length-1,2)[0]
+  const len = prices.length,
+    dp = new Array(len)
+  for (let i = 0; i < len; i++) {
+    dp[i] = new Array(3)
+    dp[i][0] = [0, Number.MIN_SAFE_INTEGER]
+  }
+  dp[-1] = new Array(3)
+  dp[-1].fill([0, Number.MIN_SAFE_INTEGER])
+  for (let i = 0; i < len; i++) {
+    for (let j = 1; j < 3; j++) {
+      const status_0 = Math.max(dp[i - 1][j][0], dp[i - 1][j][1] + prices[i])
+      const status_1 = Math.max(
+        dp[i - 1][j][1],
+        dp[i - 1][j - 1][0] - prices[i]
+      )
+      dp[i][j] = [status_0, status_1]
     }
-    return ans
-};
+  }
+  return dp[len - 1][2][0]
+}
