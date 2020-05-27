@@ -282,3 +282,46 @@ function isOk(i, j, grid) {
   }
   return true
 }
+/**
+ * 37. 解数独
+ * @param {character[][]} board
+ * @return {void} Do not return anything, modify board in-place instead.
+ */
+var solveSudoku = function (board) {
+  function isOk(i, j, val) {
+    for (let k = 0; k < 9; k++) {
+      if (board[i][k] == val) return false
+    }
+    for (let k = 0; k < 9; k++) {
+      if (board[k][j] == val) return false
+    }
+    let l = Math.floor(j / 3) * 3,
+      t = Math.floor(i / 3) * 3
+    for (let m = t; m < t + 3; m++) {
+      for (let n = l; n < l + 3; n++) {
+        if (board[m][n] == val) return false
+      }
+    }
+    return true
+  }
+  function backTrace(i, j) {
+    if (j === 9) {
+      if (i === 8) return true
+      i++
+      j = 0
+    }
+    if (board[i][j] === '.') {
+      for (let val = 1; val <= 9; val++) {
+        if (isOk(i, j, val)) {
+          board[i][j] = val + ''
+          if (backTrace(i, j + 1)) return true
+        }
+        board[i][j] = '.'
+      }
+    } else {
+      return backTrace(i, j + 1)
+    }
+    return false
+  }
+  backTrace(0, 0)
+}
