@@ -4,7 +4,7 @@
  * @param {string} t
  * @return {string}
  */
-var minWindow = function(s, t) {
+var minWindow = function (s, t) {
   let left = 0,
     right = 0,
     match = 0,
@@ -60,7 +60,7 @@ var minWindow = function(s, t) {
  * @param {string} p
  * @return {number[]}
  */
-var findAnagrams = function(s, p) {
+var findAnagrams = function (s, p) {
   let left = 0,
     right = 0,
     match = 0,
@@ -114,7 +114,7 @@ var findAnagrams = function(s, p) {
  * @return {number}
  */
 
-var lengthOfLongestSubstringTwoDistinct = function(s) {
+var lengthOfLongestSubstringTwoDistinct = function (s) {
   let left = 0,
     right = 0,
     res = Number.MIN_SAFE_INTEGER
@@ -152,7 +152,7 @@ var lengthOfLongestSubstringTwoDistinct = function(s) {
  * @return {number}
  */
 
-var lengthOfLongestSubstringKDistinct = function(s, k) {
+var lengthOfLongestSubstringKDistinct = function (s, k) {
   let left = 0,
     right = 0,
     res = Number.MIN_SAFE_INTEGER
@@ -189,7 +189,7 @@ var lengthOfLongestSubstringKDistinct = function(s, k) {
  * @param {string} s2
  * @return {boolean}
  */
-var checkInclusion = function(s1, s2) {
+var checkInclusion = function (s1, s2) {
   let left = 0,
     right = 0,
     match = 0
@@ -232,7 +232,7 @@ var checkInclusion = function(s1, s2) {
  * @param {number[]} nums
  * @return {number}
  */
-var findMaxConsecutiveOnes = function(nums) {
+var findMaxConsecutiveOnes = function (nums) {
   let left = 0,
     right = 0,
     res = 0,
@@ -256,7 +256,7 @@ var findMaxConsecutiveOnes = function(nums) {
  * @param {string} s
  * @return {number}
  */
-var lengthOfLongestSubstring = function(s) {
+var lengthOfLongestSubstring = function (s) {
   let res = 0,
     left = 0,
     right = 0
@@ -279,7 +279,7 @@ var lengthOfLongestSubstring = function(s) {
  * @param {number[]} nums
  * @return {number}
  */
-var minSubArrayLen = function(s, nums) {
+var minSubArrayLen = function (s, nums) {
   let left = 0,
     right = 0,
     res = Number.MAX_SAFE_INTEGER,
@@ -298,4 +298,41 @@ var minSubArrayLen = function(s, nums) {
   }
   if (sum < s) return 0
   return res
+}
+/**
+ * 992. K 个不同整数的子数组
+ * @param {number[]} A
+ * @param {number} K
+ * @return {number}
+ */
+var subarraysWithKDistinct = function (A, K) {
+  let ans = 0,
+    l1 = 0,
+    l2 = 0,
+    r = 0,
+    hash_l1 = {},
+    hash_l2 = {},
+    cnt_l1 = 0,
+    cnt_l2 = 0
+  for (let i = 0, len = A.length; i < len; i++) {
+    hash_l1[A[i]] = 0
+    hash_l2[A[i]] = 0
+  }
+  while (r < A.length) {
+    hash_l1[A[r]]++
+    hash_l2[A[r]]++
+    if (hash_l1[A[r]] === 1) cnt_l1++
+    if (hash_l2[A[r]] === 1) cnt_l2++
+    while (cnt_l1 > K) {
+      if (hash_l1[A[l1]] === 1) cnt_l1--
+      hash_l1[A[l1++]]--
+    }
+    while (cnt_l2 >= K) {
+      if (hash_l2[A[l2]] === 1) cnt_l2--
+      hash_l2[A[l2++]]--
+    }
+    ans += l2 - l1
+    r++
+  }
+  return ans
 }
