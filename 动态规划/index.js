@@ -1095,3 +1095,27 @@ var removeBoxes = function (boxes) {
   }
   return dfs(0, len - 1, 0)
 }
+/**
+ * 312. 戳气球
+ * @param {number[]} nums
+ * @return {number}
+ */
+var maxCoins = function(nums) {
+    const len = nums.length
+    nums.push(1)
+    nums.unshift(1)
+    const dp = new Array(len+2)
+    for(let i = 0; i<len+2; i++){
+        dp[i] = new Array(len+2)
+        dp[i].fill(0)
+    }
+    function dfs(l,r){
+        if(r-l === 1) return 0
+        if(dp[l][r]) return dp[l][r]
+        for(let i = l+1; i<r; i++){
+            dp[l][r] = Math.max(dp[l][r],nums[i]*nums[l]*nums[r] + dfs(l,i)+dfs(i,r))
+        }
+        return dp[l][r]
+    }
+    return dfs(0,len+1)
+};
