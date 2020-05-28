@@ -1060,3 +1060,38 @@ var maxProfit = function (prices) {
   }
   return dp[len - 1][2][0]
 }
+/**
+ * 546. 移除盒子
+ * @param {number[]} boxes
+ * @return {number}
+ */
+var removeBoxes = function (boxes) {
+  const len = boxes.length
+  const dp = new Array(len)
+  for (let i = 0; i < len; i++) {
+    dp[i] = new Array(len)
+    for (let j = 0; j < len; j++) {
+      dp[i][j] = new Array(len)
+      dp[i][j].fill(0)
+    }
+  }
+  function dfs(l, r, k) {
+    if (l > r) return 0
+    if (dp[l][r][k]) return dp[l][r][k]
+    while (l < r && boxes[r] === boxes[r - 1]) {
+      k++
+      r--
+    }
+    dp[l][r][k] = dfs(l, r - 1, 0) + (k + 1) * (k + 1)
+    for (let i = l; i < r; i++) {
+      if (boxes[i] === boxes[r]) {
+        dp[l][r][k] = Math.max(
+          dp[l][r][k],
+          dfs(l, i, k + 1) + dfs(i + 1, r - 1, 0)
+        )
+      }
+    }
+    return dp[l][r][k]
+  }
+  return dfs(0, len - 1, 0)
+}
