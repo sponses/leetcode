@@ -1100,22 +1100,60 @@ var removeBoxes = function (boxes) {
  * @param {number[]} nums
  * @return {number}
  */
-var maxCoins = function(nums) {
-    const len = nums.length
-    nums.push(1)
-    nums.unshift(1)
-    const dp = new Array(len+2)
-    for(let i = 0; i<len+2; i++){
-        dp[i] = new Array(len+2)
-        dp[i].fill(0)
+var maxCoins = function (nums) {
+  const len = nums.length
+  nums.push(1)
+  nums.unshift(1)
+  const dp = new Array(len + 2)
+  for (let i = 0; i < len + 2; i++) {
+    dp[i] = new Array(len + 2)
+    dp[i].fill(0)
+  }
+  function dfs(l, r) {
+    if (r - l === 1) return 0
+    if (dp[l][r]) return dp[l][r]
+    for (let i = l + 1; i < r; i++) {
+      dp[l][r] = Math.max(
+        dp[l][r],
+        nums[i] * nums[l] * nums[r] + dfs(l, i) + dfs(i, r)
+      )
     }
-    function dfs(l,r){
-        if(r-l === 1) return 0
-        if(dp[l][r]) return dp[l][r]
-        for(let i = l+1; i<r; i++){
-            dp[l][r] = Math.max(dp[l][r],nums[i]*nums[l]*nums[r] + dfs(l,i)+dfs(i,r))
-        }
-        return dp[l][r]
+    return dp[l][r]
+  }
+  return dfs(0, len + 1)
+}
+/**
+ * 87. 扰乱字符串
+ * @param {string} s1
+ * @param {string} s2
+ * @return {boolean}
+ */
+var isScramble = function (s1, s2) {
+  if (s1.length !== s2.length) return false
+  const len = s1.length
+  const dp = new Array(len)
+  for (let i = 0; i < len; i++) {
+    dp[i] = new Array(len)
+    for (let j = 0; j < len; j++) {
+      dp[i][j] = new Array(len)
+      dp[i][j].fill(-1)
     }
-    return dfs(0,len+1)
-};
+  }
+  function dfs(i1, j1, i2) {
+    if (dp[i1][j1][i2] !== -1) return dp[i1][j1][i2]
+    if (s1.slice(i1, j1 + 1) === s2.slice(i2, i2 + (j1 - i1) + 1))
+      dp[i1][j1][i2] = true
+    for (let i = i1; i < j1; i++) {
+      if (
+        (dfs(i1, i, i2) && dfs(i + 1, j1, i2 + (i - i1) + 1)) ||
+        (dfs(i1, i, i2 + j1 - i) && dfs(i + 1, j1, i2))
+      ) {
+        dp[i1][j1][i2] = true
+        break
+      }
+    }
+    if (dp[i1][j1][i2] === -1) dp[i1][j1][i2] = false
+    return dp[i1][j1][i2]
+  }
+  return dfs(0, len - 1, 0)
+}
