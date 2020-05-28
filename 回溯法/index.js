@@ -325,3 +325,27 @@ var solveSudoku = function (board) {
   }
   backTrace(0, 0)
 }
+/**
+ * 301. 删除无效的括号
+ * @param {string} s
+ * @return {string[]}
+ */
+var removeInvalidParentheses = function (s) {
+  let ans = new Set()
+  function backTrace(i, cnt, str) {
+    if (cnt < 0 || i > s.length) return
+    if (i === s.length && cnt === 0) ans.add(str)
+    if (s[i] !== ')' && s[i] !== '(') {
+      backTrace(i + 1, cnt, str + s[i])
+    } else {
+      backTrace(i + 1, cnt + (s[i] === '(' ? 1 : -1), str + s[i])
+      backTrace(i + 1, cnt, str)
+    }
+  }
+  backTrace(0, 0, '')
+  ans = [...ans]
+  ans.sort((a, b) => b.length - a.length)
+  let i = 0
+  while (i < ans.length - 1 && ans[i].length === ans[i + 1].length) i++
+  return ans.slice(0, i + 1)
+}
