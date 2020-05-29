@@ -189,3 +189,20 @@ var removeDuplicateLetters = function (s) {
   const reg = new RegExp(s[base], 'g')
   return s[base] + removeDuplicateLetters(s.slice(base + 1).replace(reg, ''))
 }
+/**
+ * 765. 情侣牵手
+ * @param {number[]} row
+ * @return {number}
+ */
+var minSwapsCouples = function (row) {
+  const hash = new Map()
+  let ans = 0
+  for (let i = 0, len = row.length; i < len; i += 2) {
+    const other = row[i] ^ 1
+    if (row[i + 1] === other) continue
+    ans++
+    let j = row.indexOf(other)
+    ;[row[j], row[i + 1]] = [row[i + 1], row[j]]
+  }
+  return ans
+}
