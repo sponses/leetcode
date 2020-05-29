@@ -169,3 +169,23 @@ var candy = function (ratings) {
   for (let i = 0; i < len; i++) ans += Math.max(arr_left[i], arr_right[i])
   return ans
 }
+/**
+ * 316. 去除重复字母（贪心）
+ * @param {string} s
+ * @return {string}
+ */
+var removeDuplicateLetters = function (s) {
+  if (!s.length) return ''
+  const cnts = new Array(26)
+  cnts.fill(0)
+  for (let i = 0, len = s.length; i < len; i++) {
+    cnts[s[i].charCodeAt() - 97]++
+  }
+  let base = 0
+  for (let i = 0, len = s.length; i < len; i++) {
+    if (s[i].charCodeAt() < s[base].charCodeAt()) base = i
+    if (--cnts[s[i].charCodeAt() - 97] === 0) break
+  }
+  const reg = new RegExp(s[base], 'g')
+  return s[base] + removeDuplicateLetters(s.slice(base + 1).replace(reg, ''))
+}
