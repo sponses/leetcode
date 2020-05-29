@@ -195,3 +195,34 @@ MinStack.prototype.getMin = function () {
  * var param_3 = obj.top()
  * var param_4 = obj.getMin()
  */
+/**
+ * 316. 去除重复字母（单调栈）
+ * @param {string} s
+ * @return {string}
+ */
+var removeDuplicateLetters = function (s) {
+  const visited = new Map()
+  const stack = []
+  const cnts = new Array(26)
+  cnts.fill(0)
+  for (let i = 0, len = s.length; i < len; i++) {
+    cnts[s[i].charCodeAt() - 97]++
+  }
+  for (let i = 0, len = s.length; i < len; i++) {
+    while (
+      stack.length &&
+      !visited.has(s[i]) &&
+      stack[stack.length - 1].charCodeAt() > s[i].charCodeAt() &&
+      cnts[stack[stack.length - 1].charCodeAt() - 97] > 0
+    ) {
+      const temp = stack.pop()
+      visited.delete(temp)
+    }
+    cnts[s[i].charCodeAt() - 97]--
+    if (!visited.has(s[i])) {
+      stack.push(s[i])
+      visited.set(s[i], true)
+    }
+  }
+  return stack.join('')
+}
