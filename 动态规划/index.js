@@ -1157,3 +1157,44 @@ var isScramble = function (s1, s2) {
   }
   return dfs(0, len - 1, 0)
 }
+/**
+ * 1092. 最短公共超序列
+ * @param {string} str1
+ * @param {string} str2
+ * @return {string}
+ */
+var shortestCommonSupersequence = function (str1, str2) {
+  const len1 = str1.length,
+    len2 = str2.length
+  const dp = new Array(len1 + 1)
+  for (let i = 0; i <= len1; i++) {
+    dp[i] = new Array(len2 + 1)
+    dp[i].fill(-1)
+  }
+  function dfs(i, j) {
+    if (i === len1 || j === len2) return ''
+    if (dp[i][j] !== -1) return dp[i][j]
+    if (str1[i] === str2[j]) {
+      if (dp[i + 1][j + 1] === -1) dp[i + 1][j + 1] = dfs(i + 1, j + 1)
+      return str1[i] + dp[i + 1][j + 1]
+    } else {
+      if (dp[i + 1][j] === -1) dp[i + 1][j] = dfs(i + 1, j)
+      if (dp[i][j + 1] === -1) dp[i][j + 1] = dfs(i, j + 1)
+      return dp[i + 1][j].length > dp[i][j + 1].length
+        ? dp[i + 1][j]
+        : dp[i][j + 1]
+    }
+  }
+  let ans = ''
+  const lcs = dfs(0, 0)
+  let i = 0,
+    j = 0
+  for (let k = 0, len = lcs.length; k < len; k++) {
+    while (i < len1 && str1[i] !== lcs[k]) ans += str1[i++]
+    while (j < len2 && str2[j] !== lcs[k]) ans += str2[j++]
+    ans += lcs[k]
+    i++
+    j++
+  }
+  return ans + str1.slice(i) + str2.slice(j)
+}
