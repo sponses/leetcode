@@ -295,3 +295,30 @@ var distributeCandies = function (candies, num_people) {
   }
   return ans
 }
+/**
+ * 1131. 绝对值表达式的最大值
+ * @param {number[]} arr1
+ * @param {number[]} arr2
+ * @return {number}
+ */
+var maxAbsValExpr = function (arr1, arr2) {
+  let a1 = Number.MIN_SAFE_INTEGER,
+    a2 = Number.MAX_SAFE_INTEGER
+  let b1 = Number.MIN_SAFE_INTEGER,
+    b2 = Number.MAX_SAFE_INTEGER
+  let c1 = Number.MIN_SAFE_INTEGER,
+    c2 = Number.MAX_SAFE_INTEGER
+  let d1 = Number.MIN_SAFE_INTEGER,
+    d2 = Number.MAX_SAFE_INTEGER
+  for (let i = 0, len = arr1.length; i < len; i++) {
+    a1 = Math.max(a1, arr1[i] + arr2[i] + i)
+    b1 = Math.max(b1, arr1[i] + arr2[i] - i)
+    c1 = Math.max(c1, arr1[i] - arr2[i] + i)
+    d1 = Math.max(d1, arr1[i] - arr2[i] - i)
+    a2 = Math.min(a2, arr1[i] + arr2[i] + i)
+    b2 = Math.min(b2, arr1[i] + arr2[i] - i)
+    c2 = Math.min(c2, arr1[i] - arr2[i] + i)
+    d2 = Math.min(d2, arr1[i] - arr2[i] - i)
+  }
+  return Math.max(a1 - a2, b1 - b2, c1 - c2, d1 - d2)
+}
